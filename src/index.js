@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './index.css';
 import App from './App';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
@@ -22,7 +25,6 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
-
     <RouterProvider router={router}>
       <App />
     </RouterProvider>
