@@ -6,12 +6,19 @@ import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import styles from './Register.module.css'
 import SocialMediaBtns from "../ReusableComponents/SocialMediaBtns/SocialMediaBtns";
+// import { useDispatch, useSelector } from 'react-redux';
+// import { register } from '../../Redux/Slicies/authSlice';
 
 export const Register = () => {
   const [error, setError] = useState("");
+  // const dispatch = useDispatch()
+  //   const { isLoading, token , error } = useSelector(state => state.auth);
+
   const handleSubmit = (values) => {
+    console.log("vvvvvvvvvvvvvvvvvvv");
     console.log(values);
     delete values.privacyCheck;
+    // dispatch(register(values))
     SendUserRegisterationData(values);
   };
 

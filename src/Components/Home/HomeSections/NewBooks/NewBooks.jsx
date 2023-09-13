@@ -96,8 +96,8 @@ const NewBooks = () => {
     let cutNewBooks = NewBooks.slice(startIndex,lastIndex);
     
     // const [newArray , setNewArray] = useState(cutNewBooks);
-    console.log("start: ",startIndex);
-    console.log("end: ",lastIndex);
+    // console.log("start: ",startIndex);
+    // console.log("end: ",lastIndex);
     const shiftRight = ()=>{
         setStart((prev) => prev + 1 )
         setLast((prev) => prev + 1 )
@@ -121,8 +121,8 @@ const NewBooks = () => {
             <div className={`row justify-content-center align-items-center text-center ${styles.gap}`}>
             <h2 className="blueHeader">New Arrivals</h2>
             <div className="d-flex justify-content-end">
-                <button className={`${styles.btn} ${styles.leftBtn}`} onClick={shiftLeft}><i class="fa-solid fa-arrow-left"></i></button>
-                <button className={`${styles.btn} ${styles.rightBtn}`} onClick={shiftRight}><i class="fa-solid fa-arrow-right"></i></button>
+                <button className={`${styles.btn} ${styles.leftBtn}`} onClick={shiftLeft}><i className="fa-solid fa-arrow-left"></i></button>
+                <button className={`${styles.btn} ${styles.rightBtn}`} onClick={shiftRight}><i className="fa-solid fa-arrow-right"></i></button>
             </div>
             <BookList NewBooks = {cutNewBooks} sectionName={"newBooks"}/>
             </div>
