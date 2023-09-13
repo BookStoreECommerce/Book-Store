@@ -71,5 +71,10 @@ root.render(
         <App />
       </RouterProvider>
     </ThemeProvider>
+
+    {/* <RouterProvider router={router}>
+      <App />
+    </RouterProvider> */}
+    
   </Provider>
 );

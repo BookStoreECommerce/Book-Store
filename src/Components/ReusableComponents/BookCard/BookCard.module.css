@@ -3,7 +3,8 @@ border-radius: 15px;
 }
 
 .bookName{
-    color: var(--navyBlue);
+    /* color: #40489b; */
+    color: var(--navyBlue );
     font-weight: bold;
     font-size: 18px;
 

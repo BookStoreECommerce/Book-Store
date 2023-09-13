@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Jost&family=Libre+Baskerville&family=PT+Serif:wght@700&display=swap');
+
+
 body {
   margin: 0;
 padding: 0;
@@ -37,19 +40,11 @@ box-sizing: border-box;
   border-color: var(--mainColor);
 }
 
-/* Our Checkbox */
-.mainCheckbox:checked {
-  background-color: var(--mainColor);
-  border-color: var(--mainColor);
-}
 
-.mainCheckbox:focus {
-  border-color: var(--beigeColor);
-  outline: 0;
-  box-shadow: 0 0 0 0.25rem var(--beigeColor);
-}
+.blueHeader{
+  color:var(--navyBlue);
+  font-size: 38px;
+  font-family: 'Libre Baskerville', serif;
+  font-weight: bold;
 
-/* Our Title */
-.mainTitle{
-  color: var(--mainColor);
 }
