@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { baseUrl } from "../../util/util";
 import axios from "axios";
 
-const initialState = { user: {}, isLoading: false, token: null , error : ''}
+const initialState = { user: {}, isLoading: false, token: null , error : null }
 
 export const signin = createAsyncThunk("auth/signin", async (values) => {
     const response = await axios.post(`${baseUrl}/auth/signin`, values);
@@ -10,43 +10,47 @@ export const signin = createAsyncThunk("auth/signin", async (values) => {
 })
 
 export const register = createAsyncThunk ("auth/signup", async (userData) => {
-    console.log("here");
-    let { data } = await axios.post( `${baseUrl}/auth/signup`,  userData);
-    return data
+    try {
+        let {data} = await axios.post(`${baseUrl}/auth/signup`, userData);
+        return data
+      } catch (error) {
+        return error.response.data
+      }
+
 });
 
 const authSlice = createSlice({
     name: "authentication",
     initialState,
-    reducers: {
-
-    },
+    reducers: {},
     extraReducers: builder => {
-        builder.addCase(signin.pending, (state, actions) => {
+        builder.addCase(signin.pending, (state, action) => {
             state.isLoading = true
         })
-        builder.addCase(signin.fulfilled, (state, actions) => {
-            // state.token = actions.payload.token
+        builder.addCase(signin.fulfilled, (state, action) => {
+            // state.token = action.payload.token
             state.isLoading = false
         })
-        builder.addCase(signin.rejected, (state, actions) => {
+        builder.addCase(signin.rejected, (state, action) => {
             state.isLoading = false
-            // state.token = actions.payload.token
+            // state.token = action.payload.token
         })
-        builder.addCase(register.pending, (state, actions) => {
+        builder.addCase(register.pending, (state, action) => {
             state.isLoading = true
         })
-        builder.addCase(register.fulfilled, (state, actions) => {
-            // state.token = actions.payload.token
+        builder.addCase(register.fulfilled, (state, action) => {
+            if(action.payload.message === 'success'){
+                state.token = action.payload.token.token
+                localStorage.setItem('registerToken', state.token);
+            }else{
+                state.error = action.payload.error
+            }
             state.isLoading = false
         })
-        builder.addCase(register.rejected, (state, actions) => {
+        builder.addCase(register.rejected, (state, action) => {
             state.isLoading = false
-            console.log(actions.payload);
-            state.error = actions.payload
-            // state.token = actions.payload.token
         })
     }
 })
 
-export const authReducer = authSlice.reducer
+export const authReducer = authSlice.reducer;

@@ -1,41 +1,24 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
 import TextField from "@mui/material/TextField";
-import Button from '@mui/material/Button';
+import { Button } from "@mui/material";
 import styles from './Register.module.css'
 import SocialMediaBtns from "../ReusableComponents/SocialMediaBtns/SocialMediaBtns";
-// import { useDispatch, useSelector } from 'react-redux';
-// import { register } from '../../Redux/Slicies/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { register } from '../../Redux/Slicies/authSlice';
+
 
 export const Register = () => {
-  const [error, setError] = useState("");
-  // const dispatch = useDispatch()
-  //   const { isLoading, token , error } = useSelector(state => state.auth);
+  const dispatch = useDispatch()
+  const { isLoading, token , error } = useSelector(state => state.auth);
 
   const handleSubmit = (values) => {
-    console.log(values);
     delete values.privacyCheck;
-    // dispatch(register(values))
-    SendUserRegisterationData(values);
+    dispatch(register(values))
+    console.log(localStorage.getItem('registerToken'));
   };
 
-  const SendUserRegisterationData = async (userData) => {
-    try {
-      console.log(userData);
-      let {data} = await axios.post(
-        `https://book-store-an5l.onrender.com/api/v1/auth/signup`,
-        userData
-      );
-      if (data.message === "success") {
-        //navigate verification page
-      }
-    } catch (error) {
-      console.log(error) ;
-      setError(error.response.data.error);
-    }
-  };
   let validationSchema = Yup.object({
     userName: Yup.string()
       .required("Name is required")
@@ -155,9 +138,10 @@ export const Register = () => {
 
             <Button
               variant="outlined"
-              endIcon={<i className="fa-solid fa-arrow-right"></i>}
+              type="submit"
+              endIcon={isLoading ? <i className="fas fa-spinner fa-spin"></i> : <i className="fa-solid fa-arrow-right"></i>}
               className={`mainBtn`}
-              // disabled={formik.isValid ? false : true}
+              disabled={formik.isValid ? false : true}
             >
               Next
             </Button>
