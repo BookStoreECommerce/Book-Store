@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import TextField from "@mui/material/TextField";
-import { Button } from "@mui/material";
+import Button from '@mui/material/Button';
 import styles from './Register.module.css'
 import SocialMediaBtns from "../ReusableComponents/SocialMediaBtns/SocialMediaBtns";
 // import { useDispatch, useSelector } from 'react-redux';
@@ -15,7 +15,6 @@ export const Register = () => {
   //   const { isLoading, token , error } = useSelector(state => state.auth);
 
   const handleSubmit = (values) => {
-    console.log("vvvvvvvvvvvvvvvvvvv");
     console.log(values);
     delete values.privacyCheck;
     // dispatch(register(values))
@@ -25,7 +24,7 @@ export const Register = () => {
   const SendUserRegisterationData = async (userData) => {
     try {
       console.log(userData);
-      let { data } = await axios.post(
+      let {data} = await axios.post(
         `https://book-store-an5l.onrender.com/api/v1/auth/signup`,
         userData
       );
@@ -68,8 +67,8 @@ export const Register = () => {
       privacyCheck: false,
     },
     validationSchema,
-    onSubmit: handleSubmit,
     isInitialValid: false,
+    onSubmit: handleSubmit,
   });
 
   return (
@@ -158,7 +157,7 @@ export const Register = () => {
               variant="outlined"
               endIcon={<i className="fa-solid fa-arrow-right"></i>}
               className={`mainBtn`}
-              disabled={formik.isValid ? false : true}
+              // disabled={formik.isValid ? false : true}
             >
               Next
             </Button>

@@ -40,6 +40,23 @@ box-sizing: border-box;
   border-color: var(--mainColor);
 }
 
+/* Our Checkbox */
+.mainCheckbox:checked {
+  background-color: var(--mainColor);
+  border-color: var(--mainColor);
+}
+
+.mainCheckbox:focus {
+  border-color: var(--beigeColor);
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem var(--beigeColor);
+}
+
+/* Our Title */
+.mainTitle{
+  color: var(--mainColor);
+}
+
 
 .blueHeader{
   color:var(--navyBlue);
