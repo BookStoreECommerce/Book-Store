@@ -22,6 +22,7 @@
         background-color: #f8f9fa;
         padding: 40px;
         border-radius: 0 10px 10px 0;
+        overflow: hidden;
 
     }
     .imgContainer img{
@@ -34,13 +35,18 @@
     
     .overLay{
         position: absolute;
-        z-index: 3;
-        top:100%;
+        /* z-index: 3; */
+        top:110%;
         left: 0;
         right: 0;
         bottom: 0;
-        opacity: 0.6;
-        background-color: var(--mainColor);
+        /* opacity: 0.6; */
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(206, 119, 119,0.6);
         border-radius: 0 10px 10px 0;
         transition:all 0.5s ease-in-out;
         
@@ -49,3 +55,15 @@
     .imgContainer:hover .overLay{
         top:0;
     }
+
+.icon{
+    width: 40px;
+    height: 30px;
+    background-color: #f8f9fa;
+    color: var(--mainColor);
+    padding: 5px 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}

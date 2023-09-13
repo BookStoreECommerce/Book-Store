@@ -8,7 +8,19 @@ const BookCard = ({image, name , price , section}) => {
 <>
     <div className="col-lg-3 col-md-4 col-xs-1 text-center">
         <div className={`mb-2 position-relative ${styles.imgContainer}`}> 
-        <div className={styles.overLay}></div>
+        <div className={styles.overLay}>
+       
+            <span className={styles.icon}>
+            <i class="fa-regular fa-eye"></i>
+            </span>
+            <span className={styles.icon}>
+            <i class="fa-solid fa-heart"></i>
+            </span>
+            <span className={styles.icon}>
+            <i class="fa-solid fa-cart-shopping"></i>
+            </span>
+            
+        </div>
             <img src= {image} className={`w-100 ${styles.cardImg}`}   alt="" />
         </div>
         <div className="d-flex flex-column">

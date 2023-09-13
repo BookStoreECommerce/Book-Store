@@ -10,7 +10,7 @@ box-sizing: border-box;
 :root {
   --navyBlue: #2b3a55;
   --white: #ffffff;
-  --mainColor: #ce7777;
+  --mainColor: rgb(206, 119, 119);
   --secondaryColor: #e8c4c4;
   --beigeColor: #f2e5e5;
 }
