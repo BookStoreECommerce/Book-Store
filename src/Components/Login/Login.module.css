@@ -1,0 +1,10 @@
+.bgBtn {
+  background-color: #f2e5e5 !important;
+}
+.hintColor {
+  color: var(--mainColor);
+}
+.forgotPpassword{
+    /* text-decoration: none; */
+    color: var(--secondaryColor);
+}

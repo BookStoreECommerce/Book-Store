@@ -7,13 +7,19 @@ import Layout from './Components/layout/Layout.jsx';
 import Home from './Components/Home/Home.jsx';
 import { Provider } from 'react-redux';
 import store from './Redux/Store.js';
+import Login from './Components/Login/Login';
+import ForgotPassword from './Components/Login/ForgotPassword';
+import ResetPassword from './Components/Login/ResetPassword';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
-      { index: true, element: <Home /> }
+      { index: true, element: <Home /> },
+      { path: "/login", element: <Login /> },
+      { path: "/forgotPassword", element: <ForgotPassword /> },
+      { path: "/resetPassword", element: <ResetPassword /> },
     ]
   }
 ])
