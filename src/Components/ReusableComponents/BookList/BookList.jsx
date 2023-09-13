@@ -5,7 +5,7 @@ const BookList = ({NewBooks , sectionName}) => {
     return (
         <>
             {NewBooks?.map((book) => (
-                <BookCard key={book.id} image ={book.image} name={book.name} price={book.price} section={sectionName}/>
+                <BookCard key={book.id} image ={book.image} name={book.name} price={book.price} author={book.author} section={sectionName}/>
             ))}
         </>
        

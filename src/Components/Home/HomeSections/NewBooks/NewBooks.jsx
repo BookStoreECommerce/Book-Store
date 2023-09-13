@@ -20,83 +20,95 @@ const NewBooks = () => {
         {
             id: 0,
             image: book,
-            name: "War of Dragon",
-            price: 350
+            name: "Our World Our Life",
+            author:"Lembid Noissa",
+            price: 310
         },
         {
             id: 1,
             image: book2,
-            name: "Alone Walker",
+            name: "Blue In The Water",
+            author:"Twent Momens",
             price: 105
         },
         {
             id: 2,
             image: book3,
-            name: "Moon Light Srdow",
+            name: "Animals Life",
+            author:"Ariean Hason",
             price: 200
         }
         ,
         {
             id: 3,
             image: book4,
-            name: "Animals Life",
-            price: 400
+            name: "Memorise",
+            author:"Lembid Noissa",
+            price: 350
         }
         ,
         {
             id: 4,
             image: book5,
-            name: "Animals Life",
-            price: 400
+            name: "War Of Dragon",
+            author:"Moren Nicol",
+            price: 410
         }
         ,
         {
             id: 5,
             image: book6,
-            name: "Animals Life",
-            price: 400
+            name: "Moon Light Sadow",
+            author:"Lebmid Traeh",
+            price: 220
         }
         ,
         {
             id: 6,
             image: book7,
-            name: "Animals Life",
-            price: 400
+            name: "Oloio",
+            author:"Madhu Sashan",
+            price: 130
         }
         ,
         {
             id: 7,
             image: book8,
-            name: "Animals Life",
-            price: 400
+            name: "Art Of Illustrator",
+            author:"Rabiul Vom",
+            price: 300
         }
         ,
         {
             id: 8,
             image: book9,
-            name: "Animals Life",
-            price: 400
+            name: "New World For Children",
+            author:"Charise Jemes",
+            price: 120
         }
         ,
         {
             id: 9,
             image: book10,
-            name: "Animals Life",
-            price: 400
+            name: "War Of Dragon",
+            author:"Moren Nicol",
+            price: 200
         }
         ,
         {
             id: 10,
             image: book11,
-            name: "Animals Life",
-            price: 400
+            name: "Alone Walker",
+            author:"Soad Humber",
+            price: 75
         }
         ,
         {
             id: 11,
             image: book12,
-            name: "Animals Life",
-            price: 400
+            name: "The Hunter House",
+            author:'Rakib Jon',
+            price: 100
         }
     ])
     const [startIndex, setStart] = useState(0);
@@ -139,10 +151,10 @@ const NewBooks = () => {
     return (
         <>
 
-            <div className="container">
-                <div className={`row justify-content-center align-items-center text-center ${styles.gap}`}>
-                    <h2 className="blueHeader">New Arrivals</h2>
-                    <div className="d-flex justify-content-end">
+            <div className="container my-4">
+                <div className={`row justify-content-center align-items-center  ${styles.gap}`}>
+                    <h2 className="blueHeader text-center mt-5">New Arrivals</h2>
+                    <div className="d-flex justify-content-end mb-3">
                         <button className={`${leftBtn ? styles.disabled : styles.enabled} ${styles.btn} ${styles.leftBtn} `} id="leftBtn" onClick={shiftLeft} ><i class="fa-solid fa-arrow-left"></i></button>
                         <button className={`${rightBtn ? styles.disabled : styles.enabled} ${styles.btn} `} id="righttBtn" onClick={shiftRight}><i class="fa-solid fa-arrow-right"></i></button>
                     </div>

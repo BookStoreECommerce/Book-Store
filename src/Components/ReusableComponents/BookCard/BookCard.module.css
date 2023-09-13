@@ -7,17 +7,25 @@
         color: var(--navyBlue );
         font-weight: bold;
         font-size: 18px;
+
     
+    }
+    .bookAuthor{
+        color: gray;
+        font-size: 16px;
+
+
     }
     .price{
         color: var(--mainColor);
         font-weight: bold;
-        font-size: 17px;
-    
-    
+        font-size: 16px;
+  
+
     }
-    
-    
+    .iconColor{
+        color: yellow;
+    }
     .imgContainer{
         background-color: #f8f9fa;
         padding: 40px;
