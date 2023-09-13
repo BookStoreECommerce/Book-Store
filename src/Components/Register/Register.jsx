@@ -1,57 +1,176 @@
+import React, { useState } from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import axios from "axios";
+import TextField from "@mui/material/TextField";
+import { Button } from "@mui/material";
+import styles from './Register.module.css'
+import SocialMediaBtns from "../ReusableComponents/SocialMediaBtns/SocialMediaBtns";
 
-import React from 'react'
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
 export const Register = () => {
+  const [error, setError] = useState("");
   const handleSubmit = (values) => {
-console.log(values);
-  }
-let validationSchema = Yup.object({
-    name :Yup.string().required('name is required').min(3 , 'name length less than 3').max(10 ,'name length more than 10' ),
-    email :Yup.string().required('email is required').email('email is not valid'),
-    password :Yup.string().required('password is required').matches(/^[A-Z][a-z0-9]{5,10}$/ , 'password is not valid'),
-    repassword :Yup.string().required('repassword is required').oneOf([Yup.ref('password')] , 'password is not match'),
-    phone :Yup.string().required('phone is required').matches(/^01[0125][0-9]{8}$/ , 'phone is not valid'),
+    console.log(values);
+    delete values.privacyCheck;
+    SendUserRegisterationData(values);
+  };
 
-})
- let formik = useFormik({
-initialValues : {
-name : '',
-phone : '',
-email : '',
-password : '', 
-repassword : ''
-},
-validationSchema  ,
-onSubmit : handleSubmit
-})
+  const SendUserRegisterationData = async (userData) => {
+    try {
+      console.log(userData);
+      let { data } = await axios.post(
+        `https://book-store-an5l.onrender.com/api/v1/auth/signup`,
+        userData
+      );
+      if (data.message === "success") {
+        //navigate verification page
+      }
+    } catch (error) {
+      console.log(error) ;
+      setError(error.response.data.error);
+    }
+  };
+  let validationSchema = Yup.object({
+    userName: Yup.string()
+      .required("Name is required")
+      .matches(
+        /^[a-zA-Z]{3,8}([_ -]?[a-zA-Z0-9]{3,8})*$/,
+        "Name must start with 3:8 letters (a-z)"
+      ),
+    email: Yup.string()
+      .required("Email is required")
+      .email("Please Enter a valid email"),
+    password: Yup.string()
+      .required("Password is required")
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+{};:,<.>])[A-Za-z\d!@#$%^&*()\-_=+{};:,<.>]{9,}$/,
+        `Password must contains:, - At least one uppercase letter.,- At least one lowercase letter.,- At least one digit.,- At least one special character.,- At least 9 characters long.`
+      ),
+    rePassword: Yup.string()
+      .required("Please confirm your password")
+      .oneOf([Yup.ref("password")], "Password is not matched"),
+    privacyCheck: Yup.boolean().oneOf([true], "Please accept privacy policy"),
+  });
+
+  let formik = useFormik({
+    initialValues: {
+      userName: "",
+      email: "",
+      password: "",
+      rePassword: "",
+      privacyCheck: false,
+    },
+    validationSchema,
+    onSubmit: handleSubmit,
+    isInitialValid: false,
+  });
+
   return (
-    <div className='w-57 mx-auto py-4'>
-      <h3>Register Now</h3>
-      <form onSubmit={formik.handleSubmit}>
-        <label htmlFor="name">Name :</label>
-        <input className='form-control mb-1' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.name} type="text" name='name' id='name'/>
-        {formik.errors.name && formik.touched.name? <div className='alert alert-danger'>{formik.errors.name}</div> : null}
-      
-        <label htmlFor="email">Email : </label>
-        <input className='form-control mb-1' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.email} type="email" email='email' id='email'/>
-        {formik.errors.email && formik.touched.email? <div className='alert alert-danger'>{formik.errors.email}</div> : null}
+    <>
+      <div className="container w-75 mx-auto py-4">
+        <h4 className="mainTitle text-center">CREATE YOUR ACCOUNT</h4>
+        <form onSubmit={formik.handleSubmit} noValidate>
+          {error ? (
+            <div className="ps-2 alert alert-danger mb-4">{error}</div>
+          ) : null}
 
-        <label htmlFor="password">password :</label>
-        <input className='form-control mb-1'onBlur={formik.handleBlur}  onChange={formik.handleChange} value={formik.values.password} type="password" password='password' id='password'/>
-        {formik.errors.password && formik.touched.password? <div className='alert alert-danger'>{formik.errors.password}</div> : null}
+          <TextField
+            onChange={formik.handleChange}
+            error={formik.errors.userName && formik.touched.userName && true}
+            helperText={formik.errors.userName}
+            id="outlined-error"
+            label="Name"
+            className="w-100"
+            name="userName"
+            type="text"
+            onBlur={formik.handleBlur}
+            margin="dense"
+          />
+          <TextField
+            onChange={formik.handleChange}
+            error={formik.errors.email && formik.touched.email && true}
+            helperText={formik.errors.email}
+            id="outlined-error"
+            label="email"
+            className="w-100"
+            name="email"
+            type="text"
+            onBlur={formik.handleBlur}
+            margin="dense"
+          />
+          <TextField
+            onChange={formik.handleChange}
+            error={formik.errors.password && formik.touched.password && true}
+            helperText={formik.errors.password}
+            id="outlined-error"
+            label="password"
+            className="w-100"
+            name="password"
+            type="password"
+            onBlur={formik.handleBlur}
+            margin="dense"
+          />
+          <TextField
+            onChange={formik.handleChange}
+            error={
+              formik.errors.rePassword && formik.touched.rePassword && true
+            }
+            helperText={formik.errors.rePassword}
+            id="outlined-error"
+            label="Confirm Password"
+            className="w-100"
+            name="rePassword"
+            type="password"
+            onBlur={formik.handleBlur}
+            margin="dense"
+          />
 
-        <label htmlFor="repassword">repassword :</label>
-        <input className='form-control mb-1' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.repassword} type="repassword" repassword='repassword' id='repassword'/>
-        {formik.errors.repassword && formik.touched.repassword? <div className='alert alert-danger'>{formik.errors.repassword}</div> : null}
 
-        <label htmlFor="phone">Phone :</label>
-        <input className='form-control mb-1' onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.phone} type="tel" phone='phone' id='phone'/>
-        {formik.errors.phone && formik.touched.phone? <div className='alert alert-danger'>{formik.errors.phone}</div> : null}
+          <div className="d-flex justify-content-between align-items-center mt-2">
+            <div className="form-check">
+              <input
+                className="form-check-input mainCheckbox"
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                type="checkbox"
+                value={formik.values.privacyCheck}
+                id="privacyCheck"
+                name="privacyCheck"
+              />
+              <label className="form-check-label text-muted" htmlFor="privacyCheck">
+                I agree to the <a className="text-muted" href="\">privacy policy</a>.
+              </label>
+              {formik.errors.privacyCheck && formik.touched.privacyCheck ? (
+                <p className="mt-1 text-danger mb-0">
+                  {formik.errors.privacyCheck}
+                </p>
+              ) : null}
+            </div>
 
-        <button className='btn btn-info' type='submit' >submit</button>
-      </form>
+            <Button
+              variant="outlined"
+              endIcon={<i className="fa-solid fa-arrow-right"></i>}
+              className={`mainBtn`}
+              disabled={formik.isValid ? false : true}
+            >
+              Next
+            </Button>
+          </div>
+        </form>
 
-    </div>
-  )
-}
+        <div className="d-flex gap-1 text-muted justify-content-center">
+          <div>Already have an account?</div>
+          <a className="text-muted" href="\">Login</a>
+        </div>
+
+        <div className="d-flex align-items-baseline justify-content-between">
+          <div className={styles.leftLine}></div>
+          <span className={styles.or}>or</span>
+          <div className={styles.rightLine}></div>
+        </div>
+
+        <SocialMediaBtns/>
+      </div>
+    </>
+  );
+};
