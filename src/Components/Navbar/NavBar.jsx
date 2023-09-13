@@ -14,7 +14,7 @@ export default function NavBar() {
     <img src={logo} alt="" className='w-100 '/>
     </Link>
     <div className={ styles.badgeContainer}>     
-<li className="nav-item   me-3 position-relative">
+<li className="nav-item me-3 position-relative">
           <Link className={`nav-link  ${styles.navLink}`}to="favorite">
           <i className={`fa-sharp fa-solid fa-heart ${styles.size}`}></i>
           <div className={` ${styles.number}`}><span className={`position-absolute ${styles.num}`}>0</span></div>
@@ -30,7 +30,7 @@ export default function NavBar() {
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
-    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+    <div className={`collapse navbar-collapse ${styles.bgCollapse}`} id="navbarSupportedContent">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
         <li className="nav-item me-2">
           <Link className={`nav-link ${styles.navLink}`} to="home">Home</Link>

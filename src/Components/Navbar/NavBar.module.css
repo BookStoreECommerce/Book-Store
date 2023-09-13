@@ -57,6 +57,10 @@ background-color: var(--beigeColor)!important;
 .badgeContainer li{
     list-style: none;
 }
+.dropdownMenu{
+    background-image: linear-gradient(45deg, beige, transparent);
+}
+/* Media Quries NavBar */
 @media screen and (min-width:100px) and (max-width: 600px) {
     .logo{
         width: 20%;
@@ -67,6 +71,7 @@ background-color: var(--beigeColor)!important;
       }
     .badgeContainer{
         left: 18%;
+        top: 7px;
     }
 }
 @media screen and (min-width:601px) and (max-width: 992px) {
@@ -121,4 +126,33 @@ background-color: var(--beigeColor)!important;
         left: 54%;
     }
 
+}
+@media screen and (min-width:1701px) and (max-width: 1800px) {
+    .badgeContainer{
+        left: 50%;
+    }
+
+}
+@media screen and (min-width:1801px) and (max-width: 1900px) {
+    .badgeContainer{
+        left: 58%;
+    }
+
+}
+@media screen and (max-width:600px){
+    .transparent{
+        position: relative!important;
+        background-color: white!important;
+    }
+}
+@media screen and (min-width:601px) and (max-width:900px){
+.bgCollapse{
+    background-image:linear-gradient(white, var(--beigeColor));
+   
+    border-radius: 20px;
+
+}
+.bgCollapse .navLink{
+    padding-left: 30px;
+}
 }

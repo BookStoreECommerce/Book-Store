@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Jost&family=Libre+Baskerville&family=PT+Serif:wght@700&display=swap');
+
+
 body {
   margin: 0;
 padding: 0;
@@ -34,4 +37,13 @@ box-sizing: border-box;
 .mainInput:focus {
   box-shadow: none;
   border-color: var(--mainColor);
+}
+
+
+.blueHeader{
+  color:var(--navyBlue);
+  font-size: 38px;
+  font-family: 'Libre Baskerville', serif;
+  font-weight: bold;
+
 }
