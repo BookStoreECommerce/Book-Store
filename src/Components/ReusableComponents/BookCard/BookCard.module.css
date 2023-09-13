@@ -1,21 +1,36 @@
 .cardImg{
-border-radius: 15px;
-}
-
-.bookName{
-    /* color: #40489b; */
-    color: var(--navyBlue );
-    font-weight: bold;
-    font-size: 18px;
-
-}
-.price{
-    color: var(--mainColor);
-    font-weight: bold;
-    font-size: 17px;
-
-
-}
-
-
-
+    border-radius: 15px;
+    }
+    
+    .bookName{
+        /* color: #40489b; */
+        color: var(--navyBlue );
+        font-weight: bold;
+        font-size: 18px;
+    
+    }
+    .price{
+        color: var(--mainColor);
+        font-weight: bold;
+        font-size: 17px;
+    
+    
+    }
+    
+    
+    .imgContainer{
+        background-color: #f8f9fa;
+        padding: 40px;
+        border-radius: 0 10px 10px 0;
+    }
+    .imgContainer img{
+        -webkit-box-shadow: 10px 10px 18px 3px rgba(222,222,222,1);
+        -moz-box-shadow: 10px 10px 18px 3px rgba(222,222,222,1);
+        box-shadow: 10px 10px 18px 3px rgba(222,222,222,1);
+        border-radius: 0 10px 10px 0;
+    
+    }
+    
+    
+    
+    

@@ -1,7 +1,7 @@
-.gap{
-    gap: 15px;
-}
-
+/* .gap{ */
+    /* gap: 15px; */
+/* } */
+/*  */
 
 .btn{
     border: 1px solid var(--navyBlue);
@@ -16,4 +16,11 @@
 .btn:hover{
     border: 1px solid var(--mainColor);
     color: var(--mainColor);
+}
+
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.6;
+    cursor: default;
 }
