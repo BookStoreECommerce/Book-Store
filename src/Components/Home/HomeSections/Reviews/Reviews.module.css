@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Jost&family=PT+Serif:wght@700&display=swap');
+
+.reviewContent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: 'Jost', sans-serif;
+
+}
+
+.imageStyle{
+    border-radius: 50%;
+    width: 100%;
+  
+}
+.reviewImage{
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+}
+.fontParg{
+    font-size: 24px;
+    font-weight:400;
+}
+.fontname{
+    font-size: 18px;
+    color: grey;
+    
+}

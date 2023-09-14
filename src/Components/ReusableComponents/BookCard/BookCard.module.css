@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Jost&family=PT+Serif:wght@700&display=swap');
+.font{
+    font-family: 'Jost', sans-serif;
+}
 .cardImg{
     border-radius: 15px;
     }
@@ -24,7 +28,7 @@
 
     }
     .iconColor{
-        color: yellow;
+        color: #ffc107;
     }
     .imgContainer{
         background-color: #f8f9fa;
@@ -74,4 +78,8 @@
     align-items: center;
     justify-content: center;
     border-radius: 5px;
+}
+
+.pLeft{
+    padding-left: 40px;
 }

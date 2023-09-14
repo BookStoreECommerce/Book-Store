@@ -47,3 +47,10 @@ box-sizing: border-box;
   font-weight: bold;
 
 }
+.darkBg{
+  background-color: var(--navyBlue);
+}
+
+section{
+  margin-top: 3rem !important;
+}
