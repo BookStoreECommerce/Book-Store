@@ -16,8 +16,13 @@ export const register = createAsyncThunk ("auth/signup", async (userData) => {
     } catch (error) {
         return error.response.data
     }
-
 });
+
+const saveUserData = (token , refreshToken) => {
+    localStorage.setItem("BookStoreToken", token)
+    localStorage.setItem("BookStoreRefreshToken", refreshToken)
+}
+
 
 const authSlice = createSlice({
     name: "authentication",
@@ -29,6 +34,9 @@ const authSlice = createSlice({
         })
         builder.addCase(signin.fulfilled, (state, action) => {
             // state.token = action.payload.token
+            if(action.payload.message === "success"){
+                saveUserData(action.payload.token.token,action.payload.token.refreshToken )
+            }
             state.isLoading = false
         })
         builder.addCase(signin.rejected, (state, action) => {
@@ -41,7 +49,7 @@ const authSlice = createSlice({
         builder.addCase(register.fulfilled, (state, action) => {
             if(action.payload.message === 'success'){
                 state.token = action.payload.token.token
-                localStorage.setItem('registerToken', state.token);
+                saveUserData(action.payload.token.token,action.payload.token.refreshToken )
             }else{
                 state.error = action.payload.error
             }

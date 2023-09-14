@@ -1,16 +1,19 @@
 
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import CustomizedDialogs from '../Dialog/Dialog'
 import NavBar from '../Navbar/NavBar'
-
+import { Register } from '../Register/Register';
+import Login from '../Login/Login';
 
 export default function Layout() {
     return (
         <>
             <NavBar/>
             <Outlet></Outlet>
-            <CustomizedDialogs></CustomizedDialogs>
+            <div >
+                <Register></Register>
+                <Login></Login>
+            </div>
         </>
     )
 }

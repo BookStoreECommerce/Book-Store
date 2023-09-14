@@ -8,12 +8,14 @@ import { signin } from '../../Redux/Slicies/authSlice';
 import styles from './Login.module.css'
 import axios from 'axios';
 import { baseUrl } from '../../util/util';
+import CustomizedDialogs from "../Dialog/Dialog";
 
 
 const Login = () => {
     // const [isLoading, setIsLoading] = useState(false);
     const [messageError, setMessageError] = useState('')
     const dispatch = useDispatch()
+    const { loginShow } = useSelector(({dialog}) => dialog);
     const { isLoading, token } = useSelector(state => {
         // console.log(state.auth);
         return state.auth
@@ -55,7 +57,7 @@ const Login = () => {
     });
 
     return (
-        <>
+        <CustomizedDialogs show={loginShow}  >
             <div className='w-50 m-auto container text-dark mt-5'>
                 <h2 className='m-auto text-center'>Login</h2>
                 {messageError.length > 0 ? <span className='alert alert-danger'>{messageError}</span> : null}
@@ -82,8 +84,7 @@ const Login = () => {
 
                 </form>
             </div>
-        </>
-
+        </CustomizedDialogs>
     )
 }
 

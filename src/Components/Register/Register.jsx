@@ -3,19 +3,21 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
-import styles from './Register.module.css'
+import styles from "./Register.module.css";
 import SocialMediaBtns from "../ReusableComponents/SocialMediaBtns/SocialMediaBtns";
-import { useDispatch, useSelector } from 'react-redux';
-import { register } from '../../Redux/Slicies/authSlice';
+import { useDispatch, useSelector } from "react-redux";
+import { register } from "../../Redux/Slicies/authSlice";
+import CustomizedDialogs from "../Dialog/Dialog";
+
 
 export const Register = () => {
-  const dispatch = useDispatch()
-  const { isLoading, token , error } = useSelector(state => state.auth);
-
+  const dispatch = useDispatch();
+  const { isLoading, token, error } = useSelector((state) => state.auth);
+  const { registerShow } = useSelector(({dialog}) => dialog);
   const handleSubmit = (values) => {
     delete values.privacyCheck;
-    dispatch(register(values))
-    console.log(localStorage.getItem('registerToken'));
+    dispatch(register(values));
+    console.log(localStorage.getItem("registerToken"));
   };
 
   let validationSchema = Yup.object({
@@ -51,10 +53,10 @@ export const Register = () => {
     validationSchema,
     isInitialValid: false,
     onSubmit: handleSubmit,
-  }); 
+  });
 
   return (
-    <>
+    <CustomizedDialogs show={registerShow}  >
       <div className="p-2">
         <h4 className="mainTitle text-center">CREATE YOUR ACCOUNT</h4>
         <form onSubmit={formik.handleSubmit} noValidate>
@@ -113,7 +115,6 @@ export const Register = () => {
             margin="dense"
           />
 
-
           <div className="d-flex justify-content-between align-items-center mt-2">
             <div className="form-check">
               <input
@@ -125,8 +126,15 @@ export const Register = () => {
                 id="privacyCheck"
                 name="privacyCheck"
               />
-              <label className="form-check-label text-muted" htmlFor="privacyCheck">
-                I agree to the <a className="text-muted" href="\">privacy policy</a>.
+              <label
+                className="form-check-label text-muted"
+                htmlFor="privacyCheck"
+              >
+                I agree to the{" "}
+                <a className="text-muted" href="\">
+                  privacy policy
+                </a>
+                .
               </label>
               {formik.errors.privacyCheck && formik.touched.privacyCheck ? (
                 <p className="mt-1 text-danger mb-0">
@@ -138,9 +146,17 @@ export const Register = () => {
             <Button
               variant="outlined"
               type="submit"
-              endIcon={isLoading ? <i className="fas fa-spinner fa-spin"></i> : <i className="fa-solid fa-arrow-right"></i>}
+              endIcon={
+                isLoading ? (
+                  <i className="fas fa-spinner fa-spin"></i>
+                ) : (
+                  <i className="fa-solid fa-arrow-right"></i>
+                )
+              }
               className={`mainBtn`}
               disabled={formik.isValid ? false : true}
+              // handel when success
+              // onClick={()=>dispatch(setDialogContent('RegisterVerify'))}
             >
               Next
             </Button>
@@ -149,7 +165,9 @@ export const Register = () => {
 
         <div className="d-flex gap-1 text-muted justify-content-center">
           <div>Already have an account?</div>
-          <a className="text-muted" href="\">Login</a>
+          <a className="text-muted" href="\">
+            Login
+          </a>
         </div>
 
         <div className="d-flex align-items-baseline justify-content-between">
@@ -158,8 +176,8 @@ export const Register = () => {
           <div className={styles.rightLine}></div>
         </div>
 
-        <SocialMediaBtns/>
+        <SocialMediaBtns />
       </div>
-    </>
+    </CustomizedDialogs>
   );
 };

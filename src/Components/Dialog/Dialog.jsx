@@ -4,9 +4,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import { Register } from '../Register/Register';
-import Login from '../Login/Login';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { handleClose } from '../../Redux/Slicies/dialogSlice';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -18,16 +16,15 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     },
   }));
   
-  export default function CustomizedDialogs() {
+  export default function CustomizedDialogs({children, show}) {
     const dispatch = useDispatch()
-    const {open, status} = useSelector(state => state.dialog);
 
-    return (
+    return (  
       <div>
         <BootstrapDialog
           onClose={()=> dispatch(handleClose())}
           aria-labelledby="customized-dialog-title"
-          open={open}
+          open={show}
         >
           <IconButton
             aria-label="close"
@@ -42,7 +39,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
             <CloseIcon />
           </IconButton>
           <DialogContent dividers>
-            {status === 'register'?<Register/> : (status === 'login'?<Login/>:'')}
+            {children}
           </DialogContent>
         </BootstrapDialog>
       </div>

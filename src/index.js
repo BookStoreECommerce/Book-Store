@@ -6,6 +6,8 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./index.css";
 import App from "./App";
 
+import {Register} from "../src/Components/Register/Register.jsx"
+
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./Components/Home/Home.jsx";
 import { Provider } from "react-redux";
