@@ -1,9 +1,10 @@
 import React from "react";
 import {Link} from 'react-router-dom';
+import Rating from "../Rating/Rating";
 import styles from './BookCard.module.css'
 
 
-const BookCard = ({image, name , price ,author, section}) => {
+const BookCard = ({image, name , price ,author,rate, section}) => {
     return ( 
 <>
     <div className={`col-lg-3 col-md-4 col-xs-1 ${styles.font}` }>
@@ -33,17 +34,8 @@ const BookCard = ({image, name , price ,author, section}) => {
             {section === "bestSeller"?'':<span className={styles.bookName}>{name}</span>}
             {section === "bestSeller"?'':<span className={styles.bookAuthor}>By { author}</span>}
             {section === "bestSeller"?'': <span className={styles.price}> {price + ` EGP`} </span>}
-          {section === "bestSeller" ? '': <>
-          <div className="d-flex">
-            <i className={`fa-solid fa-star ${styles.iconColor}`}></i>
-            <i className={`fa-solid fa-star ${styles.iconColor}`}></i>
-            <i className={`fa-solid fa-star ${styles.iconColor}`}></i>
-            <i className={`fa-regular fa-star ${styles.iconColor}`}></i>
-            <i className={`fa-regular fa-star ${styles.iconColor}`}></i>
-          </div>
-          </>}
+          {section === "bestSeller" ? '': <><Rating rate={rate}/></>}
         </div>
-     
     </div>
 
 </>

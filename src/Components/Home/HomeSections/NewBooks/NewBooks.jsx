@@ -22,21 +22,23 @@ const NewBooks = () => {
             image: book,
             name: "Our World Our Life",
             author:"Lembid Noissa",
-            price: 310
+            price: 310,
+            rate:1,
         },
         {
             id: 1,
             image: book2,
             name: "Blue In The Water",
             author:"Twent Momens",
-            price: 105
+           rate:3,
         },
         {
             id: 2,
             image: book3,
             name: "Animals Life",
             author:"Ariean Hason",
-            price: 200
+            price: 200,
+            rate:5
         }
         ,
         {
@@ -44,7 +46,8 @@ const NewBooks = () => {
             image: book4,
             name: "Memorise",
             author:"Lembid Noissa",
-            price: 350
+            price: 350,
+            rate:4,
         }
         ,
         {
@@ -52,7 +55,8 @@ const NewBooks = () => {
             image: book5,
             name: "War Of Dragon",
             author:"Moren Nicol",
-            price: 410
+            price: 410,
+            rate:2,
         }
         ,
         {
@@ -60,7 +64,8 @@ const NewBooks = () => {
             image: book6,
             name: "Moon Light Sadow",
             author:"Lebmid Traeh",
-            price: 220
+            price: 220,
+            rate:5,
         }
         ,
         {
@@ -68,7 +73,8 @@ const NewBooks = () => {
             image: book7,
             name: "Oloio",
             author:"Madhu Sashan",
-            price: 130
+            price: 130,
+            rate:3,
         }
         ,
         {
@@ -76,7 +82,8 @@ const NewBooks = () => {
             image: book8,
             name: "Art Of Illustrator",
             author:"Rabiul Vom",
-            price: 300
+            price: 300,
+            rate:2,
         }
         ,
         {
@@ -84,7 +91,8 @@ const NewBooks = () => {
             image: book9,
             name: "New World For Children",
             author:"Charise Jemes",
-            price: 120
+            price: 120,
+            rate:4
         }
         ,
         {
@@ -92,7 +100,8 @@ const NewBooks = () => {
             image: book10,
             name: "War Of Dragon",
             author:"Moren Nicol",
-            price: 200
+            price: 200,
+            rate:5,
         }
         ,
         {
@@ -100,7 +109,8 @@ const NewBooks = () => {
             image: book11,
             name: "Alone Walker",
             author:"Soad Humber",
-            price: 75
+            price: 75,
+            rate:4,
         }
         ,
         {
@@ -108,7 +118,8 @@ const NewBooks = () => {
             image: book12,
             name: "The Hunter House",
             author:'Rakib Jon',
-            price: 100
+            price: 100,
+            rate:2,
         }
     ])
     const [startIndex, setStart] = useState(0);

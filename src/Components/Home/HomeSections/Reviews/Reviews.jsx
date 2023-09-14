@@ -1,13 +1,9 @@
 import React, { Fragment, useState } from "react";
-
-import Slider from "react-slick";
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
-import profile1 from '../../../../assets/profile1.jpg'
-import profile2 from '../../../../assets/profile2.jpg'
-import profile3 from '../../../../assets/profile3.jpg'
-import profile4 from '../../../../assets/profile4.jpg'
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import style from './Reviews.module.css'
+import Rating from "../../../ReusableComponents/Rating/Rating";
 
 
 const Reviews = () => {
@@ -23,25 +19,21 @@ const Reviews = () => {
     };
     const [review, setReview] = useState([
         {
-            profileImage: profile1,
             rate: 4,
             review: "All good books have one thing in common - they are truer than if they had really happened.",
             name: "Ernest Hemingway"
         },
         {
-            profileImage: profile2,
             rate: 5,
             review: "All good books have one thing in common - they are truer than if they had really happened.",
             name: "Ernest Hemingway"
         },
         {
-            profileImage: profile3,
             rate: 3,
             review: "All good books have one thing in common - they are truer than if they had really happened.",
             name: "Ernest Hemingway"
         },
         {
-            profileImage: profile4,
             rate: 2,
             review: "All good books have one thing in common - they are truer than if they had really happened.",
             name: "Ernest Hemingway"
@@ -54,20 +46,12 @@ const Reviews = () => {
         <Fragment>
             <section>
                 <div className="container">
-                    <h2 className="blueHeader text-center mt-4 mb-5">Reviews</h2>
                     <div>
-
                         <Slider {...settings}>
                             {review.map((review) =>
                                 <div className={style.reviewContent}>
-                                <div className="d-flex justify-content-center mb-3">
-                                <div className={style.reviewImage}>
-                                        <img src={review.profileImage} className={`${style.imageStyle} w-100`} />
-                                    </div>
-                                
-                                </div>
-                                    
-                                    <p className={`mb-2 ${style.fontParg}`}>❝ {review.review} ❞</p>
+                                    <Rating rate={review.rate}/>
+                                    <p className={`my-2 ${style.fontParg}`}>❝ {review.review} ❞</p>
                                     <p className={`mb-2 ${style.fontname}`}>{review.name}</p>
                                 </div>
                             )}
@@ -75,10 +59,7 @@ const Reviews = () => {
                     </div>
                 </div>
             </section>
-
-
         </Fragment>
-
     );
 }
 
