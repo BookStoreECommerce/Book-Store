@@ -8,3 +8,6 @@
     /* text-decoration: none; */
     color: var(--secondaryColor);
 }
+.pageHead{
+  color: var(--mainColor);
+}

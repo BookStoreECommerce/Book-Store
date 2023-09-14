@@ -36,9 +36,7 @@ const Login = () => {
     // }
 
     const handleLogin = async (values) => {
-        console.log(values);
         dispatch(signin(values))
-
     }
 
     let validationSchema = Yup.object({
@@ -58,7 +56,7 @@ const Login = () => {
     return (
         <>
             <div className='w-50 m-auto container text-dark mt-5'>
-                <h2 className='m-auto text-center'>Login</h2>
+                <h2 className={`${styles.pageHead} m-auto text-center`} >Login</h2>
                 {messageError.length > 0 ? <span className='alert alert-danger'>{messageError}</span> : null}
                 <form onSubmit={formik.handleSubmit} className='p-5 row'>
 
