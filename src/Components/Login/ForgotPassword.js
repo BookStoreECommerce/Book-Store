@@ -39,6 +39,8 @@ const ForgotPassword = () => {
     });
 
     useEffect(()=>{
+    // console.log(loginConfirmed);
+        console.log(resetPasswordMessage);
         if(resetPasswordMessage === "success"){
             navigate("/verifyPassword")
         }

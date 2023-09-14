@@ -5,10 +5,12 @@ import { redirect } from "react-router-dom";
 
 
 
-const initialState = { user: {}, isLoading: false, token: null, resetPasswordMessage: null }
+const initialState = { user: {}, isLoading: false, token: null, resetPasswordMessage: null, loginConfirmed: null }
 
 export const signin = createAsyncThunk("auth/signin", async (values) => {
-    const response = await axios.post(`${baseUrl}/auth/signin`, values);
+    const response = await axios.post(`${baseUrl}/auth/signin`, values).catch(error => {
+        return error.response
+    });
     return response
 });
 
@@ -40,10 +42,15 @@ const authSlice = createSlice({
             state.isLoading = true
         })
         builder.addCase(signin.fulfilled, (state, actions) => {
+            // console.log(actions.payload);
             // state.token = actions.payload.token
+            // console.log(actions.payload.data.message);
+            state.loginConfirmed = actions.payload;
             state.isLoading = false
         })
         builder.addCase(signin.rejected, (state, actions) => {
+            // console.log(actions.error.message);
+            // state.loginConfirmed = actions.payload;
             state.isLoading = false
             // state.token = actions.payload.token
         })
