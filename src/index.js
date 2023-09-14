@@ -8,14 +8,10 @@ import App from "./App";
 
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./Components/Home/Home.jsx";
-import {Register} from "./Components/Register/Register.jsx";
 import { Provider } from "react-redux";
 import store from "./Redux/Store.js";
 import { createTheme, ThemeProvider } from "@mui/material";
 
-import Login from "./Components/Login/Login";
-import ForgotPassword from "./Components/Login/ForgotPassword";
-import ResetPassword from "./Components/Login/ResetPassword";
 import Layout from "./Components/layout/Layout";
 
 const router = createBrowserRouter([
@@ -24,7 +20,6 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { index: true, element: <Home /> },
-      {path : 'register' , element : <Register/> }
   ],
   },
 ]);

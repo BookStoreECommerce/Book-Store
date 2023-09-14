@@ -3,9 +3,13 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import logo from '../../assets/logo.png'
 import styles from './NavBar.module.css'
+import { useDispatch } from 'react-redux';
+import { handleClickOpen, setDialogContent } from '../../Redux/Slicies/dialogSlice';
 
 
 export default function NavBar() {
+   const dispatch = useDispatch()
+
   return (
    <>
    <nav className={`navbar fixed-top navbar-expand-lg py-3 ${styles.transparent}`}>
@@ -62,12 +66,6 @@ export default function NavBar() {
           <input type="text" placeholder='search....' className={`form-control rounded-pill ${styles.form}`}/>
         </li>
 
-
-
-   
-
-
-
         <li className="nav-item me-2">
           <Link className={`nav-link ${styles.navLink}`} to="profile">
           <i className={`fa-solid fa-user me-2  ${styles.size}`}></i>
@@ -76,10 +74,10 @@ export default function NavBar() {
         </li>
    
         <li className="nav-item">
-          <Link className={`nav-link ${styles.navLink}`} to="login">Login</Link>
+          <Link className={`nav-link ${styles.navLink}`}onClick={(e)=>{dispatch(handleClickOpen());dispatch(setDialogContent('login'))}} >Login</Link>
         </li>
         <li className="nav-item">
-          <Link className={`nav-link ${styles.navLink}`} to="register">Register</Link>
+          <button  className={`nav-link ${styles.navLink}`} onClick={(e)=>{dispatch(handleClickOpen());dispatch(setDialogContent('register'))}}>Register</button>
         </li>
    
       </ul>

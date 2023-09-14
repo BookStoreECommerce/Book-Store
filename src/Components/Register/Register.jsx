@@ -8,7 +8,6 @@ import SocialMediaBtns from "../ReusableComponents/SocialMediaBtns/SocialMediaBt
 import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../../Redux/Slicies/authSlice';
 
-
 export const Register = () => {
   const dispatch = useDispatch()
   const { isLoading, token , error } = useSelector(state => state.auth);
@@ -52,11 +51,11 @@ export const Register = () => {
     validationSchema,
     isInitialValid: false,
     onSubmit: handleSubmit,
-  });
+  }); 
 
   return (
     <>
-      <div className="container w-75 mx-auto py-4">
+      <div className="p-2">
         <h4 className="mainTitle text-center">CREATE YOUR ACCOUNT</h4>
         <form onSubmit={formik.handleSubmit} noValidate>
           {error ? (
