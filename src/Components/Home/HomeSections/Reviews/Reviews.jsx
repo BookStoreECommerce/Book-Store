@@ -51,6 +51,7 @@ const Reviews = () => {
         <Fragment>
             <section>
                 <div className="container">
+                    <h2 className="blueHeader text-center mt-4 mb-5">Reviews</h2>
                     <div>
 
                         <Slider {...settings}>
