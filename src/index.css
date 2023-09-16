@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Jost&family=Libre+Baskerville&family=PT+Serif:wght@700&display=swap');
+
+
 body {
   margin: 0;
 padding: 0;
@@ -14,8 +17,9 @@ box-sizing: border-box;
 
 /* Our Button */
 .mainBtn{
-  color: var(--mainColor);
-  border-color: var(--mainColor);
+  background-color: white !important;
+  color: var(--mainColor) !important;
+  border-color: var(--mainColor) !important;
   transition: all 0.7s ease;
 }
 
@@ -25,7 +29,7 @@ box-sizing: border-box;
   border-color: var(--mainColor);
 }
 
-/* Our Link */
+/* Our Input */
 .mainInput, .mainInput:focus {
   background-color: var(--beigeColor);
   border-color: var(--beigeColor);
@@ -34,4 +38,29 @@ box-sizing: border-box;
 .mainInput:focus {
   box-shadow: none;
   border-color: var(--mainColor);
+}
+
+/* Our Checkbox */
+.mainCheckbox:checked {
+  background-color: var(--mainColor) !important;
+  border-color: var(--mainColor) !important;
+}
+
+.mainCheckbox:focus {
+  border-color: var(--beigeColor) !important;
+  outline: 0 !important;
+  box-shadow: 0 0 0 0.25rem var(--beigeColor) !important;
+}
+
+/* Our Title */
+.mainTitle{
+  color: var(--mainColor);
+}
+
+.blueHeader{
+  color:var(--navyBlue);
+  font-size: 38px;
+  font-family: 'Libre Baskerville', serif;
+  font-weight: bold;
+
 }

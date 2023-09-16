@@ -1,0 +1,158 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Jost&family=PT+Serif:wght@700&display=swap');
+
+
+.logo{
+    width: 6%;
+    margin-right: 60px;
+}
+.navLink{
+    font-family: 'Jost', sans-serif;
+    font-size: 19px;
+    font-weight: bold;
+    color: #2b3069!important;
+}
+.transparent{
+    background-color: transparent;
+}
+.size{
+
+font-size: 19px;
+}
+.dropdownMenu {
+    border: 1px #dee2e6 solid !important;
+font-weight: 400;
+font-family: 'Jost', sans-serif;
+font-size: 16px!important;
+}
+.item:hover{
+background-color: var(--beigeColor)!important;
+
+}
+.colorUser{
+    color: var(--mainColor);
+    font-size: 19px;
+}
+.number{
+    width: 20px;
+    background: var(--mainColor);
+    top: -18px;
+    right: -12px;
+    border-radius: 50%;
+    height: 20px;
+    position: absolute;
+}
+.num{
+    font-size: 13px;
+    color: white;
+    left: 6px;
+}
+
+
+.badgeContainer{
+    position: relative;
+    display: flex;
+    left: 59%;
+}
+.badgeContainer li{
+    list-style: none;
+}
+.dropdownMenu{
+    background-image: linear-gradient(45deg, beige, transparent);
+}
+/* Media Quries NavBar */
+@media screen and (min-width:100px) and (max-width: 600px) {
+    .logo{
+        width: 20%;
+        margin-right: 0px;
+    }
+    .form{
+        display: none;
+      }
+    .badgeContainer{
+        left: 18%;
+        top: 7px;
+    }
+}
+@media screen and (min-width:601px) and (max-width: 992px) {
+    .logo{
+        width: 17%;
+        margin-right: 0px;
+    }
+    .form{
+        display: none;
+      }
+    .badgeContainer{
+        left: 27%;
+        top: 9px;
+    }
+}
+
+@media screen and (min-width:993px) and (max-width: 1300px) {
+    .logo{
+        width: 9%;
+        margin-right: 0px;
+    }
+
+    .badgeContainer{
+        left: 54%;
+    }
+  .form{
+    display: none;
+  }
+}
+@media screen and (min-width:1301px) and (max-width: 1500px) {
+    .logo{
+        width: 9%;
+    }
+
+    .badgeContainer{
+        left: 42%;
+    }
+
+}
+@media screen and (min-width:1501px) and (max-width: 1600px) {
+    .logo{
+        width: 9%;
+    }
+
+    .badgeContainer{
+        left: 48%;
+    }
+
+}
+@media screen and (min-width:1601px) and (max-width: 1700px) {
+    .badgeContainer{
+        left: 54%;
+    }
+
+}
+@media screen and (min-width:1701px) and (max-width: 1800px) {
+    .badgeContainer{
+        left: 50%;
+    }
+
+}
+@media screen and (min-width:1801px) and (max-width: 1900px) {
+    .badgeContainer{
+        left: 58%;
+    }
+
+}
+@media screen and (max-width:600px){
+    .transparent{
+        position: relative!important;
+        background-color: white!important;
+    }
+}
+@media screen and (min-width:601px) and (max-width:900px){
+.bgCollapse{
+    background-image:linear-gradient(white, var(--beigeColor));
+   
+    border-radius: 20px;
+
+}
+.bgCollapse .navLink{
+    padding-left: 30px;
+}
+}

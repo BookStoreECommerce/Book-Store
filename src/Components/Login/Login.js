@@ -7,7 +7,7 @@ import { signin } from '../../Redux/Slicies/authSlice';
 import styles from './Login.module.css'
 import axios from 'axios';
 import { baseUrl } from '../../util/util';
-import { Link, redirect, useNavigate } from 'react-router-dom';
+import CustomizedDialogs from "../Dialog/Dialog";
 
 
 const Login = () => {
@@ -16,6 +16,7 @@ const Login = () => {
     const [messageError, setMessageError] = useState('')
     const {loginConfirmed} = useSelector((state) => state.auth);
     const dispatch = useDispatch()
+    const { loginShow } = useSelector(({dialog}) => dialog);
     const { isLoading, token } = useSelector(state => {
         // console.log(state.auth);
         return state.auth
@@ -69,7 +70,7 @@ const Login = () => {
 
 
     return (
-        <>
+        <CustomizedDialogs show={loginShow}  >
             <div className='w-50 m-auto container text-dark mt-5'>
                 <h2 className={`${styles.pageHead} m-auto text-center`} >Login</h2>
                 {messageError.length > 0 ? <span className='alert alert-danger'>{messageError}</span> : null}
@@ -96,8 +97,7 @@ const Login = () => {
 
                 </form>
             </div>
-        </>
-
+        </CustomizedDialogs>
     )
 }
 

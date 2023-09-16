@@ -1,0 +1,21 @@
+.cardImg{
+border-radius: 15px;
+}
+
+.bookName{
+    /* color: #40489b; */
+    color: var(--navyBlue );
+    font-weight: bold;
+    font-size: 18px;
+
+}
+.price{
+    color: var(--mainColor);
+    font-weight: bold;
+    font-size: 17px;
+
+
+}
+
+
+

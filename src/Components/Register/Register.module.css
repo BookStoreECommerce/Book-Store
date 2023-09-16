@@ -1,0 +1,9 @@
+.leftLine, .rightLine {
+    width: 45%;
+    height: 1px;
+    background-color: var(--mainColor);
+}
+
+.or {
+    color: var(--mainColor);
+}

@@ -1,0 +1,20 @@
+.googleIconColor {
+    color: #DE1414;
+}
+
+.fbIconColor {
+    color: #395898;
+}
+
+.socialMediaBtns {
+    background-color: white !important;
+    color: grey!important;
+    border-color: var(--mainColor) !important;
+    transition: all 0.7s ease;
+}
+
+.socialMediaBtns:hover {
+    color: white;
+    /* background-color: var(--mainColor); */
+    border-color: var(--mainColor);
+}
