@@ -1,17 +1,16 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { baseUrl } from "../../util/util";
-import axios from "axios";
+import axiosInstance from "../../axios/axios-instance";
 
 const initialState = { user: {}, isLoading: false, token: null , error : null }
 
 export const signin = createAsyncThunk("auth/signin", async (values) => {
-    const response = await axios.post(`${baseUrl}/auth/signin`, values);
+    const response = await axiosInstance.post('auth/signin', values);
     return response
 })
 
 export const register = createAsyncThunk ("auth/signup", async (userData) => {
     try {
-        let {data} = await axios.post(`${baseUrl}/auth/signup`, userData);
+        let {data} = await axiosInstance.post('auth/signup', userData);
         return data
     } catch (error) {
         return error.response.data
@@ -20,7 +19,7 @@ export const register = createAsyncThunk ("auth/signup", async (userData) => {
 
 export const signinWithToken = createAsyncThunk("auth/signin-with-token", async(toekn) => {
     try{
-        let {data} = await axios.post(`${baseUrl}/auth/signin/${toekn}`);
+        let {data} = await axiosInstance.post(`auth/signin/${toekn}`);
         return data
     }catch(error){
         return error.response.data

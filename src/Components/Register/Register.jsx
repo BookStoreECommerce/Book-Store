@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import TextField from "@mui/material/TextField";
@@ -10,9 +10,13 @@ import { register } from "../../Redux/Slicies/authSlice";
 import CustomizedDialogs from "../Dialog/Dialog";
 
 
+const getCharacterValidationError = (str) => {
+  return `Password must have at least 1 ${str} character`;
+};
+
 export const Register = () => {
   const dispatch = useDispatch();
-  const { isLoading, token, error } = useSelector((state) => state.auth);
+  const { isLoading, error } = useSelector((state) => state.auth);
   const { registerShow } = useSelector(({dialog}) => dialog);
   const handleSubmit = (values) => {
     delete values.privacyCheck;
@@ -31,11 +35,12 @@ export const Register = () => {
       .required("Email is required")
       .email("Please Enter a valid email"),
     password: Yup.string()
-      .required("Password is required")
-      .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+{};:,<.>])[A-Za-z\d!@#$%^&*()\-_=+{};:,<.>]{9,}$/,
-        `Password must contains:, - At least one uppercase letter.,- At least one lowercase letter.,- At least one digit.,- At least one special character.,- At least 9 characters long.`
-      ),
+    .required('Password is required')
+    .min(8, 'Password should be of minimum 8 characters length')
+    .matches(/[0-9]/, getCharacterValidationError("digit"))
+    .matches(/[A-Z]/, getCharacterValidationError("uppercase"))
+    .matches(/[a-z]/, getCharacterValidationError("lowercase"))
+    .matches(/[!@#$%^&*()\-_=+{};:,<.>]/, getCharacterValidationError("special caracters")),
     rePassword: Yup.string()
       .required("Please confirm your password")
       .oneOf([Yup.ref("password")], "Password is not matched"),
