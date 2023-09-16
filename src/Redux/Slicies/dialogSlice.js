@@ -10,7 +10,9 @@ const dialogSlice = createSlice({
             state.open = !state.open;
         },
         handleClose: (state, action) => {
+            // console.log('handle close');
             state.registerShow = false
+            
             state.loginShow = false
         },
         setDialogContent: (state, action) => {

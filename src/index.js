@@ -15,6 +15,7 @@ import store from "./Redux/Store.js";
 import { createTheme, ThemeProvider } from "@mui/material";
 
 import Layout from "./Components/layout/Layout";
+import ForgetPasswordStepper from "./Components/Login/forgetPassword/ForgetPasswordStepper";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { index: true, element: <Home /> },
+      { path: "/forgotPassword", element: <ForgetPasswordStepper /> },
   ],
   },
 ]);
