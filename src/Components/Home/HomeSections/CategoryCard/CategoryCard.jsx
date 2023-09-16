@@ -5,8 +5,8 @@ const CategoryCard = ({ shuffledArray }) => {
     return (
         <>
         
-                <div className="row offset-md-1 justifiy-content-center align-items-center gy-4 mt-4">
-                    <div className="col-lg-5 col-md-12">
+                <div className="row justifiy-content-center align-items-center gy-4 mt-4">
+                    <div className="col-lg-6 col-md-12">
 
                         <div className="row gy-4 ">
                             <div className="col-md-6 col-sm-6">
@@ -23,7 +23,7 @@ const CategoryCard = ({ shuffledArray }) => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-lg-5 col-md-12">
+                    <div className="col-lg-6 col-md-12">
                     <img className="w-100 rounded-4" src={ shuffledArray[2].img } />
                     </div>
 
