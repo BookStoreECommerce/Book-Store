@@ -48,7 +48,11 @@ export default function NavBar() {
             <li><Link className={`dropdown-item ${styles.item}`} to="#">Science</Link></li>
             <li><Link className={`dropdown-item ${styles.item}`} to="#">children</Link></li>
      
-            <li><Link className={`dropdown-item ${styles.item}`} to="#">Cook</Link></li>
+            <li><Link className={`dropdown-item ${styles.item}`} to="#">Cooking</Link></li>
+            <li><Link className={`dropdown-item ${styles.item}`} to="#">Science Fiction</Link></li>
+            <li><Link className={`dropdown-item ${styles.item}`} to="#">Business</Link></li>
+            <li><Link className={`dropdown-item ${styles.item}`} to="#">Music</Link></li>
+            <li><Link className={`dropdown-item ${styles.item}`} to="#">Architecture</Link></li>
           </ul>
         </li>
         <li className="nav-item me-2">

@@ -4,18 +4,20 @@ import NewBooks from '../Home/HomeSections/NewBooks/NewBooks.jsx'
 import AboutUs from './HomeSections/AboutUs/AboutUs';
 import Reviews from './HomeSections/Reviews/Reviews';
 import Rating from '../ReusableComponents/Rating/Rating';
+import Categories from './HomeSections/Categories/Categories';
 
 
 export default function Home() {
-  
-  return (
-   <>
-   <Slider/>
-<NewBooks/>
-<AboutUs/>
-<Reviews/>
-<Rating/>
 
-   </>
+  return (
+    <>
+      <Slider />
+      <Categories/>
+      <NewBooks />
+      <AboutUs />
+      <Reviews />
+      <Rating />
+
+    </>
   )
 }

@@ -110,7 +110,7 @@ const NewBooks = () => {
             name: "Alone Walker",
             author:"Soad Humber",
             price: 75,
-            rate:4,
+            rate:0,
         }
         ,
         {
@@ -119,7 +119,7 @@ const NewBooks = () => {
             name: "The Hunter House",
             author:'Rakib Jon',
             price: 100,
-            rate:2,
+            rate:0,
         }
     ])
     const [startIndex, setStart] = useState(0);
@@ -165,8 +165,8 @@ const NewBooks = () => {
                 <div className={`row justify-content-center align-items-center  ${styles.gap}`}>
                     <h2 className="blueHeader text-center mt-5">New Arrivals</h2>
                     <div className="d-flex justify-content-end mb-3">
-                        <button className={`${leftBtn ? styles.disabled : styles.enabled} ${styles.btn} ${styles.leftBtn} `} id="leftBtn" onClick={shiftLeft} ><i class="fa-solid fa-arrow-left"></i></button>
-                        <button className={`${rightBtn ? styles.disabled : styles.enabled} ${styles.btn} `} id="righttBtn" onClick={shiftRight}><i class="fa-solid fa-arrow-right"></i></button>
+                        <button className={`${leftBtn ? styles.disabled : styles.enabled} ${styles.btn} ${styles.leftBtn} `} id="leftBtn" onClick={shiftLeft} ><i className="fa-solid fa-arrow-left"></i></button>
+                        <button className={`${rightBtn ? styles.disabled : styles.enabled} ${styles.btn} `} id="righttBtn" onClick={shiftRight}><i className="fa-solid fa-arrow-right"></i></button>
                     </div>
                     <BookList NewBooks={cutNewBooks} sectionName={"newBooks"} />
                 </div>

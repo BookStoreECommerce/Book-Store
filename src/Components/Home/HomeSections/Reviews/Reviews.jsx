@@ -14,27 +14,68 @@ const Reviews = () => {
         slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 3000,
-        cssEase: "linear"
+        autoplaySpeed: 8000,
+        cssEase: "linear",
+        arrows: false,
     };
     const [review, setReview] = useState([
         {
+            id:0,
             rate: 4,
             review: "All good books have one thing in common - they are truer than if they had really happened.",
             name: "Ernest Hemingway"
         },
         {
+            id:1,
             rate: 5,
             review: "All good books have one thing in common - they are truer than if they had really happened.",
             name: "Ernest Hemingway"
         },
         {
+            id:2,
             rate: 3,
             review: "All good books have one thing in common - they are truer than if they had really happened.",
             name: "Ernest Hemingway"
-        },
+        }
+        ,
         {
+            id:3,
             rate: 2,
+            review: "All good books have one thing in common - they are truer than if they had really happened.",
+            name: "Ernest Hemingway"
+        },
+        ,
+        {
+            id:4,
+            rate: 2,
+            review: "All good books have one thing in common - they are truer than if they had really happened.",
+            name: "Ernest Hemingway"
+        },
+        ,
+        {
+            id:5,
+            rate: 5,
+            review: "All good books have one thing in common - they are truer than if they had really happened.",
+            name: "Ernest Hemingway"
+        },
+        ,
+        {
+            id:6,
+            rate: 2,
+            review: "All good books have one thing in common - they are truer than if they had really happened.",
+            name: "Ernest Hemingway"
+        },
+        ,
+        {
+            id:7,
+            rate: 4,
+            review: "All good books have one thing in common - they are truer than if they had really happened.",
+            name: "Ernest Hemingway"
+        },
+        ,
+        {
+            id:8,
+            rate: 5,
             review: "All good books have one thing in common - they are truer than if they had really happened.",
             name: "Ernest Hemingway"
         },
@@ -48,12 +89,18 @@ const Reviews = () => {
                 <div className="container">
                     <div>
                         <Slider {...settings}>
-                            {review.map((review) =>
-                                <div className={style.reviewContent}>
+                            {review.map((review) =>{
+                            if( review.rate >= 4){
+                                return(
+                                    <div className={style.reviewContent} key={review.id}>
                                     <Rating rate={review.rate}/>
                                     <p className={`my-2 ${style.fontParg}`}>❝ {review.review} ❞</p>
                                     <p className={`mb-2 ${style.fontname}`}>{review.name}</p>
                                 </div>
+                                )
+                              
+                            }
+                        } 
                             )}
                         </Slider>
                     </div>

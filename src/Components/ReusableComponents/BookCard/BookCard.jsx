@@ -4,26 +4,26 @@ import Rating from "../Rating/Rating";
 import styles from './BookCard.module.css'
 
 
-const BookCard = ({image, name , price ,author,rate, section}) => {
+const BookCard = ({id,image, name , price ,author,rate, section}) => {
     return ( 
 <>
-    <div className={`col-lg-3 col-md-4 col-xs-1 ${styles.font}` }>
+    <div className={`col-lg-3 col-md-6 col-xs-12 ${styles.font}` }>
         <div className={`mb-2 position-relative ${styles.imgContainer}`}> 
         <div className={styles.overLay}>
        
            <Link to='detailsBook' className="text-decoration-none"> 
            <span className={styles.icon}>
-            <i class="fa-regular fa-eye"></i>
+            <i className="fa-regular fa-eye"></i>
             </span>
             </Link>
             <Link to='favorite' className="text-decoration-none">
             <span className={styles.icon}>
-            <i class="fa-solid fa-heart "></i>
+            <i className="fa-solid fa-heart "></i>
             </span>
             </Link>
             <Link to='cart' className="text-decoration-none">
             <span className={styles.icon}>
-            <i class="fa-solid fa-cart-shopping"></i>
+            <i className="fa-solid fa-cart-shopping"></i>
             </span>
             </Link>
             
@@ -34,7 +34,7 @@ const BookCard = ({image, name , price ,author,rate, section}) => {
             {section === "bestSeller"?'':<span className={styles.bookName}>{name}</span>}
             {section === "bestSeller"?'':<span className={styles.bookAuthor}>By { author}</span>}
             {section === "bestSeller"?'': <span className={styles.price}> {price + ` EGP`} </span>}
-          {section === "bestSeller" ? '': <><Rating rate={rate}/></>}
+          {section === "bestSeller" ? '': <><Rating rate={rate} id={id} /></>}
         </div>
     </div>
 

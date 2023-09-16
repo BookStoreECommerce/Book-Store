@@ -1,0 +1,26 @@
+
+.item0 { grid-area: catOne; }
+.item1 { grid-area: catTwo; }
+.item2 { grid-area: catThree; }
+.item3 { grid-area: catFour; }
+.item4 { grid-area: catFive; }
+
+.gridContainer {
+  display: grid;
+  grid-template-areas:
+    'catOne catOne catTwo catTwo catThree catThree'
+    'catOne catOne catTwo catTwo catThree catThree'
+    'catFour catFour catFive catFive catThree catThree'
+    'catFour catFour catFive catFive catThree catThree';
+
+  gap: 10px;
+  background-color: #2196F3;
+  padding: 10px;
+}
+
+.gridContainer > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+}
