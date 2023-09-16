@@ -18,6 +18,14 @@ export const register = createAsyncThunk ("auth/signup", async (userData) => {
     }
 });
 
+export const signinWithToken = createAsyncThunk("auth/signin-with-token", async(toekn) => {
+    try{
+        let {data} = await axios.post(`${baseUrl}/auth/signin/${toekn}`);
+        return data
+    }catch(error){
+        return error.response.data
+    }
+})
 const saveUserData = (token , refreshToken) => {
     localStorage.setItem("BookStoreToken", token)
     localStorage.setItem("BookStoreRefreshToken", refreshToken)
@@ -57,6 +65,18 @@ const authSlice = createSlice({
         })
         builder.addCase(register.rejected, (state, action) => {
             state.isLoading = false
+        })
+        builder.addCase(signinWithToken.pending, (state, action) => {
+            state.isLoading = true;
+        })
+        builder.addCase(signinWithToken.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.token = action.payload.token
+            
+        })
+        builder.addCase(signinWithToken.rejected, (state, action) => {
+            state.isLoading = false
+            state.error = action.payload.message
         })
     }
 })

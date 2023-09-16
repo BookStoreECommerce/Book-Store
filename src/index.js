@@ -15,6 +15,8 @@ import store from "./Redux/Store.js";
 import { createTheme, ThemeProvider } from "@mui/material";
 
 import Layout from "./Components/layout/Layout";
+import AuthLayout from "./Components/layout/AuthLayout";
+import Success from "./Components/LoginSocialActions/Success";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +26,21 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
   ],
   },
+  {
+    path: "auth",
+    element: <AuthLayout />,
+    children:[
+      {
+        path: "login",
+        children: [
+          {
+            path: "success/:token",
+            element: <Success />
+          }
+        ]
+    }
+    ]
+  }
 ]);
 
 
