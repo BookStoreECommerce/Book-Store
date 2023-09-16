@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import TextField from "@mui/material/TextField";
@@ -8,16 +7,20 @@ import SocialMediaBtns from "../ReusableComponents/SocialMediaBtns/SocialMediaBt
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../Redux/Slicies/authSlice";
 import CustomizedDialogs from "../Dialog/Dialog";
+import { registerVerifyModal } from "../../Redux/Slicies/dialogSlice";
 
 
 export const Register = () => {
   const dispatch = useDispatch();
-  const { isLoading, token, error } = useSelector((state) => state.auth);
+  const { isLoading, msgError } = useSelector((state) => state.auth);
   const { registerShow } = useSelector(({dialog}) => dialog);
-  const handleSubmit = (values) => {
+
+  const handleSubmit = async (values) => {
     delete values.privacyCheck;
-    dispatch(register(values));
-    console.log(localStorage.getItem("registerToken"));
+    const {payload} = await dispatch(register(values));
+    if(payload.message === "success"){
+      dispatch(registerVerifyModal())
+    }
   };
 
   let validationSchema = Yup.object({
@@ -55,13 +58,14 @@ export const Register = () => {
     onSubmit: handleSubmit,
   });
 
+
   return (
     <CustomizedDialogs show={registerShow}  >
       <div className="p-2">
         <h4 className="mainTitle text-center">CREATE YOUR ACCOUNT</h4>
         <form onSubmit={formik.handleSubmit} noValidate>
-          {error ? (
-            <div className="ps-2 alert alert-danger mb-4">{error}</div>
+          {msgError ? (
+            <div className="ps-2 alert alert-danger mb-4">{msgError}</div>
           ) : null}
 
           <TextField
@@ -155,8 +159,6 @@ export const Register = () => {
               }
               className={`mainBtn`}
               disabled={formik.isValid ? false : true}
-              // handel when success
-              // onClick={()=>dispatch(setDialogContent('RegisterVerify'))}
             >
               Next
             </Button>

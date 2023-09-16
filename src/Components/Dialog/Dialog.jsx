@@ -6,6 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch } from 'react-redux';
 import { handleClose } from '../../Redux/Slicies/dialogSlice';
+import { clearError } from '../../Redux/Slicies/authSlice';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
@@ -18,17 +19,21 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   
   export default function CustomizedDialogs({children, show}) {
     const dispatch = useDispatch()
+    const closeHandle = () =>{
+      dispatch(handleClose());
+      dispatch(clearError());
+    }
 
     return (  
       <div>
         <BootstrapDialog
-          onClose={()=> dispatch(handleClose())}
+          onClose={()=> closeHandle()}
           aria-labelledby="customized-dialog-title"
           open={show}
         >
           <IconButton
             aria-label="close"
-            onClick={()=> dispatch(handleClose())}
+            onClick={()=>closeHandle()}
             sx={{
               position: 'absolute',
               right: 8,

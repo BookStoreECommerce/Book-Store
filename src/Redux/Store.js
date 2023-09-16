@@ -5,8 +5,8 @@ import { dialogReducer } from "./Slicies/dialogSlice";
 
 const store = configureStore({
     reducer:{
-        auth: authReducer,
         dialog: dialogReducer,
+        auth: authReducer,
     }
 })
 
