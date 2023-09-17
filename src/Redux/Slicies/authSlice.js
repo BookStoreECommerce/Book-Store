@@ -60,7 +60,6 @@ const authSlice = createSlice({
             state.isLoading = true
         })
         builder.addCase(signin.fulfilled, (state, action) => {
-            // state.token = action.payload.token
             if(action.payload.message === "success"){
                 saveUserData(action.payload.token.token,action.payload.token.refreshToken )
             }
@@ -68,7 +67,6 @@ const authSlice = createSlice({
         })
         builder.addCase(signin.rejected, (state, action) => {
             state.isLoading = false
-            // state.token = action.payload.token
         })
     //register
         builder.addCase(register.pending, (state, action) => {

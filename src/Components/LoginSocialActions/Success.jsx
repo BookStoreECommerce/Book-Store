@@ -25,7 +25,6 @@ const Success = () => {
   }, [dispatch, isFirst, token, serverToekn, navigate]);
 
 
-
   return (
     <>
       {

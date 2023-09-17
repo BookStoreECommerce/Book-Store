@@ -18,6 +18,7 @@ import Success from "./Components/LoginSocialActions/Success";
 import ThemeContextProvider from "./context/theme-context.jsx";
 import LoginLayout from "./Components/LoginSocialActions/LoginLayout";
 import Failed from "./Components/LoginSocialActions/Failed";
+import { UserProfile } from "./Components/UserProfile/UserProfile";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { index: true, element: <Home /> },
+      { path: '/profile', element: <UserProfile /> },
   ],
   },
   {
