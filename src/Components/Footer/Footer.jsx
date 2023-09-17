@@ -10,7 +10,7 @@ const Footer = () => {
         <div className="container">
             <div className="row justify-content-center align-items-center text-white text-center">
                 <div className="col-12 py-3">
-                    <span className={style.footer}>Copyright 2022 <span className="fw-bold">Sphinx</span>. All Rights Reserved.
+                    <span className={style.footer}>Copyright 2023 <span className="fw-bold">Sphinx</span>. All Rights Reserved.
                     </span>
                 </div>
             </div>
