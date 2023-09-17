@@ -23,6 +23,13 @@ import { UserProfile } from "./Components/UserProfile/UserProfile";
 const router = createBrowserRouter([
   {
     path: "/",
+    loader: async () => {
+      const token = localStorage.getItem("token");
+      if(!token){
+        return null
+      }
+      // const {data} = await 
+    },
     element: <Layout />,
     children: [
       { index: true, element: <Home /> },
@@ -40,6 +47,7 @@ const router = createBrowserRouter([
           {
             path: "success/:token",
             element: <Success />
+            // http://localhost:3000/auth/login/success/ + creatred token"
           },
           {
             path: "failed",

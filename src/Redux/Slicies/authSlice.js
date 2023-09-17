@@ -1,16 +1,26 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {
+    createAsyncThunk,
+    createSlice
+} from "@reduxjs/toolkit";
 import axiosInstance from "../../axios/axios-instance";
 
-const initialState = { user: {}, isLoading: false, token: null , msgError : null }
+const initialState = {
+    user: {},
+    isLoading: false,
+    token: null,
+    msgError: null
+}
 
 export const signin = createAsyncThunk("auth/signin", async (values) => {
     const response = await axiosInstance.post('auth/signin', values);
     return response
 })
 
-export const register = createAsyncThunk ("auth/signup", async (userData) => {
+export const register = createAsyncThunk("auth/signup", async (userData) => {
     try {
-        let {data} = await axiosInstance.post('auth/signup', userData);
+        let {
+            data
+        } = await axiosInstance.post('auth/signup', userData);
         return data
     } catch (error) {
         return error.response.data
@@ -18,11 +28,16 @@ export const register = createAsyncThunk ("auth/signup", async (userData) => {
 });
 
 
-export const registerVerification = createAsyncThunk ("auth/verifyEmail", async (verifycode) => {
+export const registerVerification = createAsyncThunk("auth/verifyEmail", async (verifycode) => {
     try {
-        let {data} = await axiosInstance.post(`auth/verifyEmail`, {code:verifycode}, 
-        {headers: 
-            {authorization: localStorage.getItem("BookStoreToken")}
+        let {
+            data
+        } = await axiosInstance.post(`auth/verifyEmail`, {
+            code: verifycode
+        }, {
+            headers: {
+                authorization: localStorage.getItem("BookStoreToken")
+            }
         });
         return data
     } catch (error) {
@@ -31,16 +46,35 @@ export const registerVerification = createAsyncThunk ("auth/verifyEmail", async 
 });
 
 
-export const signinWithToken = createAsyncThunk("auth/signin-with-token", async(toekn) => {
-    try{
-        let {data} = await axiosInstance.post(`auth/signin/${toekn}`);
+export const signinWithToken = createAsyncThunk("auth/signin-with-token", async (toekn) => {
+    try {
+        let {
+            data
+        } = await axiosInstance.post(`auth/signin/${toekn}`);
         return data
-    }catch(error){
+    } catch (error) {
         return error.response.data
     }
 })
 
-const saveUserData = (token , refreshToken) => {
+export const userProfile = createAsyncThunk("users/update", async (userData) => {
+    try {
+        let {
+            data
+        } = await axiosInstance.put(`users/update`, userData, {
+            headers: {
+                authorization: localStorage.getItem("BookStoreToken")
+            }
+        });
+        return data
+    } catch (error) {
+        return error.response.data
+    }
+});
+
+
+
+const saveUserData = (token, refreshToken) => {
     localStorage.setItem("BookStoreToken", token)
     localStorage.setItem("BookStoreRefreshToken", refreshToken)
 }
@@ -60,56 +94,70 @@ const authSlice = createSlice({
             state.isLoading = true
         })
         builder.addCase(signin.fulfilled, (state, action) => {
-            if(action.payload.message === "success"){
-                saveUserData(action.payload.token.token,action.payload.token.refreshToken )
+            if (action.payload.message === "success") {
+                saveUserData(action.payload.token.token, action.payload.token.refreshToken)
             }
             state.isLoading = false
         })
         builder.addCase(signin.rejected, (state, action) => {
             state.isLoading = false
         })
-    //register
+        //register
         builder.addCase(register.pending, (state, action) => {
             state.isLoading = true
         })
         builder.addCase(register.fulfilled, (state, action) => {
-            if(action.payload.message === 'success'){
+            if (action.payload.message === 'success') {
                 state.isLoading = false
                 state.token = action.payload.token.token
-                saveUserData(action.payload.token.token,action.payload.token.refreshToken )
-            }else{
+                saveUserData(action.payload.token.token, action.payload.token.refreshToken)
+            } else {
                 state.msgError = action.payload.error
             }
         })
         builder.addCase(register.rejected, (state, action) => {
             state.isLoading = false;
         })
-            //verifyEmail
-            builder.addCase(registerVerification.pending, (state, action) => {
-                state.isLoading = true;
-            })
-            
-            builder.addCase(registerVerification.fulfilled, (state, action) => {
-                if(action.payload.message === 'success'){
-                    state.isLoading = false
-                    state.token = action.payload.token.token
-                    saveUserData(action.payload.token.token,action.payload.token.refreshToken )
-                }else{
-                    state.msgError = action.payload.error
-                }
-            })
-            builder.addCase(registerVerification.rejected, (state, action) => {
-                state.isLoading = false;
-            })
+        //verifyEmail
+        builder.addCase(registerVerification.pending, (state, action) => {
+            state.isLoading = true;
+        })
+
+        builder.addCase(registerVerification.fulfilled, (state, action) => {
+            if (action.payload.message === 'success') {
+                state.isLoading = false
+                state.token = action.payload.token.token
+                saveUserData(action.payload.token.token, action.payload.token.refreshToken)
+            } else {
+                state.msgError = action.payload.error
+            }
+        })
+        builder.addCase(registerVerification.rejected, (state, action) => {
+            state.isLoading = false;
+        })
+        // signinWithToken
         builder.addCase(signinWithToken.pending, (state, action) => {
             state.isLoading = true;
         })
         builder.addCase(signinWithToken.fulfilled, (state, action) => {
             state.isLoading = false;
             state.token = action.payload.token
-            
+
         })
         builder.addCase(signinWithToken.rejected, (state, action) => {
+            state.isLoading = false
+            state.msgError = action.payload.message
+        })
+        // userProfile
+        builder.addCase(userProfile.pending, (state, action) => {
+            state.isLoading = true;
+        })
+        builder.addCase(userProfile.fulfilled, (state, action) => {
+            state.isLoading = false;
+            // state.token = action.payload.token
+
+        })
+        builder.addCase(userProfile.rejected, (state, action) => {
             state.isLoading = false
             state.msgError = action.payload.message
         })
@@ -117,4 +165,6 @@ const authSlice = createSlice({
 })
 
 export const authReducer = authSlice.reducer;
-export const {clearError} = authSlice.actions;
+export const {
+    clearError
+} = authSlice.actions;
