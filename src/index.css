@@ -11,8 +11,8 @@ box-sizing: border-box;
   --navyBlue: #2b3a55;
   --white: #ffffff;
   --mainColor: rgb(206, 119, 119);
-  --secondaryColor: #e8c4c4;
-  --beigeColor: #f2e5e5;
+  --secondaryColor: rgb(232, 196, 196);
+  --beigeColor: rgb(242, 229, 229);
 }
 
 /* Our Button */
@@ -55,3 +55,10 @@ section{
   margin-top: 3rem !important;
 }
 
+.slick-prev:before, .slick-next:before{
+color: var(--navyBlue)!important;
+}
+.slick-current{
+  transform: scale(1.1);
+  transition: scale 2s ease-in-out ;
+}

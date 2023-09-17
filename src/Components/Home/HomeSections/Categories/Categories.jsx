@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import styles from './Categories.module.css';
 import CategoryCard from "../CategoryCard/CategoryCard";
 import music from '../../../../assets/music.jpg'
-import architure from '../../../../assets/architecture.jpg';
-import science from '../../../../assets/science.jpg';
+import architure from '../../../../assets/arc.jpg';
+import science from '../../../../assets/sciencee.jpg';
 import cooking from '../../../../assets/cooking.jpg';
 import scienceFiction from '../../../../assets/sci-fiction.jpg';
 import children from '../../../../assets/children.jpg';
@@ -53,7 +53,7 @@ const Categories = () => {
 
     return (
         <>
-            <section className='pt-3'>
+            <section className='pt-4 pb-5'>
                 <div className="container text-center">
                     <h2 className="blueHeader">Categories</h2>
                   <CategoryCard shuffledArray={shuffledArray} />

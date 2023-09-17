@@ -5,7 +5,7 @@ const Footer = () => {
     return (
 
         <Fragment>
-        <section>
+        <section className={style.marginTop}>
         <div className="darkBg">
         <div className="container">
             <div className="row justify-content-center align-items-center text-white text-center">

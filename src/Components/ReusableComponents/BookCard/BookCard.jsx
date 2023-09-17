@@ -4,31 +4,48 @@ import Rating from "../Rating/Rating";
 import styles from './BookCard.module.css'
 
 
-const BookCard = ({ id, image, name, price, author, rate, section }) => {
+const BookCard = ({ id, image, name, price, author, rate, section, cardStyle ,sale}) => {
+    console.log(cardStyle);
     return (
         <>
-            <div className={`col-lg-3 col-md-6 col-xs-12 ${styles.font}`}>
-                <div className={`mb-2 position-relative ${styles.imgContainer}`}>
+            <div className={section == "newBooks" ? `col-lg-3 col-md-6 col-xs-12 ${styles.font}` : ''}>
+                <div className={`mb-2 position-relative ${styles.imgContainer}`} style={cardStyle}>
                     <div className={styles.overLay}>
 
-                        <Link to='detailsBook' className="text-decoration-none">
-                            <span className={styles.icon}>
-                                <i className="fa-regular fa-eye"></i>
-                            </span>
-                        </Link>
-                        <Link to='favorite' className="text-decoration-none">
-                            <span className={styles.icon}>
-                                <i className="fa-solid fa-heart "></i>
-                            </span>
-                        </Link>
-                        <Link to='cart' className="text-decoration-none">
-                            <span className={styles.icon}>
-                                <i className="fa-solid fa-cart-shopping"></i>
-                            </span>
-                        </Link>
+                        {section !== 'bestSeller' ? <>
+                            <Link to='detailsBook' className="text-decoration-none">
+                                <span className={styles.icon}>
+                                    <i className="fa-regular fa-eye"></i>
+                                </span>
+                            </Link>
+                            <Link to='favorite' className="text-decoration-none">
+                                <span className={styles.icon}>
+                                    <i className="fa-solid fa-heart "></i>
+                                </span>
+                            </Link>
+                            <Link to='cart' className="text-decoration-none">
+                                <span className={styles.icon}>
+                                    <i className="fa-solid fa-cart-shopping"></i>
+                                </span>
+                            </Link>
+                        </> : <>
+                            <div className={styles.bestSellerCard}>
+                                <p className={styles.headerFont}>{name.slice(0,12)}...</p>
+                                <p>{author}</p>
+                                <Rating rate={rate} id={id} />
+                            </div>
+                        </>
+                        }
 
                     </div>
+
                     <img src={image} className={`w-100 ${styles.cardImg}`} alt="" />
+                  {section === 'bestSeller' && sale ?<>
+                  <div className={`position-absolute ${styles.priceSeller}`}>
+                        <span>{sale}% OFF</span>
+                    </div>
+                  </>:''}
+
                 </div>
                 <div className={`d-flex flex-column justify-content-start text-left ${styles.pLeft}`} >
                     {section === "bestSeller" ? '' : <span className={styles.bookName}>{name}</span>}

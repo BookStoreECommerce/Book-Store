@@ -14,7 +14,7 @@ const Rating = ({ rate }) => {
 
     return (
         <>
-            <div> {golden}{white}</div>
+            <div className="mt-2"> {golden}{white}</div>
         </>
     );
 }

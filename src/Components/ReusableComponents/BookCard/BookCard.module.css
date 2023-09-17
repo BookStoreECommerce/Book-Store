@@ -34,7 +34,7 @@
         overflow: hidden;
     }
     .imgContainer img{
-        -webkit-box-shadow: 10px 10px 18px 3px rgba(222,222,222,1);
+        -webkit-box-shadow: 10px 10px 18px 3px rgb(118, 72, 72);
         -moz-box-shadow: 10px 10px 18px 3px rgba(222,222,222,1);
         box-shadow: 10px 10px 18px 3px rgba(222,222,222,1);
         border-radius: 0 10px 10px 0;
@@ -44,7 +44,7 @@
     .overLay{
         position: absolute;
         /* z-index: 3; */
-        top:110%;
+        top:180%;
         left: 0;
         right: 0;
         bottom: 0;
@@ -54,12 +54,12 @@
         gap: 10px;
         align-items: center;
         justify-content: center;
-        background-color: rgba(206, 119, 119,0.6);
+      
         border-radius: 0 10px 10px 0;
         transition:all 0.5s ease-in-out;
-        
+        background-color: rgba(206, 119, 119,0.6);
     }
-    
+
     .imgContainer:hover .overLay{
         top:0;
     }
@@ -78,4 +78,37 @@
 
 .pLeft{
     padding-left: 40px;
+}
+.bestSellerCard{
+    color: white;
+    text-align: center;
+}
+.bestSellerCard p {
+    margin: 0;
+}
+.headerFont{
+    font-size: 23px;
+    font-weight: bold;
+}
+.priceSeller{
+    color: white;
+    border: 2px solid white;
+    right: 0;
+    top: 0;
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+    width: 36%;
+    height: 28%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   background-image: linear-gradient(var(--navyBlue),var(--secondaryColor));
+}
+.priceSeller span{
+    font-weight: bold;
+    font-size: 13px;
+}
+.colorStar{
+    color: #ffc107;
 }

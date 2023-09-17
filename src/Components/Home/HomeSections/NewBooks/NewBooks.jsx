@@ -30,6 +30,7 @@ const NewBooks = () => {
             image: book2,
             name: "Blue In The Water",
             author:"Twent Momens",
+            price: 310,
            rate:3,
         },
         {
@@ -168,6 +169,7 @@ const NewBooks = () => {
                         <button className={`${leftBtn ? styles.disabled : styles.enabled} ${styles.btn} ${styles.leftBtn} `} id="leftBtn" onClick={shiftLeft} ><i className="fa-solid fa-arrow-left"></i></button>
                         <button className={`${rightBtn ? styles.disabled : styles.enabled} ${styles.btn} `} id="righttBtn" onClick={shiftRight}><i className="fa-solid fa-arrow-right"></i></button>
                     </div>
+                    
                     <BookList NewBooks={cutNewBooks} sectionName={"newBooks"} />
                 </div>
             </div>

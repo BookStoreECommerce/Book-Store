@@ -2,7 +2,10 @@
     /* gap: 15px; */
 /* } */
 /*  */
-
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Jost&family=PT+Serif:wght@700&display=swap');
+.font{
+    font-family: 'Jost', sans-serif;
+}
 .btn{
     border: 1px solid var(--navyBlue);
     border-radius: 50%;
