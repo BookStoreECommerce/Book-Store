@@ -30,6 +30,8 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
           onClose={()=> closeHandle()}
           aria-labelledby="customized-dialog-title"
           open={show}
+          maxWidth="sm"
+          disableScrollLock = {true}
         >
           <IconButton
             aria-label="close"

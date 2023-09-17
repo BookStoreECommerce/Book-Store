@@ -1,13 +1,10 @@
 import { useFormik } from 'formik'
 import { useState } from 'react'
 import * as Yup from 'yup'
-// import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { signin } from '../../Redux/Slicies/authSlice';
 import styles from './Login.module.css'
-import axios from 'axios';
-import { baseUrl } from '../../util/util';
 import CustomizedDialogs from "../Dialog/Dialog";
 
 
@@ -16,7 +13,7 @@ const Login = () => {
     const [messageError, setMessageError] = useState('')
     const dispatch = useDispatch()
     const { loginShow } = useSelector(({dialog}) => dialog);
-    const { isLoading, token } = useSelector(state => {
+    const { isLoading } = useSelector(state => {
         // console.log(state.auth);
         return state.auth
     });

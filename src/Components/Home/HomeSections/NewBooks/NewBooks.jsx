@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from "react";
+import React,{ useState } from "react";
 import BookList from "../../../ReusableComponents/BookList/BookList";
 import styles from '../NewBooks/NewBooks.module.css';
 import book from '../../../../assets/10.jpg'

@@ -1,26 +1,26 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { baseUrl } from "../../util/util";
-import axios from "axios";
+import axiosInstance from "../../axios/axios-instance";
 
 const initialState = { user: {}, isLoading: false, token: null , msgError : null }
 
 export const signin = createAsyncThunk("auth/signin", async (values) => {
-    const response = await axios.post(`${baseUrl}/auth/signin`, values);
+    const response = await axiosInstance.post('auth/signin', values);
     return response
 })
 
 export const register = createAsyncThunk ("auth/signup", async (userData) => {
     try {
-        let {data} = await axios.post(`${baseUrl}/auth/signup`, userData);
+        let {data} = await axiosInstance.post('auth/signup', userData);
         return data
     } catch (error) {
         return error.response.data
     }
 });
 
+
 export const registerVerification = createAsyncThunk ("auth/verifyEmail", async (verifycode) => {
     try {
-        let {data} = await axios.post(`${baseUrl}/auth/verifyEmail`, {code:verifycode}, 
+        let {data} = await axiosInstance.post(`auth/verifyEmail`, {code:verifycode}, 
         {headers: 
             {authorization: localStorage.getItem("BookStoreToken")}
         });
@@ -29,6 +29,16 @@ export const registerVerification = createAsyncThunk ("auth/verifyEmail", async 
         return error.response.data
     }
 });
+
+
+export const signinWithToken = createAsyncThunk("auth/signin-with-token", async(toekn) => {
+    try{
+        let {data} = await axiosInstance.post(`auth/signin/${toekn}`);
+        return data
+    }catch(error){
+        return error.response.data
+    }
+})
 
 const saveUserData = (token , refreshToken) => {
     localStorage.setItem("BookStoreToken", token)
@@ -93,6 +103,18 @@ const authSlice = createSlice({
             builder.addCase(registerVerification.rejected, (state, action) => {
                 state.isLoading = false;
             })
+        builder.addCase(signinWithToken.pending, (state, action) => {
+            state.isLoading = true;
+        })
+        builder.addCase(signinWithToken.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.token = action.payload.token
+            
+        })
+        builder.addCase(signinWithToken.rejected, (state, action) => {
+            state.isLoading = false
+            state.msgError = action.payload.message
+        })
     }
 })
 
