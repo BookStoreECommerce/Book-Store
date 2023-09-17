@@ -1,26 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Jost&family=PT+Serif:wght@700&display=swap');
 
-.item0 { grid-area: catOne; }
-.item1 { grid-area: catTwo; }
-.item2 { grid-area: catThree; }
-.item3 { grid-area: catFour; }
-.item4 { grid-area: catFive; }
 
-.gridContainer {
-  display: grid;
-  grid-template-areas:
-    'catOne catOne catTwo catTwo catThree catThree'
-    'catOne catOne catTwo catTwo catThree catThree'
-    'catFour catFour catFive catFive catThree catThree'
-    'catFour catFour catFive catFive catThree catThree';
-
-  gap: 10px;
-  background-color: #2196F3;
-  padding: 10px;
+.overlayCat{
+  position: absolute;
+  top: 0;
+  left: 0;
+right: 0;
+bottom: 0;
+width: 0;
+height: 0;
+  background-color: rgb(0, 0, 0);
+  transition: all 0.7s ease;
 }
-
-.gridContainer > div {
-  background-color: rgba(255, 255, 255, 0.8);
-  text-align: center;
-  padding: 20px 0;
-  font-size: 30px;
+.overlayCat p{
+  background-color: #fff;
+  font-size: 25px;
+  font-weight: 600;
+  font-family: 'Jost', sans-serif;
+  width: 80%;
+  height: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  left: 3%;
+display: none;
+}
+.imgCat:hover .overlayCat{
+width: 100%;
+height: 100%;
 }

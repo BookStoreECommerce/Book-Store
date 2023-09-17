@@ -5,6 +5,7 @@ import AboutUs from './HomeSections/AboutUs/AboutUs';
 import Reviews from './HomeSections/Reviews/Reviews';
 import Rating from '../ReusableComponents/Rating/Rating';
 import Categories from './HomeSections/Categories/Categories';
+import ScrollToTop from '../ReusableComponents/ScrollToTop/ScrollToTop';
 
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
       <AboutUs />
       <Reviews />
       <Rating />
+      <ScrollToTop/>
 
     </>
   )
