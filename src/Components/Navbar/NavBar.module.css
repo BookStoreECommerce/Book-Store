@@ -14,6 +14,7 @@
 }
 .transparent{
     background-color: transparent;
+    transition: all 1s;
 }
 .size{
 
@@ -59,6 +60,11 @@ background-color: var(--beigeColor)!important;
 }
 .dropdownMenu{
     background-image: linear-gradient(45deg, beige, transparent);
+}
+.colorNav{
+
+   background-color: var(--beigeColor);
+   transition: all 2s;
 }
 /* Media Quries NavBar */
 @media screen and (min-width:100px) and (max-width: 600px) {

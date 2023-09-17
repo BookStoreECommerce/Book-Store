@@ -1,14 +1,28 @@
 
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import logo from '../../assets/logo.png'
 import styles from './NavBar.module.css'
 
 
 export default function NavBar() {
+  const [navbar, setNavbar] = useState(false);
+  const changeBackground = () => {
+    console.log(window.scrollY)
+    if (window.scrollY >= 100) {
+      setNavbar(true)
+    } else {
+      setNavbar(false)
+    }
+  }
+  useEffect(() => {
+    changeBackground()
+    // adding the event when scroll change background
+    window.addEventListener("scroll", changeBackground)
+  })
   return (
    <>
-   <nav className={`navbar fixed-top navbar-expand-lg py-3 ${styles.transparent}`}>
+   <nav className={navbar?`navbar fixed-top navbar-expand-lg py-3 ${styles.colorNav}`:`navbar fixed-top navbar-expand-lg py-3 ${styles.transparent}`}>
   <div className="container-fluid">
     <Link to='/' className={styles.logo}>
     <img src={logo} alt="" className='w-100 '/>
