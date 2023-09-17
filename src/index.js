@@ -34,6 +34,9 @@ const router = createBrowserRouter([
       {
         path: "login",
         element: <LoginLayout />,
+        loader:({request, params}) => {
+          console.log(request);
+        },
         children: [
           {
             path: "success/:token",
