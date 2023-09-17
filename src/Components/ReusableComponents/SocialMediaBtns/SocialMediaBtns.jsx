@@ -11,6 +11,7 @@ const SocialMediaBtns = () => {
       sx={{
         display: 'flex',
         justifyContent: 'space-between',
+        mt:1
       }}
       >
         <Button
