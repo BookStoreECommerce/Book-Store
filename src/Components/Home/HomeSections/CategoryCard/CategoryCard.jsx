@@ -22,11 +22,14 @@ const CategoryCard = ({ shuffledArray }) => {
                         </div>
                     </div>
                 </div>
-                <div className={`col-lg-6 col-md-12 position-relative ${styles.imgCat}`}>
-                    <div className={`${styles.overlayCat} rounded-4`}>
-                        <p>{shuffledArray[2].catName}</p>
+                <div className={`col-lg-6 col-md-12  `}>
+
+                    <div className={`${styles.imgCat} position-relative`}>
+                        <div className={`${styles.overlayCat} rounded-4`}>
+                            <p>{shuffledArray[2].catName}</p>
+                        </div>
+                        <img className="w-100 rounded-4" src={shuffledArray[2].img} alt='' />
                     </div>
-                    <img className="w-100 rounded-4" src={shuffledArray[2].img} alt='' />
                 </div>
 
             </div>
