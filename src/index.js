@@ -23,8 +23,12 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { index: true, element: <Home /> },
-      { path: "/forgotPassword", element: <ForgetPasswordStepper /> },
+      // { path: "/forgotPassword", element: <ForgetPasswordStepper /> },
   ],
+  },
+  {
+    path: "/forgotPassword",
+    element: <ForgetPasswordStepper />,
   },
 ]);
 

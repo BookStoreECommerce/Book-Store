@@ -11,32 +11,13 @@ import { handleClose } from "../../Redux/Slicies/dialogSlice";
 import SocialMediaBtns from "../ReusableComponents/SocialMediaBtns/SocialMediaBtns";
 
 const Login = () => {
-  // const [isLoading, setIsLoading] = useState(false);
-  let navigate = useNavigate();
   const [messageError, setMessageError] = useState("");
-  const { loginConfirmed } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
   const { loginShow } = useSelector(({ dialog }) => dialog);
-  const { isLoading, token, error } = useSelector((state) => {
-    // console.log(state.auth);
+  const { isLoading, error } = useSelector((state) => {
     return state.auth;
   });
-  // console.log(auth);
-  // async function handleLogin(values) {
-  //     console.log(values);
-  //     setIsLoading(true);
-  //     let { data } = await axios.post('https://book-store-an5l.onrender.com/api/v1/auth/signin', values).catch((error) => {
-  //         console.log(error);
-  //         setIsLoading(false);
-  //         // setMessageError(`${error.response.data.errors.param}:${error.response.data.errors.msg}`)
-  //     });
-  //     if (data.message === 'success') {
-  //         setIsLoading(false)
-  //         Navigate('/')
-  //     }
-  //     console.log(data);
-  // }
 
   const handleLogin = async (values) => {
     await dispatch(signin(values));
@@ -66,8 +47,6 @@ const Login = () => {
           <span className="alert alert-danger">{messageError}</span>
         ) : null}
         <form onSubmit={formik.handleSubmit} className="p-5 row">
-
-
           {error ? (
             <div className="ps-2 alert alert-danger mb-4">{error}</div>
           ) : null}

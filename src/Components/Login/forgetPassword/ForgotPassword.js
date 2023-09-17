@@ -1,19 +1,16 @@
 import { useFormik } from "formik";
-import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 
 import "bootstrap/dist/css/bootstrap.css";
 import styles from "../Login.module.css";
 import { forgetPassword } from "../../../Redux/Slicies/authSlice";
-import { Link, useNavigate } from "react-router-dom";
+import { Button, TextField } from "@mui/material";
 
 const ForgotPassword = ({ onSubmit: moveToNext }) => {
-  const [messageError, setMessageError] = useState("");
 
-  const { error: errorMsg } = useSelector((state) => state.auth);
+  const { isLoading, error } = useSelector((state) => state.auth);
 
-  console.log(errorMsg);
 
   const dispatch = useDispatch();
 
@@ -37,45 +34,49 @@ const ForgotPassword = ({ onSubmit: moveToNext }) => {
   });
 
   return (
-    <div className="w-50 m-auto container text-dark mt-5">
+    <div className=" m-auto container text-dark mt-5">
+
       <h2 className={`${styles.pageHead} m-auto text-center mb-2`}>
         Forgot Password
       </h2>
-      {errorMsg && <p>{errorMsg}</p>}
       <p>
-        Please enter your email address and we will send you instructions on how
-        to reset your password
+        Please enter your email address and we will send you instructions on how to reset your password
       </p>
-      {messageError.length > 0 ? (
-        <span className="alert alert-danger">{messageError}</span>
-      ) : null}
-      <form onSubmit={formik.handleSubmit} className="p-5 pt-2 row">
+      <form onSubmit={formik.handleSubmit} className="pt-2 row">
         <div className="form-group mb-3">
-          <label htmlFor="email" className="mb-2">
-            Email
-          </label>
-
-          <input
-            type="text"
-            className={` ${styles.bgBtn} form-control mb-1`}
-            onBlur={formik.handleBlur}
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            id="email"
-            name="email"
-            aria-describedby="emailHelp"
-            placeholder="Enter email"
-          />
-          {formik.errors.email && formik.touched.email ? (
-            <small className="form-text text-danger text-center">
-              {formik.errors.email}
-            </small>
+          {error ? (
+            <div className="ps-2 alert alert-danger mb-4">{error}</div>
           ) : null}
+          <TextField
+            onChange={formik.handleChange}
+            error={formik.errors.email && formik.touched.email && true}
+            helperText={formik.errors.email}
+            id="email"
+            label="Email"
+            className="w-100"
+            name="email"
+            type="text"
+            onBlur={formik.handleBlur}
+            margin="dense"
+          />
         </div>
-
-        <button type="submit" className="btn btn-primary ">
-          Submit
-        </button>
+        <div className="form-group mb-3">
+          <Button
+            variant="outlined"
+            type="submit"
+            endIcon={
+              isLoading ? (
+                <i className="fas fa-spinner fa-spin"></i>
+              ) : (
+                <i className="fa-solid"></i>
+              )
+            }
+            className={`mainBtn ${styles.fitContent}`}
+            disabled={formik.isValid ? false : true}
+          >
+            Set New Password
+          </Button>
+        </div>
       </form>
     </div>
   );

@@ -11,6 +11,16 @@ const initialState = {
   loginConfirmed: null,
 };
 
+export const register = createAsyncThunk("auth/signup", async (userData) => {
+  try {
+    let { data } = await axios.post(`${baseUrl}/auth/signup`, userData);
+    return data;
+  } catch (error) {
+    return error.response.data;
+  }
+});
+
+
 export const signin = createAsyncThunk("auth/signin", async (values) => {
   const response = await axios
     .post(`${baseUrl}/auth/signin`, values)
@@ -20,6 +30,7 @@ export const signin = createAsyncThunk("auth/signin", async (values) => {
   return response;
 });
 
+
 export const forgetPassword = createAsyncThunk(
   "auth/forgetPassword",
   async (values) => {
@@ -28,18 +39,35 @@ export const forgetPassword = createAsyncThunk(
       .catch((error) => {
         return error.response;
       });
+      console.log(response);
     return response;
   }
 );
 
-export const register = createAsyncThunk("auth/signup", async (userData) => {
-  try {
-    let { data } = await axios.post(`${baseUrl}/auth/signup`, userData);
-    return data;
-  } catch (error) {
-    return error.response.data;
-  }
+
+export const varifyPasswordEmail = createAsyncThunk("auth/varifyPasswordEmail", async (values) => {
+  const response = await axios
+    .post(`${baseUrl}/auth/varifyPasswordEmail`, values, {headers: {'authorization': localStorage.getItem('BookStoreToken')}})
+    .catch((error) => {
+      console.log(error.response);
+      return error.response;
+    });
+    console.log(response);
+  return response;
 });
+
+
+export const resetPassword = createAsyncThunk("auth/resetPassword", async (values) => {
+  const response = await axios
+    .post(`${baseUrl}/auth/resetPassword`, values, {headers: {'authorization': localStorage.getItem('BookStoreToken')}})
+    .catch((error) => {
+      console.log(error.response);
+      return error.response;
+    });
+    console.log(response);
+  return response;
+});
+
 
 const saveUserData = (token, refreshToken) => {
   localStorage.setItem("BookStoreToken", token);
@@ -55,6 +83,26 @@ const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    builder.addCase(register.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(register.fulfilled, (state, action) => {
+      if (action.payload.message === "success") {
+        state.token = action.payload.token.token;
+        saveUserData(
+          action.payload.token.token,
+          action.payload.token.refreshToken
+        );
+      } else {
+        state.error = action.payload.error;
+      }
+      state.isLoading = false;
+    });
+    builder.addCase(register.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+
+
     builder.addCase(signin.pending, (state, action) => {
       state.error = null;
       state.isLoading = true;
@@ -76,24 +124,7 @@ const authSlice = createSlice({
     builder.addCase(signin.rejected, (state, action) => {
       state.isLoading = false;
     });
-    builder.addCase(register.pending, (state, action) => {
-      state.isLoading = true;
-    });
-    builder.addCase(register.fulfilled, (state, action) => {
-      if (action.payload.message === "success") {
-        state.token = action.payload.token.token;
-        saveUserData(
-          action.payload.token.token,
-          action.payload.token.refreshToken
-        );
-      } else {
-        state.error = action.payload.error;
-      }
-      state.isLoading = false;
-    });
-    builder.addCase(register.rejected, (state, action) => {
-      state.isLoading = false;
-    });
+
 
     builder.addCase(forgetPassword.pending, (state, action) => {
         state.error = null
@@ -107,7 +138,6 @@ const authSlice = createSlice({
         );
             state.error = null;
         } else {
-          console.log(action.payload.data.error);
         state.error = action.payload.data.error;
       }
       state.resetPasswordMessage = action.payload;
@@ -115,7 +145,46 @@ const authSlice = createSlice({
     });
     builder.addCase(forgetPassword.rejected, (state, action) => {
       state.isLoading = false;
-      console.log(action.payload);
+    });
+
+
+    builder.addCase(varifyPasswordEmail.pending, (state, action) => {
+      state.error = null;
+      state.isLoading = true;
+    });
+    builder.addCase(varifyPasswordEmail.fulfilled, (state, action) => {
+      if (action.payload.data.message === "success") {
+            state.error = null;
+        } else {
+        state.error = action.payload.data.error;
+      }
+      state.resetPasswordMessage = action.payload;
+      state.isLoading = false;
+    });
+    builder.addCase(varifyPasswordEmail.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+
+
+    builder.addCase(resetPassword.pending, (state, action) => {
+      state.error = null;
+      state.isLoading = true;
+    });
+    builder.addCase(resetPassword.fulfilled, (state, action) => {
+      // state.token = action.payload.token
+      if (action.payload.message === "success") {
+        state.token = action.payload.token.token;
+        saveUserData(
+          action.payload.token.token,
+          action.payload.token.refreshToken
+        );
+      } else {
+        state.error = action.payload.error;
+      }
+      state.isLoading = false;
+    });
+    builder.addCase(resetPassword.rejected, (state, action) => {
+      state.isLoading = false;
     });
   },
 });

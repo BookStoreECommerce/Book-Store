@@ -4,15 +4,16 @@
 .hintColor {
   color: var(--mainColor);
 }
-.forgotPpassword{
-    /* text-decoration: none; */
-    color: var(--secondaryColor);
+.forgotPpassword {
+  /* text-decoration: none; */
+  color: var(--secondaryColor);
 }
-.pageHead{
+.pageHead {
   color: var(--mainColor);
 }
 
-.leftLine, .rightLine {
+.leftLine,
+.rightLine {
   width: 45%;
   height: 1px;
   background-color: var(--mainColor);
@@ -20,4 +21,12 @@
 
 .or {
   color: var(--mainColor);
+}
+.fitContent {
+  width: fit-content !important;
+}
+.fastack {
+  font-size: 30px !important;
+  color: var(--mainColor);
+  transform: rotatey(180deg);
 }

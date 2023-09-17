@@ -1,63 +1,85 @@
 import { useFormik } from 'formik'
 import React, { useState } from 'react'
+import * as Yup from "yup";
+import styles from "../Login.module.css";
 import 'bootstrap/dist/css/bootstrap.css';
-import axios from 'axios'
-import { Navigate } from 'react-router-dom'
+import { useDispatch, useSelector } from "react-redux";
+import { varifyPasswordEmail } from '../../../Redux/Slicies/authSlice';
+import { Button, TextField } from "@mui/material";
 
 
 
-const VerifyPassword = () => {
-
-    const [isLoading, setIsLoading] = useState(false);
-    const [messageError, setMessageError] = useState('')
-
+const VerifyPassword = ({ onSubmit: moveToNext }) => {
+    const dispatch = useDispatch();
+    const { isLoading, error } = useSelector((state) => state.auth);
 
     async function handleVerifyPassword(values) {
-        console.log("verifyCode", values.verifyCode);
-        setIsLoading(true);
-        let { data } = await axios.post('', values).catch((error) => {
-            setIsLoading(false);
-            setMessageError(`${error.response.data.errors.param}:${error.response.data.errors.msg}`)
-        });
-        if (data.message === 'success') {
-            setIsLoading(false)
-            Navigate('/')
+        const { payload } = await dispatch(varifyPasswordEmail(values));
+        if (payload.data.message === "success") {
+            moveToNext();
+        }else{
+            console.log(payload.data.message);
         }
-
     }
 
-
-
+    let validationSchema = Yup.object({
+        code: Yup.string().required("Verification Code is required").min(4),
+      });
 
 
     let formik = useFormik({
         initialValues: {
-            verifyCode: '',
+            code: ''
         },
+        validationSchema,
         onSubmit: handleVerifyPassword
     });
 
     return (
-        <>
-            <div className='w-50 m-auto container text-dark mt-5'>
-                <h2 className='text-center text-info'>Verify Password</h2>
-                {messageError.length > 0 ? <span className='alert alert-danger'>{messageError}</span> : null}
-                <form onSubmit={formik.handleSubmit} className='p-5 pt-2 row'>
 
-                    <div className="form-group mb-3">
-                        <label htmlFor="verifyCode">Verify Password:</label>
-                        <input type="verifyCode" className="form-control" onBlur={formik.handleBlur} value={formik.values.verifyCode} onChange={formik.handleChange} id="verifyCode" name="verifyCode" placeholder="Password" />
-                        {formik.errors.verifyCode && formik.touched.password ? <small className="form-text text-danger">{formik.errors.password}</small> : null}
+        <div className=' m-auto container text-dark mt-5'>
+            <h2 className={`${styles.pageHead} m-auto text-center mb-2`}>
+                Verify Password
+            </h2>
+            <form onSubmit={formik.handleSubmit} className='p-5 pt-2 row'>
 
-                    </div>
+                <div className="form-group mb-3">
+                    {error ? (
+                        <div className="ps-2 alert alert-danger mb-4">{error}</div>
+                    ) : null}
+                    <TextField
+                        onChange={formik.handleChange}
+                        error={formik.errors.code && formik.touched.code && true}
+                        helperText={formik.errors.code}
+                        id="code"
+                        label="code"
+                        className="w-100"
+                        name="code"
+                        type="text"
+                        onBlur={formik.handleBlur}
+                        margin="dense"
+                    />
+                </div>
+                <div className="form-group mb-3">
+                    <Button
+                        variant="outlined"
+                        type="submit"
+                        endIcon={
+                            isLoading ? (
+                                <i className="fas fa-spinner fa-spin"></i>
+                            ) : (
+                                <i className="fa-solid"></i>
+                            )
+                        }
+                        className={`mainBtn ${styles.fitContent}`}
+                        disabled={formik.isValid ? false : true}
+                    >
+                        Verify
+                    </Button>
+                </div>
+            </form>
+        </div>
 
-
-
-                    <button type="submit" className="btn btn-primary">Submit</button>
-
-                </form>
-            </div>
-        </>
     )
 }
 
