@@ -1,15 +1,15 @@
-
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import TextField from "@mui/material/TextField";
-import { Button } from "@mui/material";
+import { Button, FormControl, FormHelperText, IconButton, InputLabel, OutlinedInput } from "@mui/material";
 import styles from "./Register.module.css";
 import SocialMediaBtns from "../ReusableComponents/SocialMediaBtns/SocialMediaBtns";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../Redux/Slicies/authSlice";
 import CustomizedDialogs from "../Dialog/Dialog";
 import { registerVerifyModal } from "../../Redux/Slicies/dialogSlice";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 
 const getCharacterValidationError = (str) => {
@@ -19,8 +19,14 @@ const getCharacterValidationError = (str) => {
 export const Register = () => {
   const dispatch = useDispatch();
   const { isLoading, msgError } = useSelector((state) => state.auth);
-  const { registerShow } = useSelector(({dialog}) => dialog);
+  const { registerShow } = useSelector(({ dialog }) => dialog);
+  const [showPassword, setShowPassword] = useState(false);
 
+  const handleClickShowPassword = () => setShowPassword((prev) => !prev);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
   const handleSubmit = async (values) => {
     delete values.privacyCheck;
     const {payload} = await dispatch(register(values));
@@ -40,12 +46,12 @@ export const Register = () => {
       .required("Email is required")
       .email("Please Enter a valid email"),
     password: Yup.string()
-    .required('Password is required')
-    .min(8, 'Password should be of minimum 8 characters length')
-    .matches(/[0-9]/, getCharacterValidationError("digit"))
-    .matches(/[A-Z]/, getCharacterValidationError("uppercase"))
-    .matches(/[a-z]/, getCharacterValidationError("lowercase"))
-    .matches(/[!@#$%^&*()\-_=+{};:,<.>]/, getCharacterValidationError("special caracters")),
+      .required('Password is required')
+      .min(8, 'Password should be of minimum 8 characters length')
+      .matches(/[0-9]/, getCharacterValidationError("digit"))
+      .matches(/[A-Z]/, getCharacterValidationError("uppercase"))
+      .matches(/[a-z]/, getCharacterValidationError("lowercase"))
+      .matches(/[!@#$%^&*()\-_=+{};:,<.>]/, getCharacterValidationError("special caracters")),
     rePassword: Yup.string()
       .required("Please confirm your password")
       .oneOf([Yup.ref("password")], "Password is not matched"),
@@ -99,18 +105,31 @@ export const Register = () => {
             onBlur={formik.handleBlur}
             margin="dense"
           />
-          <TextField
-            onChange={formik.handleChange}
-            error={formik.errors.password && formik.touched.password && true}
-            helperText={formik.errors.password}
-            id="outlined-error"
-            label="password"
-            className="w-100"
-            name="password"
-            type="password"
-            onBlur={formik.handleBlur}
-            margin="dense"
-          />
+          <FormControl variant="outlined" fullWidth margin="dense" error={formik.errors.password && formik.touched.password && true}>
+            <InputLabel htmlFor="password-input">Password</InputLabel>
+            <OutlinedInput
+              onChange={formik.handleChange}
+              helperText={formik.errors.password}
+              id="password-input"
+              label="password"
+              className="w-100"
+              name="password"
+              type={showPassword ? "text" : "password"}
+              onBlur={formik.handleBlur}
+              endAdornment={
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              }
+            />
+            <FormHelperText>{formik.errors.password}</FormHelperText>
+          </FormControl>
+
           <TextField
             onChange={formik.handleChange}
             error={
