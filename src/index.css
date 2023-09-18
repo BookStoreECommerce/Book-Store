@@ -17,15 +17,16 @@ box-sizing: border-box;
 
 /* Our Button */
 .mainBtn{
-  color: var(--mainColor);
-  border-color: var(--mainColor);
-  transition: all 0.7s ease;
+  color: var(--mainColor) !important;
+  border-color: var(--mainColor) !important;
+  transition: all 0.7s ease !important;
+  outline: auto !important;
 }
 
 .mainBtn:hover{
-  color: white;
-  background-color: var(--mainColor);
-  border-color: var(--mainColor);
+  color: white !important;
+  background-color: var(--mainColor) !important;
+  border-color: var(--mainColor) !important;
 }
 
 /* Our Link */
