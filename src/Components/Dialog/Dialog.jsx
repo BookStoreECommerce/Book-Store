@@ -4,9 +4,28 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { handleClose } from '../../Redux/Slicies/dialogSlice';
 import { clearError } from '../../Redux/Slicies/authSlice';
+import { DialogTitle } from '@mui/material';
+import { Register } from '../Register/Register';
+
+import { RegisterVerify } from '../RegisterVerify/RegisterVerify';
+import Login from '../Login/Login';
+
+
+
+
+const formsList = [
+  {name: "login", title: "LOGIN", form: <Login />},
+  {name: "register", title: "CREATE YOUR ACCOUNT", form: <Register />},
+  {name: "register-verify", title: "ACCOUNT VERIFICATION", form: <RegisterVerify />}
+]
+
+const getForm = (name) => {
+  const form = formsList.filter(form => form.name === name)
+  return {...form[0]}
+}
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
@@ -17,8 +36,11 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     },
   }));
   
-  export default function CustomizedDialogs({children, show}) {
+  // export default function CustomizedDialogs({children, show}) {
+  export default function CustomizedDialogs() {
     const dispatch = useDispatch()
+    const { open, name } = useSelector((state) => state.dialog)
+    const { title, form } = getForm(name);
     const closeHandle = () =>{
       dispatch(handleClose());
       dispatch(clearError());
@@ -29,8 +51,9 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
         <BootstrapDialog
           onClose={()=> closeHandle()}
           aria-labelledby="customized-dialog-title"
-          open={show}
+          open={open}
           maxWidth="sm"
+          fullWidth
           disableScrollLock = {true}
         >
           <IconButton
@@ -45,8 +68,13 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
           >
             <CloseIcon />
           </IconButton>
-          <DialogContent dividers>
-            {children}
+          <DialogTitle variant='h4' sx={{
+            fontSize: 'calc(1.275rem + 0.3vw)',
+            textAlign: 'center',
+            color: (theme) => theme.palette.primary.main
+          }}>{title}</DialogTitle>
+          <DialogContent dividers sx={{p: 2}}>
+            {form}
           </DialogContent>
         </BootstrapDialog>
       </div>

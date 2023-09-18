@@ -21,8 +21,8 @@ axiosInstance.interceptors.response.use(res => res, async(error) => {
                 //=> show a tost with this message "login timed out, please login again."
             }
     }
-
-    return error
+    
+    return Promise.reject(error)
 })
 
 export default axiosInstance;

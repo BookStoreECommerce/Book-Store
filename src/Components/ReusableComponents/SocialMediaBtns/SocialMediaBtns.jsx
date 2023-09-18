@@ -1,18 +1,24 @@
 import React from "react";
 import GoogleIcon from "@mui/icons-material/Google";
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import styles from './SocialMedia.module.css'
 import { baseUrl } from "../../../util/util";
 
 const SocialMediaBtns = () => {
   return (
     <>
-      <div className="d-flex justify-content-between">
+      <Box 
+      sx={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        mt:1
+      }}
+      >
         <Button
           variant="outlined"
-          startIcon={<GoogleIcon className={styles.googleIconColor}/>}
-          className={styles.socialMediaBtns}href={baseUrl + "auth/google"}
-          // target="_blank"
+          startIcon={<GoogleIcon sx={{color: "#DE1414"}}/>}
+          className={styles.socialMediaBtns}
+          href={baseUrl + "auth/google"}
         >
           signup with google
         </Button>
@@ -22,11 +28,10 @@ const SocialMediaBtns = () => {
           startIcon={<i className={`fa-brands fa-facebook-f ${styles.fbIconColor}`}></i>}
           className={styles.socialMediaBtns}
           href={baseUrl + "auth/facebook"}
-          // target="_blank"
         >
           signup with facebook
         </Button>
-      </div>
+      </Box>
     </>
   );
 };
