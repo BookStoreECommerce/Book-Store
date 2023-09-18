@@ -64,3 +64,11 @@ box-sizing: border-box;
   font-weight: bold;
 
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active{
+  -webkit-background-clip: text;
+  box-shadow: inset 0 0 0 100px transparent;
+}

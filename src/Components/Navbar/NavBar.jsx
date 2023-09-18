@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import styles from "./NavBar.module.css";
 import { useDispatch } from "react-redux";
-import { registerModal, loginModal } from "../../Redux/Slicies/dialogSlice";
+import { registerModal, loginModal, handleClickOpen } from "../../Redux/Slicies/dialogSlice";
 
 export default function NavBar() {
   const dispatch = useDispatch();
@@ -117,13 +117,13 @@ export default function NavBar() {
 
               <li className="nav-item">
                 <Link
-                  className={`nav-link ${styles.navLink}`} onClick={()=>{dispatch(loginModal())}}
+                  className={`nav-link ${styles.navLink}`} onClick={()=>{dispatch(handleClickOpen({name: "login"}))}}
                 >
                   Login
                 </Link>
               </li>
               <li className="nav-item">
-                <button  className={`nav-link ${styles.navLink}`} onClick={()=>{dispatch(registerModal())}}>
+                <button  className={`nav-link ${styles.navLink}`} onClick={()=>{dispatch(handleClickOpen({name: "register"}))}}>
                     Register
                 </button>
               </li>
