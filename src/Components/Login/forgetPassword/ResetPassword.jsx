@@ -20,10 +20,8 @@ const ResetPassword = () => {
     async function handleResetPassword(values) {
         const { payload } = await dispatch(resetPassword(values));
         console.log(values);
-        if (payload.data.message === "success") {
+        if (payload.message === "success") {
             navigate("/")
-        } else {
-            console.log(payload.data.error);
         }
     }
 

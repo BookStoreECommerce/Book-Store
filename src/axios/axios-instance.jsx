@@ -1,11 +1,14 @@
 import { default as axios } from "axios";
 import { baseUrl } from "../util/util";
 import { redirect } from "react-router-dom";
+import store from "../Redux/Store";
 
+
+// console.log( store.getState((state) => state.auth.token));
 const axiosInstance = axios.create({
     baseURL: baseUrl,
     // headers:{
-    //     'Authorization': 
+    //     // 'Authorization': `${localStorage.getItem("access-token") || store.getState((state) => state.auth.token)}`
     // }
 })
 

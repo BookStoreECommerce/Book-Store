@@ -17,7 +17,7 @@ const ForgotPassword = ({ onSubmit: moveToNext }) => {
   const handleForgotPassword = async (values) => {
     const { payload } = await dispatch(forgetPassword(values));
     console.log(payload.message);
-    if (payload.data.message === "success") {
+    if (payload.message === "success") {
       moveToNext();
     }
   };

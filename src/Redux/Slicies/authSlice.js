@@ -54,7 +54,7 @@ export const forgetPassword = createAsyncThunk(
 
 export const varifyPasswordEmail = createAsyncThunk("auth/varifyPasswordEmail", async (values, { rejectWithValue }) => {
     try {
-        const { data } = await axiosInstance.post('auth/varifyPasswordEmail', values, { headers: { 'authorization': localStorage.getItem('BookStoreToken') } })
+        const { data } = await axiosInstance.post('auth/varifyPasswordEmail', values, { headers: { 'authorization': localStorage.getItem('access-token') } })
         return data;
     } catch (error) {
         return rejectWithValue(error.response.data)
@@ -147,7 +147,7 @@ const authSlice = createSlice({
             state.isLoading = false;
             state.token = toekn
             saveUserData(toekn)
-            return redirect('/')
+        //  redirect('/')
         })
         builder.addCase(signinWithToken.rejected, (state, action) => {
             state.isLoading = false
@@ -161,6 +161,7 @@ const authSlice = createSlice({
             const token = action.payload.token
             state.token = token;
             saveUserData(token);
+            state.msgError = null;
             // state.resetPasswordMessage = action.payload;
             state.isLoading = false;
         });
@@ -176,6 +177,7 @@ const authSlice = createSlice({
         });
         builder.addCase(varifyPasswordEmail.fulfilled, (state, action) => {
             state.isLoading = false;
+            state.msgError = null;
         });
         builder.addCase(varifyPasswordEmail.rejected, (state, action) => {
             state.msgError = action.payload.error
@@ -191,6 +193,7 @@ const authSlice = createSlice({
             state.token = token;
             saveUserData(token);
             state.isLoading = false;
+            state.msgError = null;
         });
         builder.addCase(resetPassword.rejected, (state, action) => {
             state.msgError = action.payload.error

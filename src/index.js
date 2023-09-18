@@ -38,6 +38,7 @@ const router = createBrowserRouter([
         element: <LoginLayout />,
         loader:({request, params}) => {
           console.log(request);
+          return null;
         },
         children: [
           {
