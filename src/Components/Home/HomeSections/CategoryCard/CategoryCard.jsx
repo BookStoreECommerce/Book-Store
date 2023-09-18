@@ -51,9 +51,7 @@ const CategoryCard = ({ shuffledArray }) => {
                         <img className="w-100 rounded-4" src={shuffledArray[2].img} alt='' />
                     </div>
                 </div>
-
             </div>
-
         </>
     );
 }

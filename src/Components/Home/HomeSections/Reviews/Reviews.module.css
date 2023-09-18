@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&family=Jost&family=PT+Serif:wght@700&display=swap');
 
-.reviewContent{
+.reviewContent {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,23 +9,51 @@
 
 }
 
-.imageStyle{
+.imageStyle {
     border-radius: 50%;
     width: 100%;
-  
+
 }
-.reviewImage{
+
+.reviewImage {
     width: 150px;
     height: 150px;
     display: flex;
     justify-content: center;
 }
-.fontParg{
+
+.fontParg {
     font-size: 24px;
-    font-weight:400;
+    font-weight: 400;
 }
-.fontname{
+
+.fontname {
     font-size: 18px;
     color: grey;
-    
+
+}
+
+@media screen and (min-width:300px) and (max-width:666px) {
+    .fontParg {
+        font-size: 17px;
+    }
+
+    .fontname {
+        font-size: 14px;
+    }
+
+    .reviewContent {
+        padding: 0px 45px;
+    }
+
+}
+
+@media screen and (min-width:667px) and (max-width:1200px) {
+    .fontParg {
+        font-size: 20px;
+    }
+
+    .fontname {
+        font-size: 17px;
+    }
 }

@@ -129,19 +129,13 @@ const NewBooks = () => {
     const [rightBtn, setRightBtn] = useState(false);
     let cutNewBooks = NewBooks.slice(startIndex, lastIndex);
   
-
     const shiftRight = () => {
         setStart((prev) => prev + 1)
         setLast((prev) => prev + 1)
         setLeftBtn(false)
-
-
         if (lastIndex === NewBooks.length - 1) {
             setRightBtn(true)
-
         }
-      
-
     }
 
     const shiftLeft = () => {
@@ -156,29 +150,22 @@ const NewBooks = () => {
             setRightBtn(false)
 
         }
-
     }
  
     return (
         <>
             <section>
-            <div className="container ">
+            <div className={`container ${styles.paddingSection}`}>
                 <div className={`row justify-content-center align-items-center  ${styles.gap}`}>
-                    <h2 className="blueHeader text-center mt-5">New Arrivals</h2>
+                    <h2 className="blueHeader text-center mt-md-5 mb-2">New Arrivals</h2>
                     <div className="d-flex justify-content-end mb-3">
                         <button className={`${leftBtn ? styles.disabled : styles.enabled} ${styles.btn} ${styles.leftBtn} `} id="leftBtn" onClick={shiftLeft} ><i className="fa-solid fa-arrow-left"></i></button>
                         <button className={`${rightBtn ? styles.disabled : styles.enabled} ${styles.btn} `} id="righttBtn" onClick={shiftRight}><i className="fa-solid fa-arrow-right"></i></button>
                     </div>
-                    
                     <BookList NewBooks={cutNewBooks} sectionName={"newBooks"} />
                 </div>
             </div>
             </section>
-
-
-
-
-
         </>
     );
 }

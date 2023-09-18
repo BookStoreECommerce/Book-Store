@@ -62,3 +62,15 @@ color: var(--navyBlue)!important;
   transform: scale(1.1);
   transition: scale 2s ease-in-out ;
 }
+@media screen and (min-width:300px) and (max-width:768px){
+  .blueHeader{
+    font-size: 26px;
+    padding-bottom: 10px;
+  }
+}
+@media screen and (min-width:769px) and (max-width:1200px){
+  .blueHeader{
+    font-size: 29px;
+    padding-bottom: 10px;
+  }
+}

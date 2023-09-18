@@ -8,3 +8,8 @@ font-size: 18px;
 .marginTop{
     margin-top: 6rem!important;
 }
+@media screen and (min-width:300px) and (max-width:666px){
+.footer{
+    font-size: 13px;
+}
+  }

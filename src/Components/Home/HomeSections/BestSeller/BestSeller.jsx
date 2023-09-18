@@ -25,7 +25,7 @@ const BestSeller = () => {
             name: "Our World Our Life",
             author: "Lembid Noissa",
             price: 310,
-            sale:-5,
+            sale: -5,
         },
         {
             id: 1,
@@ -33,7 +33,7 @@ const BestSeller = () => {
             name: "Blue In The Water",
             author: "Twent Momens",
             price: 200,
-           
+
         },
         {
             id: 2,
@@ -41,7 +41,7 @@ const BestSeller = () => {
             name: "Animals Life",
             author: "Ariean Hason",
             price: 200,
-           
+
         }
         ,
         {
@@ -50,7 +50,7 @@ const BestSeller = () => {
             name: "Memorise",
             author: "Lembid Noissa",
             price: 350,
-            sale:-10,
+            sale: -10,
         }
         ,
         {
@@ -59,7 +59,7 @@ const BestSeller = () => {
             name: "War Of Dragon",
             author: "Moren Nicol",
             price: 410,
-            sale:-25,
+            sale: -25,
         }
         ,
         {
@@ -68,7 +68,7 @@ const BestSeller = () => {
             name: "Moon Light Sadow",
             author: "Lebmid Traeh",
             price: 220,
-           
+
         }
         ,
         {
@@ -77,7 +77,7 @@ const BestSeller = () => {
             name: "Oloio",
             author: "Madhu Sashan",
             price: 130,
-           
+
         }
         ,
         {
@@ -86,7 +86,7 @@ const BestSeller = () => {
             name: "Art Of Illustrator",
             author: "Rabiul Vom",
             price: 300,
-            sale:-30,
+            sale: -30,
         }
         ,
         {
@@ -95,7 +95,7 @@ const BestSeller = () => {
             name: "New World For Children",
             author: "Charise Jemes",
             price: 120,
-            
+
         }
         ,
         {
@@ -104,7 +104,7 @@ const BestSeller = () => {
             name: "War Of Dragon",
             author: "Moren Nicol",
             price: 200,
-         
+
         }
         ,
         {
@@ -113,7 +113,7 @@ const BestSeller = () => {
             name: "Alone Walker",
             author: "Soad Humber",
             price: 75,
-      
+
         }
         ,
         {
@@ -122,7 +122,7 @@ const BestSeller = () => {
             name: "The Hunter House",
             author: 'Rakib Jon',
             price: 100,
-            sale:-5,
+            sale: -5,
         }
     ])
     const settings = {
@@ -131,61 +131,59 @@ const BestSeller = () => {
         infinite: true,
         speed: 500,
         centerPadding: "60px",
-        
         slidesToShow: 7,
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 2000,
-        
+
         responsive: [
             {
                 breakpoint: 1700,
                 settings: {
-                  slidesToShow: 5,
-                  slidesToScroll: 1,
-                  infinite: true,
+                    slidesToShow: 5,
+                    slidesToScroll: 1,
+                    infinite: true,
                 }
-              },
-            {
-              breakpoint: 1300,
-              settings: {
-                slidesToShow: 4,
-                slidesToScroll: 1,
-                infinite: true,
-              }
             },
             {
-              breakpoint: 1000,
-              settings: {
-                slidesToShow: 3,
-                slidesToScroll: 1,
-                infinite: true,
-              }
+                breakpoint: 1300,
+                settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 1,
+                    infinite: true,
+                }
+            },
+            {
+                breakpoint: 1000,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    infinite: true,
+                }
             },
             {
                 breakpoint: 800,
                 settings: {
-                  slidesToShow: 2,
-                  slidesToScroll: 1
+                    slidesToShow: 2,
+                    slidesToScroll: 1
                 }
-              },
+            },
             {
-              breakpoint: 600,
-              settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-              }
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
             }
-          ]
+        ]
     };
     return (
 
-        <section className="px-lg-0 px-5">
+        <section className="px-lg-0 px-4">
             <div className="container-fluid">
                 <div className="row justify-content-center">
-                <h2 className="blueHeader text-center mt-4 mb-5">Best Seller</h2>
+                    <h2 className="blueHeader text-center mt-4 mb-5">Best Seller</h2>
                     <div className={`col-lg-11 ${styles.marginBottom}`}>
-
                         <Slider {...settings} >
                             {bestSeller.map((bestSeller, index) =>
                                 <BookCard

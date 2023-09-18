@@ -5,10 +5,9 @@ import styles from './BookCard.module.css'
 
 
 const BookCard = ({ id, image, name, price, author, rate, section, cardStyle ,sale}) => {
-    console.log(cardStyle);
     return (
         <>
-            <div className={section == "newBooks" ? `col-lg-3 col-md-6 col-xs-12 ${styles.font}` : ''}>
+            <div className={section == "newBooks" ? `col-lg-3 col-sm-6 col-12 mb-2 ${styles.font}` : ''}>
                 <div className={`mb-2 position-relative ${styles.imgContainer}`} style={cardStyle}>
                     <div className={styles.overLay}>
 

@@ -13,13 +13,12 @@ export default function Home() {
   return (
     <>
       <Slider />
-      
       <NewBooks />
-      <Categories/>
+      <Categories />
       <AboutUs />
-      <BestSeller/>
+      <BestSeller />
       <Reviews />
-      <ScrollToTop/>
+      <ScrollToTop />
     </>
   )
 }

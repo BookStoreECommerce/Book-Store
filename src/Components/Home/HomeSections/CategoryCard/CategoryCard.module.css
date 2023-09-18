@@ -3,9 +3,10 @@
 .imgCat {
   overflow: hidden;
   border-radius: 1rem;
-  cursor:pointer
+  cursor: pointer
 }
-.imgCat img{
+
+.imgCat img {
   transition: transform 0.5s ease-in-out;
 
 }
@@ -34,13 +35,16 @@
   color: var(--navyBlue);
   margin: 0;
 }
-.fontSize p{
+
+.fontSize p {
   font-size: 20px;
 }
+
 .imgCat:hover .overlayCat {
   top: 80%;
 }
-.imgCat:hover img{
-transform: scale(1.1,1.1);
+
+.imgCat:hover img {
+  transform: scale(1.1, 1.1);
 
 }

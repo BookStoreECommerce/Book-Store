@@ -54,7 +54,7 @@ const Categories = () => {
     return (
         <>
             <section className='pt-4 pb-5'>
-                <div className="container text-center">
+                <div className={`container text-center ${styles.paddingSection}`}>
                     <h2 className="blueHeader">Categories</h2>
                   <CategoryCard shuffledArray={shuffledArray} />
                 </div>
