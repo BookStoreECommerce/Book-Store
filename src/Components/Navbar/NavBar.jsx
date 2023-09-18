@@ -5,13 +5,13 @@ import styles from "./NavBar.module.css";
 import { useDispatch } from "react-redux";
 import { registerModal, loginModal, handleClickOpen } from "../../Redux/Slicies/dialogSlice";
 
-export default function NavBar() {
+export default function NavBar({innerRef}) {
   const dispatch = useDispatch();
 
   return (
     <>
       <nav
-        className={`navbar fixed-top navbar-expand-lg py-3 ${styles.transparent}`}
+        className={`navbar fixed-top navbar-expand-lg py-3 ${styles.transparent}`} ref={innerRef}
       >
         <div className="container-fluid">
           <Link to="/" className={styles.logo}>
@@ -52,7 +52,7 @@ export default function NavBar() {
           >
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item me-2">
-                <Link className={`nav-link ${styles.navLink}`} to="home">
+                <Link className={`nav-link ${styles.navLink}`} to="/">
                   Home
                 </Link>
               </li>

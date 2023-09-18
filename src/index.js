@@ -17,11 +17,13 @@ import ThemeContextProvider from "./context/theme-context.jsx";
 import LoginLayout from "./Components/LoginSocialActions/LoginLayout";
 import Failed from "./Components/LoginSocialActions/Failed";
 import { UserProfile } from "./Components/UserProfile/UserProfile";
+import ErrorBoundry from "./Components/ErrorBoundry/ErrorBoundry";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
+    errorElement: <ErrorBoundry />,
     children: [
       { index: true, element: <Home /> },
       { path: '/profile', element: <UserProfile /> },
