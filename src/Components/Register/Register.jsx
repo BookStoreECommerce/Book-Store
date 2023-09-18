@@ -19,7 +19,6 @@ const getCharacterValidationError = (str) => {
 export const Register = () => {
   const dispatch = useDispatch();
   const { isLoading, msgError } = useSelector((state) => state.auth);
-  // const { registerShow } = useSelector(({ dialog }) => dialog);
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((prev) => !prev);
@@ -211,9 +210,6 @@ export const Register = () => {
         >
           Login
         </Button>
-        {/* <a className="text-muted" href="\">
-          Login
-        </a> */}
       </div>
 
       <div className="d-flex align-items-baseline justify-content-between">

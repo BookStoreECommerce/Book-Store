@@ -21,12 +21,12 @@ export const UserProfile = () => {
     const {payload} = await dispatch(userProfile(values));
     console.log(payload);
     // if(payload.message === "success"){
-    //   dispatch(registerVerifyModal())
+
     // }
   };
 
   let validationSchema = Yup.object({
-    userName: Yup.string().max(20).min(4).matches(
+    userName: Yup.string().required('Name is required').max(20).min(4).matches(
         /^[a-zA-Z]{3,8}([_ -]?[a-zA-Z0-9]{3,8})*$/,
         "Name must start with 3:8 letters (a-z)"
       ),

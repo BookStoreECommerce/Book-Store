@@ -3,24 +3,20 @@ import styles from './RegisterVerify.module.css'
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import CustomizedDialogs from "../Dialog/Dialog";
 import { registerVerification } from "../../Redux/Slicies/authSlice";
-import { loginModal } from '../../Redux/Slicies/dialogSlice';
+import { handleClickOpen } from '../../Redux/Slicies/dialogSlice';
 
 export const RegisterVerify = () => {
   const dispatch = useDispatch();
   const { msgError } = useSelector((state) => state.auth);
-  // const { registerVerifyShow } = useSelector((state) => state.dialog);
   const [code, setcode] = useState(null);
   const handleChange = event => {
-    console.log('value is:', event.target.value);
     setcode(event.target.value);
-
   };
   const handleRegVerify = async () => {
     const { payload } = await dispatch(registerVerification(code));
     if (payload.message === "success") {
-      // dispatch(loginModal())
+      dispatch(handleClickOpen({ name: "login" }))
     }
   }
   return (
@@ -28,7 +24,6 @@ export const RegisterVerify = () => {
       {msgError ? (
         <div className="ps-2 alert alert-danger mb-4 ">{msgError}</div>
       ) : null}
-      {/* <div className={`text-muted w-100 m-auto mb-2 ${styles.line}`}></div> */}
       <div className='text-center'>
         <i className={`fa-solid fa-paper-plane d-block ${styles.iconFontSize}`}></i>
         <b>An email has been sent to you.</b>

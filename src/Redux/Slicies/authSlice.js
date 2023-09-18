@@ -47,9 +47,7 @@ export const registerVerification = createAsyncThunk("auth/verifyEmail", async (
 
 export const userProfile = createAsyncThunk("users/update", async (userData, { rejectWithValue }) => {
     try {
-        let {
-            data
-        } = await axiosInstance.put(`users/update`, userData, {
+        let { data } = await axiosInstance.put(`users/update`, userData, {
             headers: {
                 authorization: localStorage.getItem("access-token")
             }
@@ -150,7 +148,6 @@ const authSlice = createSlice({
         builder.addCase(registerVerification.pending, (state, action) => {
             state.isLoading = true;
         })
-
         builder.addCase(registerVerification.fulfilled, (state, action) => {
             const token = action.payload.token
             state.isLoading = false
@@ -184,7 +181,6 @@ const authSlice = createSlice({
         })
         builder.addCase(userProfile.fulfilled, (state, action) => {
             state.isLoading = false;
-            // state.token = action.payload.token
 
         })
         builder.addCase(userProfile.rejected, (state, action) => {

@@ -9,11 +9,8 @@ import { handleClose } from '../../Redux/Slicies/dialogSlice';
 import { clearError } from '../../Redux/Slicies/authSlice';
 import { DialogTitle } from '@mui/material';
 import { Register } from '../Register/Register';
-
 import { RegisterVerify } from '../RegisterVerify/RegisterVerify';
 import Login from '../Login/Login';
-
-
 
 
 const formsList = [
@@ -36,7 +33,6 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     },
   }));
   
-  // export default function CustomizedDialogs({children, show}) {
   export default function CustomizedDialogs() {
     const dispatch = useDispatch()
     const { open, name } = useSelector((state) => state.dialog)
