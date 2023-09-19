@@ -50,6 +50,7 @@ return (
         open={open}
         maxWidth="md"
         fullWidth
+        disableScrollLock
       >
         <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title" className={styles.header}>
           Policy

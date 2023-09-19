@@ -20,7 +20,7 @@ export default function Home() {
       <BestSeller />
       <Reviews />
       <ScrollToTop />
-      {/* <PolicyDialog/> */}
+      <PolicyDialog/>
     </>
   )
 }
