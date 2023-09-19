@@ -13,12 +13,14 @@ import Home from './Components/Home/Home.jsx';
 import { Provider } from 'react-redux';
 import store from './Redux/Store.js';
 
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
-      { index: true, element: <Home /> }
+      { index: true, element: <Home /> },
+
     ]
   }
 ])

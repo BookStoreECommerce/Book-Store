@@ -66,7 +66,7 @@ return (
         >
           <CloseIcon />
         </IconButton>
-        <DialogContent dividers>
+        <DialogContent dividers className={styles.modalBody}>
         <Box >
         <Typography variant="h4">1. Terms of Service</Typography>
         <Typography variant="span"  >

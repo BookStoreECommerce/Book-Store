@@ -10,7 +10,10 @@ import children from '../../../../assets/children.jpg';
 import business from '../../../../assets/business.jpg';
 
 
+
 const Categories = () => {
+
+    
     const [category, setCategory] = useState([
         {
             catName: "Science",

@@ -1,14 +1,18 @@
-import React from "react";
+import React  from "react";
 import styles from './CategoryCard.module.css'
 
+
 const CategoryCard = ({ shuffledArray }) => {
+
+
+
     return (
         <>
-            <div className="row justifiy-content-center align-items-center gy-4 mt-4">
+            <div className="row justifiy-content-center align-items-center gy-4 mt-4" >
                 <div className="col-lg-6 col-md-12">
 
-                    <div className="row gy-4 ">
-                        <div className="col-md-6 col-sm-6">
+                    <div className="row gy-4 "  >
+                        <div className="col-md-6 col-sm-6" >
                             <div className={`${styles.imgCat} ${styles.fontSize} position-relative`}>
                                 <div className={`${styles.overlayCat}`}>
                                     <p>{shuffledArray[0].catName}</p>
@@ -16,7 +20,7 @@ const CategoryCard = ({ shuffledArray }) => {
                                 <img className="w-100 rounded-4" src={shuffledArray[0].img} alt='' />
                             </div>
                         </div>
-                        <div className="col-md-6 col-sm-6">
+                        <div className="col-md-6 col-sm-6" >
                             <div className={`${styles.imgCat} ${styles.fontSize} position-relative`}>
                                 <div className={`${styles.overlayCat} `}>
                                     <p>{shuffledArray[1].catName}</p>
