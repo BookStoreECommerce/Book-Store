@@ -158,6 +158,8 @@ const Login = () => {
         <div className={styles.rightLine}></div>
       </div>
 
+
+
       <SocialMediaBtns />
     </>
   );

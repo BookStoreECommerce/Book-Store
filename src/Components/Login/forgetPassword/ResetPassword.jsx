@@ -93,7 +93,7 @@ const ResetPassword = () => {
                         onChange={formik.handleChange}
                         error={formik.errors.rePassword && formik.touched.rePassword && true}
                         helperText={formik.errors.rePassword}
-                        id="outlined-error"
+                        id="reoutlined-error"
                         label="Confirm Password"
                         className="w-100"
                         name="rePassword"

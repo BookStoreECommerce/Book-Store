@@ -38,10 +38,10 @@ export const registerVerification = createAsyncThunk("auth/verifyEmail", async (
 
 export const forgetPassword = createAsyncThunk(
     "auth/forgetPassword",
-    async (values, { rejectWithValue }) => {
+    async (values = {email: localStorage.getItem('user-mail')}, { rejectWithValue }) => {
         try {
             const response = await axiosInstance.post('auth/forgetPassword', values)
-            console.log(response.data);
+            localStorage.setItem('user-mail', values.email);
             return response.data;
         } catch (error) {
             console.log(error);
@@ -103,7 +103,7 @@ const authSlice = createSlice({
             saveUserData(token)
             state.token = token
             state.isLoading = false;
-            
+
         })
         builder.addCase(signin.rejected, (state, action) => {
             state.msgError = action.payload.error
@@ -163,7 +163,7 @@ const authSlice = createSlice({
             saveUserData(token);
             // state.resetPasswordMessage = action.payload;
             state.isLoading = false;
-            
+
         });
         builder.addCase(forgetPassword.rejected, (state, action) => {
             state.msgError = action.payload.error
@@ -177,7 +177,7 @@ const authSlice = createSlice({
         });
         builder.addCase(varifyPasswordEmail.fulfilled, (state, action) => {
             state.isLoading = false;
-            
+
         });
         builder.addCase(varifyPasswordEmail.rejected, (state, action) => {
             state.msgError = action.payload.error
@@ -194,6 +194,7 @@ const authSlice = createSlice({
             // saveUserData(token);
             state.isLoading = false;
             localStorage.removeItem('access-token');
+            localStorage.removeItem('user-mail');
         });
         builder.addCase(resetPassword.rejected, (state, action) => {
             state.msgError = action.payload.error
