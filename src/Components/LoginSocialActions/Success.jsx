@@ -19,9 +19,9 @@ const Success = () => {
       setIsFirst(false);
       dispatch(signinWithToken(token));
     }
-    // if (serverToekn != null) {
-    //   navigate('/');
-    // }
+    if (serverToekn !== null) {
+      navigate('/');
+    }
   }, [dispatch, isFirst, token, navigate]);
 
 
