@@ -1,0 +1,156 @@
+
+
+.mousescroll {
+	display: block;
+	margin: 0 auto;
+	width: 25px;
+	height: 100px;
+    position: absolute;
+    top: 88%;
+    left: 50%;
+    z-index: 1;
+    cursor: pointer;
+    
+}
+.mscrollarrows
+{
+  display: block;
+  width: 5px;
+  height: 5px;
+  transform: rotate(45deg);
+  border-right: 2px solid var(--mainColor);
+  border-bottom: 2px solid var(--mainColor);
+  margin: 0 0 3px 4px;
+  width: 16px;
+  height: 16px;
+}
+
+.unu
+{
+  margin-top: 1px;
+}
+
+.unu, .doi
+{
+    animation: mouse-scroll 1s infinite;  
+}
+
+.unu
+{
+  animation-direction: alternate;
+  animation-delay: alternate;
+}
+
+.doi
+{
+  animation-delay: 0.1s;
+  animation-direction: alternate;
+  margin-top: -6px;
+}
+
+
+.mouse {
+  height: 42px;
+  width: 24px;
+  border-radius: 14px;
+  transform: none;
+  border: 3px solid var(--mainColor);
+  top: 170px;
+}
+
+.wheel {
+  height: 5px;
+  width: 2px;
+  display: block;
+  margin: 5px auto;
+  background: var(--mainColor);
+  position: relative;
+  height: 8px;
+  width: 4px;
+  border: 2px solid var(--mainColor);
+  border-radius: 100px;
+}
+
+.wheel {
+  animation: mouse-wheel 0.6s linear infinite;
+}
+
+@-webkit-keyframes mouse-wheel{
+   0% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(6px);
+    -ms-transform: translateY(6px);
+    transform: translateY(6px);
+  }
+}
+@-moz-keyframes mouse-wheel {
+  0% { top: 1px; }
+  25% { top: 2px; }
+  50% { top: 3px;}
+  75% { top: 2px;}
+  100% { top: 1px;}
+}
+@-o-keyframes mouse-wheel {
+
+   0% { top: 1px; }
+  25% { top: 2px; }
+  50% { top: 3px;}
+  75% { top: 2px;}
+  100% { top: 1px;}
+}
+@keyframes mouse-wheel {
+
+   0% { top: 1px; }
+  25% { top: 2px; }
+  50% { top: 3px;}
+  75% { top: 2px;}
+  100% { top: 1px;}
+}
+
+@-webkit-keyframes mouse-scroll {
+
+  0%   { opacity: 0;}
+  50%  { opacity: .5;}
+  100% { opacity: 1;}
+}
+@-moz-keyframes mouse-scroll {
+
+  0%   { opacity: 0; }
+  50%  { opacity: .5; }
+  100% { opacity: 1; }
+}
+@-o-keyframes mouse-scroll {
+
+  0%   { opacity: 0; }
+  50%  { opacity: .5; }
+  100% { opacity: 1; }
+}
+@keyframes mouse-scroll {
+
+  0%   { opacity: 0; }
+  50%  { opacity: .5; }
+  100% { opacity: 1; }
+}
+ @media screen and (max-width:1100px){
+    .mousescroll{
+        display: none!important;
+       
+    }
+ }
+ @media screen  and (min-width:1100px) and (max-width:1300px){
+    .mousescroll{
+        top: 83%;
+    }
+ }
+ @media screen  and (min-width:1300px) and (max-width:1700px){
+    .mousescroll{
+        top: 84%;
+    }
+ }

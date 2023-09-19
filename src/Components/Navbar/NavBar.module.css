@@ -11,9 +11,24 @@
     font-size: 19px;
     font-weight: bold;
     color: #2b3069!important;
+    position: relative;
+}
+.navLinkBorder::before{
+    content: '';
+    position: absolute;
+    bottom: 6px;
+    width: 0%;
+    height: 2px;
+    background: var(--navyBlue);
+    transition: all 1s ease;
+
+}
+.navItem:hover .navLinkBorder::before{
+ width: 82%;
 }
 .transparent{
     background-color: transparent;
+    transition: all 1s;
 }
 .size{
 
@@ -60,6 +75,11 @@ background-color: var(--beigeColor)!important;
 .dropdownMenu{
     background-image: linear-gradient(45deg, beige, transparent);
 }
+.colorNav{
+
+   background-color: var(--beigeColor);
+   transition: all 2s;
+}
 /* Media Quries NavBar */
 @media screen and (min-width:100px) and (max-width: 600px) {
     .logo{
@@ -83,7 +103,7 @@ background-color: var(--beigeColor)!important;
         display: none;
       }
     .badgeContainer{
-        left: 27%;
+        left: 30%;
         top: 9px;
     }
 }
@@ -139,18 +159,14 @@ background-color: var(--beigeColor)!important;
     }
 
 }
-@media screen and (max-width:600px){
-    .transparent{
-        position: relative!important;
-        background-color: white!important;
-    }
-}
-@media screen and (min-width:601px) and (max-width:900px){
+
+@media screen and (min-width:300px) and (max-width:900px){
 .bgCollapse{
     background-image:linear-gradient(white, var(--beigeColor));
    
     border-radius: 20px;
-
+    position: relative;
+    top: 5px;
 }
 .bgCollapse .navLink{
     padding-left: 30px;

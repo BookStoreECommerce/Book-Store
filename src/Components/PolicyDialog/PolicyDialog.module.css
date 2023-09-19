@@ -1,0 +1,11 @@
+.header{
+    color: var(--mainColor) !important;
+    font-size: 2.5rem !important;
+    padding-inline: 40px !important;
+}
+
+
+.modalBody{
+    padding: 40px !important;
+}
+
