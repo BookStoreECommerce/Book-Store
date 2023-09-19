@@ -7,7 +7,7 @@ import store from "../Store";
 import { redirect } from "react-router-dom";
 
 const initialState = {
-    user: {},
+    user: null,
     isLoading: false,
     token: null,
     msgError: null
@@ -58,15 +58,26 @@ export const userProfile = createAsyncThunk("users/update", async (userData, { r
     }
 });
 
+export const getUserProfile = createAsyncThunk("users/profile", async (_, { rejectWithValue }) => {
+    try {
+        let { data } = await axiosInstance.get(`users/profile`,
+            {
+                headers:
+                    { authorization: localStorage.getItem("access-token") }
+            });
+        return data
+    } catch (error) {
+        return rejectWithValue(error.response.data)
+    }
+})
+
 export const forgetPassword = createAsyncThunk(
     "auth/forgetPassword",
     async (values, { rejectWithValue }) => {
         try {
             const response = await axiosInstance.post('auth/forgetPassword', values)
-            console.log(response.data);
             return response.data;
         } catch (error) {
-            console.log(error);
             return rejectWithValue(error.response.data)
         }
     }
@@ -113,6 +124,12 @@ const authSlice = createSlice({
     reducers: {
         clearError: (state) => {
             state.msgError = null;
+        },
+        setUser: (state, action) => {
+            const {name , value} = action.payload;
+            let user = state.user;
+            user[name] = value;
+            state.user = user;
         }
     },
     extraReducers: builder => {
@@ -168,7 +185,7 @@ const authSlice = createSlice({
             state.isLoading = false;
             state.token = token
             saveUserData(token)
-            return redirect('/')
+            // return redirect('/')
         })
         builder.addCase(signinWithToken.rejected, (state, action) => {
             state.isLoading = false
@@ -184,6 +201,18 @@ const authSlice = createSlice({
 
         })
         builder.addCase(userProfile.rejected, (state, action) => {
+            state.isLoading = false
+            state.msgError = action.payload.message
+        })
+        // getUserProfile
+        builder.addCase(getUserProfile.pending, (state, action) => {
+            state.isLoading = true;
+        })
+        builder.addCase(getUserProfile.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.user = action.payload.user
+        })
+        builder.addCase(getUserProfile.rejected, (state, action) => {
             state.isLoading = false
             state.msgError = action.payload.message
         })
@@ -235,4 +264,4 @@ const authSlice = createSlice({
 })
 
 export const authReducer = authSlice.reducer;
-export const { clearError } = authSlice.actions;
+export const { clearError, setUser } = authSlice.actions;
