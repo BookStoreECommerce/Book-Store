@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Jost&family=Libre+Baskerville&family=PT+Serif:wght@700&display=swap');
+
+
 body {
   margin: 0;
 padding: 0;
@@ -7,25 +10,27 @@ box-sizing: border-box;
 :root {
   --navyBlue: #2b3a55;
   --white: #ffffff;
-  --mainColor: #ce7777;
-  --secondaryColor: #e8c4c4;
-  --beigeColor: #f2e5e5;
+  --mainColor: rgb(206, 119, 119);
+  --secondaryColor: rgb(232, 196, 196);
+  --beigeColor: rgb(242, 229, 229);
 }
 
 /* Our Button */
 .mainBtn{
-  color: var(--mainColor);
-  border-color: var(--mainColor);
-  transition: all 0.7s ease;
+  background-color: white !important;
+  color: var(--mainColor) !important !important;
+  border-color: var(--mainColor) !important !important;
+  transition: all 0.7s ease !important;
+  outline: auto !important;
 }
 
 .mainBtn:hover{
-  color: white;
-  background-color: var(--mainColor);
-  border-color: var(--mainColor);
+  color: white !important;
+  background-color: var(--mainColor) !important;
+  border-color: var(--mainColor) !important;
 }
 
-/* Our Link */
+/* Our Input */
 .mainInput, .mainInput:focus {
   background-color: var(--beigeColor);
   border-color: var(--beigeColor);
@@ -34,4 +39,64 @@ box-sizing: border-box;
 .mainInput:focus {
   box-shadow: none;
   border-color: var(--mainColor);
+}
+
+/* Our Checkbox */
+.mainCheckbox:checked {
+  background-color: var(--mainColor) !important;
+  border-color: var(--mainColor) !important;
+}
+
+.mainCheckbox:focus {
+  border-color: var(--beigeColor) !important;
+  outline: 0 !important;
+  box-shadow: 0 0 0 0.25rem var(--beigeColor) !important;
+}
+
+/* Our Title */
+.mainTitle{
+  color: var(--mainColor);
+}
+
+.blueHeader{
+  color:var(--navyBlue);
+  font-size: 38px;
+  font-family: 'Libre Baskerville', serif;
+  font-weight: bold;
+
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active{
+  -webkit-background-clip: text;
+  box-shadow: inset 0 0 0 100px transparent;
+}
+.darkBg{
+  background-color: var(--navyBlue);
+}
+
+section{
+  margin-top: 3rem !important;
+}
+
+.slick-prev:before, .slick-next:before{
+color: var(--navyBlue)!important;
+}
+.slick-current{
+  transform: scale(1.1);
+  transition: scale 2s ease-in-out ;
+}
+@media screen and (min-width:300px) and (max-width:768px){
+  .blueHeader{
+    font-size: 26px;
+    padding-bottom: 10px;
+  }
+}
+@media screen and (min-width:769px) and (max-width:1200px){
+  .blueHeader{
+    font-size: 29px;
+    padding-bottom: 10px;
+  }
 }
