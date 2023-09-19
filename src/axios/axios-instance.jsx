@@ -10,8 +10,9 @@ const axiosInstance = axios.create({
     // headers:{
     //     // 'Authorization': `${localStorage.getItem("access-token") || store.getState((state) => state.auth.token)}`
     // }
+    withCredentials: true,
 })
-
+console.log(axiosInstance);
 axiosInstance.interceptors.response.use(res => res, async(error) => {
     // if(error.response.status === "403" && error.response.data.message)
     if(error.response.status === "403" && (error.response.data.message === "jwt expired" || error.response.data.message === "access denied")){
