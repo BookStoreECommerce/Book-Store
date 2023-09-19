@@ -18,7 +18,7 @@ export default function ForgetPasswordStepper() {
       alignItems: 'center',
       width: '100%',
     }}>
-      <Box maxWidth="md" >
+      <Box maxWidth="sm" >
         <Stepper activeStep={activeStep} >
           {steps.map((label) => {
             const labelProps = {};

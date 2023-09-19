@@ -4,19 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 
 import "bootstrap/dist/css/bootstrap.css";
 import styles from "../Login.module.css";
-import { forgetPassword } from "../../../Redux/Slicies/authSlice";
+import { clearError, forgetPassword } from "../../../Redux/Slicies/authSlice";
 import { Button, TextField } from "@mui/material";
+import { useEffect } from "react";
 
 const ForgotPassword = ({ onSubmit: moveToNext }) => {
-
   const { isLoading, msgError } = useSelector((state) => state.auth);
-
-
   const dispatch = useDispatch();
-
   const handleForgotPassword = async (values) => {
+    console.log(values);
     const { payload } = await dispatch(forgetPassword(values));
-    console.log(payload.message);
     if (payload.message === "success") {
       moveToNext();
     }
@@ -33,7 +30,10 @@ const ForgotPassword = ({ onSubmit: moveToNext }) => {
     validationSchema,
     onSubmit: handleForgotPassword,
   });
+  useEffect(()=> {
+  dispatch(clearError());  
 
+  }, [dispatch]);
   return (
     <div className=" m-auto container text-dark mt-5">
 
