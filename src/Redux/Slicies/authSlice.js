@@ -109,6 +109,7 @@ export const signinWithToken = createAsyncThunk("auth/signin-with-token", async 
         let { data } = await axiosInstance.post(`auth/signin/${token}`);
         return data
     } catch (error) {
+        console.log(error);
         return rejectWithValue(error.response.data)
     }
 })

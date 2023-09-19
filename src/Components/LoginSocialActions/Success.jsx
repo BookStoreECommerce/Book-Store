@@ -22,7 +22,7 @@ const Success = () => {
     if (serverToekn !== null) {
       navigate('/');
     }
-  }, [dispatch, isFirst, token, navigate]);
+  }, [dispatch, isFirst, token, navigate, serverToekn]);
 
 
   return (
