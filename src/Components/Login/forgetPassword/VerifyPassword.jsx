@@ -1,10 +1,10 @@
 import { useFormik } from 'formik'
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import * as Yup from "yup";
 import styles from "../Login.module.css";
 import 'bootstrap/dist/css/bootstrap.css';
 import { useDispatch, useSelector } from "react-redux";
-import { varifyPasswordEmail } from '../../../Redux/Slicies/authSlice';
+import { clearError, varifyPasswordEmail } from '../../../Redux/Slicies/authSlice';
 import { Button, TextField } from "@mui/material";
 
 
@@ -15,10 +15,12 @@ const VerifyPassword = ({ onSubmit: moveToNext }) => {
 
     async function handleVerifyPassword(values) {
         const { payload } = await dispatch(varifyPasswordEmail(values));
-        if (payload.data.message === "success") {
+        console.log(payload.error);
+        if (payload.message === "success") {
+            console.log("doneeeee");
             moveToNext();
         }else{
-            console.log(payload.data.message);
+            console.log(payload.message);
         }
     }
 
@@ -34,7 +36,10 @@ const VerifyPassword = ({ onSubmit: moveToNext }) => {
         validationSchema,
         onSubmit: handleVerifyPassword
     });
-
+    useEffect(()=> {
+      dispatch(clearError());  
+    
+      }, [dispatch]);
     return (
 
         <div className=' m-auto container text-dark mt-5'>

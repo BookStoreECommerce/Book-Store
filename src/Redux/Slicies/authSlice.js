@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axiosInstance from "../../axios/axios-instance";
-import store from "../Store";
 import { redirect } from "react-router-dom";
 
 const initialState = { user: {}, isLoading: false, token: null, msgError: null }
@@ -54,7 +53,7 @@ export const forgetPassword = createAsyncThunk(
 
 export const varifyPasswordEmail = createAsyncThunk("auth/varifyPasswordEmail", async (values, { rejectWithValue }) => {
     try {
-        const { data } = await axiosInstance.post('auth/varifyPasswordEmail', values, { headers: { 'authorization': localStorage.getItem('BookStoreToken') } })
+        const { data } = await axiosInstance.post('auth/varifyPasswordEmail', values, { headers: { 'authorization': localStorage.getItem('access-token') } })
         return data;
     } catch (error) {
         return rejectWithValue(error.response.data)
@@ -65,7 +64,7 @@ export const varifyPasswordEmail = createAsyncThunk("auth/varifyPasswordEmail", 
 export const resetPassword = createAsyncThunk("auth/resetPassword", async (values, { rejectWithValue }) => {
     try {
         const { data } = await axiosInstance
-            .post('auth/resetPassword', values, { headers: { 'authorization': localStorage.getItem('BookStoreToken') } })
+            .post('auth/resetPassword', values, { headers: { 'authorization': localStorage.getItem('access-token') } })
         return data;
     } catch (error) {
         return rejectWithValue(error.response.data)
@@ -73,9 +72,9 @@ export const resetPassword = createAsyncThunk("auth/resetPassword", async (value
 });
 
 
-export const signinWithToken = createAsyncThunk("auth/signin-with-token", async (toekn, { rejectWithValue }) => {
+export const signinWithToken = createAsyncThunk("auth/signin-with-token", async (token, { rejectWithValue }) => {
     try {
-        let { data } = await axiosInstance.post(`auth/signin/${toekn}`);
+        let { data } = await axiosInstance.post(`auth/signin/${token}`);
         return data
     } catch (error) {
         return rejectWithValue(error.response.data)
@@ -100,13 +99,14 @@ const authSlice = createSlice({
             state.isLoading = true
         })
         builder.addCase(signin.fulfilled, (state, action) => {
-            const token = action.payload.toekn
+            const token = action.payload.token
             saveUserData(token)
             state.token = token
-            state.isLoading = false
+            state.isLoading = false;
+            
         })
         builder.addCase(signin.rejected, (state, action) => {
-            state.msgError = action.payload.message
+            state.msgError = action.payload.error
             state.isLoading = false
         })
         //register
@@ -143,10 +143,10 @@ const authSlice = createSlice({
             state.isLoading = true;
         })
         builder.addCase(signinWithToken.fulfilled, (state, action) => {
-            const toekn = action.payload.token;
+            const token = action.payload.token;
             state.isLoading = false;
-            state.token = toekn
-            saveUserData(toekn)
+            state.token = token
+            saveUserData(token)
             return redirect('/')
         })
         builder.addCase(signinWithToken.rejected, (state, action) => {
@@ -163,6 +163,7 @@ const authSlice = createSlice({
             saveUserData(token);
             // state.resetPasswordMessage = action.payload;
             state.isLoading = false;
+            
         });
         builder.addCase(forgetPassword.rejected, (state, action) => {
             state.msgError = action.payload.error
@@ -176,6 +177,7 @@ const authSlice = createSlice({
         });
         builder.addCase(varifyPasswordEmail.fulfilled, (state, action) => {
             state.isLoading = false;
+            
         });
         builder.addCase(varifyPasswordEmail.rejected, (state, action) => {
             state.msgError = action.payload.error
@@ -187,10 +189,11 @@ const authSlice = createSlice({
             state.isLoading = true;
         });
         builder.addCase(resetPassword.fulfilled, (state, action) => {
-            const token = action.payload.token
-            state.token = token;
-            saveUserData(token);
+            // const token = action.payload.token
+            // state.token = token;
+            // saveUserData(token);
             state.isLoading = false;
+            localStorage.removeItem('access-token');
         });
         builder.addCase(resetPassword.rejected, (state, action) => {
             state.msgError = action.payload.error

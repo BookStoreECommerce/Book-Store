@@ -1,36 +1,50 @@
 import { useFormik } from 'formik'
-import React, { useState } from 'react'
+// import React, { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.css';
 import styles from "../Login.module.css";
 
 import * as Yup from 'yup'
-import axios from 'axios'
+// import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import { resetPassword } from '../../../Redux/Slicies/authSlice';
+import { clearError, resetPassword } from '../../../Redux/Slicies/authSlice';
 import { useDispatch, useSelector } from "react-redux";
 import { Button, TextField } from "@mui/material";
+import { useEffect } from 'react';
 
 
 const ResetPassword = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { isLoading, msgError } = useSelector((state) => state.auth);
+    const { isLoading } = useSelector((state) => state.auth);
+
+
 
     async function handleResetPassword(values) {
         const { payload } = await dispatch(resetPassword(values));
         console.log(values);
-        if (payload.data.message === "success") {
+        if (payload.message === "success") {
             navigate("/")
         } else {
-            console.log(payload.data.error);
+            console.log(payload.error);
         }
     }
 
-
+    const getCharacterValidationError = (str) => {
+        return `Password must have at least 1 ${str} character`;
+    };
+    
     let validationSchema = Yup.object({
-        password: Yup.string().required("password is required").min(9),
-        rePassword: Yup.string().required("rePassword is required").oneOf([Yup.ref('password')], "password and rePassword doesn't match")
+        password: Yup.string()
+            .required('Password is required')
+            .min(8, 'Password should be of minimum 8 characters length')
+            .matches(/[0-9]/, getCharacterValidationError("digit"))
+            .matches(/[A-Z]/, getCharacterValidationError("uppercase"))
+            .matches(/[a-z]/, getCharacterValidationError("lowercase"))
+            .matches(/[!@#$%^&*()\-_=+{};:,<.>]/, getCharacterValidationError("special caracters")),
+        rePassword: Yup.string()
+            .required("Please confirm your password")
+            .oneOf([Yup.ref("password")], "Password is not matched"),
     })
 
 
@@ -43,7 +57,10 @@ const ResetPassword = () => {
         validationSchema,
         onSubmit: handleResetPassword
     });
+    useEffect(() => {
+        dispatch(clearError());
 
+    }, [dispatch]);
     return (
 
         <div className=' m-auto container text-dark mt-5'>
@@ -56,7 +73,7 @@ const ResetPassword = () => {
             </h2>
             <form onSubmit={formik.handleSubmit} className='p-5 pt-2 row'>
 
-                <div className="form-group mb-3">
+                <div className="mb-3">
                     <TextField
                         onChange={formik.handleChange}
                         error={formik.errors.password && formik.touched.password && true}
@@ -74,9 +91,7 @@ const ResetPassword = () => {
                 <div className="form-group mb-3">
                     <TextField
                         onChange={formik.handleChange}
-                        error={
-                            formik.errors.rePassword && formik.touched.rePassword && true
-                        }
+                        error={formik.errors.rePassword && formik.touched.rePassword && true}
                         helperText={formik.errors.rePassword}
                         id="outlined-error"
                         label="Confirm Password"
