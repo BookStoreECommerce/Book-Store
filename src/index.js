@@ -22,6 +22,13 @@ import ErrorBoundry from "./Components/ErrorBoundry/ErrorBoundry";
 const router = createBrowserRouter([
   {
     path: "/",
+    loader: async () => {
+      const token = localStorage.getItem("token");
+      if(!token){
+        return null
+      }
+      // const {data} = await 
+    },
     element: <Layout />,
     errorElement: <ErrorBoundry />,
     children: [
@@ -37,13 +44,14 @@ const router = createBrowserRouter([
         path: "login",
         element: <LoginLayout />,
         loader:({request, params}) => {
-          console.log(request);
-          return null;
+          // console.log(request);
+          return null
         },
         children: [
           {
             path: "success/:token",
             element: <Success />
+            // http://localhost:3000/auth/login/success/ + creatred token"
           },
           {
             path: "failed",

@@ -7,8 +7,7 @@ import styles from "./Register.module.css";
 import SocialMediaBtns from "../ReusableComponents/SocialMediaBtns/SocialMediaBtns";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../Redux/Slicies/authSlice";
-import CustomizedDialogs from "../Dialog/Dialog";
-import { handleClickOpen, registerVerifyModal } from "../../Redux/Slicies/dialogSlice";
+import { handleClickOpen } from "../../Redux/Slicies/dialogSlice";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 
@@ -19,7 +18,6 @@ const getCharacterValidationError = (str) => {
 export const Register = () => {
   const dispatch = useDispatch();
   const { isLoading, msgError } = useSelector((state) => state.auth);
-  // const { registerShow } = useSelector(({ dialog }) => dialog);
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((prev) => !prev);
@@ -211,9 +209,6 @@ export const Register = () => {
         >
           Login
         </Button>
-        {/* <a className="text-muted" href="\">
-          Login
-        </a> */}
       </div>
 
       <div className="d-flex align-items-baseline justify-content-between">
