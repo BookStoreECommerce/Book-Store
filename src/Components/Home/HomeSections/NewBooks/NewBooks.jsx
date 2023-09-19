@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import React,{ useState } from "react";
-=======
-import React, { useState } from "react";
->>>>>>> 7c1d5b03a1d98e2a46a9fb6b372a91df1067dc0b
 import BookList from "../../../ReusableComponents/BookList/BookList";
 import styles from '../NewBooks/NewBooks.module.css';
 import book from '../../../../assets/1.jpg'
@@ -129,25 +125,6 @@ const NewBooks = () => {
     ])
     const [startIndex, setStart] = useState(0);
     const [lastIndex, setLast] = useState(4);
-<<<<<<< HEAD
-    // let lastIndex=4;
-    let cutNewBooks = NewBooks.slice(startIndex,lastIndex);
-    
-    // const [newArray , setNewArray] = useState(cutNewBooks);
-    // console.log("start: ",startIndex);
-    // console.log("end: ",lastIndex);
-    const shiftRight = ()=>{
-        setStart((prev) => prev + 1 )
-        setLast((prev) => prev + 1 )
-        console.log("Right");
-        // setNewArray(NewBooks.slice(startIndex,lastIndex))
-    }
-    const shiftLeft = ()=>{
-        setStart((prev) => prev - 1 )
-        setLast((prev) => prev - 1 )
-        console.log("Left");
-        // setNewArray(NewBooks.slice(startIndex,lastIndex))
-=======
     const [leftBtn, setLeftBtn] = useState(true);
     const [rightBtn, setRightBtn] = useState(false);
     let cutNewBooks = NewBooks.slice(startIndex, lastIndex);
@@ -159,7 +136,6 @@ const NewBooks = () => {
         if (lastIndex === NewBooks.length - 1) {
             setRightBtn(true)
         }
->>>>>>> 7c1d5b03a1d98e2a46a9fb6b372a91df1067dc0b
     }
 
     const shiftLeft = () => {
@@ -169,30 +145,12 @@ const NewBooks = () => {
         if (startIndex - 1 <= 0) {
             setLeftBtn(true)
 
-<<<<<<< HEAD
-    return ( 
-        <>
-        <div className="container">
-            <div className={`row justify-content-center align-items-center text-center ${styles.gap}`}>
-            <h2 className="blueHeader">New Arrivals</h2>
-            <div className="d-flex justify-content-end">
-                <button className={`${styles.btn} ${styles.leftBtn}`} onClick={shiftLeft}><i className="fa-solid fa-arrow-left"></i></button>
-                <button className={`${styles.btn} ${styles.rightBtn}`} onClick={shiftRight}><i className="fa-solid fa-arrow-right"></i></button>
-            </div>
-            <BookList NewBooks = {cutNewBooks} sectionName={"newBooks"}/>
-            </div>
-        </div>
-        </>
-     );
-}
-=======
         }
         if(lastIndex -1 <= NewBooks.length - 1){
             setRightBtn(false)
 
         }
     }
->>>>>>> 7c1d5b03a1d98e2a46a9fb6b372a91df1067dc0b
  
     return (
         <>

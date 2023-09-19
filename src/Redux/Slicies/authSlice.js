@@ -3,7 +3,6 @@ import {
     createSlice
 } from "@reduxjs/toolkit";
 import axiosInstance from "../../axios/axios-instance";
-import { redirect } from "react-router-dom";
 
 const initialState = {
     user: null,
@@ -184,8 +183,8 @@ const authSlice = createSlice({
         builder.addCase(signinWithToken.fulfilled, (state, action) => {
             const token = action.payload.token;
             state.isLoading = false;
-            state.token = toekn
-            saveUserData(toekn)
+            state.token = token
+            saveUserData(token)
         //  redirect('/')
         })
         builder.addCase(signinWithToken.rejected, (state, action) => {

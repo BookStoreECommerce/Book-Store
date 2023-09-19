@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import styles from "./NavBar.module.css";
 import { useDispatch } from "react-redux";
-import { registerModal, loginModal, handleClickOpen } from "../../Redux/Slicies/dialogSlice";
+import {handleClickOpen } from "../../Redux/Slicies/dialogSlice";
 
 export default function NavBar({innerRef}) {
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ export default function NavBar({innerRef}) {
   })
   return (
     <>
-      <nav className={navbar ? `navbar fixed-top navbar-expand-lg py-3 ${styles.colorNav}` : `navbar fixed-top navbar-expand-lg py-3 ${styles.transparent}`}>
+      <nav className={navbar ? `navbar fixed-top navbar-expand-lg py-3 ${styles.colorNav}` : `navbar fixed-top navbar-expand-lg py-3 ${styles.transparent}`} ref={innerRef}>
         <div className="container-fluid">
           <Link to='/' className={styles.logo}>
             <img src={logo} alt="" className='w-100 ' />
