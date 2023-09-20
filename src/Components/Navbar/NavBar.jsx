@@ -42,7 +42,7 @@ export default function NavBar() {
                 </Link>
               </li>
 
-              <li className="nav-item ms-3">
+              <li className="nav-item">
                   <Link className={`nav-link ${styles.navLinkIcon}`} to="profile">
                     <PersonOutlineOutlinedIcon sx={{fontSize: {xs:24, sm:24, md:27, lg:26}}} />
                     <span className={styles.colorUser}>username</span>
