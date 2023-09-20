@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import styles from "../Login.module.css";
 import 'bootstrap/dist/css/bootstrap.css';
 import { useDispatch, useSelector } from "react-redux";
-import { clearError, forgetPassword, varifyPasswordEmail } from '../../../Redux/Slicies/authSlice';
+import { clearError, resendResetPass, varifyPasswordEmail } from '../../../Redux/Slicies/authSlice';
 import { Button, TextField } from "@mui/material";
 import { Link } from 'react-router-dom';
 
@@ -15,24 +15,14 @@ const VerifyPassword = ({ onSubmit: moveToNext }) => {
     const { isLoading, msgError } = useSelector((state) => state.auth);
 
     const resendCode = async () => {
-        await dispatch(forgetPassword());
+        await dispatch(resendResetPass());
     }
 
     async function handleVerifyPassword(values) {
         const { payload } = await dispatch(varifyPasswordEmail(values));
-        console.log(payload.error);
         if (payload.message === "success") {
-            console.log("doneeeee");
             moveToNext();
-        } else {
-            console.log(payload.message);
         }
-        // if (resend.message === "success") {
-        //     console.log("doneeeee");
-        //     // moveToNext();
-        // } else {
-        //     console.log(resend.message);
-        // }
     }
 
     let validationSchema = Yup.object({

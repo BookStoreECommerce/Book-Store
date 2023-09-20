@@ -38,13 +38,22 @@ export const registerVerification = createAsyncThunk("auth/verifyEmail", async (
 
 export const forgetPassword = createAsyncThunk(
     "auth/forgetPassword",
-    async (values = {email: localStorage.getItem('user-mail')}, { rejectWithValue }) => {
+    async (values, { rejectWithValue }) => {
         try {
-            const response = await axiosInstance.post('auth/forgetPassword', values)
-            localStorage.setItem('user-mail', values.email);
+            const response = await axiosInstance.post('auth/forgetPassword', values);
             return response.data;
         } catch (error) {
-            console.log(error);
+            return rejectWithValue(error.response.data)
+        }
+    }
+);
+export const resendResetPass = createAsyncThunk(
+    "auth/resendResetPass",
+    async (values, { rejectWithValue }) => {
+        try {
+            const response = await axiosInstance.post('auth/resendResetPass', null, { headers: { 'authorization': localStorage.getItem('access-token') } });
+            return response.data;
+        } catch (error) {
             return rejectWithValue(error.response.data)
         }
     }
@@ -194,7 +203,6 @@ const authSlice = createSlice({
             // saveUserData(token);
             state.isLoading = false;
             localStorage.removeItem('access-token');
-            localStorage.removeItem('user-mail');
         });
         builder.addCase(resetPassword.rejected, (state, action) => {
             state.msgError = action.payload.error
