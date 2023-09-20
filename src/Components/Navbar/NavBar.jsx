@@ -7,7 +7,7 @@ import { handleClickOpen } from "../../Redux/Slicies/dialogSlice";
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
-export default function NavBar() {
+export default function NavBar({navRef}) {
   const [navbar, setNavbar] = useState(false);
   const dispatch = useDispatch()
   const changeBackground = () => {
@@ -24,7 +24,7 @@ export default function NavBar() {
   })
   return (
     <>
-      <div className="fixed-top">
+      <div className="fixed-top" ref={navRef}>
             <div className={styles.navTop}>
               <li className="nav-item me-5 position-relative">
                 <Link className={`nav-link  ${styles.navLinkIcon}`} to="favorite">
