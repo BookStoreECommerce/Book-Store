@@ -87,10 +87,6 @@ export default function NavBar() {
               </ul>
 
               <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-
-
-            
-
                 <li className="nav-item">
                   <Link
                     className={`nav-link ${styles.navLink}`} onClick={() => { dispatch(handleClickOpen({ name: "login" })) }}
