@@ -105,20 +105,7 @@ export default function NavBar() {
                 </li>
               </ul>
             </div>
-            <div className="d-none">
-              <li className="nav-item me-3 position-relative">
-                <Link className={`nav-link  ${styles.navLink}`} to="favorite">
-                  <i className={`fa-sharp fa-solid fa-heart ${styles.size}`}></i>
-                  <div className={` ${styles.number}`}><span className={`position-absolute ${styles.num}`}>0</span></div>
-                </Link>
-              </li>
-              <li className="nav-item me-2 position-relative">
-                <Link className={`nav-link ${styles.navLink}`} to="cart">
-                  <i className={`fa-solid fa-cart-shopping ${styles.size}`}></i>
-                  <div className={` ${styles.number}`}><span className={`position-absolute ${styles.num}`}>0</span></div>
-                </Link>
-              </li>
-            </div>
+      
           </div>
         </nav>
       </div>
