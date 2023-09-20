@@ -40,7 +40,7 @@ export const UserProfile = () => {
     gender: Yup.string().oneOf(["Male", "Female"]),
   });
 
-  const { values,  handleChange, handleBlur,  handleSubmit,  touched, errors, setValues,} = useFormik({
+  const { values,  handleChange, handleBlur,  handleSubmit,  touched, errors, setValues, isValid} = useFormik({
     initialValues: {
       userName: "",
       address: "",
@@ -57,14 +57,16 @@ export const UserProfile = () => {
   });
 
   const myHandleSubmit = async (values) => {
-    Object.keys(values).flatMap((key) => {
-      if (values[key] === "") {
-        delete values[key];
+    if(isValid){
+      Object.keys(values).flatMap((key) => {
+        if (values[key] === "") {
+          delete values[key];
+        }
+      });
+      const { payload } = await dispatch(userProfile(values));
+      if (payload.message === "success") {
+        navigate("/");
       }
-    });
-    const { payload } = await dispatch(userProfile(values));
-    if (payload.message === "success") {
-      navigate("/");
     }
   };
 
@@ -262,6 +264,7 @@ export const UserProfile = () => {
                 sx={{
                   display: disabled ? 'none': 'block'
                 }}
+                disabled={isValid? false : true}
               >
                 Save
               </Button>

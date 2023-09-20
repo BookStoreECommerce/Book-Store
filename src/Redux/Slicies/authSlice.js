@@ -170,10 +170,14 @@ const authSlice = createSlice({
             const token = action.payload.token
             state.isLoading = false
             state.token = token
-            saveUserData(token)
+            saveUserData(token);
         })
         builder.addCase(registerVerification.rejected, (state, action) => {
-            state.msgError = action.payload.error
+            if(action.payload.error){
+                state.msgError = action.payload.error
+            }else{
+                state.msgError = action.payload.errors[0].message
+            }
             state.isLoading = false;
         })
         // signinWithToken

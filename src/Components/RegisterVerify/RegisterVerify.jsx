@@ -14,6 +14,7 @@ export const RegisterVerify = () => {
     setcode(event.target.value);
   };
   const handleRegVerify = async () => {
+    if(code ){}
     const { payload } = await dispatch(registerVerification(code));
     if (payload.message === "success") {
       dispatch(handleClickOpen({ name: "login" }))
