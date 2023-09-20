@@ -36,7 +36,6 @@ export default function NavBar() {
               </li>
               <li className="nav-item me-5 position-relative">
                 <Link className={`nav-link ${styles.navLinkIcon}`} to="cart">
-      
                   <ShoppingCartOutlinedIcon sx={{fontSize: {xs:24, sm:24, md:27, lg:24}}} />
                   <div className={` ${styles.number}`}><span className={` ${styles.num}`}>0</span></div>
                 </Link>
