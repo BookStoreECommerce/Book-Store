@@ -10,6 +10,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import { Box } from '@mui/material';
 import styles from './PolicyDialog.module.css'
+import { useDispatch, useSelector } from 'react-redux';
+import { handlePrivacyClose } from '../../Redux/Slicies/dialogSlice';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -22,23 +24,25 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   }));
 
 export default function ScrollDialog() {
-    const [open, setOpen] = React.useState(true);
+    // const [open, setOpen] = React.useState(false);
 
-
+    const dispatch = useDispatch();
+    const { privacyOpen } = useSelector((state) => state.dialog)
 
     const handleClose = () => {
-        setOpen(false);
+        // setOpen(false);
+        dispatch(handlePrivacyClose());
     };
 
     const descriptionElementRef = React.useRef(null);
     React.useEffect(() => {
-        if (open) {
+        if (privacyOpen) {
             const { current: descriptionElement } = descriptionElementRef;
             if (descriptionElement !== null) {
                 descriptionElement.focus();
             }
         }
-    }, [open]);
+    }, [privacyOpen]);
 
 
 return (
@@ -47,7 +51,7 @@ return (
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
-        open={open}
+        open={privacyOpen}
         maxWidth="md"
         fullWidth
         disableScrollLock

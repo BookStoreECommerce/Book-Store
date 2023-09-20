@@ -7,7 +7,7 @@ import styles from "./Register.module.css";
 import SocialMediaBtns from "../ReusableComponents/SocialMediaBtns/SocialMediaBtns";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../Redux/Slicies/authSlice";
-import { handleClickOpen } from "../../Redux/Slicies/dialogSlice";
+import { handleClickOpen, handlePrivacyOpen } from "../../Redux/Slicies/dialogSlice";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 
@@ -160,12 +160,12 @@ export const Register = () => {
               className="form-check-label text-muted"
               htmlFor="privacyCheck"
             >
-              I agree to the{" "}
-              <a className="text-muted" href="\">
-                privacy policy
-              </a>
-              .
+              I agree to the
             </label>
+            <button type="button" className={`text-muted ${styles.privacyBtn}`} onClick={()=>dispatch(handlePrivacyOpen())}>
+              privacy policy
+            </button>
+            .
             {formik.errors.privacyCheck && formik.touched.privacyCheck ? (
               <p className="mt-1 text-danger mb-0">
                 {formik.errors.privacyCheck}
