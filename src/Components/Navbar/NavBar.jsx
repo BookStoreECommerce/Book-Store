@@ -5,10 +5,9 @@ import styles from "./NavBar.module.css";
 import { useDispatch } from "react-redux";
 import {handleClickOpen } from "../../Redux/Slicies/dialogSlice";
 
-export default function NavBar({innerRef}) {
-  const dispatch = useDispatch();
-
+export default function NavBar() {
   const [navbar, setNavbar] = useState(false);
+  const dispatch = useDispatch()
   const changeBackground = () => {
 
     if (window.scrollY >= 100) {
@@ -23,7 +22,7 @@ export default function NavBar({innerRef}) {
   })
   return (
     <>
-      <nav className={navbar ? `navbar fixed-top navbar-expand-lg py-3 ${styles.colorNav}` : `navbar fixed-top navbar-expand-lg py-3 ${styles.transparent}`} ref={innerRef}>
+      <nav className={navbar ? `navbar fixed-top navbar-expand-lg py-3 ${styles.colorNav}` : `navbar fixed-top navbar-expand-lg py-3 ${styles.transparent}`}>
         <div className="container-fluid">
           <Link to='/' className={styles.logo}>
             <img src={logo} alt="" className='w-100 ' />
@@ -85,7 +84,7 @@ export default function NavBar({innerRef}) {
                   <span className={styles.colorUser}>username</span>
                 </Link>
               </li>
-
+              
               <li className="nav-item">
                 <Link
                   className={`nav-link ${styles.navLink}`} onClick={()=>{dispatch(handleClickOpen({name: "login"}))}}
@@ -103,5 +102,5 @@ export default function NavBar({innerRef}) {
         </div>
       </nav>
     </>
-  );
+)
 }

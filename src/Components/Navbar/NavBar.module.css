@@ -8,9 +8,9 @@
 }
 .navLink{
     font-family: 'Jost', sans-serif;
-    font-size: 19px;
-    font-weight: bold;
-    color: #2b3069!important;
+    font-size: 19px !important;
+    font-weight: bold !important;
+    color: #2b3069 !important;
     position: relative;
 }
 .navLinkBorder::before{
