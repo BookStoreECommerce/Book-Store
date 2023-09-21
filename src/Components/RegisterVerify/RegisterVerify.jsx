@@ -3,7 +3,7 @@ import styles from './RegisterVerify.module.css'
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { registerVerification, resendVerifyCode } from "../../Redux/Slicies/authSlice";
+import { registerVerification, resendVerifyCode } from "../../Redux/Slicies/authActions";
 import { handleClickOpen } from '../../Redux/Slicies/dialogSlice';
 
 export const RegisterVerify = () => {

@@ -2,7 +2,6 @@ import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
-import { clearError, signin } from "../../Redux/Slicies/authSlice";
 import styles from "./Login.module.css";
 import { Button, FormControl, FormHelperText, IconButton, InputLabel, OutlinedInput, TextField } from "@mui/material";
 // import CustomizedDialogs from "../Dialog/Dialog";
@@ -10,6 +9,8 @@ import { Link } from "react-router-dom";
 import { handleClickOpen, handleClose } from "../../Redux/Slicies/dialogSlice";
 import SocialMediaBtns from "../ReusableComponents/SocialMediaBtns/SocialMediaBtns";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { signin } from "../../Redux/Slicies/authActions";
+import { clearError } from "../../Redux/Slicies/authSlice";
 
 const Login = () => {
   // const [messageError, setMessageError] = useState("");

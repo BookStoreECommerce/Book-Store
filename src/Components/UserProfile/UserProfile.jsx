@@ -10,8 +10,9 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
-import {getUserProfile,setUser, userProfile,} from "../../Redux/Slicies/authSlice";
 import { useNavigate } from "react-router";
+import { getUserProfile, userProfile } from "../../Redux/Slicies/authActions";
+import { setUser } from "../../Redux/Slicies/authSlice";
 
 export const UserProfile = () => {
   const [disabled, setDisabel] = useState(true);
