@@ -18,17 +18,12 @@ import LoginLayout from "./Components/LoginSocialActions/LoginLayout";
 import Failed from "./Components/LoginSocialActions/Failed";
 import { UserProfile } from "./Components/UserProfile/UserProfile";
 import ErrorBoundry from "./Components/ErrorBoundry/ErrorBoundry";
+import { indexLoader } from "./util/loaders";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    loader: async () => {
-      const token = localStorage.getItem("token");
-      if(!token){
-        return null
-      }
-      // const {data} = await 
-    },
+    loader: indexLoader,
     element: <Layout />,
     errorElement: <ErrorBoundry />,
     children: [

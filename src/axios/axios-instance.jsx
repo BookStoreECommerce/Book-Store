@@ -10,6 +10,15 @@ const axiosInstance = axios.create({
     withCredentials: true,
 })
 console.log(axiosInstance);
+
+axiosInstance.interceptors.request.use(req => {
+    const token = localStorage.getItem('access-token');
+    console.log(token);
+    req.headers.Authorization = token ? token : "";
+    return req
+}, async(error) => Promise.reject(error));
+
+
 axiosInstance.interceptors.response.use(res => res, async(error) => {
     if(error.response.status === "403" && (error.response.data.message === "jwt expired" || error.response.data.message === "access denied")){
             const response = await axiosInstance.post('auth/refresh', {}, { withCredentials: true });

@@ -59,10 +59,11 @@ export const userProfile = createAsyncThunk("users/update", async (userData, { r
 export const getUserProfile = createAsyncThunk("users/profile", async (_, { rejectWithValue }) => {
     try {
         let { data } = await axiosInstance.get(`users/profile`,
-            {
-                headers:
-                    { authorization: localStorage.getItem("access-token") }
-            });
+            // {
+            //     headers:
+            //         { authorization: localStorage.getItem("access-token") }
+            // }
+            );
         return data
     } catch (error) {
         return rejectWithValue(error.response.data)
