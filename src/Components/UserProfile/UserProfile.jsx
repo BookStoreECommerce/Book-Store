@@ -251,7 +251,7 @@ export const UserProfile = () => {
                 className={`mainBtn ${styles.mainBtnWidth}`}
                 onClick={() => setDisabel((prev) => !prev)}
               >
-                {disabled ? 'Edite': 'Skip'}
+                {disabled ? 'Edit': 'Skip'}
               </Button>
 
               <Button

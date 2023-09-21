@@ -1,0 +1,9 @@
+.timerBg {
+    background-color: transparent !important;
+    border: 2px solid var(--secondaryColor) !important;
+    color: var(--navyBlue) !important;
+    padding: 3px 6px !important;
+    border-radius: 50% !important;
+    width: 3.5rem;
+    height: 3.5rem;
+}

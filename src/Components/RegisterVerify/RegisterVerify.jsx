@@ -5,8 +5,10 @@ import { Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { registerVerification, resendVerifyCode } from "../../Redux/Slicies/authActions";
 import { handleClickOpen } from '../../Redux/Slicies/dialogSlice';
+import Timer from '../Timer/Timer';
 
 export const RegisterVerify = () => {
+  const [disabled, setDisabled] = useState(true);
   const dispatch = useDispatch();
   const { isLoading, msgError } = useSelector((state) => state.auth);
   const [code, setcode] = useState(null);
@@ -60,8 +62,10 @@ export const RegisterVerify = () => {
         </Button>
 
       </div>
-      <div className="d-flex gap-1 text-muted justify-content-center">
-        <button type='button' className={`text-muted ${styles.resendBtn}`} onClick={()=>dispatch(resendVerifyCode())}>Send me another code</button>
+      <div className="d-flex gap-1 text-muted justify-content-center align-items-center">
+        <button type='button' disabled={disabled} className={` ${styles.resendBtn}`} onClick={()=>dispatch(resendVerifyCode())}>Send me another code</button>
+        <p className='mb-0'>after</p>
+        <Timer callback={setDisabled}/>
       </div>
     </>
   )
