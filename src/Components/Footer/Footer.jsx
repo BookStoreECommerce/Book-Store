@@ -1,11 +1,11 @@
 import React, { Fragment } from "react";
 import style from './Footer.module.css'
 
-const Footer = () => {
+const Footer = ({footerRef, customCss}) => {
     return (
 
-        <Fragment>
-        <section className={style.marginTop}>
+        <>
+        <section className={customCss ? customCss : style.marginTop} ref={footerRef}>
         <div className="darkBg">
         <div className="container">
             <div className="row justify-content-center align-items-center text-white text-center">
@@ -15,11 +15,10 @@ const Footer = () => {
                 </div>
             </div>
         </div>
-
     </div>
         </section>
 
-        </Fragment>
+        </>
     );
 }
 
