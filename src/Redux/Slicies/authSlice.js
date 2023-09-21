@@ -43,6 +43,19 @@ export const registerVerification = createAsyncThunk("auth/verifyEmail", async (
     }
 })
 
+export const resendVerifyCode = createAsyncThunk("auth/resendVaryfyEmail", async (_, { rejectWithValue }) => {
+    try {
+        let { data } = await axiosInstance.post(`auth/resendVaryfyEmail`,
+            {
+                headers:
+                    { authorization: localStorage.getItem("access-token") }
+            });
+        return data
+    } catch (error) { 
+        return rejectWithValue(error.response.data)
+    }
+})
+
 export const userProfile = createAsyncThunk("users/update", async (userData, { rejectWithValue }) => {
     try {
         let { data } = await axiosInstance.put(`users/update`, userData, {
@@ -173,6 +186,26 @@ const authSlice = createSlice({
             saveUserData(token);
         })
         builder.addCase(registerVerification.rejected, (state, action) => {
+            console.log(action.payload);
+            if(action.payload.error){
+                state.msgError = action.payload.error
+            }else{
+                state.msgError = action.payload.errors[0].message
+            }
+            state.isLoading = false;
+        })
+        //resendVerifyCode
+        builder.addCase(resendVerifyCode.pending, (state, action) => {
+            // state.isLoading = true;
+        })
+        builder.addCase(resendVerifyCode.fulfilled, (state, action) => {
+            const token = action.payload.token
+            state.isLoading = false
+            state.token = token
+            saveUserData(token);
+        })
+        builder.addCase(resendVerifyCode.rejected, (state, action) => {
+            console.log(action.payload);
             if(action.payload.error){
                 state.msgError = action.payload.error
             }else{

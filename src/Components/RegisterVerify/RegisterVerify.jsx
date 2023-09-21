@@ -3,18 +3,17 @@ import styles from './RegisterVerify.module.css'
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { registerVerification } from "../../Redux/Slicies/authSlice";
+import { registerVerification, resendVerifyCode } from "../../Redux/Slicies/authSlice";
 import { handleClickOpen } from '../../Redux/Slicies/dialogSlice';
 
 export const RegisterVerify = () => {
   const dispatch = useDispatch();
-  const { msgError } = useSelector((state) => state.auth);
+  const { isLoading, msgError } = useSelector((state) => state.auth);
   const [code, setcode] = useState(null);
   const handleChange = event => {
     setcode(event.target.value);
   };
   const handleRegVerify = async () => {
-    if(code ){}
     const { payload } = await dispatch(registerVerification(code));
     if (payload.message === "success") {
       dispatch(handleClickOpen({ name: "login" }))
@@ -49,13 +48,20 @@ export const RegisterVerify = () => {
           className={`mainBtn ${styles.verifyBtn}`}
           disabled={code ? false : true}
           onClick={handleRegVerify}
+          endIcon={
+            isLoading ? (
+              <i className="fas fa-spinner fa-spin"></i>
+            ) : (
+              ''
+            )
+          }
         >
           Verify
         </Button>
 
       </div>
       <div className="d-flex gap-1 text-muted justify-content-center">
-        <a className="text-muted" href="\">Send me another code</a>
+        <button type='button' className={`text-muted ${styles.resendBtn}`} onClick={()=>dispatch(resendVerifyCode())}>Send me another code</button>
       </div>
     </>
   )

@@ -11,3 +11,9 @@
 .verifyBtn{
     height: 3.3rem;
 }
+
+.resendBtn {
+    border: none;
+    background: no-repeat;
+    text-decoration: underline;
+}
