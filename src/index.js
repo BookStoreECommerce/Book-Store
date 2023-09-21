@@ -6,25 +6,26 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./index.css";
 import App from "./App";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Home from "./Components/Home/Home.jsx";
 import { Provider } from "react-redux";
 import store from "./Redux/Store.js";
-import Layout from "./Components/layout/Layout";
-import ForgetPasswordStepper from "./Components/Login/forgetPassword/ForgetPasswordStepper";
-import AuthLayout from "./Components/layout/AuthLayout";
-import Success from "./Components/LoginSocialActions/Success";
-import ThemeContextProvider from "./context/theme-context.jsx";
-import LoginLayout from "./Components/LoginSocialActions/LoginLayout";
-import Failed from "./Components/LoginSocialActions/Failed";
-import { UserProfile } from "./Components/UserProfile/UserProfile";
-import ErrorBoundry from "./Components/ErrorBoundry/ErrorBoundry";
+import ThemeContextProvider from "./Contexts/theme-context.jsx";
+import Layout from "./Layouts/Layout";
+import ErrorBoundry from "./pages/ErrorBoundry/ErrorBoundry";
+import Home from "./pages/Home/Home";
+import { UserProfile } from "./pages/UserProfile/UserProfile";
+import AuthLayout from "./Layouts/AuthLayout";
+import SocialLayout from "./Layouts/SocialLayout";
+import Success from "./pages/SocialLogin/Success";
+import Failed from "./pages/SocialLogin/Failed";
+import ForgetPasswordStepper from "./pages/ForgetPassword/ForgetPasswordStepper";
+
 
 const router = createBrowserRouter([
   {
     path: "/",
     loader: async () => {
       const token = localStorage.getItem("token");
-      if(!token){
+      if (!token) {
         return null
       }
       // const {data} = await 
@@ -34,16 +35,16 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: '/profile', element: <UserProfile /> },
-  ],
+    ],
   },
   {
     path: "auth",
     element: <AuthLayout />,
-    children:[
+    children: [
       {
         path: "login",
-        element: <LoginLayout />,
-        loader:({request, params}) => {
+        element: <SocialLayout />,
+        loader: ({ request, params }) => {
           // console.log(request);
           return null
         },
@@ -58,11 +59,11 @@ const router = createBrowserRouter([
             element: <Failed />
           }
         ]
-    },
-    {
-      path:"forgotPassword",
-      element: <ForgetPasswordStepper />
-    }
+      },
+      {
+        path: "forgotPassword",
+        element: <ForgetPasswordStepper />
+      }
     ]
   }
 ]);

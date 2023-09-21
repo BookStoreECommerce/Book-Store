@@ -1,0 +1,23 @@
+import { Box, Container } from "@mui/material"
+import { Outlet } from "react-router-dom"
+
+
+const SocialLayout = () => {
+    return (
+        <Box
+            sx={{
+                width: "100%",
+                minHeight: "100vh",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                backgroundColor: (theme) => theme.palette.secondary.light,
+                pt: 2
+            }}
+        >
+            <Outlet />
+        </Box>
+    )
+}
+
+export default SocialLayout;
