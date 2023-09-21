@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./Timer.module.css";
 
 function Timer({ setDisabled, clicked, setClicked }) {
-  const [counter, setCounter] = useState(5);
+  const [counter, setCounter] = useState(60);
 
   useEffect(() => {
     const timer =
@@ -14,7 +14,7 @@ function Timer({ setDisabled, clicked, setClicked }) {
     if (counter === 0) setDisabled(false);
 
     if (clicked) {
-      setCounter(5);
+      setCounter(60);
       setClicked(false);
       setDisabled(true);
     }

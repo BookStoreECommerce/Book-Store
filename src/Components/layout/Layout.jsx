@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Outlet } from 'react-router-dom'
 import NavBar from '../Navbar/NavBar'
 import Footer from '../Footer/Footer'
