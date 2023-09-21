@@ -9,6 +9,7 @@ import Timer from '../Timer/Timer';
 
 export const RegisterVerify = () => {
   const [disabled, setDisabled] = useState(true);
+  const [clicked, setClicked] = useState(false);
   const dispatch = useDispatch();
   const { isLoading, msgError } = useSelector((state) => state.auth);
   const [code, setcode] = useState(null);
@@ -63,9 +64,12 @@ export const RegisterVerify = () => {
 
       </div>
       <div className="d-flex gap-1 text-muted justify-content-center align-items-center">
-        <button type='button' disabled={disabled} className={` ${styles.resendBtn}`} onClick={()=>dispatch(resendVerifyCode())}>Send me another code</button>
+        <button type='button' disabled={disabled} className={` ${styles.resendBtn}`} onClick={()=>{
+          setClicked(true);
+          dispatch(resendVerifyCode())
+        }}>Send me another code</button>
         <p className='mb-0'>after</p>
-        <Timer callback={setDisabled}/>
+        <Timer setDisabled={setDisabled} clicked={clicked} setClicked={setClicked}/>
       </div>
     </>
   )
