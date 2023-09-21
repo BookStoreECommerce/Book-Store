@@ -51,7 +51,7 @@ export default function NavBar({navRef}) {
         <nav className={navbar ? `navbar navbar-expand-lg ${styles.navBarContainer} ${styles.colorNav}` : `navbar navbar-expand-lg  ${styles.transparent}`}>
           <div className="container-fluid">
             <Link to='/' className={styles.logo}>
-              <img src={logo} alt="" className='w-100' />
+              <img src={logo} alt="" className='w-100' loading="lazy"/>
             </Link>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>

@@ -15,7 +15,6 @@ const Footer = ({footerRef, customCss}) => {
                 </div>
             </div>
         </div>
-
     </div>
         </section>
 
