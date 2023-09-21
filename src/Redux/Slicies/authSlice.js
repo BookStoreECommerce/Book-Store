@@ -106,7 +106,7 @@ export const resetPassword = createAsyncThunk("auth/resetPassword", async (value
 
 export const signinWithToken = createAsyncThunk("auth/signin-with-token", async (token, { rejectWithValue }) => {
     try {
-        let { data } = await axiosInstance.post(`auth/signin/${token}`);
+        let { data } = await axiosInstance.post(`auth/signin/${token}`,{},);
         return data
     } catch (error) {
         console.log(error);
