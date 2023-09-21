@@ -1,11 +1,12 @@
 import React, { Fragment } from "react";
 import style from './Footer.module.css'
+import { Box } from "@mui/material";
 
 const Footer = ({footerRef, customCss}) => {
     return (
 
         <>
-        <section className={customCss ? customCss : style.marginTop} ref={footerRef}>
+        <Box width={'100%'} className={customCss ? customCss : style.marginTop} ref={footerRef}>
         <div className="darkBg">
         <div className="container">
             <div className="row justify-content-center align-items-center text-white text-center">
@@ -17,7 +18,7 @@ const Footer = ({footerRef, customCss}) => {
         </div>
 
     </div>
-        </section>
+        </Box>
 
         </>
     );

@@ -7,6 +7,19 @@ import { handleClickOpen } from "../../../Redux/Slicies/dialogSlice";
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import { Button, styled } from "@mui/material";
+
+
+const NavButton = styled(Button)(({theme}) => ({
+  textTransform: "inherit",
+  "&.MuiButtonBase-root":{
+    ":hover":{
+      backgroundColor: "transparent",
+    }
+  }
+}))
+
+
 export default function NavBar({navRef}) {
   const [navbar, setNavbar] = useState(false);
   const dispatch = useDispatch()
@@ -87,16 +100,16 @@ export default function NavBar({navRef}) {
 
               <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                  <Link
+                  <NavButton
                     className={`nav-link ${styles.navLink}`} onClick={() => { dispatch(handleClickOpen({ name: "login" })) }}
                   >
                     Login
-                  </Link>
+                  </NavButton>
                 </li>
                 <li className="nav-item">
-                  <button className={`nav-link ${styles.navLink}`} onClick={() => { dispatch(handleClickOpen({ name: "register" })) }}>
+                  <NavButton className={`nav-link ${styles.navLink}`} onClick={() => { dispatch(handleClickOpen({ name: "register" })) }}>
                     Register
-                  </button>
+                  </NavButton>
                 </li>
               </ul>
             </div>

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import styles from "./UserProfile.module.css";
 import TextField from "@mui/material/TextField";
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -16,6 +16,7 @@ import { useNavigate } from "react-router";
 export const UserProfile = () => {
   const [disabled, setDisabel] = useState(true);
   const [isFirst, setIsFirst] = useState(true);
+  const {footerH, navH, footerNoMargin} = useSelector((state) => state.app);
   const navigate = useNavigate();
   const { isLoading, msgError, user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -100,7 +101,26 @@ export const UserProfile = () => {
   return (
     <>
       {!isLoading && (
-        <div className="container w-50 mt-5 p-2">
+        // <div className="container w-50 mt-5 p-2">
+        <Box
+          sx={{
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            mt: `${navH + (footerH/3)}px`
+          }}
+        >
+          <Box
+            // maxWidth="xs"
+            // minWidth="xs"
+            // width="xl"
+            sx={(theme) => ({
+              maxWidth : theme.breakpoints.up()
+            })}
+          >
           <div className="text-center">
             <i
               className={`fa-solid fa-circle-user mb-2 ${styles.iconFontSize}`}
@@ -267,7 +287,9 @@ export const UserProfile = () => {
               </Button>
             </div>
           </form>
-        </div>
+          </Box>
+        {/* </div> */}
+        </Box>
       )}
     </>
   );
