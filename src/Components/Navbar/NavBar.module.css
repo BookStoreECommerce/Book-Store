@@ -1,19 +1,32 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Inter&family=Jost&family=PT+Serif:wght@700&display=swap');
 
+.navBarContainer {
+    display: flex;
+    flex-direction: column;
+}
 
-.logo{
+.logo {
     width: 6%;
     margin-right: 60px;
 }
-.navLink{
-    font-family: 'Jost', sans-serif;
-    font-size: 19px;
-    font-weight: bold;
-    color: #2b3069!important;
+
+.navLink {
+    font-family: 'Jost', sans-serif !important;
+    font-size: 19px !important;
+    font-weight: bold !important;
+    color: #2b3069 !important;
     position: relative;
 }
-.navLinkBorder::before{
+
+.navLinkIcon {
+    font-family: 'Jost', sans-serif !important;
+    font-size: 19px !important;
+    font-weight: bold !important;
+    color: #FFF !important;
+    position: relative;
+}
+
+.navLinkBorder::before {
     content: '';
     position: absolute;
     bottom: 6px;
@@ -23,152 +36,172 @@
     transition: all 1s ease;
 
 }
-.navItem:hover .navLinkBorder::before{
- width: 82%;
+
+.navItem:hover .navLinkBorder::before {
+    width: 82%;
 }
-.transparent{
+
+.transparent {
     background-color: transparent;
     transition: all 1s;
 }
-.size{
 
-font-size: 19px;
-}
-.dropdownMenu {
-    border: 1px #dee2e6 solid !important;
-font-weight: 400;
-font-family: 'Jost', sans-serif;
-font-size: 16px!important;
-}
-.item:hover{
-background-color: var(--beigeColor)!important;
+.size {
 
-}
-.colorUser{
-    color: var(--mainColor);
     font-size: 19px;
 }
-.number{
-    width: 20px;
-    background: var(--mainColor);
-    top: -18px;
-    right: -12px;
-    border-radius: 50%;
-    height: 20px;
-    position: absolute;
+
+.dropdownMenu {
+    border: 1px #dee2e6 solid !important;
+    font-weight: 400;
+    font-family: 'Jost', sans-serif;
+    font-size: 16px !important;
 }
-.num{
+
+.item:hover {
+    background-color: var(--beigeColor) !important;
+
+}
+
+.colorUser {
+    color:#fff;
+    font-size: 20px;
+    margin-left: 5px;
+}
+
+.number {
+    width: 21px;
+    background: #fff;
+    top: -3px;
+    right: -29px;
+    border-radius: 50%;
+    height: 21px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.num {
     font-size: 13px;
-    color: white;
+    color: var(--mainColor);
     left: 6px;
 }
 
-
-.badgeContainer{
-    position: relative;
+.navTop {
     display: flex;
-    left: 59%;
+    justify-content: end;
+    align-items: center;
+    list-style: none;
+    padding: 7px 15px 7px 0px;
+    background:var(--navyBlue) !important;
+
+    /* background-image: linear-gradient(45deg, var(--beigeColor), 70%, var(--secondaryColor)); */
+
 }
-.badgeContainer li{
+
+.navTop li {
     list-style: none;
 }
-.dropdownMenu{
+
+.dropdownMenu {
     background-image: linear-gradient(45deg, beige, transparent);
 }
-.colorNav{
 
-   background-color: var(--beigeColor);
-   transition: all 2s;
+.colorNav {
+
+    background-color: var(--beigeColor);
+    transition: all 2s;
+}
+.badgeNumber{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 /* Media Quries NavBar */
 @media screen and (min-width:100px) and (max-width: 600px) {
-    .logo{
+    .logo {
         width: 20%;
         margin-right: 0px;
     }
-    .form{
-        display: none;
-      }
-    .badgeContainer{
-        left: 18%;
-        top: 7px;
+    .size{
+        font-size: 14px;
+    }
+    .colorUser{
+        font-size: 17px;
+    }
+    .number{
+        width: 18px;
+    /* background: var(--mainColor); */
+    top: 5px;
+    right: -26px;
+    border-radius: 50%;
+    height: 18px;
+    position: absolute;
+    }
+    .num{
+        left: 5px;
+    top: -1px;
     }
 }
+
 @media screen and (min-width:601px) and (max-width: 992px) {
-    .logo{
-        width: 17%;
+    .logo {
+        width: 15%;
         margin-right: 0px;
     }
-    .form{
-        display: none;
-      }
-    .badgeContainer{
-        left: 30%;
-        top: 9px;
-    }
+
 }
 
 @media screen and (min-width:993px) and (max-width: 1300px) {
-    .logo{
-        width: 9%;
-        margin-right: 0px;
+    .logo {
+        width: 10%;
+        margin-right: 15px;
     }
-
-    .badgeContainer{
-        left: 54%;
-    }
-  .form{
-    display: none;
-  }
 }
+
 @media screen and (min-width:1301px) and (max-width: 1500px) {
-    .logo{
+    .logo {
         width: 9%;
     }
 
-    .badgeContainer{
-        left: 42%;
-    }
-
 }
+
 @media screen and (min-width:1501px) and (max-width: 1600px) {
-    .logo{
+    .logo {
         width: 9%;
     }
+}
 
-    .badgeContainer{
-        left: 48%;
+@media screen and (min-width:300px) and (max-width:991px) {
+    .bgCollapse {
+        background-image: linear-gradient(white, var(--beigeColor));
+
+        border-radius: 20px;
+        position: relative;
+        top: 5px;
     }
 
-}
-@media screen and (min-width:1601px) and (max-width: 1700px) {
-    .badgeContainer{
-        left: 54%;
+    .bgCollapse .navLink {
+        padding-left: 30px;
     }
-
-}
-@media screen and (min-width:1701px) and (max-width: 1800px) {
-    .badgeContainer{
-        left: 50%;
+    .navItem:hover .navLinkBorder::before {
+        width: 0%;
     }
-
-}
-@media screen and (min-width:1801px) and (max-width: 1900px) {
-    .badgeContainer{
-        left: 58%;
-    }
-
 }
 
-@media screen and (min-width:300px) and (max-width:900px){
-.bgCollapse{
-    background-image:linear-gradient(white, var(--beigeColor));
-   
-    border-radius: 20px;
-    position: relative;
-    top: 5px;
-}
-.bgCollapse .navLink{
-    padding-left: 30px;
-}
+.tyrNumber
+{
+    margin-right: 20px;
+    width: 20px;
+    height: 20px;
+    background-color: #FFF;
+    color: var(--mainColor);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 13px;
+    text-align: center;
+    line-height:1 !important;
 }
