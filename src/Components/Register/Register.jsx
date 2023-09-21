@@ -41,6 +41,8 @@ export const Register = () => {
   let validationSchema = Yup.object({
     userName: Yup.string()
       .required("Name is required")
+      .max(20, "Name must be at most 20 characters")
+      .min(4, "Name must be at least 4 characters")
       .matches(
         /^[a-zA-Z]{3,8}([_ -]?[a-zA-Z0-9]{3,8})*$/,
         "Name must start with 3:8 letters (a-z)"
@@ -145,8 +147,8 @@ export const Register = () => {
           margin="dense"
         />
 
-        <div className="d-flex justify-content-between align-items-center mt-2">
-          <div className="form-check">
+        <div className="d-flex flex-column flex-sm-row justify-content-between gap-sm-0 gap-2 align-items-center mt-2">
+          <div className="form-check align-self-start">
             <input
               className="form-check-input mainCheckbox"
               onBlur={formik.handleBlur}
@@ -183,7 +185,7 @@ export const Register = () => {
                 <i className="fa-solid fa-arrow-right"></i>
               )
             }
-            className={`mainBtn`}
+            className={`mainBtn align-self-end`}
             disabled={formik.isValid ? false : true}
           >
             Next

@@ -23,8 +23,8 @@ export const UserProfile = () => {
   const validationSchema = Yup.object({
     userName: Yup.string()
       .required("Name is required")
-      .max(20)
-      .min(4)
+      .max(20, "Name must be at most 20 characters")
+      .min(4, "Name must be at least 4 characters")
       .matches(
         /^[a-zA-Z]{3,8}([_ -]?[a-zA-Z0-9]{3,8})*$/,
         "Name must start with 3:8 letters (a-z)"

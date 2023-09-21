@@ -69,7 +69,6 @@ const authSlice = createSlice({
             saveUserData(token);
         })
         builder.addCase(registerVerification.rejected, (state, action) => {
-            console.log(action.payload);
             if(action.payload.error){
                 state.msgError = action.payload.error
             }else{
@@ -88,7 +87,6 @@ const authSlice = createSlice({
             saveUserData(token);
         })
         builder.addCase(resendVerifyCode.rejected, (state, action) => {
-            console.log(action.payload);
             if(action.payload.error){
                 state.msgError = action.payload.error
             }else{
