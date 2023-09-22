@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import styles from "./NavBar.module.css";
@@ -7,7 +7,8 @@ import { handleClickOpen } from "../../Redux/Slicies/dialogSlice";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
-import { Button, styled } from "@mui/material";
+// import MailIcon from "@mui/icons-material/Mail";
+import { Badge, Button, IconButton, styled } from "@mui/material";
 
 const NavButton = styled(Button)(({ theme }) => ({
   textTransform: "inherit",
@@ -18,7 +19,17 @@ const NavButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-export default function NavBar({ navRef }) {
+// const StyledBadge = styled(Badge)(({ theme }) => ({
+//   '& .MuiBadge-badge': {
+//     backgroundColor: "white",
+//     color: theme.palette.primary.main,
+//     fontSize: '13px',
+//     // border: `2px solid ${theme.palette.background.paper}`,
+//     padding: '0 4px',
+//   },
+// }));
+
+function NavBar({ navRef }) {
   const [navbar, setNavbar] = useState(false);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
@@ -58,8 +69,19 @@ export default function NavBar({ navRef }) {
               </div>
             </Link>
           </li>
+          {/* <li className="nav-item me-5 position-relative">
+            <Link className={`nav-link ${styles.navLinkIcon}`} to="cart">
+              <IconButton aria-label="cart">
+                <StyledBadge badgeContent={4} color="secondary">
+                  <ShoppingCartOutlinedIcon sx={{
+                    color: 'white'
+                  }}/>
+                </StyledBadge>
+              </IconButton>
+            </Link>
+          </li> */}
 
-         {user !== null && ( <li className="nav-item">
+          {user !== null && (<li className="nav-item">
             <Link className={`nav-link ${styles.navLinkIcon}`} to="profile">
               <PersonOutlineOutlinedIcon
                 sx={{ fontSize: { xs: 24, sm: 24, md: 27, lg: 26 } }}
@@ -98,7 +120,7 @@ export default function NavBar({ navRef }) {
                 <li className={`nav-item me-2 ${styles.navItem}`}>
                   <Link
                     className={`nav-link ${styles.navLink} ${styles.navLinkBorder}`}
-                    to="home"
+                    to="/"
                   >
                     Home
                   </Link>
@@ -202,3 +224,4 @@ export default function NavBar({ navRef }) {
     </>
   );
 }
+export default memo(NavBar)

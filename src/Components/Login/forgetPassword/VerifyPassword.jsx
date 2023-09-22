@@ -20,12 +20,9 @@ const VerifyPassword = ({ onSubmit: moveToNext }) => {
 
     async function handleVerifyPassword(values) {
         const { payload } = await dispatch(varifyPasswordEmail(values));
-        console.log(payload.error);
         if (payload.message === "success") {
-            console.log("doneeeee");
             moveToNext();
         } else {
-            console.log(payload.message);
         }
         // if (resend.message === "success") {
         //     console.log("doneeeee");

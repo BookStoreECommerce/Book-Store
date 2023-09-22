@@ -25,7 +25,6 @@ const LoginTE = () => {
     };
 
     const handleLogin = async (values) => {
-        console.log(values);
         dispatch(signin(values))
 
     }

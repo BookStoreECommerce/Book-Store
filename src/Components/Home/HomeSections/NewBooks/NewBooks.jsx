@@ -141,7 +141,6 @@ const NewBooks = () => {
     const shiftLeft = () => {
         setStart((prev) => prev - 1)
         setLast((prev) => prev -= 1)
-        console.log(startIndex);
         if (startIndex - 1 <= 0) {
             setLeftBtn(true)
 
