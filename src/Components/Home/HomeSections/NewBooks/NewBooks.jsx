@@ -16,7 +16,7 @@ import book12 from '../../../../assets/12.jpg'
 
 
 const NewBooks = () => {
-    const [NewBooks, setNewBooks] = useState([
+    const [newBooks, setNewBooks] = useState([
         {
             id: 0,
             image: book,
@@ -127,13 +127,13 @@ const NewBooks = () => {
     const [lastIndex, setLast] = useState(4);
     const [leftBtn, setLeftBtn] = useState(true);
     const [rightBtn, setRightBtn] = useState(false);
-    let cutNewBooks = NewBooks.slice(startIndex, lastIndex);
+    let cutNewBooks = newBooks.slice(startIndex, lastIndex);
   
     const shiftRight = () => {
         setStart((prev) => prev + 1)
         setLast((prev) => prev + 1)
         setLeftBtn(false)
-        if (lastIndex === NewBooks.length - 1) {
+        if (lastIndex === newBooks.length - 1) {
             setRightBtn(true)
         }
     }
@@ -145,7 +145,7 @@ const NewBooks = () => {
             setLeftBtn(true)
 
         }
-        if(lastIndex -1 <= NewBooks.length - 1){
+        if(lastIndex -1 <= newBooks.length - 1){
             setRightBtn(false)
 
         }

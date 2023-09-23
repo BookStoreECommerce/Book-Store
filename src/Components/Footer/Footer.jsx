@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import style from './Footer.module.css'
 import { useSelector } from "react-redux";
 
-const Footer = ({ footerRef, customCss }) => {
+const Footer = ({ footerRef }) => {
     const {footerMargin} = useSelector((state) => state.app);
     return (
 

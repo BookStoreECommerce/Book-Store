@@ -7,8 +7,7 @@ import { handleClickOpen } from "../../Redux/Slicies/dialogSlice";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
-// import MailIcon from "@mui/icons-material/Mail";
-import { Badge, Button, IconButton, styled } from "@mui/material";
+import { Button, styled } from "@mui/material";
 
 const NavButton = styled(Button)(({ theme }) => ({
   textTransform: "inherit",
@@ -18,16 +17,6 @@ const NavButton = styled(Button)(({ theme }) => ({
     },
   },
 }));
-
-// const StyledBadge = styled(Badge)(({ theme }) => ({
-//   '& .MuiBadge-badge': {
-//     backgroundColor: "white",
-//     color: theme.palette.primary.main,
-//     fontSize: '13px',
-//     // border: `2px solid ${theme.palette.background.paper}`,
-//     padding: '0 4px',
-//   },
-// }));
 
 function NavBar({ navRef }) {
   const [navbar, setNavbar] = useState(false);
@@ -69,17 +58,6 @@ function NavBar({ navRef }) {
               </div>
             </Link>
           </li>
-          {/* <li className="nav-item me-5 position-relative">
-            <Link className={`nav-link ${styles.navLinkIcon}`} to="cart">
-              <IconButton aria-label="cart">
-                <StyledBadge badgeContent={4} color="secondary">
-                  <ShoppingCartOutlinedIcon sx={{
-                    color: 'white'
-                  }}/>
-                </StyledBadge>
-              </IconButton>
-            </Link>
-          </li> */}
 
           {user !== null && (<li className="nav-item">
             <Link className={`nav-link ${styles.navLinkIcon}`} to="profile">
