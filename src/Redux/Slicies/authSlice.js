@@ -23,7 +23,7 @@ const authSlice = createSlice({
         },
         setUser: (state, action) => {
             const {name , value} = action.payload;
-            let user = state.user;
+            const user = state.user;
             user[name] = value;
             state.user = user;
         }

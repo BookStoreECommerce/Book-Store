@@ -14,7 +14,7 @@ import { useNavigate } from "react-router";
 import { getUserProfile, userProfile } from "../../Redux/Slicies/authActions";
 import { setUser } from "../../Redux/Slicies/authSlice";
 
-export const UserProfile = () => {
+const UserProfile = () => {
   const [disabled, setDisabel] = useState(true);
   const [isFirst, setIsFirst] = useState(true);
   const navigate = useNavigate();
@@ -59,7 +59,8 @@ export const UserProfile = () => {
 
   const myHandleSubmit = async (values) => {
     if(isValid){
-      Object.keys(values).flatMap((key) => {
+      Object.keys(values).forEach((key) => {
+        // Object.keys(values).flatMap((key) => {
         if (values[key] === "") {
           delete values[key];
         }
@@ -263,7 +264,7 @@ export const UserProfile = () => {
                 }
                 className={`mainBtn ${styles.mainBtnWidth}`}
                 sx={{
-                  display: disabled ? 'none': 'block'
+                  display: disabled ? 'none' : 'block'
                 }}
                 disabled={isValid? false : true}
               >
@@ -276,3 +277,5 @@ export const UserProfile = () => {
     </>
   );
 };
+
+export default UserProfile

@@ -1,23 +1,28 @@
 import { Box, Button, Typography } from "@mui/material";
 import NavBar from "../Navbar/NavBar";
 import { useEffect, useRef, useState } from "react";
+import Footer from "../Footer/Footer";
+import Styles from "./error.module.css"
 
 const ErrorBoundry = () => {
     const [navHeight, setNavHeight] = useState(0);
+    const [footerHeight, setFooterHeight] = useState(0);
     const navRef = useRef(null);
+    const footerRef = useRef(null);
     useEffect(() => {
-        setNavHeight(navRef.current.clientHeight)
+        setNavHeight(navRef.current.clientHeight);
+        setFooterHeight(footerRef.current.clientHeight);
     }, [])
     return (
         <>
-            <NavBar innerRef={navRef} />
+            <NavBar navRef={navRef} />
             <Box
                 sx={{
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
                     flexDirection: 'column',
-                    minHeight: `calc(100vh - ${navHeight}px)`,
+                    minHeight: `calc(100vh - ${navHeight + footerHeight}px)`,
                     width: '100%',
                     mt: `${navHeight}px`,
                     backgroundColor: (theme) => theme.palette.secondary.main,
@@ -31,6 +36,7 @@ const ErrorBoundry = () => {
                 </Typography>
                 <Button variant="contained" sx={{ mt: 1, mb: 1 }}>Back Home</Button>
             </Box>
+            <Footer footerRef={footerRef} customCss={Styles.removeMargT}/>
         </>
     )
 }
