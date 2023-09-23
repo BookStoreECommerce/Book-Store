@@ -104,7 +104,7 @@ const UserProfile = () => {
   return (
     <>
       {!isLoading && (
-        <div className="container w-50 mt-5 p-2">
+        <div className="container w-50 mt-5 px-sm-2 px-md-3 px-lg-5 pt-5">
           <div className="text-center">
             <i
               className={`fa-solid fa-circle-user mb-2 ${styles.iconFontSize}`}
@@ -191,7 +191,7 @@ const UserProfile = () => {
               disabled={disabled}
             />
 
-            <div className="ageAndGender d-flex justify-content-between">
+            <div className="ageAndGender d-flex flex-column flex-sm-row justify-content-between">
               <TextField
                 onBlur={handleBlur}
                 error={errors.age && touched.age && true}
@@ -246,7 +246,7 @@ const UserProfile = () => {
 
             {/* Favorite Categories */}
 
-            <div className="d-flex justify-content-between mt-1">
+            <div className="d-flex justify-content-center gap-1 mt-1">
               <Button
                 variant="outlined"
                 className={`mainBtn ${styles.mainBtnWidth}`}
