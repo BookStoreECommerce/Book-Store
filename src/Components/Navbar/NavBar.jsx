@@ -9,6 +9,7 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 // import MailIcon from "@mui/icons-material/Mail";
 import { Badge, Button, IconButton, styled } from "@mui/material";
+import { logout } from "../../Redux/Slicies/authSlice";
 
 const NavButton = styled(Button)(({ theme }) => ({
   textTransform: "inherit",
@@ -33,6 +34,7 @@ function NavBar({ navRef }) {
   const [navbar, setNavbar] = useState(false);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+  const token = localStorage.getItem('access-token');
   const changeBackground = () => {
     if (window.scrollY >= 100) {
       setNavbar(true);
@@ -81,14 +83,28 @@ function NavBar({ navRef }) {
             </Link>
           </li> */}
 
-          {user !== null && (<li className="nav-item">
-            <Link className={`nav-link ${styles.navLinkIcon}`} to="profile">
-              <PersonOutlineOutlinedIcon
-                sx={{ fontSize: { xs: 24, sm: 24, md: 27, lg: 26 } }}
-              />
-              <span className={styles.colorUser}>{user.userName}</span>
-            </Link>
-          </li>)}
+          {user !== null && token !== null && (
+            <>
+              <li className="nav-item">
+                <Link className={`nav-link ${styles.navLinkIcon}`} to="profile">
+                  <PersonOutlineOutlinedIcon
+                    sx={{ fontSize: { xs: 24, sm: 24, md: 27, lg: 26 } }}
+                  />
+                  <span className={styles.colorUser}>{user.userName}</span>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <NavButton
+                  className={`nav-link`}
+                  onClick={() => {
+                    dispatch(logout());
+                  }}
+                >
+                  <span className={`${styles.colorUser}`}>Logout</span>
+                </NavButton>
+              </li>
+            </>
+          )}
         </div>
         <nav
           className={
@@ -193,7 +209,7 @@ function NavBar({ navRef }) {
                 </li>
               </ul>
 
-              {user === null && (
+              {user === null && token === null && (
                 <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                   <li className="nav-item">
                     <NavButton
@@ -224,4 +240,4 @@ function NavBar({ navRef }) {
     </>
   );
 }
-export default memo(NavBar)
+export default memo(NavBar);
