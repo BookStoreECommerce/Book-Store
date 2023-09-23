@@ -1,5 +1,5 @@
 import React, { useState, useEffect, memo } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import styles from "./NavBar.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -31,6 +31,7 @@ const NavButton = styled(Button)(({ theme }) => ({
 // }));
 
 function NavBar({ navRef }) {
+  const navigate = useNavigate();
   const [navbar, setNavbar] = useState(false);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
@@ -46,6 +47,11 @@ function NavBar({ navRef }) {
     changeBackground();
     window.addEventListener("scroll", changeBackground);
   });
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/');
+  }
 
   return (
     <>
@@ -96,9 +102,7 @@ function NavBar({ navRef }) {
               <li className="nav-item">
                 <NavButton
                   className={`nav-link`}
-                  onClick={() => {
-                    dispatch(logout());
-                  }}
+                  onClick={handleLogout}
                 >
                   <span className={`${styles.colorUser}`}>Logout</span>
                 </NavButton>

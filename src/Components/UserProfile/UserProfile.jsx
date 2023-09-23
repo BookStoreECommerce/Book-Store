@@ -38,10 +38,10 @@ const UserProfile = () => {
     age: Yup.number()
       .min(12, "Age must be greater than 12")
       .max(99, "Age must be less than 99"),
-    gender: Yup.string().oneOf(["Male", "Female"]),
+    gender: Yup.string(),
   });
 
-  const { values,  handleChange, handleBlur,  handleSubmit,  touched, errors, setValues, isValid} = useFormik({
+  const { values,  handleChange, handleBlur,  handleSubmit, touched, errors, setValues, isValid } = useFormik({
     initialValues: {
       userName: "",
       address: "",
