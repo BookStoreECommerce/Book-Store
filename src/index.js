@@ -13,7 +13,6 @@ import ErrorBoundry from "./Components/ErrorBoundry/ErrorBoundry";
 
 
 
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -32,11 +31,33 @@ const router = createBrowserRouter([
         },
       },
       {
-        path: '/profile', 
+        path: '/userInfo', 
         async lazy() {
-          const { default:UserProfile } = await import('./Components/UserProfile/UserProfile');
-          return { Component: UserProfile }
-        }
+          const { default: Sidebar } = await import('./Components/Sidebar/Sidebar');
+          return { Component: Sidebar }
+        },
+        children: [
+          {
+            index: true, async lazy() {
+              const { default:UserProfile } = await import('./Components/UserProfile/UserProfile');
+              return { Component: UserProfile }
+            }
+          },
+          {
+            path: 'favourites', 
+            async lazy() {
+              const { default:Favourites } = await import('./Components/Favourites/Favourites');
+              return { Component: Favourites }
+            }
+          },
+          {
+            path: 'settings', 
+            async lazy() {
+              const { default:Settings } = await import('./Components/Settings/Settings');
+              return { Component: Settings }
+            }
+          },
+        ],
       },
     ],
   },
@@ -80,7 +101,8 @@ const router = createBrowserRouter([
         }
       }
     ]
-  }
+  },
+  
 ]);
 
 
@@ -94,3 +116,11 @@ root.render(
     </ThemeContextProvider>
   </Provider>
 );
+
+// {
+//   path: '/profile', 
+//   async lazy() {
+//     const { default:UserProfile } = await import('./Components/UserProfile/UserProfile');
+//     return { Component: UserProfile }
+//   }
+// },

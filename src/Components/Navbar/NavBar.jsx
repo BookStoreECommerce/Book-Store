@@ -92,7 +92,7 @@ function NavBar({ navRef }) {
           {user !== null && token !== null && (
             <>
               <li className="nav-item">
-                <Link className={`nav-link ${styles.navLinkIcon}`} to="profile">
+                <Link className={`nav-link ${styles.navLinkIcon}`} to="userInfo">
                   <PersonOutlineOutlinedIcon
                     sx={{ fontSize: { xs: 24, sm: 24, md: 27, lg: 26 } }}
                   />
