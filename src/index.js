@@ -19,7 +19,8 @@ const router = createBrowserRouter([
     path: "/",
     async lazy() {
       const { default:Layout } = await import('./Components/layout/Layout');
-      const {indexLoader} = await import("./util/loaders")
+      const {indexLoader} = await import("./util/loaders");
+      // const {default:ErrorBoundry} = await import("./Components/ErrorBoundry/ErrorBoundry")
       return { Component: Layout, loader: indexLoader }
     },
     errorElement: <ErrorBoundry />,

@@ -1,10 +1,10 @@
-import { Container } from "@mui/material"
+import { Box, Container } from "@mui/material"
 import { Outlet } from "react-router-dom"
 
 
 const LoginLayout = () => {
     return (
-        <Container maxWidth="xl"
+        <Box 
             sx={{
                 width: "100%",
                 minHeight: "100vh",
@@ -16,7 +16,7 @@ const LoginLayout = () => {
             }}
         >
             <Outlet />
-        </Container>
+        </Box>
     )
 }
 

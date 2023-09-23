@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import styles from "./UserProfile.module.css";
 import TextField from "@mui/material/TextField";
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -12,12 +12,14 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { getUserProfile, setUser, userProfile, } from "../../Redux/Slicies/authSlice";
 import { useNavigate } from "react-router";
+import { removeFooterMargin, setFooterMargin } from "../../Redux/Slicies/appSlice";
 
 const UserProfile = () => {
   const [disabled, setDisabel] = useState(true);
   const [isFirst, setIsFirst] = useState(true);
   const navigate = useNavigate();
   const { isLoading, msgError, user } = useSelector((state) => state.auth);
+  const { footerH, navH, footerNoMargin } = useSelector((state) => state.app);
   const dispatch = useDispatch();
   const validationSchema = Yup.object({
     userName: Yup.string()
@@ -96,11 +98,23 @@ const UserProfile = () => {
       });
     }
   }, [setValues, user]);
+  useEffect(() => {
+    dispatch(removeFooterMargin());
+    return () => dispatch(setFooterMargin())
+  }, [])
 
   return (
-    <>
+    <Box
+    sx={{
+      marginTop: `${navH}px`,
+      minHeight: `calc(100vh - ${footerH + navH}px)`,
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center'
+    }}
+    >
       {!isLoading && (
-        <div className="container w-50 mt-5 p-2">
+        <div className="container w-50 p-2">
           <div className="text-center">
             <i
               className={`fa-solid fa-circle-user mb-2 ${styles.iconFontSize}`}
@@ -269,7 +283,7 @@ const UserProfile = () => {
           </form>
         </div>
       )}
-    </>
+    </Box>
   );
 };
 
