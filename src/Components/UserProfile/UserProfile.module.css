@@ -3,14 +3,6 @@
     color: var(--mainColor);
 }
 
-.address {
-    width: 65%;
-}
-
-.mobilePhone, .homeNumber {
-    width: 49%;
-}
-
 .mainBtnWidth {
     width: 35%;
 }

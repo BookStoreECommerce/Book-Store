@@ -118,7 +118,7 @@ const UserProfile = () => {
     }}
     >
       {!isLoading && (
-        <div className="container w-50 mt-5 px-sm-2 px-md-3 px-lg-5 pt-5">
+        <div className="container col-lg-6 col-9 px-sm-2 px-md-3 px-lg-0 px-xl-5">
           <div className="text-center">
             <i
               className={`fa-solid fa-circle-user mb-2 ${styles.iconFontSize}`}
@@ -149,14 +149,14 @@ const UserProfile = () => {
               disabled={disabled}
             />
 
-            <div className="addressGroup d-flex justify-content-between">
+            <div className="addressGroup d-flex flex-column flex-sm-row justify-content-between">
               <TextField
                 onBlur={handleBlur}
                 error={errors.address && touched.address && true}
                 helperText={errors.address}
                 id="outlined-error"
                 label="Address"
-                className={`${styles.address}`}
+                className={`col-sm-7 col-12`}
                 name="address"
                 type="text"
                 onChange={(e) => {
@@ -174,7 +174,7 @@ const UserProfile = () => {
                 helperText={errors.city}
                 id="outlined-error"
                 label="City"
-                className={`${styles.city}`}
+                className={`col-sm-4 col-12`}
                 name="city"
                 type="text"
                 onChange={(e) => {
@@ -205,7 +205,7 @@ const UserProfile = () => {
               disabled={disabled}
             />
 
-            <div className="ageAndGender d-flex flex-column flex-sm-row justify-content-between">
+            <div className="ageAndGender d-flex flex-column flex-md-row justify-content-between">
               <TextField
                 onBlur={handleBlur}
                 error={errors.age && touched.age && true}
@@ -260,7 +260,7 @@ const UserProfile = () => {
 
             {/* Favorite Categories */}
 
-            <div className="d-flex justify-content-center gap-1 mt-1">
+            <div className="d-flex justify-content-center gap-1 my-3">
               <Button
                 variant="outlined"
                 className={`mainBtn ${styles.mainBtnWidth}`}
