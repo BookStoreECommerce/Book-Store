@@ -8,7 +8,6 @@ const Success = () => {
   const { token } = useParams();
 
   const { isLoading, token: serverToekn } = useSelector(state => state.auth);
-  console.log(serverToekn);
   const dispatch = useDispatch();
   const navigate = useNavigate()
 
@@ -20,7 +19,7 @@ const Success = () => {
       dispatch(signinWithToken(token));
     }
     if (serverToekn !== null) {
-      // navigate('/');
+      navigate('/');
     }
   }, [dispatch, isFirst, token, navigate, serverToekn]);
 

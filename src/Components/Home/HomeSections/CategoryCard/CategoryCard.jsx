@@ -21,7 +21,7 @@ const CategoryCard = ({ shuffledArray }) => {
                                 <div className={`${styles.overlayCat}`}>
                                     <p>{shuffledArray[0].catName}</p>
                                 </div>
-                                <img className="w-100 rounded-4" src={shuffledArray[0].img} alt='' />
+                                <img className="w-100 rounded-4" src={shuffledArray[0].img} alt='' loading="lazy" />
                             </div>
                         </div>
                         <div className="col-md-6 col-sm-6" >
@@ -29,7 +29,7 @@ const CategoryCard = ({ shuffledArray }) => {
                                 <div className={`${styles.overlayCat} `}>
                                     <p>{shuffledArray[1].catName}</p>
                                 </div>
-                                <img className="w-100 rounded-4" src={shuffledArray[1].img} alt='' />
+                                <img className="w-100 rounded-4" src={shuffledArray[1].img} alt='' loading="lazy"/>
                             </div>
                         </div>
                         <div className="col-md-6 col-sm-6">
@@ -37,7 +37,7 @@ const CategoryCard = ({ shuffledArray }) => {
                                 <div className={`${styles.overlayCat} `}>
                                     <p>{shuffledArray[3].catName}</p>
                                 </div>
-                                <img className="w-100 rounded-4" src={shuffledArray[3].img} alt='' />
+                                <img className="w-100 rounded-4" src={shuffledArray[3].img} alt='' loading="lazy" />
                             </div>
                         </div>
                         <div className="col-md-6 col-sm-6">
@@ -45,7 +45,7 @@ const CategoryCard = ({ shuffledArray }) => {
                                 <div className={`${styles.overlayCat} `}>
                                     <p>{shuffledArray[4].catName}</p>
                                 </div>
-                                <img className="w-100 " src={shuffledArray[4].img} alt='' />
+                                <img className="w-100 " src={shuffledArray[4].img} alt='' loading="lazy"/>
                             </div>
                         </div>
                     </div>
@@ -56,7 +56,7 @@ const CategoryCard = ({ shuffledArray }) => {
                         <div className={`${styles.overlayCat} `}>
                             <p>{shuffledArray[2].catName}</p>
                         </div>
-                        <img className="w-100 rounded-4" src={shuffledArray[2].img} alt='' />
+                        <img className="w-100 rounded-4" src={shuffledArray[2].img} alt='' loading="lazy"/>
                     </div>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import styles from "./UserProfile.module.css";
 import TextField from "@mui/material/TextField";
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -10,14 +10,16 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
-import {getUserProfile,setUser, userProfile,} from "../../Redux/Slicies/authSlice";
+import { getUserProfile, setUser, userProfile, } from "../../Redux/Slicies/authSlice";
 import { useNavigate } from "react-router";
+import { removeFooterMargin, setFooterMargin } from "../../Redux/Slicies/appSlice";
 
-export const UserProfile = () => {
+const UserProfile = () => {
   const [disabled, setDisabel] = useState(true);
   const [isFirst, setIsFirst] = useState(true);
   const navigate = useNavigate();
   const { isLoading, msgError, user } = useSelector((state) => state.auth);
+  const { footerH, navH, footerNoMargin } = useSelector((state) => state.app);
   const dispatch = useDispatch();
   const validationSchema = Yup.object({
     userName: Yup.string()
@@ -40,7 +42,7 @@ export const UserProfile = () => {
     gender: Yup.string().oneOf(["Male", "Female"]),
   });
 
-  const { values,  handleChange, handleBlur,  handleSubmit,  touched, errors, setValues,} = useFormik({
+  const { values, handleChange, handleBlur, handleSubmit, touched, errors, setValues, } = useFormik({
     initialValues: {
       userName: "",
       address: "",
@@ -57,7 +59,7 @@ export const UserProfile = () => {
   });
 
   const myHandleSubmit = async (values) => {
-    Object.keys(values).flatMap((key) => {
+    Object.keys(values).forEach((key) => {
       if (values[key] === "") {
         delete values[key];
       }
@@ -96,11 +98,23 @@ export const UserProfile = () => {
       });
     }
   }, [setValues, user]);
+  useEffect(() => {
+    dispatch(removeFooterMargin());
+    return () => dispatch(setFooterMargin())
+  }, [])
 
   return (
-    <>
+    <Box
+    sx={{
+      marginTop: `${navH}px`,
+      minHeight: `calc(100vh - ${footerH + navH}px)`,
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center'
+    }}
+    >
       {!isLoading && (
-        <div className="container w-50 mt-5 p-2">
+        <div className="container w-50 p-2">
           <div className="text-center">
             <i
               className={`fa-solid fa-circle-user mb-2 ${styles.iconFontSize}`}
@@ -248,7 +262,7 @@ export const UserProfile = () => {
                 className={`mainBtn ${styles.mainBtnWidth}`}
                 onClick={() => setDisabel((prev) => !prev)}
               >
-                {disabled ? 'Edite': 'Skip'}
+                {disabled ? 'Edite' : 'Skip'}
               </Button>
 
               <Button
@@ -260,7 +274,7 @@ export const UserProfile = () => {
                 }
                 className={`mainBtn ${styles.mainBtnWidth}`}
                 sx={{
-                  display: disabled ? 'none': 'block'
+                  display: disabled ? 'none' : 'block'
                 }}
               >
                 Save
@@ -269,6 +283,8 @@ export const UserProfile = () => {
           </form>
         </div>
       )}
-    </>
+    </Box>
   );
 };
+
+export default UserProfile
