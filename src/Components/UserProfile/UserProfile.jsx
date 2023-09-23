@@ -110,7 +110,7 @@ const UserProfile = () => {
   return (
     <Box
     sx={{
-      marginTop: `${navH}px`,
+      // marginTop: `${navH}px`,
       minHeight: `calc(100vh - ${footerH + navH}px)`,
       display: 'flex',
       justifyContent: 'center',
@@ -118,7 +118,7 @@ const UserProfile = () => {
     }}
     >
       {!isLoading && (
-        <div className="container col-lg-6 col-9 px-sm-2 px-md-3 px-lg-0 px-xl-5">
+        <div className="px-sm-2 px-md-3 px-lg-0 px-xl-5">
           <div className="text-center">
             <i
               className={`fa-solid fa-circle-user mb-2 ${styles.iconFontSize}`}
