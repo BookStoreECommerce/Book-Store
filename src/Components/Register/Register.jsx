@@ -6,7 +6,7 @@ import { Button, FormControl, FormHelperText, IconButton, InputLabel, OutlinedIn
 import styles from "./Register.module.css";
 import SocialMediaBtns from "../ReusableComponents/SocialMediaBtns/SocialMediaBtns";
 import { useDispatch, useSelector } from "react-redux";
-import { register } from "../../Redux/Slicies/authSlice";
+import { register } from "../../Redux/Slicies/authActions";
 import CustomizedDialogs from "../Dialog/Dialog";
 import { handleClickOpen, registerVerifyModal } from "../../Redux/Slicies/dialogSlice";
 import { Visibility, VisibilityOff } from "@mui/icons-material";

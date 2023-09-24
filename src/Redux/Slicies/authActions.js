@@ -116,3 +116,15 @@ export const signinWithToken = createAsyncThunk("auth/signin-with-token", async 
         return rejectWithValue(error.response.data)
     }
 })
+
+export const resendResetPass = createAsyncThunk(
+    "auth/resendResetPass",
+    async (values, { rejectWithValue }) => {
+        try {
+            const response = await axiosInstance.post('auth/resendResetPass', null, { headers: { 'authorization': localStorage.getItem('access-token') } });
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response.data)
+        }
+    }
+);
