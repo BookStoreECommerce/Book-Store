@@ -13,14 +13,12 @@ import FormLabel from "@mui/material/FormLabel";
 import { useNavigate } from "react-router";
 import { getUserProfile, userProfile } from "../../Redux/Slicies/authActions";
 import { setUser } from "../../Redux/Slicies/authSlice";
-import { removeFooterMargin, setFooterMargin } from "../../Redux/Slicies/appSlice";
 
 const UserProfile = () => {
   const [disabled, setDisabel] = useState(true);
   const [isFirst, setIsFirst] = useState(true);
   const navigate = useNavigate();
   const { isLoading, msgError, user } = useSelector((state) => state.auth);
-  const { footerH, navH, footerNoMargin } = useSelector((state) => state.app);
   const dispatch = useDispatch();
   const validationSchema = Yup.object({
     userName: Yup.string()
@@ -102,21 +100,8 @@ const UserProfile = () => {
       });
     }
   }, [setValues, user]);
-  useEffect(() => {
-    dispatch(removeFooterMargin());
-    return () => dispatch(setFooterMargin())
-  }, [])
 
-  return (
-    <Box
-    sx={{
-      // marginTop: `${navH}px`,
-      minHeight: `calc(100vh - ${footerH + navH}px)`,
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center'
-    }}
-    >
+  return <>
       {!isLoading && (
         <div className="px-sm-2 px-md-3 px-lg-0 px-xl-5">
           <div className="text-center">
@@ -288,8 +273,7 @@ const UserProfile = () => {
           </form>
         </div>
       )}
-    </Box>
-  );
+  </>
 };
 
 export default UserProfile

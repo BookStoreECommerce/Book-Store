@@ -55,7 +55,7 @@ function NavBar({ navRef }) {
 
   return (
     <>
-      <div className={`fixed-top ${styles.stickyTop}`} ref={navRef}>
+      <div className="fixed-top" ref={navRef}>
       {/* <div className="fixed-top" ref={navRef}> */}
         <div className={styles.navTop}>
           <li className="nav-item me-5 position-relative">
