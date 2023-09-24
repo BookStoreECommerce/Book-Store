@@ -1,94 +1,14 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axiosInstance from "../../axios/axios-instance";
-import { redirect } from "react-router-dom";
+import {
+    createSlice
+} from "@reduxjs/toolkit";
+import { forgetPassword, getUserProfile, register, registerVerification, resendVerifyCode, resetPassword, signin, signinWithToken, userProfile, varifyPasswordEmail } from "./authActions";
 
-const initialState = { user: {}, isLoading: false, token: null, msgError: null }
-
-export const signin = createAsyncThunk("auth/signin", async (values, { rejectWithValue }) => {
-    try {
-        const { data } = await axiosInstance.post('auth/signin', values);
-        return data
-    } catch (error) {
-        return rejectWithValue(error.response.data)
-    }
-})
-
-export const register = createAsyncThunk("auth/signup", async (userData, { rejectWithValue }) => {
-    try {
-        let { data } = await axiosInstance.post('auth/signup', userData);
-        return data
-    } catch (error) {
-        return rejectWithValue(error.response.data)
-    }
-});
-
-
-export const registerVerification = createAsyncThunk("auth/verifyEmail", async (verifycode, { rejectWithValue }) => {
-    try {
-        let { data } = await axiosInstance.post(`auth/verifyEmail`, { code: verifycode },
-            {
-                headers:
-                    { authorization: localStorage.getItem("BookStoreToken") }
-            });
-        return data
-    } catch (error) {
-        return rejectWithValue(error.response.data)
-    }
-})
-
-export const forgetPassword = createAsyncThunk(
-    "auth/forgetPassword",
-    async (values, { rejectWithValue }) => {
-        try {
-            const response = await axiosInstance.post('auth/forgetPassword', values);
-            return response.data;
-        } catch (error) {
-            return rejectWithValue(error.response.data)
-        }
-    }
-);
-export const resendResetPass = createAsyncThunk(
-    "auth/resendResetPass",
-    async (values, { rejectWithValue }) => {
-        try {
-            const response = await axiosInstance.post('auth/resendResetPass', null, { headers: { 'authorization': localStorage.getItem('access-token') } });
-            return response.data;
-        } catch (error) {
-            return rejectWithValue(error.response.data)
-        }
-    }
-);
-
-
-export const varifyPasswordEmail = createAsyncThunk("auth/varifyPasswordEmail", async (values, { rejectWithValue }) => {
-    try {
-        const { data } = await axiosInstance.post('auth/varifyPasswordEmail', values, { headers: { 'authorization': localStorage.getItem('access-token') } })
-        return data;
-    } catch (error) {
-        return rejectWithValue(error.response.data)
-    }
-});
-
-
-export const resetPassword = createAsyncThunk("auth/resetPassword", async (values, { rejectWithValue }) => {
-    try {
-        const { data } = await axiosInstance
-            .post('auth/resetPassword', values, { headers: { 'authorization': localStorage.getItem('access-token') } })
-        return data;
-    } catch (error) {
-        return rejectWithValue(error.response.data)
-    }
-});
-
-
-export const signinWithToken = createAsyncThunk("auth/signin-with-token", async (token, { rejectWithValue }) => {
-    try {
-        let { data } = await axiosInstance.post(`auth/signin/${token}`);
-        return data
-    } catch (error) {
-        return rejectWithValue(error.response.data)
-    }
-})
+const initialState = {
+    user: null,
+    isLoading: false,
+    token: null,
+    msgError: null
+}
 
 const saveUserData = (token) => {
     localStorage.setItem("access-token", token);
@@ -100,6 +20,15 @@ const authSlice = createSlice({
     reducers: {
         clearError: (state) => {
             state.msgError = null;
+        },
+        setUser: (state, action) => {
+            const {name , value} = action.payload;
+            const user = state.user;
+            user[name] = value;
+            state.user = user;
+        },
+        logout: (state, action) => {
+            localStorage.removeItem('access-token');
         }
     },
     extraReducers: builder => {
@@ -126,7 +55,7 @@ const authSlice = createSlice({
             const token = action.payload.token
             state.isLoading = false
             state.token = token
-            saveUserData(action.payload)
+            saveUserData(token)
         })
         builder.addCase(register.rejected, (state, action) => {
             state.isLoading = false;
@@ -136,17 +65,39 @@ const authSlice = createSlice({
         builder.addCase(registerVerification.pending, (state, action) => {
             state.isLoading = true;
         })
-
         builder.addCase(registerVerification.fulfilled, (state, action) => {
             const token = action.payload.token
             state.isLoading = false
             state.token = token
-            saveUserData(token)
+            saveUserData(token);
         })
         builder.addCase(registerVerification.rejected, (state, action) => {
-            state.msgError = action.payload.error
+            if(action.payload.error){
+                state.msgError = action.payload.error
+            }else{
+                state.msgError = action.payload.errors[0].message
+            }
             state.isLoading = false;
         })
+        //resendVerifyCode
+        builder.addCase(resendVerifyCode.pending, (state, action) => {
+            // state.isLoading = true;
+        })
+        builder.addCase(resendVerifyCode.fulfilled, (state, action) => {
+            const token = action.payload.token
+            state.isLoading = false
+            state.token = token
+            saveUserData(token);
+        })
+        builder.addCase(resendVerifyCode.rejected, (state, action) => {
+            if(action.payload.error){
+                state.msgError = action.payload.error
+            }else{
+                state.msgError = action.payload.errors[0].message
+            }
+            state.isLoading = false;
+        })
+        // signinWithToken
         //login with social account
         builder.addCase(signinWithToken.pending, (state, action) => {
             state.isLoading = true;
@@ -156,12 +107,38 @@ const authSlice = createSlice({
             state.isLoading = false;
             state.token = token
             saveUserData(token)
-            return redirect('/')
+        //  redirect('/')
         })
         builder.addCase(signinWithToken.rejected, (state, action) => {
             state.isLoading = false
             state.msgError = action.payload.error
         })
+
+        // userProfile
+        builder.addCase(userProfile.pending, (state, action) => {
+            state.isLoading = true;
+        })
+        builder.addCase(userProfile.fulfilled, (state, action) => {
+            state.isLoading = false;
+
+        })
+        builder.addCase(userProfile.rejected, (state, action) => {
+            state.isLoading = false
+            state.msgError = action.payload.message
+        })
+        // getUserProfile
+        builder.addCase(getUserProfile.pending, (state, action) => {
+            state.isLoading = true;
+        })
+        builder.addCase(getUserProfile.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.user = action.payload.user
+        })
+        builder.addCase(getUserProfile.rejected, (state, action) => {
+            state.isLoading = false
+            state.msgError = action.payload.message
+        })
+
         //forget password
         builder.addCase(forgetPassword.pending, (state, action) => {
             state.isLoading = true;
@@ -170,6 +147,7 @@ const authSlice = createSlice({
             const token = action.payload.token
             state.token = token;
             saveUserData(token);
+            state.msgError = null;
             // state.resetPasswordMessage = action.payload;
             state.isLoading = false;
 
@@ -212,4 +190,4 @@ const authSlice = createSlice({
 })
 
 export const authReducer = authSlice.reducer;
-export const { clearError } = authSlice.actions;
+export const { clearError, setUser, logout } = authSlice.actions;

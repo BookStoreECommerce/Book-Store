@@ -4,9 +4,11 @@ import * as Yup from "yup";
 import styles from "../Login.module.css";
 import 'bootstrap/dist/css/bootstrap.css';
 import { useDispatch, useSelector } from "react-redux";
-import { clearError, resendResetPass, varifyPasswordEmail } from '../../../Redux/Slicies/authSlice';
+
 import { Button, TextField } from "@mui/material";
 import { Link } from 'react-router-dom';
+import { forgetPassword, varifyPasswordEmail } from '../../../Redux/Slicies/authActions';
+import { clearError } from '../../../Redux/Slicies/authSlice';
 
 
 
@@ -22,7 +24,14 @@ const VerifyPassword = ({ onSubmit: moveToNext }) => {
         const { payload } = await dispatch(varifyPasswordEmail(values));
         if (payload.message === "success") {
             moveToNext();
+        } else {
         }
+        // if (resend.message === "success") {
+        //     console.log("doneeeee");
+        //     // moveToNext();
+        // } else {
+        //     console.log(resend.message);
+        // }
     }
 
     let validationSchema = Yup.object({
