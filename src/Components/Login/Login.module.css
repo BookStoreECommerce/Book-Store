@@ -31,4 +31,22 @@
   transform: rotatey(180deg) !important;
 }
 
+.line {
+  height: 1px;
+  background-color: grey;
+}
 
+.iconFontSize {
+  font-size: 3rem;
+  color: var(--mainColor);
+}
+
+.verifyBtn{
+  height: 3.3rem;
+}
+
+.resendBtn {
+  border: none;
+  background: no-repeat;
+  text-decoration: underline;
+}

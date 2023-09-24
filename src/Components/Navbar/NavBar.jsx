@@ -213,8 +213,7 @@ function NavBar({ navRef }) {
                   </Link>
                 </li>
               </ul>
-
-              {user === null && token === null && (
+              {(user === null || token === null) && (
                 <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                   <li className="nav-item">
                     <NavButton

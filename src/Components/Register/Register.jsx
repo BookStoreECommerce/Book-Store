@@ -6,9 +6,10 @@ import { Button, FormControl, FormHelperText, IconButton, InputLabel, OutlinedIn
 import styles from "./Register.module.css";
 import SocialMediaBtns from "../ReusableComponents/SocialMediaBtns/SocialMediaBtns";
 import { useDispatch, useSelector } from "react-redux";
-import { handleClickOpen, handlePrivacyOpen } from "../../Redux/Slicies/dialogSlice";
+import { register } from "../../Redux/Slicies/authSlice";
+import CustomizedDialogs from "../Dialog/Dialog";
+import { handleClickOpen, registerVerifyModal } from "../../Redux/Slicies/dialogSlice";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { register } from "../../Redux/Slicies/authActions";
 
 
 const getCharacterValidationError = (str) => {
@@ -18,6 +19,7 @@ const getCharacterValidationError = (str) => {
 export const Register = () => {
   const dispatch = useDispatch();
   const { isLoading, msgError } = useSelector((state) => state.auth);
+  // const { registerShow } = useSelector(({ dialog }) => dialog);
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((prev) => !prev);
@@ -41,8 +43,6 @@ export const Register = () => {
   let validationSchema = Yup.object({
     userName: Yup.string()
       .required("Name is required")
-      .max(20, "Name must be at most 20 characters")
-      .min(4, "Name must be at least 4 characters")
       .matches(
         /^[a-zA-Z]{3,8}([_ -]?[a-zA-Z0-9]{3,8})*$/,
         "Name must start with 3:8 letters (a-z)"
@@ -147,8 +147,8 @@ export const Register = () => {
           margin="dense"
         />
 
-        <div className="d-flex flex-column flex-sm-row justify-content-between gap-sm-0 gap-2 align-items-center mt-2">
-          <div className="form-check align-self-start">
+        <div className="d-flex justify-content-between align-items-center mt-2">
+          <div className="form-check">
             <input
               className="form-check-input mainCheckbox"
               onBlur={formik.handleBlur}
@@ -162,12 +162,12 @@ export const Register = () => {
               className="form-check-label text-muted"
               htmlFor="privacyCheck"
             >
-              I agree to the
+              I agree to the{" "}
+              <a className="text-muted" href="\">
+                privacy policy
+              </a>
+              .
             </label>
-            <button type="button" className={`text-muted ${styles.privacyBtn}`} onClick={()=>dispatch(handlePrivacyOpen())}>
-              privacy policy
-            </button>
-            .
             {formik.errors.privacyCheck && formik.touched.privacyCheck ? (
               <p className="mt-1 text-danger mb-0">
                 {formik.errors.privacyCheck}
@@ -185,7 +185,7 @@ export const Register = () => {
                 <i className="fa-solid fa-arrow-right"></i>
               )
             }
-            className={`mainBtn align-self-end`}
+            className={`mainBtn`}
             disabled={formik.isValid ? false : true}
           >
             Next
@@ -211,6 +211,9 @@ export const Register = () => {
         >
           Login
         </Button>
+        {/* <a className="text-muted" href="\">
+          Login
+        </a> */}
       </div>
 
       <div className="d-flex align-items-baseline justify-content-between">
