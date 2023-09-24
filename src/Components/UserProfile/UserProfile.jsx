@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import styles from "./UserProfile.module.css";
 import TextField from "@mui/material/TextField";
-import { Box, Button } from "@mui/material";
+import { Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -103,7 +103,7 @@ const UserProfile = () => {
 
   return <>
       {!isLoading && (
-        <div className="px-sm-2 px-md-3 px-lg-0 px-xl-5">
+        <div className="profile">
           <div className="text-center">
             <i
               className={`fa-solid fa-circle-user mb-2 ${styles.iconFontSize}`}
