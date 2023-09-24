@@ -10,6 +10,8 @@ import {
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
+import { useMediaQuery } from "@mui/material";
+import { useTheme } from "@emotion/react";
 
 const Sidebar = () => {
   const { footerH, navH, footerNoMargin } = useSelector((state) => state.app);
@@ -26,6 +28,9 @@ const Sidebar = () => {
     setValue(newValue);
   };
 
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
+
   return (
     <>
       <Box
@@ -37,22 +42,23 @@ const Sidebar = () => {
           alignItems: "center",
         }}
       >
-        <div className="row w-100">
-          <div className="col-3">
+        <div className="row w-100 flex-lg-row flex-column align-items-center align-items-lg-start">
+          <div className="col-lg-3 col-md-10 col-12">
             <nav
-              className={`sidebar d-flex flex-column align-item-start p-3 h-100 ${styles.sidebarStyle}`}
+              className={`sidebar d-flex flex-column align-item-start p-3 h-100 align-items-center`}
             >
               <h3 className="my-4">
-                <div>User Profile</div>
+                <div className={`${styles.sidebarHeader} fw-bold`}>User Profile</div>
               </h3>
 
               <Box sx={{ width: "100%" }}>
                 <Tabs
-                  orientation="vertical"
-                  sx={{ borderRight: 1, borderColor: "divider" }}
+                  orientation={isSmallScreen? "horizontal" : "vertical"}
+                  sx={isSmallScreen?{ borderBottom: 1, borderColor: "divider" }:{ borderRight: 1, borderColor: "divider" }}
                   onChange={handleChange}
                   value={value}
                   aria-label="Tabs where selection follows focus"
+                  variant="fullWidth"
                   selectionFollowsFocus
                 >
                   <Tab onClick={() => navigate("")} icon={<i className="fa-solid fa-user"></i>} iconPosition="start" label="User Info" />
@@ -64,7 +70,7 @@ const Sidebar = () => {
               </Box>
             </nav>
           </div>
-          <div className="col-8">
+          <div className="col-lg-9 col-md-10 col-12">
             <Outlet></Outlet>
           </div>
         </div>

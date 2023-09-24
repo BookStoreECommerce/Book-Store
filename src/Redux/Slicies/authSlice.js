@@ -136,7 +136,7 @@ const authSlice = createSlice({
         })
         builder.addCase(getUserProfile.rejected, (state, action) => {
             state.isLoading = false
-            state.msgError = action.payload.message
+            state.msgError = action.payload.error
         })
 
         //forget password

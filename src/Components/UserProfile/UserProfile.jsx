@@ -15,7 +15,6 @@ import { getUserProfile, userProfile } from "../../Redux/Slicies/authActions";
 import { setUser } from "../../Redux/Slicies/authSlice";
 
 const UserProfile = () => {
-  const [disabled, setDisabel] = useState(true);
   const [isFirst, setIsFirst] = useState(true);
   const navigate = useNavigate();
   const { isLoading, msgError, user } = useSelector((state) => state.auth);
@@ -41,7 +40,16 @@ const UserProfile = () => {
     gender: Yup.string(),
   });
 
-  const { values,  handleChange, handleBlur,  handleSubmit, touched, errors, setValues, isValid } = useFormik({
+  const {
+    values,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    touched,
+    errors,
+    setValues,
+    isValid,
+  } = useFormik({
     initialValues: {
       userName: "",
       address: "",
@@ -58,16 +66,15 @@ const UserProfile = () => {
   });
 
   const myHandleSubmit = async (values) => {
-    if(isValid){
+    if (isValid) {
       Object.keys(values).forEach((key) => {
-        // Object.keys(values).flatMap((key) => {
         if (values[key] === "") {
           delete values[key];
         }
       });
       const { payload } = await dispatch(userProfile(values));
       if (payload.message === "success") {
-        navigate("/");
+        navigate("");
       }
     }
   };
@@ -101,28 +108,31 @@ const UserProfile = () => {
     }
   }, [setValues, user]);
 
-  return <>
-      {!isLoading && (
-        <div className="profile">
-          <div className="text-center">
-            <i
-              className={`fa-solid fa-circle-user mb-2 ${styles.iconFontSize}`}
-            ></i>
-            <h4 className="mainTitle">PERSONAL INFORMATION</h4>
+  return (
+    <>
+      <div className="profile row justify-content-center">
+        <form
+          onSubmit={handleSubmit}
+          noValidate
+          className="d-flex col-10 col-lg-8 text-center flex-column gap-md-4 gap-3"
+        >
+          {msgError ? (
+            <div className="ps-2 alert alert-danger mb-4">{msgError}</div>
+          ) : null}
+
+          <div className="d-flex align-items-center gap-3 justify-content-center">
+            <i className={`fa-solid fa-circle-user ${styles.iconFontSize}`}></i>
+            <h4 className={`${styles.mainTitle}`}>{values.userName}</h4>
           </div>
 
-          <form onSubmit={handleSubmit} noValidate>
-            {msgError ? (
-              <div className="ps-2 alert alert-danger mb-4">{msgError}</div>
-            ) : null}
-
+          <div className="nameAndPhone d-flex flex-column flex-md-row gap-md-0 gap-3 justify-content-evenly">
             <TextField
               onBlur={handleBlur}
               error={errors.userName && touched.userName && true}
               helperText={errors.userName}
               id="outlined-error"
               label="Name"
-              className="w-100"
+              className="col-md-5 col-12"
               name="userName"
               type="text"
               onChange={(e) => {
@@ -131,46 +141,7 @@ const UserProfile = () => {
               }}
               value={values.userName}
               margin="dense"
-              disabled={disabled}
             />
-
-            <div className="addressGroup d-flex flex-column flex-sm-row justify-content-between">
-              <TextField
-                onBlur={handleBlur}
-                error={errors.address && touched.address && true}
-                helperText={errors.address}
-                id="outlined-error"
-                label="Address"
-                className={`col-sm-7 col-12`}
-                name="address"
-                type="text"
-                onChange={(e) => {
-                  inputHandler(e);
-                  handleChange(e);
-                }}
-                value={values.address}
-                margin="dense"
-                disabled={disabled}
-              />
-
-              <TextField
-                onBlur={handleBlur}
-                error={errors.city && touched.city && true}
-                helperText={errors.city}
-                id="outlined-error"
-                label="City"
-                className={`col-sm-4 col-12`}
-                name="city"
-                type="text"
-                onChange={(e) => {
-                  inputHandler(e);
-                  handleChange(e);
-                }}
-                value={values.city}
-                margin="dense"
-                disabled={disabled}
-              />
-            </div>
 
             <TextField
               onBlur={handleBlur}
@@ -178,7 +149,7 @@ const UserProfile = () => {
               helperText={errors.phone}
               id="outlined-error"
               label="Mobile Phone"
-              className={`w-100 ${styles.phone}`}
+              className={`col-md-5 col-12`}
               name="phone"
               type="text"
               onChange={(e) => {
@@ -187,93 +158,122 @@ const UserProfile = () => {
               }}
               value={values.phone}
               margin="dense"
-              disabled={disabled}
+            />
+          </div>
+
+          <div className="addressGroup d-flex flex-column flex-md-row gap-md-0 gap-3 justify-content-evenly">
+            <TextField
+              onBlur={handleBlur}
+              error={errors.address && touched.address && true}
+              helperText={errors.address}
+              id="outlined-error"
+              label="Address"
+              className={`col-md-5 col-12`}
+              name="address"
+              type="text"
+              onChange={(e) => {
+                inputHandler(e);
+                handleChange(e);
+              }}
+              value={values.address}
+              margin="dense"
             />
 
-            <div className="ageAndGender d-flex flex-column flex-md-row justify-content-between">
-              <TextField
-                onBlur={handleBlur}
-                error={errors.age && touched.age && true}
-                helperText={errors.age}
-                id="outlined-error"
-                label="Age"
-                className={`${styles.age}`}
-                name="age"
-                type="number"
+            <TextField
+              onBlur={handleBlur}
+              error={errors.city && touched.city && true}
+              helperText={errors.city}
+              id="outlined-error"
+              label="City"
+              className={`col-md-5 col-12`}
+              name="city"
+              type="text"
+              onChange={(e) => {
+                inputHandler(e);
+                handleChange(e);
+              }}
+              value={values.city}
+              margin="dense"
+            />
+          </div>
+
+          <div className="ageAndGender d-flex flex-column flex-md-row gap-md-0 gap-3 justify-content-evenly">
+            <TextField
+              onBlur={handleBlur}
+              error={errors.age && touched.age && true}
+              helperText={errors.age}
+              id="outlined-error"
+              label="Age"
+              className={`col-md-5 col-12`}
+              name="age"
+              type="number"
+              onChange={(e) => {
+                inputHandler(e);
+                handleChange(e);
+              }}
+              value={values.age}
+              margin="dense"
+            />
+
+            <FormControl className="flex-row align-items-center gap-2 col-md-5 col-12">
+              <FormLabel id="demo-controlled-radio-buttons-group">
+                Gender:
+              </FormLabel>
+              <RadioGroup
+                aria-labelledby="demo-controlled-radio-buttons-group"
+                name="gender"
                 onChange={(e) => {
                   inputHandler(e);
                   handleChange(e);
                 }}
-                value={values.age}
-                margin="dense"
-                disabled={disabled}
-              />
-
-              <FormControl
-                className="flex-row align-items-center gap-2"
-                disabled={disabled}
+                value={values.gender}
               >
-                <FormLabel id="demo-controlled-radio-buttons-group">
-                  Gender:
-                </FormLabel>
-                <RadioGroup
-                  aria-labelledby="demo-controlled-radio-buttons-group"
-                  name="gender"
-                  onChange={(e) => {
-                    inputHandler(e);
-                    handleChange(e);
-                  }}
-                  value={values.gender}
-                >
-                  <div className="d-flex">
-                    <FormControlLabel
-                      value="Female"
-                      control={<Radio />}
-                      className={`text-muted`}
-                      label="Female"
-                    />
-                    <FormControlLabel
-                      value="Male"
-                      control={<Radio />}
-                      className={`text-muted`}
-                      label="Male"
-                    />
-                  </div>
-                </RadioGroup>
-              </FormControl>
-            </div>
+                <div className="d-flex">
+                  <FormControlLabel
+                    value="Female"
+                    control={<Radio />}
+                    className={`text-muted`}
+                    label="Female"
+                  />
+                  <FormControlLabel
+                    value="Male"
+                    control={<Radio />}
+                    className={`text-muted`}
+                    label="Male"
+                  />
+                </div>
+              </RadioGroup>
+            </FormControl>
+          </div>
 
-            {/* Favorite Categories */}
+          {/* Favorite Categories */}
 
-            <div className="d-flex justify-content-center gap-1 my-3">
-              <Button
-                variant="outlined"
-                className={`mainBtn ${styles.mainBtnWidth}`}
-                onClick={() => setDisabel((prev) => !prev)}
-              >
-                {disabled ? 'Edit': 'Skip'}
-              </Button>
+          <div className="d-flex justify-content-center gap-3 my-3">
+            <Button
+              variant="outlined"
+              className={`mainBtn ${styles.mainBtnWidth}`}
+              onClick={() => navigate("/")}
+            >
+              Skip
+            </Button>
 
-              <Button
-                variant="outlined"
-                // type="submit"
-                onClick={() => myHandleSubmit(values)}
-                endIcon={
-                  isLoading ? <i className="fas fa-spinner fa-spin"></i> : ""
-                }
-                className={`mainBtn ${styles.mainBtnWidth}`}
-                sx={{
-                  display: disabled ? 'none' : 'block'
-                }}
-                disabled={isValid? false : true}
-              >
-                Save
-              </Button>
-            </div>
-          </form>
-        </div>
-      )}
-  </>
+            <Button
+              variant="outlined"
+              // type="submit"
+              onClick={() => myHandleSubmit(values)}
+              endIcon={
+                isLoading ? <i className="fas fa-spinner fa-spin"></i> : ""
+              }
+              className={`mainBtn ${styles.mainBtnWidth}`}
+              disabled={isValid ? false : true}
+            >
+              Save
+            </Button>
+          </div>
+        </form>
+      </div>
+    </>
+  );
 };
 
-export default UserProfile
+export default UserProfile;
