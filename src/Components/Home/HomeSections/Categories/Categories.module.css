@@ -1,0 +1,11 @@
+@media screen and (min-width:300px) and (max-width:666px) {
+   .paddingSection {
+      padding: 0px 35px;
+   }
+}
+
+@media screen and (min-width:501px) and (max-width:700px) {
+   .paddingSection {
+      padding: 0px 15px;
+   }
+}
