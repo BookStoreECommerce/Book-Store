@@ -35,9 +35,6 @@ const Sidebar = () => {
         sx={{
           marginTop: `${navH}px`,
           minHeight: `calc(100vh - ${footerH + navH}px)`,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
         }}
       >
         <div className="row w-100 flex-lg-row flex-column align-items-center align-items-lg-start">
@@ -68,7 +65,7 @@ const Sidebar = () => {
               </Box>
             </nav>
           </div>
-          <div className="col-lg-9 col-md-10 col-12">
+          <div className="col-lg-9 col-md-10 col-12 mt-lg-5 mt-3">
             <Outlet></Outlet>
           </div>
         </div>
