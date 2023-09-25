@@ -1,5 +1,5 @@
 import { redirect } from "react-router-dom";
-import { getUserProfile } from "../Redux/Slicies/authSlice";
+import { getUserProfile } from "../Redux/Slicies/authActions";
 import store from "../Redux/Store";
 
 

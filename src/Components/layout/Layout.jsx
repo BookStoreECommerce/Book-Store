@@ -2,9 +2,7 @@
 import React, { useEffect, useRef } from 'react'
 import { Outlet } from 'react-router-dom'
 import NavBar from '../Navbar/NavBar'
-import Footer from '../Footer/Footer'// import { Register } from '../Register/Register';
-// import Login from '../Login/Login';
-// import { RegisterVerify } from '../RegisterVerify/RegisterVerify';
+import Footer from '../Footer/Footer'
 import CustomizedDialogs from '../Dialog/Dialog';
 import { useDispatch, useSelector } from 'react-redux';
 import { setHeight } from '../../Redux/Slicies/appSlice';

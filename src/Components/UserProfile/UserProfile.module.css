@@ -1,16 +1,12 @@
 .iconFontSize {
-    font-size: 4rem;
-    color: var(--mainColor);
-}
-
-.address {
-    width: 65%;
-}
-
-.mobilePhone, .homeNumber {
-    width: 49%;
+    font-size: 5rem;
+    color: var(--navyBlue);
 }
 
 .mainBtnWidth {
-    width: 49%;
+    width: 30%;
+}
+
+.mainTitle{
+    color: var(--navyBlue);
 }

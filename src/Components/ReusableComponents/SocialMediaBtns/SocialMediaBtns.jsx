@@ -1,19 +1,13 @@
 import React from "react";
 import GoogleIcon from "@mui/icons-material/Google";
-import { Box, Button } from "@mui/material";
+import { Button } from "@mui/material";
 import styles from './SocialMedia.module.css'
 import { baseUrl } from "../../../util/util";
 
 const SocialMediaBtns = () => {
   return (
     <>
-      <Box 
-      sx={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        mt:1
-      }}
-      >
+      <div className="d-flex flex-column flex-sm-row gap-sm-0 gap-2 justify-content-between mt-1">
         <Button
           variant="outlined"
           startIcon={<GoogleIcon sx={{color: "#DE1414"}}/>}
@@ -31,7 +25,7 @@ const SocialMediaBtns = () => {
         >
           signup with facebook
         </Button>
-      </Box>
+      </div>
     </>
   );
 };

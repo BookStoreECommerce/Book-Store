@@ -64,7 +64,7 @@
 }
 
 .colorUser {
-    color:#fff;
+    color:#fff !important;
     font-size: 20px;
     margin-left: 5px;
 }
@@ -91,7 +91,8 @@
 .navTop {
     display: flex;
     justify-content: flex-end;
-    align-items: center;
+    /* align-items: center; */
+    align-items: baseline;
     list-style: none;
     padding: 7px 15px 7px 0px;
     background:var(--navyBlue) !important;

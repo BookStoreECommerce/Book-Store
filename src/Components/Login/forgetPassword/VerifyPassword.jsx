@@ -4,9 +4,11 @@ import * as Yup from "yup";
 import styles from "../Login.module.css";
 import 'bootstrap/dist/css/bootstrap.css';
 import { useDispatch, useSelector } from "react-redux";
-import { clearError, forgetPassword, varifyPasswordEmail } from '../../../Redux/Slicies/authSlice';
+
 import { Button, TextField } from "@mui/material";
 import { Link } from 'react-router-dom';
+import { forgetPassword, varifyPasswordEmail } from '../../../Redux/Slicies/authActions';
+import { clearError } from '../../../Redux/Slicies/authSlice';
 
 
 
