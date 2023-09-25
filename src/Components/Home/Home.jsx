@@ -8,7 +8,6 @@ import ScrollToTop from '../ReusableComponents/ScrollToTop/ScrollToTop';
 import BestSeller from './HomeSections/BestSeller/BestSeller';
 import PolicyDialog from '../PolicyDialog/PolicyDialog';
 
-
 export default function Home() {
 
   return (

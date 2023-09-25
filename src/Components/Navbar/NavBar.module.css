@@ -96,7 +96,7 @@
     justify-content: flex-end;
     align-items: baseline;
     list-style: none;
-    padding: 7px 0px 7px 0px;
+    padding: 7px 15px 7px 0px;
     background:var(--navyBlue) !important;
 }
 
