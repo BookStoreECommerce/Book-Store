@@ -23,7 +23,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     },
   }));
 
-export default function ScrollDialog() {
+export default function PolicyDialog() {
     // const [open, setOpen] = React.useState(false);
 
     const dispatch = useDispatch();

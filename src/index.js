@@ -10,6 +10,7 @@ import store from "./Redux/Store.js";
 import ThemeContextProvider from "./context/theme-context.jsx";
 import ErrorBoundry from "./Components/ErrorBoundry/ErrorBoundry";
 import Loading from "./Components/ReusableComponents/Loading/Loading";
+import App from './App.js'
 
 const router = createBrowserRouter([
   {
@@ -109,15 +110,8 @@ root.render(
   <Provider store={store}>
     <ThemeContextProvider>
       <RouterProvider router={router} fallbackElement={<Loading/>}>
+        <App/>
       </RouterProvider>
     </ThemeContextProvider>
   </Provider>
 );
-
-// {
-//   path: '/profile', 
-//   async lazy() {
-//     const { default:UserProfile } = await import('./Components/UserProfile/UserProfile');
-//     return { Component: UserProfile }
-//   }
-// },

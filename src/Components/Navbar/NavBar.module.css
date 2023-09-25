@@ -19,9 +19,8 @@
 }
 
 .navLinkIcon {
-    font-family: 'Jost', sans-serif !important;
+    font-family: 'Inter', sans-serif !important;
     font-size: 19px !important;
-    font-weight: bold !important;
     color: #FFF !important;
     position: relative;
 }
@@ -37,7 +36,7 @@
 
 }
 
-.navItem:hover .navLinkBorder::before {
+.navItem:hover>.navLinkBorder::before, .itemActive::before {
     width: 82%;
 }
 
@@ -57,15 +56,19 @@
     font-family: 'Jost', sans-serif;
     font-size: 16px !important;
 }
-
-.item:hover {
+.item{
+    font-weight: 400;
+    font-family: 'Jost', sans-serif;
+    font-size: 16px !important; 
+}
+.item:hover, .item.dropItemActive {
     background-color: var(--beigeColor) !important;
 
 }
 
 .colorUser {
     color:#fff !important;
-    font-size: 20px;
+    font-size: 18px;
     margin-left: 5px;
 }
 
@@ -91,14 +94,10 @@
 .navTop {
     display: flex;
     justify-content: flex-end;
-    /* align-items: center; */
     align-items: baseline;
     list-style: none;
-    padding: 7px 15px 7px 0px;
+    padding: 7px 0px 7px 0px;
     background:var(--navyBlue) !important;
-
-    /* background-image: linear-gradient(45deg, var(--beigeColor), 70%, var(--secondaryColor)); */
-
 }
 
 .navTop li {
@@ -106,7 +105,7 @@
 }
 
 .dropdownMenu {
-    background-image: linear-gradient(45deg, beige, transparent);
+    background-image: white;
 }
 
 .colorNav {

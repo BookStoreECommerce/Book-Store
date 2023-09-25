@@ -1,5 +1,5 @@
 import React, { useState, useEffect, memo } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import styles from "./NavBar.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,18 +7,17 @@ import { handleClickOpen } from "../../Redux/Slicies/dialogSlice";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
-// import MailIcon from "@mui/icons-material/Mail";
 import { Badge, Button, IconButton, styled } from "@mui/material";
 import { logout } from "../../Redux/Slicies/authSlice";
 
-const NavButton = styled(Button)(({ theme }) => ({
-  textTransform: "inherit",
-  "&.MuiButtonBase-root": {
-    ":hover": {
-      backgroundColor: "transparent",
-    },
-  },
-}));
+// const NavButton = styled(Button)(({ theme }) => ({
+//   textTransform: "inherit",
+//   "&.MuiButtonBase-root": {
+//     ":hover": {
+//       backgroundColor: "transparent",
+//     },
+//   },
+// }));
 
 function NavBar({ navRef }) {
   const navigate = useNavigate();
@@ -42,11 +41,11 @@ function NavBar({ navRef }) {
     dispatch(logout());
     navigate('/');
   }
-
+  const linkStyle = `nav-link ${styles.navLink} ${styles.navLinkBorder} `;
+  const dropStyle = `nav-link dropdown-toggle ${styles.navLink} ${styles.navLinkBorder} `;
   return (
     <>
       <div data-testid="NavBar" className="fixed-top" ref={navRef}>
-        {/* <div className="fixed-top" ref={navRef}> */}
         <div className={styles.navTop}>
           <li className="nav-item me-5 position-relative">
             <Link className={`nav-link  ${styles.navLinkIcon}`} to="favorite">
@@ -110,78 +109,81 @@ function NavBar({ navRef }) {
             >
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className={`nav-item me-2 ${styles.navItem}`}>
-                  <Link
-                    className={`nav-link ${styles.navLink} ${styles.navLinkBorder}`}
+                  <NavLink 
+                  
+                    className={({isActive}) => isActive? linkStyle + styles.itemActive: linkStyle}
                     to="/"
+                    end
                   >
                     Home
-                  </Link>
+                  </NavLink>
                 </li>
                 <li className={`nav-item me-2 ${styles.navItem}`}>
-                  <Link
-                    className={`nav-link ${styles.navLink} ${styles.navLinkBorder}`}
+                  <NavLink
+                    className={({isActive}) => isActive? linkStyle + styles.itemActive: linkStyle}
                     to="shop"
                   >
                     Shop
-                  </Link>
+                  </NavLink>
                 </li>
 
                 <li className={`nav-item dropdown me-2 ${styles.navItem}`}>
-                  <Link
-                    className={`nav-link dropdown-toggle ${styles.navLink} ${styles.navLinkBorder}`}
-                    to="#"
+                  <NavLink
+                    className={({isActive}) => isActive? dropStyle + styles.itemActive: dropStyle}
+                    to="nav"
                     role="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
+                    end
                   >
                     Categories
-                  </Link>
+                  </NavLink>
 
                   <ul className={`dropdown-menu ${styles.dropdownMenu}`}>
                     <li>
-                      <Link className={`dropdown-item ${styles.item}`} to="#">
+                      <NavLink className={({isActive}) => isActive? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}`: linkStyle + ` dropdown-item ${styles.item}`} to="nav/1">
                         Science
-                      </Link>
+                      </NavLink>
                     </li>
                     <li>
-                      <Link className={`dropdown-item ${styles.item}`} to="#">
+                      <NavLink className={({isActive}) => isActive? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}`: linkStyle + ` dropdown-item ${styles.item}`} to="nav/2">
                         children
-                      </Link>
+                      </NavLink>
                     </li>
                     <li>
-                      <Link className={`dropdown-item ${styles.item}`} to="#">
+                      <NavLink className={({isActive}) => isActive? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}`: linkStyle + ` dropdown-item ${styles.item}`} to="nav/3">
                         Cooking
-                      </Link>
+                      </NavLink>
                     </li>
                     <li>
-                      <Link className={`dropdown-item ${styles.item}`} to="#">
+                      <NavLink className={({isActive}) => isActive? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}`: linkStyle + ` dropdown-item ${styles.item}`} to="nav/4">
                         Science Fiction
-                      </Link>
+                      </NavLink>
                     </li>
                     <li>
-                      <Link className={`dropdown-item ${styles.item}`} to="#">
+                      <NavLink className={({isActive}) => isActive? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}`: linkStyle + ` dropdown-item ${styles.item}`} to="nav/5">
                         Business
-                      </Link>
+                      </NavLink>
                     </li>
                     <li>
-                      <Link className={`dropdown-item ${styles.item}`} to="#">
+                      <NavLink className={({isActive}) => isActive? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}`: linkStyle + ` dropdown-item ${styles.item}`} to="nav/6">
                         Music
-                      </Link>
+                      </NavLink>
                     </li>
                     <li>
-                      <Link className={`dropdown-item ${styles.item}`} to="#">
+                      <NavLink className={({isActive}) => isActive? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}`: linkStyle + ` dropdown-item ${styles.item}`} to="nav/7">
                         Architecture
-                      </Link>
+                      </NavLink>
                     </li>
                   </ul>
                 </li>
                 <li className={`nav-item me-2 ${styles.navItem}`}>
-                  <Link
-                    className={`nav-link ${styles.navLink} ${styles.navLinkBorder}`}
+                  <NavLink
+                    className={({isActive}) => isActive? linkStyle + styles.itemActive: linkStyle}
                     to="contact"
                   >
                     Contact
-                  </Link>
+                  </NavLink>
                 </li>
               </ul>
 
@@ -190,12 +192,12 @@ function NavBar({ navRef }) {
                   <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
 
                     <li className={`nav-item me-2 ${styles.navItem}`}>
-                      <NavButton
+                      <Link
                         className={`nav-link ${styles.navLink}`}
                         onClick={handleLogout}
                       >
                         Logout
-                      </NavButton>
+                      </Link>
                     </li>
                   </ul>
                 </>
@@ -204,24 +206,24 @@ function NavBar({ navRef }) {
                   <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
 
                     <li className="nav-item">
-                      <NavButton
+                      <Link
                         className={`nav-link ${styles.navLink}`}
                         onClick={() => {
                           dispatch(handleClickOpen({ name: "login" }));
                         }}
                       >
                         Login
-                      </NavButton>
+                      </Link>
                     </li>
                     <li className="nav-item">
-                      <NavButton
+                      <Link
                         className={`nav-link ${styles.navLink}`}
                         onClick={() => {
                           dispatch(handleClickOpen({ name: "register" }));
                         }}
                       >
                         Register
-                      </NavButton>
+                      </Link>
                     </li>
                   </ul>
                 </>}
