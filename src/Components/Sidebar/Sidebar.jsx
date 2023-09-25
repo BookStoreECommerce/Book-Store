@@ -11,10 +11,9 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { useMediaQuery } from "@mui/material";
-import { useTheme } from "@emotion/react";
 
 const Sidebar = () => {
-  const { footerH, navH, footerNoMargin } = useSelector((state) => state.app);
+  const { footerH, navH } = useSelector((state) => state.app);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -28,10 +27,7 @@ const Sidebar = () => {
     setValue(newValue);
   };
 
-  const theme = useTheme();
   const isSmallScreen = useMediaQuery('(max-width:991px)');
-  // const isSmallScreen = useMediaQuery('(max-width:767px)');
-  // const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
     <>
@@ -44,9 +40,7 @@ const Sidebar = () => {
           alignItems: "center",
         }}
       >
-        {/* <div className="row w-100 flex-md-row flex-column align-items-center align-items-md-start"> */}
         <div className="row w-100 flex-lg-row flex-column align-items-center align-items-lg-start">
-          {/* <div className="col-md-3 col-12"> */}
           <div className="col-lg-3 col-md-10 col-12">
             <nav
               className={`sidebar d-flex flex-column align-item-start p-3 h-100 align-items-center`}
@@ -74,7 +68,6 @@ const Sidebar = () => {
               </Box>
             </nav>
           </div>
-          {/* <div className="col-md-9 col-12"> */}
           <div className="col-lg-9 col-md-10 col-12">
             <Outlet></Outlet>
           </div>
