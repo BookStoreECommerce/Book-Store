@@ -18,6 +18,7 @@ export default function Layout() {
     useEffect(() => {
         dispatch(setHeight({footerH: footerRef.current.clientHeight, navH: navRef.current.clientHeight}));
     }, [dispatch]);
+
     return (
         <>
             <NavBar navRef={navRef}/>

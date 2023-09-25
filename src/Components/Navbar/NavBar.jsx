@@ -22,6 +22,7 @@ function NavBar({ navRef }) {
   const [navbar, setNavbar] = useState(false);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+  console.log(user);
   const changeBackground = () => {
     if (window.scrollY >= 100) {
       setNavbar(true);
@@ -36,7 +37,7 @@ function NavBar({ navRef }) {
 
   return (
     <>
-      <div className="fixed-top" ref={navRef}>
+      <div data-testid="NavBar" className="fixed-top" ref={navRef}>
         <div className={styles.navTop}>
           <li className="nav-item me-5 position-relative">
             <Link className={`nav-link  ${styles.navLinkIcon}`} to="favorite">
@@ -202,4 +203,4 @@ function NavBar({ navRef }) {
     </>
   );
 }
-export default memo(NavBar)
+export default NavBar;

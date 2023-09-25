@@ -9,7 +9,7 @@ const AboutUs = () => {
     }, []);
     return (
         <>
-            <section className={` ${styles.bg} darkBg `}>
+            <section className={` ${styles.bg} darkBg `} data-testid='AboutUs'>
                 <div className={styles.bgOverLay}>
                     <div className="container pb-5 text-center">
                         <div className="row">

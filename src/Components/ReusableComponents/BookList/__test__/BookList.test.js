@@ -3,8 +3,9 @@ import BookList from '../BookList';
 const {NewBooks} = require('../BookList');
 
 describe("BookList", () =>{
+
     it('should render Array not to be null', () => {
-        render(<BookList />);
+        render(<BookList  />);
         expect(NewBooks).not.toBeNull()
     });
   

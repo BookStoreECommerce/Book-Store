@@ -42,7 +42,7 @@ export default function ScrollDialog() {
 
 
 return (
-    <div>
+    <div data-testid='PolicyDialog'>
      
       <BootstrapDialog
         onClose={handleClose}
@@ -56,6 +56,7 @@ return (
           Policy
         </DialogTitle>
         <IconButton
+        data-testid='closeIcon'
           aria-label="close"
           onClick={handleClose}
           sx={{
@@ -114,7 +115,7 @@ return (
     <br/>
         </DialogContent>
         <DialogActions>
-          <Button className="mainBtn"  onClick={handleClose}>
+          <Button data-testid='return' className="mainBtn" onClick={handleClose}>
             Return
           </Button>
         </DialogActions>

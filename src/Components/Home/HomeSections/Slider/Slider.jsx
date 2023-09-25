@@ -14,7 +14,7 @@ import SliderScrollBtn from "../../../ReusableComponents/SliderScrollBtn/SliderS
 const Slider = () => {
     return (
         <>
-            <div id="carouselExampleSlidesOnly" className="carousel slide mb-5" data-bs-ride="carousel" >
+            <div id="carouselExampleSlidesOnly" className="carousel slide mb-5" data-bs-ride="carousel" data-testid='Slider'>
                 <div className="carousel-inner">
                     <div className={`carousel-item active ${styles.sliderImgOne}`}>
                         <div className={styles.carusouelContent}>

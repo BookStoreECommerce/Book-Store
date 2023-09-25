@@ -12,8 +12,6 @@ import ThemeContextProvider from "./context/theme-context.jsx";
 import ErrorBoundry from "./Components/ErrorBoundry/ErrorBoundry";
 
 
-
-
 const router = createBrowserRouter([
   {
     path: "/",

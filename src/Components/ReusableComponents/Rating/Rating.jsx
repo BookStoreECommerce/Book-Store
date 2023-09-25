@@ -13,7 +13,7 @@ const Rating = ({ rate }) => {
 
     return (
         <>
-            <div className="mt-2"> {golden}{white}</div>
+            <div className="mt-2" data-testid='rate'> {golden}{white}</div>
         </>
     );
 }
