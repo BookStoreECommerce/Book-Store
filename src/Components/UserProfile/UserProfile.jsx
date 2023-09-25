@@ -12,13 +12,18 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { useNavigate } from "react-router";
 import { getUserProfile, userProfile } from "../../Redux/Slicies/authActions";
-import { setUser } from "../../Redux/Slicies/authSlice";
+import { clearError, setUser } from "../../Redux/Slicies/authSlice";
 
 const UserProfile = () => {
   const [isFirst, setIsFirst] = useState(true);
   const navigate = useNavigate();
   const { isLoading, msgError, user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+
+  useEffect(()=> {
+    dispatch(clearError());  
+  }, [dispatch]);
+
   const validationSchema = Yup.object({
     userName: Yup.string()
       .required("Name is required")

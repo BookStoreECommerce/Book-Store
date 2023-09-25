@@ -22,24 +22,16 @@ export const register = createAsyncThunk("auth/signup", async (userData, { rejec
 
 export const registerVerification = createAsyncThunk("auth/verifyEmail", async (verifycode, { rejectWithValue }) => {
     try {
-        let { data } = await axiosInstance.post(`auth/verifyEmail`, { code: verifycode },
-            {
-                headers:
-                    { authorization: localStorage.getItem("access-token") }
-            });
+        let { data } = await axiosInstance.post(`auth/verifyEmail`, { code: verifycode });
         return data
     } catch (error) {
         return rejectWithValue(error.response.data)
     }
 })
 
-export const resendVerifyCode = createAsyncThunk("auth/resendVaryfyEmail", async (_, { rejectWithValue }) => {
+export const resendCode = createAsyncThunk("auth/resendCode", async (_, { rejectWithValue }) => {
     try {
-        let { data } = await axiosInstance.get(`auth/resendVaryfyEmail`,
-            {
-                headers:
-                    { authorization: localStorage.getItem("access-token") }
-            });
+        let { data } = await axiosInstance.post(`auth/resendCode`, null);
         return data
     } catch (error) {
         return rejectWithValue(error.response.data)
@@ -48,11 +40,7 @@ export const resendVerifyCode = createAsyncThunk("auth/resendVaryfyEmail", async
 
 export const userProfile = createAsyncThunk("users/update", async (userData, { rejectWithValue }) => {
     try {
-        let { data } = await axiosInstance.put(`users/update`, userData, {
-            headers: {
-                authorization: localStorage.getItem("access-token")
-            }
-        });
+        let { data } = await axiosInstance.put(`users/update`, userData);
         return data
     } catch (error) {
         return rejectWithValue(error.response.data)
@@ -61,11 +49,7 @@ export const userProfile = createAsyncThunk("users/update", async (userData, { r
 
 export const getUserProfile = createAsyncThunk("users/profile", async (_, { rejectWithValue }) => {
     try {
-        let { data } = await axiosInstance.get(`users/profile`,
-            {
-                headers:
-                    { authorization: localStorage.getItem("access-token") }
-            });
+        let { data } = await axiosInstance.get(`users/profile`);
         return data
     } catch (error) {
         return rejectWithValue(error.response.data)

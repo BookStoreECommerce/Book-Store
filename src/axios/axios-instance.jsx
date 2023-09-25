@@ -1,4 +1,5 @@
 import { default as axios } from "axios";
+import store from "../Redux/Store";
 import { baseUrl } from "../util/util";
 
 
@@ -11,7 +12,7 @@ const axiosInstance = axios.create({
 })
 
 axiosInstance.interceptors.request.use(req => {
-    const token = localStorage.getItem('access-token');
+    const token = localStorage.getItem('access-token') || store.getState().auth.token;
     req.headers.Authorization = token ? token : "";
     return req
 }, async(error) => Promise.reject(error));
