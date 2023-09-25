@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 import store from "./Redux/Store.js";
 import ThemeContextProvider from "./context/theme-context.jsx";
 import ErrorBoundry from "./Components/ErrorBoundry/ErrorBoundry";
+import Loading from "./Components/ReusableComponents/Loading/Loading";
 
 
 const router = createBrowserRouter([
@@ -86,8 +87,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
     <ThemeContextProvider>
-      <RouterProvider router={router}>
-        <App />
+      <RouterProvider router={router} fallbackElement={<Loading/>}>
       </RouterProvider>
     </ThemeContextProvider>
   </Provider>

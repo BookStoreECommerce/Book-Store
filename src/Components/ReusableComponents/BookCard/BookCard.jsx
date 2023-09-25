@@ -7,7 +7,7 @@ import styles from './BookCard.module.css'
 const BookCard = ({ id, image, name, price, author, rate, section, cardStyle ,sale}) => {
     return (
         <>
-            <div data-testid='BookCard' className={section === "newBooks" ? `col-lg-3 col-sm-6 col-12 mb-2 ${styles.font}` : ''}>
+            <div data-testid='BookCard' className={section === "newBooks" ? `col-lg-3 col-sm-6 col-12 mb-5 ${styles.font}` : ''}>
                 <div className={`mb-2 position-relative ${styles.imgContainer}`} style={cardStyle}>
                     <div className={styles.overLay}>
 
