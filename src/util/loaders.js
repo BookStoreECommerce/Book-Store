@@ -14,7 +14,7 @@ export const indexLoader = async() => {
     if(isLogedin || !token){
         return null;
     }
-    store.dispatch(getUserProfile())
+    await store.dispatch(getUserProfile())
     return null
 }
 

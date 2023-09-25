@@ -22,9 +22,7 @@ const authSlice = createSlice({
             state.msgError = null;
         },
         setUser: (state, action) => {
-            const {name , value} = action.payload;
-            const user = state.user;
-            user[name] = value;
+            const user = action.payload;
             state.user = user;
         },
         logout: (state, action) => {
