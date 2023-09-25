@@ -100,3 +100,12 @@ export const signinWithToken = createAsyncThunk("auth/signin-with-token", async 
         return rejectWithValue(error.response.data)
     }
 })
+
+export const signout = createAsyncThunk("auth/logout", async (_, { rejectWithValue }) => {
+    try {
+        const { data } = await axiosInstance.post('auth/logout');
+        return data
+    } catch (error) {
+        return rejectWithValue(error.response.data)
+    }
+})

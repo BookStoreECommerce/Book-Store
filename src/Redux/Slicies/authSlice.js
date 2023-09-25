@@ -1,7 +1,7 @@
 import {
     createSlice
 } from "@reduxjs/toolkit";
-import { forgetPassword, getUserProfile, register, registerVerification, resendCode, resetPassword, signin, signinWithToken, userProfile, varifyPasswordEmail } from "./authActions";
+import { forgetPassword, getUserProfile, register, registerVerification, resendCode, resetPassword, signin, signinWithToken, userProfile, varifyPasswordEmail, signout } from "./authActions";
 
 const initialState = {
     user: null,
@@ -106,7 +106,6 @@ const authSlice = createSlice({
             state.isLoading = false;
             state.token = token
             saveUserData(token)
-        //  redirect('/')
         })
         builder.addCase(signinWithToken.rejected, (state, action) => {
             state.isLoading = false
@@ -154,7 +153,6 @@ const authSlice = createSlice({
             const token = action.payload.token
             state.token = token;
             state.msgError = null;
-            // state.resetPasswordMessage = action.payload;
             state.isLoading = false;
 
         });
@@ -193,6 +191,21 @@ const authSlice = createSlice({
             state.msgError = action.payload.error
             state.isLoading = false;
         });
+         // signout
+         builder.addCase(signout.pending, (state, action) => {
+            state.isLoading = true;
+        })
+        builder.addCase(signout.fulfilled, (state, action) => {
+            state.isLoading = false;
+        })
+        builder.addCase(signout.rejected, (state, action) => {
+            state.isLoading = false
+            if(action.payload.error){
+                state.msgError = action.payload.error
+            }else{
+                state.msgError = action.payload.errors[0].message
+            }
+        })
     }
 })
 
