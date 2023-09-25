@@ -8,7 +8,7 @@ const store = configureStore({
     reducer:{
         dialog: dialogReducer,
         auth: authReducer,
-        app: appReducer
+        app: appReducer,
     }
 })
 

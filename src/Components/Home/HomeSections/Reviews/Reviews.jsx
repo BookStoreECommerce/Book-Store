@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, {useState } from "react";
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -10,7 +10,6 @@ const Reviews = () => {
     const settings = {
         dots: true,
         infinite: true,
-
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -85,8 +84,8 @@ const Reviews = () => {
 
     return (
 
-        <Fragment>
-            <section className="mt-0">
+        <>
+            <section className="mt-0" data-testid='Reviews'>
                 <div className={`container ${style.paddingSection}`}>
                     <div>
                         <Slider {...settings}>
@@ -107,7 +106,7 @@ const Reviews = () => {
                     </div>
                 </div>
             </section>
-        </Fragment>
+        </>
     );
 }
 

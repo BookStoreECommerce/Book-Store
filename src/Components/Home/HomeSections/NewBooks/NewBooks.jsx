@@ -16,7 +16,7 @@ import book12 from '../../../../assets/12.jpg'
 
 
 const NewBooks = () => {
-    const [NewBooks, setNewBooks] = useState([
+    const [newBooks, setNewBooks] = useState([
         {
             id: 0,
             image: book,
@@ -127,13 +127,13 @@ const NewBooks = () => {
     const [lastIndex, setLast] = useState(4);
     const [leftBtn, setLeftBtn] = useState(true);
     const [rightBtn, setRightBtn] = useState(false);
-    let cutNewBooks = NewBooks.slice(startIndex, lastIndex);
+    let cutNewBooks = newBooks.slice(startIndex, lastIndex);
   
     const shiftRight = () => {
         setStart((prev) => prev + 1)
         setLast((prev) => prev + 1)
         setLeftBtn(false)
-        if (lastIndex === NewBooks.length - 1) {
+        if (lastIndex === newBooks.length - 1) {
             setRightBtn(true)
         }
     }
@@ -145,7 +145,7 @@ const NewBooks = () => {
             setLeftBtn(true)
 
         }
-        if(lastIndex -1 <= NewBooks.length - 1){
+        if(lastIndex -1 <= newBooks.length - 1){
             setRightBtn(false)
 
         }
@@ -153,13 +153,13 @@ const NewBooks = () => {
  
     return (
         <>
-            <section id="NewBooks">
+            <section id="NewBooks" data-testid='NewBooks'>
             <div className={`container ${styles.paddingSection}`} >
                 <div className={`row justify-content-center align-items-center  ${styles.gap}`}>
                     <h2 className="blueHeader text-center mt-md-5 mb-2 pt-5" >New Arrivals</h2>
                     <div className="d-flex justify-content-end mb-3">
-                        <button className={`${leftBtn ? styles.disabled : styles.enabled} ${styles.btn} ${styles.leftBtn} `} id="leftBtn" onClick={shiftLeft} ><i className="fa-solid fa-arrow-left"></i></button>
-                        <button className={`${rightBtn ? styles.disabled : styles.enabled} ${styles.btn} `} id="righttBtn" onClick={shiftRight}><i className="fa-solid fa-arrow-right"></i></button>
+                        <button data-testid="left" className={`${leftBtn ? styles.disabled : styles.enabled} ${styles.btn} ${styles.leftBtn} `} id="leftBtn" onClick={shiftLeft} ><i className="fa-solid fa-arrow-left"></i></button>
+                        <button data-testid="right" className={`${rightBtn ? styles.disabled : styles.enabled} ${styles.btn} `} id="righttBtn" onClick={shiftRight}><i className="fa-solid fa-arrow-right"></i></button>
                     </div>
                     <BookList NewBooks={cutNewBooks} sectionName={"newBooks"} />
                 </div>

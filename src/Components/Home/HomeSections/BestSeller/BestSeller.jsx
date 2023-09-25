@@ -2,19 +2,19 @@ import React, { useState } from "react";
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import styles from './BestSeller.module.css'
-import book from '../../../../assets/1.jpg'
-import book2 from '../../../../assets/2.jpg'
-import book3 from '../../../../assets/3.jpg'
-import book4 from '../../../../assets/4.jpg'
-import book5 from '../../../../assets/5.jpg'
-import book6 from '../../../../assets/6.jpg'
-import book7 from '../../../../assets/7.jpg'
-import book8 from '../../../../assets/8.jpg'
-import book9 from '../../../../assets/9.jpg'
-import book10 from '../../../../assets/10.jpg'
-import book11 from '../../../../assets/11.jpg'
-import book12 from '../../../../assets/12.jpg'
+import styles from './BestSeller.module.css';
+import book from '../../../../assets/1.jpg';
+import book2 from '../../../../assets/2.jpg';
+import book3 from '../../../../assets/3.jpg';
+import book4 from '../../../../assets/4.jpg';
+import book5 from '../../../../assets/5.jpg';
+import book6 from '../../../../assets/6.jpg';
+import book7 from '../../../../assets/7.jpg';
+import book8 from '../../../../assets/8.jpg';
+import book9 from '../../../../assets/9.jpg';
+import book10 from '../../../../assets/10.jpg';
+import book11 from '../../../../assets/11.jpg';
+import book12 from '../../../../assets/12.jpg';
 import BookCard from "../../../ReusableComponents/BookCard/BookCard";
 
 const BestSeller = () => {
@@ -179,7 +179,7 @@ const BestSeller = () => {
     };
     return (
 
-        <section className="px-lg-0 px-4">
+        <section className="px-lg-0 px-4" data-testid='BestSeller'>
             <div className="container-fluid">
                 <div className="row justify-content-center">
                     <h2 className="blueHeader text-center mt-4 mb-5">Best Seller</h2>

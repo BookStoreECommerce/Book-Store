@@ -56,7 +56,7 @@ const Categories = () => {
 
     return (
         <>
-            <section className='pt-4 pb-5'>
+            <section className='pt-4 pb-5' data-testid='Categories'>
                 <div className={`container text-center ${styles.paddingSection}`}>
                     <h2 className="blueHeader">Categories</h2>
                   <CategoryCard shuffledArray={shuffledArray} />

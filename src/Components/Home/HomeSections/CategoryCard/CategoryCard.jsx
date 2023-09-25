@@ -5,6 +5,8 @@ import "aos/dist/aos.css";
 
 const CategoryCard = ({ shuffledArray }) => {
 
+const recievedArray = shuffledArray;
+
     useEffect(() => {
         AOS.init();
         window.addEventListener('load', AOS.refresh);
@@ -12,10 +14,10 @@ const CategoryCard = ({ shuffledArray }) => {
 
     return (
         <>
-            <div className="row justifiy-content-center align-items-center gy-4 mt-4" >
+            <div className="row justifiy-content-center align-items-center gy-4 mt-4" data-testid='CategoryCard'>
                 <div className="col-lg-6 col-md-12" data-aos="fade-up"  data-aos-duration="800">
 
-                    <div className="row gy-4 "  >
+                    <div className="row gy-4">
                         <div className="col-md-6 col-sm-6" >
                             <div className={`${styles.imgCat} ${styles.fontSize} position-relative`}>
                                 <div className={`${styles.overlayCat}`}>

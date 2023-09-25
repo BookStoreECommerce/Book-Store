@@ -1,5 +1,6 @@
-import { default as axios } from "axios";
+
 import { baseUrl } from "../util/util";
+import axios from "axios";
 
 
 const axiosInstance = axios.create({

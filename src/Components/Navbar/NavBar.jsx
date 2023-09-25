@@ -7,8 +7,7 @@ import { handleClickOpen } from "../../Redux/Slicies/dialogSlice";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
-// import MailIcon from "@mui/icons-material/Mail";
-import { Badge, Button, IconButton, styled } from "@mui/material";
+import { Button, styled } from "@mui/material";
 
 const NavButton = styled(Button)(({ theme }) => ({
   textTransform: "inherit",
@@ -19,20 +18,11 @@ const NavButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-// const StyledBadge = styled(Badge)(({ theme }) => ({
-//   '& .MuiBadge-badge': {
-//     backgroundColor: "white",
-//     color: theme.palette.primary.main,
-//     fontSize: '13px',
-//     // border: `2px solid ${theme.palette.background.paper}`,
-//     padding: '0 4px',
-//   },
-// }));
-
 function NavBar({ navRef }) {
   const [navbar, setNavbar] = useState(false);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+  console.log(user);
   const changeBackground = () => {
     if (window.scrollY >= 100) {
       setNavbar(true);
@@ -47,7 +37,7 @@ function NavBar({ navRef }) {
 
   return (
     <>
-      <div className="fixed-top" ref={navRef}>
+      <div data-testid="NavBar" className="fixed-top" ref={navRef}>
         <div className={styles.navTop}>
           <li className="nav-item me-5 position-relative">
             <Link className={`nav-link  ${styles.navLinkIcon}`} to="favorite">
@@ -69,17 +59,6 @@ function NavBar({ navRef }) {
               </div>
             </Link>
           </li>
-          {/* <li className="nav-item me-5 position-relative">
-            <Link className={`nav-link ${styles.navLinkIcon}`} to="cart">
-              <IconButton aria-label="cart">
-                <StyledBadge badgeContent={4} color="secondary">
-                  <ShoppingCartOutlinedIcon sx={{
-                    color: 'white'
-                  }}/>
-                </StyledBadge>
-              </IconButton>
-            </Link>
-          </li> */}
 
           {user !== null && (<li className="nav-item">
             <Link className={`nav-link ${styles.navLinkIcon}`} to="profile">
@@ -224,4 +203,4 @@ function NavBar({ navRef }) {
     </>
   );
 }
-export default memo(NavBar)
+export default NavBar;
