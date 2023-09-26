@@ -230,7 +230,6 @@ function NavBar({ navRef }) {
                   </ul>
                 </>}
 
-
             </div>
           </div>
         </nav>

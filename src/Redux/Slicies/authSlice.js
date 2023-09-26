@@ -180,12 +180,8 @@ const authSlice = createSlice({
             state.isLoading = true;
         });
         builder.addCase(resetPassword.fulfilled, (state, action) => {
-            // const token = action.payload.token
-            // state.token = token;
-            // saveUserData(token);
             state.isLoading = false;
             localStorage.removeItem('access-token');
-            localStorage.removeItem('user-mail');
         });
         builder.addCase(resetPassword.rejected, (state, action) => {
             state.msgError = action.payload.error

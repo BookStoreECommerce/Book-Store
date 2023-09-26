@@ -58,10 +58,9 @@ export const getUserProfile = createAsyncThunk("users/profile", async (_, { reje
 
 export const forgetPassword = createAsyncThunk(
     "auth/forgetPassword",
-    async (values = {email: localStorage.getItem('user-mail')}, { rejectWithValue }) => {
+    async (values, { rejectWithValue }) => {
         try {
             const response = await axiosInstance.post('auth/forgetPassword', values)
-            localStorage.setItem('user-mail', values.email);
             return response.data;
         } catch (error) {
             return rejectWithValue(error.response.data)
