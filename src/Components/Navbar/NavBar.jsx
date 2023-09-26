@@ -9,6 +9,7 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import { Badge, Button, IconButton, styled } from "@mui/material";
 import { logout } from "../../Redux/Slicies/authSlice";
+import { signout } from "../../Redux/Slicies/authActions";
 
 // const NavButton = styled(Button)(({ theme }) => ({
 //   textTransform: "inherit",
@@ -39,6 +40,7 @@ function NavBar({ navRef }) {
 
   const handleLogout = () => {
     dispatch(logout());
+    dispatch(signout());
     navigate('/');
   }
   const linkStyle = `nav-link ${styles.navLink} ${styles.navLinkBorder} `;
