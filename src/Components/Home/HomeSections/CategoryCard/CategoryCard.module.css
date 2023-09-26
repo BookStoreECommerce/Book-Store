@@ -14,7 +14,7 @@
 .overlayCat {
   position: absolute;
   width: 80%;
-  top: 110%;
+  top: 80%;
   left: 10%;
   right: 0;
   bottom: 3%;
@@ -40,11 +40,23 @@
   font-size: 20px;
 }
 
-.imgCat:hover .overlayCat {
-  top: 80%;
-}
-
 .imgCat:hover img {
   transform: scale(1.1, 1.1);
+
+}
+.fontpargraph{
+  font-size: 22px;
+  font-weight: bold;
+
+  color: var(--navyBlue);
+  padding-top: 15px;
+  margin-bottom: 0;
+  display: flex;
+justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+}
+.fontpargraph:hover{
+  color: var(--mainColor);
 
 }

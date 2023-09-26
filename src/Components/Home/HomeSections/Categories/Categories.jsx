@@ -52,7 +52,7 @@ const Categories = () => {
         }
         return array;
     };
-    const shuffledArray = shuffle(category).slice(0, 5);
+    const shuffledArray = shuffle(category).slice(0, 6);
 
     return (
         <>

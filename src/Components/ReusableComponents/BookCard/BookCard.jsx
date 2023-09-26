@@ -46,11 +46,11 @@ const BookCard = ({ id, image, name, price, author, rate, section, cardStyle ,sa
                   </>:''}
 
                 </div>
-                <div className={`d-flex flex-column justify-content-start text-left ${styles.pLeft}`} >
+                <div className={`d-flex flex-column justify-content-start text-center`} >
                     {section === "bestSeller" ? '' : <span className={styles.bookName}>{name}</span>}
                     {section === "bestSeller" ? '' : <span className={styles.bookAuthor}>By {author}</span>}
                     {section === "bestSeller" ? '' : <span className={styles.price}> {price + ` EGP`} </span>}
-                    {section === "bestSeller" ? '' : <><Rating rate={rate} id={id} /></>}
+                  
                 </div>
             </div>
 

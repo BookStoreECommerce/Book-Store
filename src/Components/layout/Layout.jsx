@@ -6,6 +6,7 @@ import Footer from '../Footer/Footer'
 import CustomizedDialogs from '../Dialog/Dialog';
 import { useDispatch, useSelector } from 'react-redux';
 import { setHeight } from '../../Redux/Slicies/appSlice';
+import PolicyDialog from '../PolicyDialog/PolicyDialog.jsx';
 
 export default function Layout() {
     const navRef = useRef(null);
@@ -22,6 +23,7 @@ export default function Layout() {
             <NavBar navRef={navRef}/>
             <Outlet></Outlet>
             <CustomizedDialogs />
+            <PolicyDialog/>
             <Footer footerRef={footerRef}/>
         </>
     )

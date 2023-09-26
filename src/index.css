@@ -10,7 +10,7 @@ box-sizing: border-box;
 :root {
   --navyBlue: #2b3a55;
   --white: #ffffff;
-  --mainColor: rgb(206, 119, 119);
+  --mainColor: #ce7777;
   --secondaryColor: rgb(232, 196, 196);
   --beigeColor: rgb(242, 229, 229);
 }
@@ -88,6 +88,15 @@ color: var(--navyBlue)!important;
   transform: scale(1.1);
   transition: scale 2s ease-in-out ;
 }
+
+.carousel-control-next-icon{
+  background-image:   url('./assets/next.svg') !important;
+}
+
+.carousel-control-prev-icon{
+  background-image: url('./assets/prev.svg') !important;
+}
+
 @media screen and (min-width:300px) and (max-width:768px){
   .blueHeader{
     font-size: 26px;
