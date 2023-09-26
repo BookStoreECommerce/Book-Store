@@ -18,8 +18,8 @@ box-sizing: border-box;
 /* Our Button */
 .mainBtn{
   background-color: white !important;
-  color: var(--mainColor) !important !important;
-  border-color: var(--mainColor) !important !important;
+  color: var(--mainColor);
+  border-color: var(--mainColor) !important;
   transition: all 0.7s ease !important;
   outline: auto !important;
 }

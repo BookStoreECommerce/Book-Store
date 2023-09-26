@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import TextField from "@mui/material/TextField";
@@ -6,7 +6,8 @@ import { Button, FormControl, FormHelperText, IconButton, InputLabel, OutlinedIn
 import styles from "./Register.module.css";
 import SocialMediaBtns from "../ReusableComponents/SocialMediaBtns/SocialMediaBtns";
 import { useDispatch, useSelector } from "react-redux";
-import { register } from "../../Redux/Slicies/authSlice";
+import { register } from "../../Redux/Slicies/authActions";
+import { clearError } from "../../Redux/Slicies/authSlice";
 import { handleClickOpen } from "../../Redux/Slicies/dialogSlice";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
@@ -18,7 +19,12 @@ const getCharacterValidationError = (str) => {
 export const Register = () => {
   const dispatch = useDispatch();
   const { isLoading, msgError } = useSelector((state) => state.auth);
+  // const { registerShow } = useSelector(({ dialog }) => dialog);
   const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(()=> {
+    dispatch(clearError());  
+  }, [dispatch]);
 
   const handleClickShowPassword = () => setShowPassword((prev) => !prev);
 
@@ -209,6 +215,9 @@ export const Register = () => {
         >
           Login
         </Button>
+        {/* <a className="text-muted" href="\">
+          Login
+        </a> */}
       </div>
 
       <div className="d-flex align-items-baseline justify-content-between">

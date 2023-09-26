@@ -1,15 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './RegisterVerify.module.css'
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { registerVerification } from "../../Redux/Slicies/authSlice";
+import { registerVerification, resendCode } from "../../Redux/Slicies/authActions";
 import { handleClickOpen } from '../../Redux/Slicies/dialogSlice';
+import Timer from '../Timer/Timer';
+import { clearError } from "../../Redux/Slicies/authSlice";
 
 export const RegisterVerify = () => {
+  const [disabled, setDisabled] = useState(true);
+  const [clicked, setClicked] = useState(false);
   const dispatch = useDispatch();
-  const { msgError } = useSelector((state) => state.auth);
+  const { isLoading, msgError } = useSelector((state) => state.auth);
   const [code, setcode] = useState(null);
+  
+  useEffect(()=> {
+    dispatch(clearError());  
+  }, [dispatch]);
+
   const handleChange = event => {
     setcode(event.target.value);
   };
@@ -48,13 +57,25 @@ export const RegisterVerify = () => {
           className={`mainBtn ${styles.verifyBtn}`}
           disabled={code ? false : true}
           onClick={handleRegVerify}
+          endIcon={
+            isLoading ? (
+              <i className="fas fa-spinner fa-spin"></i>
+            ) : (
+              ''
+            )
+          }
         >
           Verify
         </Button>
 
       </div>
-      <div className="d-flex gap-1 text-muted justify-content-center">
-        <a className="text-muted" href="\">Send me another code</a>
+      <div className="d-flex gap-1 text-muted justify-content-center align-items-center">
+        <button type='button' disabled={disabled} className={` ${styles.resendBtn}`} onClick={()=>{
+          setClicked(true);
+          dispatch(resendCode())
+        }}>Send me another code</button>
+        <p className='mb-0'>after</p>
+        <Timer setDisabled={setDisabled} clicked={clicked} setClicked={setClicked}/>
       </div>
     </>
   )

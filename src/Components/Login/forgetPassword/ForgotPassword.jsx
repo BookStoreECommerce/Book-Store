@@ -4,15 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 
 import "bootstrap/dist/css/bootstrap.css";
 import styles from "../Login.module.css";
-import { clearError, forgetPassword } from "../../../Redux/Slicies/authSlice";
 import { Button, TextField } from "@mui/material";
 import { useEffect } from "react";
+import { forgetPassword } from "../../../Redux/Slicies/authActions";
+import { clearError } from "../../../Redux/Slicies/authSlice";
 
 const ForgotPassword = ({ onSubmit: moveToNext }) => {
   const { isLoading, msgError } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+
   const handleForgotPassword = async (values) => {
-    console.log(values);
     const { payload } = await dispatch(forgetPassword(values));
     if (payload.message === "success") {
       moveToNext();

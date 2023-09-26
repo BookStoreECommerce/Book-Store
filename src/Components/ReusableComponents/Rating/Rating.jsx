@@ -10,11 +10,10 @@ const Rating = ({ rate }) => {
     for (var j = 0; j < (5 - rate); j++) {
         white.push(<i className={`fa-regular fa-star ${styles.colorStar}`} key={j}></i>)
     }
-    // <div> {golden}{white.map((white, index) => <span key={index}>{white}</span>)}</div>
 
     return (
         <>
-            <div className="mt-2"> {golden}{white}</div>
+            <div className="mt-2" data-testid='rate'> {golden}{white}</div>
         </>
     );
 }
