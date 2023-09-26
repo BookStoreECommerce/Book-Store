@@ -185,7 +185,7 @@
     .bgCollapse .navLink {
         padding-left: 30px;
     }
-    .navItem:hover .navLinkBorder::before {
+    .navItem:hover>.navLinkBorder::before, .itemActive::before {
         width: 0%;
     }
 }
