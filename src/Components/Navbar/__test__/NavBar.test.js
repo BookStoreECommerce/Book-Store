@@ -6,6 +6,11 @@ import {appReducer } from '../../../Redux/Slicies/appSlice';
 import { authReducer } from '../../../Redux/Slicies/authSlice';
 
 
+const mockUsedNavigate = jest.fn();
+jest.mock('react-router-dom', () => ({
+   ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockUsedNavigate,
+}));
 
 const ReduxProvider = ({ children, reduxStore }) => (
     < Provider store={reduxStore}>{children}</Provider>

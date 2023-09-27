@@ -11,7 +11,8 @@ const ReduxProvider = ({ children, reduxStore }) => (
 describe("FooterContent", () =>{
     const mockStore =()=> configureStore({
         reducer: {
-            app: appReducer,        }
+            app: appReducer,
+        }
     });
 
     const wrapper = ({ children }) => (

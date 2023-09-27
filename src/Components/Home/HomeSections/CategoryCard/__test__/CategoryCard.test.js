@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import CategoryCard from '../CategoryCard';
+import { BrowserRouter } from 'react-router-dom';
 
 
 
@@ -25,11 +26,17 @@ const shuffledArray =[
         catName: "Business",
         img: ''
     },
+    {
+        catName: "Architecture",
+        img: ''
+    },
 
 ]
     it('should render BookCard', () => {
         render(
-             <CategoryCard shuffledArray={shuffledArray}  />
+             <BrowserRouter>
+             <CategoryCard shuffledArray={shuffledArray}/>
+             </BrowserRouter>
         );
         const imgElement = screen.getAllByRole('img');
         expect(imgElement).toBeTruthy();

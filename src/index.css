@@ -92,7 +92,12 @@ color: var(--navyBlue)!important;
 .carousel-control-next-icon{
   background-image:   url('./assets/next.svg') !important;
 }
-
+.carousel-control-next{
+  width: 5%;
+}
+.carousel-control-prev{
+  width: 5%;
+}
 .carousel-control-prev-icon{
   background-image: url('./assets/prev.svg') !important;
 }

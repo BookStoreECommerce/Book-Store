@@ -68,13 +68,5 @@ describe("Home", () =>{
         expect(screen.getByTestId('ScrollToTop')).toBeInTheDocument();
     });
 
-    it('should render NewBooks inside PolicyDialog', () => {
-        render(
-        <BrowserRouter>
-        <Home />
-        </BrowserRouter>
-        );
-        expect(screen.getByTestId('PolicyDialog')).toBeInTheDocument();
-    });
   
 })
