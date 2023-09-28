@@ -1,18 +1,16 @@
 
+import store from "../Redux/Store";
 import { baseUrl } from "../util/util";
 import axios from "axios";
 
 
 const axiosInstance = axios.create({
     baseURL: baseUrl,
-    // headers:{
-    //     // 'Authorization': `${localStorage.getItem("access-token") || store.getState((state) => state.auth.token)}`
-    // }
     withCredentials: true,
 })
 
 axiosInstance.interceptors.request.use(req => {
-    const token = localStorage.getItem('access-token');
+    const token = localStorage.getItem('access-token') || store.getState().auth.token;
     req.headers.Authorization = token ? token : "";
     return req
 }, async(error) => Promise.reject(error));

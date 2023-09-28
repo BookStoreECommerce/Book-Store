@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import TextField from "@mui/material/TextField";
@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { handleClickOpen, handlePrivacyOpen } from "../../Redux/Slicies/dialogSlice";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { register } from "../../Redux/Slicies/authActions";
+import { clearError } from "../../Redux/Slicies/authSlice";
 
 
 const getCharacterValidationError = (str) => {
@@ -19,6 +20,10 @@ export const Register = () => {
   const dispatch = useDispatch();
   const { isLoading, msgError } = useSelector((state) => state.auth);
   const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(()=> {
+    dispatch(clearError());  
+  }, [dispatch]);
 
   const handleClickShowPassword = () => setShowPassword((prev) => !prev);
 

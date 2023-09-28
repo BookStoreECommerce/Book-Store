@@ -1,7 +1,7 @@
 import {
     createSlice
 } from "@reduxjs/toolkit";
-import { forgetPassword, getUserProfile, register, registerVerification, resendVerifyCode, resetPassword, signin, signinWithToken, userProfile, varifyPasswordEmail } from "./authActions";
+import { forgetPassword, getUserProfile, register, registerVerification, resendCode, resetPassword, signin, signinWithToken, userProfile, varifyPasswordEmail, signout } from "./authActions";
 
 const initialState = {
     user: null,
@@ -22,9 +22,7 @@ const authSlice = createSlice({
             state.msgError = null;
         },
         setUser: (state, action) => {
-            const {name , value} = action.payload;
-            const user = state.user;
-            user[name] = value;
+            const user = action.payload;
             state.user = user;
         },
         logout: (state, action) => {
@@ -52,24 +50,26 @@ const authSlice = createSlice({
             state.isLoading = true
         })
         builder.addCase(register.fulfilled, (state, action) => {
+            state.isLoading = false;
             const token = action.payload.token
-            state.isLoading = false
             state.token = token
-            saveUserData(token)
         })
         builder.addCase(register.rejected, (state, action) => {
+            if(action.payload.error){
+                state.msgError = action.payload.error
+            }else{
+                state.msgError = action.payload.errors[0].message
+            }
             state.isLoading = false;
-            state.msgError = action.payload.error
         })
         //verifyEmail
         builder.addCase(registerVerification.pending, (state, action) => {
             state.isLoading = true;
         })
         builder.addCase(registerVerification.fulfilled, (state, action) => {
+            state.isLoading = false;
             const token = action.payload.token
-            state.isLoading = false
             state.token = token
-            saveUserData(token);
         })
         builder.addCase(registerVerification.rejected, (state, action) => {
             if(action.payload.error){
@@ -79,17 +79,16 @@ const authSlice = createSlice({
             }
             state.isLoading = false;
         })
-        //resendVerifyCode
-        builder.addCase(resendVerifyCode.pending, (state, action) => {
+        //resendCode
+        builder.addCase(resendCode.pending, (state, action) => {
             // state.isLoading = true;
         })
-        builder.addCase(resendVerifyCode.fulfilled, (state, action) => {
+        builder.addCase(resendCode.fulfilled, (state, action) => {
             const token = action.payload.token
             state.isLoading = false
             state.token = token
-            saveUserData(token);
         })
-        builder.addCase(resendVerifyCode.rejected, (state, action) => {
+        builder.addCase(resendCode.rejected, (state, action) => {
             if(action.payload.error){
                 state.msgError = action.payload.error
             }else{
@@ -107,7 +106,6 @@ const authSlice = createSlice({
             state.isLoading = false;
             state.token = token
             saveUserData(token)
-        //  redirect('/')
         })
         builder.addCase(signinWithToken.rejected, (state, action) => {
             state.isLoading = false
@@ -124,7 +122,11 @@ const authSlice = createSlice({
         })
         builder.addCase(userProfile.rejected, (state, action) => {
             state.isLoading = false
-            state.msgError = action.payload.message
+            if(action.payload.error){
+                state.msgError = action.payload.error
+            }else{
+                state.msgError = action.payload.errors[0].message
+            }
         })
         // getUserProfile
         builder.addCase(getUserProfile.pending, (state, action) => {
@@ -136,7 +138,11 @@ const authSlice = createSlice({
         })
         builder.addCase(getUserProfile.rejected, (state, action) => {
             state.isLoading = false
-            state.msgError = action.payload.error
+            if(action.payload.error){
+                state.msgError = action.payload.error
+            }else{
+                state.msgError = action.payload.errors[0].message
+            }
         })
 
         //forget password
@@ -146,9 +152,7 @@ const authSlice = createSlice({
         builder.addCase(forgetPassword.fulfilled, (state, action) => {
             const token = action.payload.token
             state.token = token;
-            saveUserData(token);
             state.msgError = null;
-            // state.resetPasswordMessage = action.payload;
             state.isLoading = false;
 
         });
@@ -176,17 +180,28 @@ const authSlice = createSlice({
             state.isLoading = true;
         });
         builder.addCase(resetPassword.fulfilled, (state, action) => {
-            // const token = action.payload.token
-            // state.token = token;
-            // saveUserData(token);
             state.isLoading = false;
             localStorage.removeItem('access-token');
-            localStorage.removeItem('user-mail');
         });
         builder.addCase(resetPassword.rejected, (state, action) => {
             state.msgError = action.payload.error
             state.isLoading = false;
         });
+         // signout
+         builder.addCase(signout.pending, (state, action) => {
+            state.isLoading = true;
+        })
+        builder.addCase(signout.fulfilled, (state, action) => {
+            state.isLoading = false;
+        })
+        builder.addCase(signout.rejected, (state, action) => {
+            state.isLoading = false
+            if(action.payload.error){
+                state.msgError = action.payload.error
+            }else{
+                state.msgError = action.payload.errors[0].message
+            }
+        })
     }
 })
 

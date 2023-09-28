@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./UserProfile.module.css";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
@@ -11,14 +11,19 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { useNavigate } from "react-router";
-import { getUserProfile, userProfile } from "../../Redux/Slicies/authActions";
-import { setUser } from "../../Redux/Slicies/authSlice";
+import { userProfile } from "../../Redux/Slicies/authActions";
+import { clearError, setUser } from "../../Redux/Slicies/authSlice";
 
 const UserProfile = () => {
-  const [isFirst, setIsFirst] = useState(true);
   const navigate = useNavigate();
   const { isLoading, msgError, user } = useSelector((state) => state.auth);
+  const [data, setData] = useState(user);
   const dispatch = useDispatch();
+
+  useEffect(()=> {
+    dispatch(clearError());  
+  }, [dispatch]);
+
   const validationSchema = Yup.object({
     userName: Yup.string()
       .required("Name is required")
@@ -47,16 +52,15 @@ const UserProfile = () => {
     handleSubmit,
     touched,
     errors,
-    setValues,
     isValid,
   } = useFormik({
     initialValues: {
-      userName: "",
-      address: "",
-      city: "",
-      phone: "",
-      age: "",
-      gender: "",
+      userName: data.userName,
+      address: data.address,
+      city: data.city,
+      phone: data.phone,
+      age: data.age,
+      gender: data.gender,
     },
     validationSchema,
     isInitialValid: false,
@@ -74,39 +78,17 @@ const UserProfile = () => {
       });
       const { payload } = await dispatch(userProfile(values));
       if (payload.message === "success") {
+        dispatch(setUser(values))
         navigate("");
       }
     }
   };
 
-  const responseFn = useCallback(() => {
-    dispatch(getUserProfile());
-  }, [dispatch]);
-
   const inputHandler = (e) => {
     const { name, value } = e.target;
-    dispatch(setUser({ name, value }));
+    setData((prev) => ({...prev, [name]: value}))
   };
 
-  useEffect(() => {
-    if (isFirst) {
-      responseFn();
-      setIsFirst(false);
-    }
-  }, [isFirst, responseFn]);
-
-  useEffect(() => {
-    if (user !== null) {
-      setValues({
-        userName: user.userName,
-        address: user.address || "",
-        city: user.city || "",
-        age: user.age || "",
-        gender: user.gender || "",
-        phone: user.phone || "",
-      });
-    }
-  }, [setValues, user]);
 
   return (
     <>
@@ -122,7 +104,7 @@ const UserProfile = () => {
 
           <div className="d-flex align-items-center gap-3 justify-content-center">
             <i className={`fa-solid fa-circle-user ${styles.iconFontSize}`}></i>
-            <h4 className={`${styles.mainTitle}`}>{values.userName}</h4>
+            <h4 className={`${styles.mainTitle}`}>{user.userName}</h4>
           </div>
 
           <div className="nameAndPhone d-flex flex-column flex-md-row gap-md-0 gap-3 justify-content-evenly">
@@ -259,7 +241,6 @@ const UserProfile = () => {
 
             <Button
               variant="outlined"
-              // type="submit"
               onClick={() => myHandleSubmit(values)}
               endIcon={
                 isLoading ? <i className="fas fa-spinner fa-spin"></i> : ""
