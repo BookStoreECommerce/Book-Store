@@ -10,7 +10,7 @@
         /* color: #40489b; */
         color: var(--navyBlue );
         font-weight: bold;
-        font-size: 18px;
+        font-size: 20px;
 
     
     }
@@ -112,6 +112,7 @@
 .colorStar{
     color: #ffc107;
 }
+
 @media screen and (min-width:300px) and (max-width:700px){
     .headerFont{
 font-size: 19px;

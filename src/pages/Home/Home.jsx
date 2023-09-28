@@ -6,7 +6,6 @@ import Reviews from '../../Components/HomeComponents/Reviews/Reviews';
 import Categories from '../../Components/HomeComponents/Categories/Categories';
 import ScrollToTop from '../../Components/ReusableComponents/ScrollToTop/ScrollToTop';
 import BestSeller from '../../Components/HomeComponents/BestSeller/BestSeller';
-import PolicyDialog from '../../Components/Dialogs/PolicyDialog/PolicyDialog';
 
 
 export default function Home() {
@@ -20,7 +19,6 @@ export default function Home() {
       <BestSeller />
       <Reviews />
       <ScrollToTop />
-      <PolicyDialog/>
     </>
   )
 }

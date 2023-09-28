@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import TextField from "@mui/material/TextField";
@@ -6,19 +6,47 @@ import { Button, FormControl, FormHelperText, IconButton, InputLabel, OutlinedIn
 import styles from "./Register.module.css";
 import SocialMediaBtns from "../../ReusableComponents/SocialMediaBtns/SocialMediaBtns";
 import { useDispatch, useSelector } from "react-redux";
-import { register } from "../../../Redux/Slicies/authSlice";
-import { handleClickOpen } from "../../../Redux/Slicies/dialogSlice";
+import { register } from "../../../Redux/Slicies/authActions";
+import { handleClickOpen, handlePrivacyOpen } from "../../../Redux/Slicies/dialogSlice";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { clearError } from "../../../Redux/Slicies/authSlice";
 
 
 const getCharacterValidationError = (str) => {
   return `Password must have at least 1 ${str} character`;
 };
 
-  const Register = () => {
+const validationSchema = Yup.object({
+  userName: Yup.string()
+    .required("Name is required")
+    .matches(
+      /^[a-zA-Z]{3,8}([_ -]?[a-zA-Z0-9]{3,8})*$/,
+      "Name must start with 3:8 letters (a-z)"
+    ),
+  email: Yup.string()
+    .required("Email is required")
+    .email("Please Enter a valid email"),
+  password: Yup.string()
+    .required('Password is required')
+    .min(8, 'Password should be of minimum 8 characters length')
+    .matches(/[0-9]/, getCharacterValidationError("digit"))
+    .matches(/[A-Z]/, getCharacterValidationError("uppercase"))
+    .matches(/[a-z]/, getCharacterValidationError("lowercase"))
+    .matches(/[!@#$%^&*()\-_=+{};:,<.>]/, getCharacterValidationError("special caracters")),
+  rePassword: Yup.string()
+    .required("Please confirm your password")
+    .oneOf([Yup.ref("password")], "Password is not matched"),
+  privacyCheck: Yup.boolean().oneOf([true], "Please accept privacy policy"),
+});
+
+const Register = () => {
   const dispatch = useDispatch();
   const { isLoading, msgError } = useSelector((state) => state.auth);
   const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(()=> {
+    dispatch(clearError());  
+  }, [dispatch]);
 
   const handleClickShowPassword = () => setShowPassword((prev) => !prev);
 
@@ -37,29 +65,6 @@ const getCharacterValidationError = (str) => {
       dispatch(handleClickOpen({ name: "register-verify" }))
     }
   };
-
-  let validationSchema = Yup.object({
-    userName: Yup.string()
-      .required("Name is required")
-      .matches(
-        /^[a-zA-Z]{3,8}([_ -]?[a-zA-Z0-9]{3,8})*$/,
-        "Name must start with 3:8 letters (a-z)"
-      ),
-    email: Yup.string()
-      .required("Email is required")
-      .email("Please Enter a valid email"),
-    password: Yup.string()
-      .required('Password is required')
-      .min(8, 'Password should be of minimum 8 characters length')
-      .matches(/[0-9]/, getCharacterValidationError("digit"))
-      .matches(/[A-Z]/, getCharacterValidationError("uppercase"))
-      .matches(/[a-z]/, getCharacterValidationError("lowercase"))
-      .matches(/[!@#$%^&*()\-_=+{};:,<.>]/, getCharacterValidationError("special caracters")),
-    rePassword: Yup.string()
-      .required("Please confirm your password")
-      .oneOf([Yup.ref("password")], "Password is not matched"),
-    privacyCheck: Yup.boolean().oneOf([true], "Please accept privacy policy"),
-  });
 
   let formik = useFormik({
     initialValues: {
@@ -145,8 +150,8 @@ const getCharacterValidationError = (str) => {
           margin="dense"
         />
 
-        <div className="d-flex justify-content-between align-items-center mt-2">
-          <div className="form-check">
+        <div className="d-flex flex-column flex-sm-row justify-content-between gap-sm-0 gap-2 align-items-center mt-2">
+          <div className="form-check align-self-start">
             <input
               className="form-check-input mainCheckbox"
               onBlur={formik.handleBlur}
@@ -160,12 +165,12 @@ const getCharacterValidationError = (str) => {
               className="form-check-label text-muted"
               htmlFor="privacyCheck"
             >
-              I agree to the{" "}
-              <a className="text-muted" href="\">
-                privacy policy
-              </a>
-              .
+              I agree to the
             </label>
+            <button type="button" className={`text-muted ${styles.privacyBtn}`} onClick={()=>dispatch(handlePrivacyOpen())}>
+              privacy policy
+            </button>
+            .
             {formik.errors.privacyCheck && formik.touched.privacyCheck ? (
               <p className="mt-1 text-danger mb-0">
                 {formik.errors.privacyCheck}
@@ -183,7 +188,7 @@ const getCharacterValidationError = (str) => {
                 <i className="fa-solid fa-arrow-right"></i>
               )
             }
-            className={`mainBtn`}
+            className={`mainBtn align-self-end`}
             disabled={formik.isValid ? false : true}
           >
             Next

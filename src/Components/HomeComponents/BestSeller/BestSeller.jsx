@@ -18,7 +18,7 @@ import book12 from '../../../assets/12.jpg'
 import BookCard from "../../../Components/ReusableComponents/BookCard/BookCard";
 
 const BestSeller = () => {
-    const [bestSeller, setBestSeller] = useState([
+    const [bestSeller] = useState([
         {
             id: 0,
             image: book,
@@ -179,7 +179,7 @@ const BestSeller = () => {
     };
     return (
 
-        <section className="px-lg-0 px-4">
+        <section className="px-lg-0 px-4" data-testid='BestSeller'>
             <div className="container-fluid">
                 <div className="row justify-content-center">
                     <h2 className="blueHeader text-center mt-4 mb-5">Best Seller</h2>

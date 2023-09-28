@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useRef } from 'react';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
@@ -10,44 +10,46 @@ import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import { Box } from '@mui/material';
 import styles from './PolicyDialog.module.css'
+import { useDispatch, useSelector } from 'react-redux';
+import { handlePrivacyClose } from '../../../Redux/Slicies/dialogSlice';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-    '& .MuiDialogContent-root': {
-      padding: theme.spacing(2),
-    },
-    '& .MuiDialogActions-root': {
-      padding: theme.spacing(1),
-    },
-  }));
-
-export default function ScrollDialog() {
-    const [open, setOpen] = React.useState(true);
+  '& .MuiDialogContent-root': {
+    padding: theme.spacing(2),
+  },
+  '& .MuiDialogActions-root': {
+    padding: theme.spacing(1),
+  },
+}));
+const PolicyDialog = () => {
 
 
+  const dispatch = useDispatch();
+  const { privacyOpen } = useSelector((state) => state.dialog)
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+  const handleClose = () => {
+      // setOpen(false);
+      dispatch(handlePrivacyClose());
+  };
 
-    const descriptionElementRef = React.useRef(null);
-    React.useEffect(() => {
-        if (open) {
-            const { current: descriptionElement } = descriptionElementRef;
-            if (descriptionElement !== null) {
-                descriptionElement.focus();
-            }
-        }
-    }, [open]);
+  const descriptionElementRef = useRef(null);
+  useEffect(() => {
+      if (privacyOpen) {
+          const { current: descriptionElement } = descriptionElementRef;
+          if (descriptionElement !== null) {
+              descriptionElement.focus();
+          }
+      }
+  }, [privacyOpen]);
 
-
-return (
-    <div>
-     
+  return ( 
+      <div data-testid='PolicyDialog'>
+   
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
-        open={open}
+        open={privacyOpen}
         maxWidth="md"
         fullWidth
         disableScrollLock
@@ -56,6 +58,7 @@ return (
           Policy
         </DialogTitle>
         <IconButton
+        data-testid='closeIcon'
           aria-label="close"
           onClick={handleClose}
           sx={{
@@ -114,7 +117,7 @@ return (
     <br/>
         </DialogContent>
         <DialogActions>
-          <Button className="mainBtn"  onClick={handleClose}>
+          <Button data-testid='return' className="mainBtn" onClick={handleClose}>
             Return
           </Button>
         </DialogActions>
@@ -122,3 +125,5 @@ return (
     </div>
   );
 }
+ 
+export default PolicyDialog;

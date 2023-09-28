@@ -7,7 +7,7 @@ import styles from './BookCard.module.css'
 const BookCard = ({ id, image, name, price, author, rate, section, cardStyle ,sale}) => {
     return (
         <>
-            <div className={section === "newBooks" ? `col-lg-3 col-sm-6 col-12 mb-2 ${styles.font}` : ''}>
+            <div data-testid='BookCard' className={section === "newBooks" ? `col-lg-3 col-sm-6 col-12 mb-5 ${styles.font}` : ''}>
                 <div className={`mb-2 position-relative ${styles.imgContainer}`} style={cardStyle}>
                     <div className={styles.overLay}>
 
@@ -46,11 +46,11 @@ const BookCard = ({ id, image, name, price, author, rate, section, cardStyle ,sa
                   </>:''}
 
                 </div>
-                <div className={`d-flex flex-column justify-content-start text-left ${styles.pLeft}`} >
+                <div className={`d-flex flex-column justify-content-start text-center`} >
                     {section === "bestSeller" ? '' : <span className={styles.bookName}>{name}</span>}
                     {section === "bestSeller" ? '' : <span className={styles.bookAuthor}>By {author}</span>}
                     {section === "bestSeller" ? '' : <span className={styles.price}> {price + ` EGP`} </span>}
-                    {section === "bestSeller" ? '' : <><Rating rate={rate} id={id} /></>}
+                  
                 </div>
             </div>
 

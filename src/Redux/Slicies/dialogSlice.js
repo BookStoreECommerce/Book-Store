@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {open: false, name: "", };
+const initialState = {open: false, name: "", privacyOpen: false};
 
 const dialogSlice = createSlice({
     name: 'dialog',
@@ -14,8 +14,14 @@ const dialogSlice = createSlice({
             state.open = false;
             state.name = ""
         },
+        handlePrivacyOpen: (state, action) => {
+            state.privacyOpen = true;
+        },
+        handlePrivacyClose: (state, action) => {
+            state.privacyOpen = false;
+        },
     }
 });
 
 export const dialogReducer = dialogSlice.reducer;
-export const { handleClickOpen, handleClose } = dialogSlice.actions;
+export const { handleClickOpen, handleClose, handlePrivacyOpen, handlePrivacyClose } = dialogSlice.actions;

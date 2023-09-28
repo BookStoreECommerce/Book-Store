@@ -4,14 +4,19 @@ import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./Login.module.css";
 import { Button, FormControl, FormHelperText, IconButton, InputLabel, OutlinedInput, TextField } from "@mui/material";
-import { Link } from "react-router-dom";
+// import CustomizedDialogs from "../Dialog/Dialog";
+import { Link, useNavigate } from "react-router-dom";
+import { handleClickOpen, handleClose } from "../../../Redux/Slicies/dialogSlice";
 import SocialMediaBtns from "../../ReusableComponents/SocialMediaBtns/SocialMediaBtns";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { clearError, signin } from "../../../Redux/Slicies/authSlice";
-import { handleClickOpen, handleClose } from "../../../Redux/Slicies/dialogSlice";
+import { signin } from "../../../Redux/Slicies/authActions";
+import { clearError } from "../../../Redux/Slicies/authSlice";
 
 const Login = () => {
+  // const [messageError, setMessageError] = useState("");
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   // dispatch(clearError());
   // const { loginShow } = useSelector(({ dialog }) => dialog);
   const { isLoading, msgError } = useSelector((state) => {
@@ -30,6 +35,7 @@ const Login = () => {
     await dispatch(signin(values));
     if (localStorage.getItem("access-token")) {
       dispatch(handleClose());
+      navigate('/');
     }
   };
 
@@ -144,6 +150,9 @@ const Login = () => {
         >
           Signup
         </Button>
+        {/* <a className="text-muted" href="\">
+            Signup
+          </a> */}
       </div>
 
       <div className="d-flex align-items-baseline justify-content-between">

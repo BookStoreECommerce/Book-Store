@@ -1,18 +1,23 @@
 import { Box, Button, Typography } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
-import Styles from "./error.module.css"
 import NavBar from "../../Components/MainLayoutComponents/Navbar/NavBar";
+import { useCallback, useEffect, useRef } from "react";
 import Footer from "../../Components/MainLayoutComponents/Footer/Footer";
+import { useDispatch, useSelector } from "react-redux";
+import { removeFooterMargin, setFooterMargin, setHeight } from "../../Redux/Slicies/appSlice";
+import { useNavigate } from "react-router-dom";
 
 const ErrorBoundry = () => {
-    const [navHeight, setNavHeight] = useState(0);
-    const [footerHeight, setFooterHeight] = useState(0);
     const navRef = useRef(null);
     const footerRef = useRef(null);
+    const { footerH, navH } = useSelector((state) => state.app);
+    const dispatch = useDispatch();
+    const navigated = useNavigate()
+    const navigateToHome = useCallback(() => navigated('/'), [navigated])
     useEffect(() => {
-        setNavHeight(navRef.current.clientHeight);
-        setFooterHeight(footerRef.current.clientHeight);
-    }, [])
+        dispatch(setHeight({ footerH: footerRef.current.clientHeight, navH: navRef.current.clientHeight }));
+        dispatch(removeFooterMargin());
+        return () => dispatch(setFooterMargin())
+    }, [dispatch])
     return (
         <>
             <NavBar navRef={navRef} />
@@ -22,9 +27,9 @@ const ErrorBoundry = () => {
                     justifyContent: 'center',
                     alignItems: 'center',
                     flexDirection: 'column',
-                    minHeight: `calc(100vh - ${navHeight + footerHeight}px)`,
+                    minHeight: `calc(100vh - ${navH + footerH}px)`,
                     width: '100%',
-                    mt: `${navHeight}px`,
+                    mt: `${navH}px`,
                     backgroundColor: (theme) => theme.palette.secondary.main,
                 }}
             >
@@ -34,9 +39,9 @@ const ErrorBoundry = () => {
                 <Typography variant="h6" sx={{ color: 'white', mt: 1, mb: 1 }}>
                     The page you’re looking for doesn’t exist.
                 </Typography>
-                <Button variant="contained" sx={{ mt: 1, mb: 1 }}>Back Home</Button>
+                <Button variant="contained" sx={{ mt: 1, mb: 1 }} onClick={navigateToHome}>Back Home</Button>
             </Box>
-            <Footer footerRef={footerRef} customCss={Styles.removeMargT}/>
+            <Footer footerRef={footerRef} />
         </>
     )
 }

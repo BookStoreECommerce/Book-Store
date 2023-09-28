@@ -6,10 +6,11 @@ import styles from "../../AuthComponents/Login/Login.module.css";
 import * as Yup from 'yup'
 // import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import { clearError, resetPassword } from '../../../Redux/Slicies/authSlice';
 import { useDispatch, useSelector } from "react-redux";
 import { Button, TextField } from "@mui/material";
 import { useEffect } from 'react';
+import { resetPassword } from '../../../Redux/Slicies/authActions';
+import { clearError } from '../../../Redux/Slicies/authSlice';
 
 
 const ResetPassword = () => {
@@ -22,11 +23,9 @@ const ResetPassword = () => {
 
     async function handleResetPassword(values) {
         const { payload } = await dispatch(resetPassword(values));
-        console.log(values);
         if (payload.message === "success") {
             navigate("/")
         } else {
-            console.log(payload.error);
         }
     }
 

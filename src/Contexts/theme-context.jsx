@@ -1,5 +1,5 @@
-import { CssBaseline, ThemeProvider, createTheme, useMediaQuery } from "@mui/material";
-import React, { createContext, useCallback, useMemo, useState } from "react";
+import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+import React, { createContext, useMemo } from "react";
 
 const ThemeContext = createContext({ toggleColorMode: () => { } });
 
@@ -40,6 +40,7 @@ const ThemeContextProvider = ({ children }) => {
         MuiInputBase: {
           styleOverrides: {
             root: {
+              // backgroundColor: "transparent",
               backgroundColor: '#faf5f5',
             },
           }
@@ -48,8 +49,8 @@ const ThemeContextProvider = ({ children }) => {
           styleOverrides: {
             root: {
               "&.Mui-focused": {
+                // color: '#2b3a55',
                 color: '#ce7777',
-                // backgroundColor: 'transparent'
               },
             },
           }
@@ -59,15 +60,18 @@ const ThemeContextProvider = ({ children }) => {
             input: {
               "&:-webkit-autofill": {
                 WebkitBoxShadow: '0 0 0 100px transparent inset',
+                // textAlign: "center"
                 // WebkitTextFillColor: '#fff'
               },
               ':hover': {
+                // borderColor: '#2b3a55 !important'
                 borderColor: '#e8c4c4 !important'
               },
             },
             root: {
               "&.Mui-focused": {
                 "& .MuiOutlinedInput-notchedOutline": {
+                  // borderColor: '#2b3a55 !important'
                   borderColor: '#e8c4c4 !important'
                 },
               }

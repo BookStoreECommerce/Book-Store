@@ -7,3 +7,11 @@
 .or {
     color: var(--mainColor);
 }
+
+.privacyBtn {
+    border: none;
+    background: no-repeat;
+    text-decoration: underline;
+    padding: 0px;
+    margin-left: 5px;
+}

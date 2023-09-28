@@ -20,7 +20,7 @@ const ScrollToTop = () => {
         });
     };
     return (
-        <div className={styles.topToBtm}>
+        <div className={styles.topToBtm} data-testid='ScrollToTop'>
             <div className={styles.iconPosition}>
             {" "}{showTopBtn && ( <BiChevronUp className={styles.iconStyle} onClick={goToTop} /> )}{" "}
             </div>

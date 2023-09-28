@@ -1,25 +1,24 @@
 import React, { Fragment } from "react";
 import style from './Footer.module.css'
-import { Box } from "@mui/material";
+import { useSelector } from "react-redux";
 
-const Footer = ({footerRef, customCss}) => {
+const Footer = ({ footerRef }) => {
+    const {footerMargin} = useSelector((state) => state.app);
     return (
 
         <>
-        <Box width={'100%'} className={customCss ? customCss : style.marginTop} ref={footerRef}>
-        <div className="darkBg">
-        <div className="container">
-            <div className="row justify-content-center align-items-center text-white text-center">
-                <div className="col-12 py-3">
-                    <span className={style.footer}>Copyright 2023 <span className="fw-bold">Sphinx</span>. All Rights Reserved.
-                    </span>
+            <section data-testid="footer" className={ footerMargin ? style.marginTop : style.removeMargT} ref={footerRef}>
+                <div className="darkBg">
+                    <div className="container">
+                        <div className="row justify-content-center align-items-center text-white text-center">
+                            <div className="col-12 py-3">
+                                <span className={style.footer}>Copyright 2023 <span className="fw-bold">Sphinx</span>. All Rights Reserved.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-
-    </div>
-        </Box>
-
+            </section>
         </>
     );
 }

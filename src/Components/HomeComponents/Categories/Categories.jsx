@@ -14,7 +14,7 @@ import business from '../../../assets/business.jpg';
 const Categories = () => {
 
     
-    const [category, setCategory] = useState([
+    const [category] = useState([
         {
             catName: "Science",
             img: science
@@ -52,11 +52,11 @@ const Categories = () => {
         }
         return array;
     };
-    const shuffledArray = shuffle(category).slice(0, 5);
+    const shuffledArray = shuffle(category).slice(0, 6);
 
     return (
         <>
-            <section className='pt-4 pb-5'>
+            <section className='pt-4 pb-5' data-testid='Categories'>
                 <div className={`container text-center ${styles.paddingSection}`}>
                     <h2 className="blueHeader">Categories</h2>
                   <CategoryCard shuffledArray={shuffledArray} />

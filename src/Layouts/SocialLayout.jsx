@@ -1,10 +1,10 @@
-import { Box, Container } from "@mui/material"
+import { Box } from "@mui/material"
 import { Outlet } from "react-router-dom"
 
 
 const SocialLayout = () => {
     return (
-        <Box
+        <Box 
             sx={{
                 width: "100%",
                 minHeight: "100vh",
