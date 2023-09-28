@@ -151,8 +151,8 @@ export const Register = () => {
           margin="dense"
         />
 
-        <div className="d-flex justify-content-between align-items-center mt-2">
-          <div className="form-check">
+        <div className="d-flex flex-column flex-sm-row justify-content-between gap-sm-0 gap-2 align-items-center mt-2">
+          <div className="form-check align-self-start">
             <input
               className="form-check-input mainCheckbox"
               onBlur={formik.handleBlur}
@@ -166,12 +166,12 @@ export const Register = () => {
               className="form-check-label text-muted"
               htmlFor="privacyCheck"
             >
-              I agree to the{" "}
-              <a className="text-muted" href="\">
-                privacy policy
-              </a>
-              .
+              I agree to the
             </label>
+            <button type="button" className={`text-muted ${styles.privacyBtn}`} onClick={()=>dispatch(handlePrivacyOpen())}>
+              privacy policy
+            </button>
+            .
             {formik.errors.privacyCheck && formik.touched.privacyCheck ? (
               <p className="mt-1 text-danger mb-0">
                 {formik.errors.privacyCheck}
@@ -189,7 +189,7 @@ export const Register = () => {
                 <i className="fa-solid fa-arrow-right"></i>
               )
             }
-            className={`mainBtn`}
+            className={`mainBtn align-self-end`}
             disabled={formik.isValid ? false : true}
           >
             Next
@@ -215,9 +215,6 @@ export const Register = () => {
         >
           Login
         </Button>
-        {/* <a className="text-muted" href="\">
-          Login
-        </a> */}
       </div>
 
       <div className="d-flex align-items-baseline justify-content-between">
