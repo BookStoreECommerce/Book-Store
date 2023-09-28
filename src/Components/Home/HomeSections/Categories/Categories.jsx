@@ -14,7 +14,7 @@ import business from '../../../../assets/business.jpg';
 const Categories = () => {
 
     
-    const [category, setCategory] = useState([
+    const [category] = useState([
         {
             catName: "Science",
             img: science

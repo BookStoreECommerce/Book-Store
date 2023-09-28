@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, { useState } from "react";
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -18,7 +18,7 @@ const Reviews = () => {
         cssEase: "linear",
         arrows: false,
     };
-    const [review, setReview] = useState([
+    const [review] = useState([
         {
             id: 0,
             rate: 4,
@@ -44,35 +44,30 @@ const Reviews = () => {
             review: "All good books have one thing in common - they are truer than if they had really happened.",
             name: "Ernest Hemingway"
         },
-        ,
         {
             id: 4,
             rate: 2,
             review: "All good books have one thing in common - they are truer than if they had really happened.",
             name: "Ernest Hemingway"
         },
-        ,
         {
             id: 5,
             rate: 5,
             review: "All good books have one thing in common - they are truer than if they had really happened.",
             name: "Ernest Hemingway"
         },
-        ,
         {
             id: 6,
             rate: 2,
             review: "All good books have one thing in common - they are truer than if they had really happened.",
             name: "Ernest Hemingway"
         },
-        ,
         {
             id: 7,
             rate: 4,
             review: "All good books have one thing in common - they are truer than if they had really happened.",
             name: "Ernest Hemingway"
         },
-        ,
         {
             id: 8,
             rate: 5,
@@ -89,18 +84,15 @@ const Reviews = () => {
                 <div className={`container ${style.paddingSection}`}>
                     <div>
                         <Slider {...settings}>
-                            {review.map((review) => {
-                                if (review.rate >= 4) {
-                                    return (
-                                        <div className={style.reviewContent} key={review.id}>
-                                            <Rating rate={review.rate} />
-                                            <p className={`my-2 ${style.fontParg}`}>❝ {review.review} ❞</p>
-                                            <p className={`mb-2 ${style.fontname}`}>{review.name}</p>
-                                        </div>
-                                    )
+                            {review.map((review) =>
+                                (review.rate >= 4) && (
+                                    <div className={style.reviewContent} key={review.id}>
+                                        <Rating rate={review.rate} />
+                                        <p className={`my-2 ${style.fontParg}`}>❝ {review.review} ❞</p>
+                                        <p className={`mb-2 ${style.fontname}`}>{review.name}</p>
+                                    </div>
+                                )
 
-                                }
-                            }
                             )}
                         </Slider>
                     </div>

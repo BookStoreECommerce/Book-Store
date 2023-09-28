@@ -12,7 +12,7 @@ export const signin = createAsyncThunk("auth/signin", async (values, { rejectWit
 
 export const register = createAsyncThunk("auth/signup", async (userData, { rejectWithValue }) => {
     try {
-        let { data } = await axiosInstance.post('auth/signup', userData);
+        const { data } = await axiosInstance.post('auth/signup', userData);
         return data
     } catch (error) {
         return rejectWithValue(error.response.data)
@@ -22,7 +22,7 @@ export const register = createAsyncThunk("auth/signup", async (userData, { rejec
 
 export const registerVerification = createAsyncThunk("auth/verifyEmail", async (verifycode, { rejectWithValue }) => {
     try {
-        let { data } = await axiosInstance.post(`auth/verifyEmail`, { code: verifycode });
+        const { data } = await axiosInstance.post(`auth/verifyEmail`, { code: verifycode });
         return data
     } catch (error) {
         return rejectWithValue(error.response.data)
@@ -31,7 +31,7 @@ export const registerVerification = createAsyncThunk("auth/verifyEmail", async (
 
 export const resendCode = createAsyncThunk("auth/resendCode", async (_, { rejectWithValue }) => {
     try {
-        let { data } = await axiosInstance.post(`auth/resendCode`, null);
+        const { data } = await axiosInstance.post(`auth/resendCode`, null);
         return data
     } catch (error) {
         return rejectWithValue(error.response.data)
@@ -40,7 +40,7 @@ export const resendCode = createAsyncThunk("auth/resendCode", async (_, { reject
 
 export const userProfile = createAsyncThunk("users/update", async (userData, { rejectWithValue }) => {
     try {
-        let { data } = await axiosInstance.put(`users/update`, userData);
+        const { data } = await axiosInstance.put(`users/update`, userData);
         return data
     } catch (error) {
         return rejectWithValue(error.response.data)
@@ -49,7 +49,7 @@ export const userProfile = createAsyncThunk("users/update", async (userData, { r
 
 export const getUserProfile = createAsyncThunk("users/profile", async (_, { rejectWithValue }) => {
     try {
-        let { data } = await axiosInstance.get(`users/profile`);
+        const { data } = await axiosInstance.get(`users/profile`);
         return data
     } catch (error) {
         return rejectWithValue(error.response.data)
@@ -92,7 +92,7 @@ export const resetPassword = createAsyncThunk("auth/resetPassword", async (value
 
 export const signinWithToken = createAsyncThunk("auth/signin-with-token", async (token, { rejectWithValue }) => {
     try {
-        let { data } = await axiosInstance.post(`auth/signin/${token}`);
+        const { data } = await axiosInstance.post(`auth/signin/${token}`);
         return data
     } catch (error) {
         console.log(error);

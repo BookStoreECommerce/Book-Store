@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import styles from "./NavBar.module.css";
@@ -7,18 +7,8 @@ import { handleClickOpen } from "../../Redux/Slicies/dialogSlice";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
-import { Badge, Button, IconButton, styled } from "@mui/material";
 import { logout } from "../../Redux/Slicies/authSlice";
 import { signout } from "../../Redux/Slicies/authActions";
-
-// const NavButton = styled(Button)(({ theme }) => ({
-//   textTransform: "inherit",
-//   "&.MuiButtonBase-root": {
-//     ":hover": {
-//       backgroundColor: "transparent",
-//     },
-//   },
-// }));
 
 function NavBar({ navRef }) {
   const navigate = useNavigate();

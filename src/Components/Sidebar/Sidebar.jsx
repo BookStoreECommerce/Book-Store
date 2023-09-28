@@ -20,7 +20,7 @@ const Sidebar = () => {
   useEffect(() => {
     dispatch(removeFooterMargin());
     return () => dispatch(setFooterMargin());
-  }, []);
+  }, [dispatch]);
 
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
@@ -37,7 +37,7 @@ const Sidebar = () => {
           minHeight: `calc(100vh - ${footerH + navH}px)`,
         }}
       >
-        <div className="row w-100 flex-lg-row flex-column align-items-center align-items-lg-start">
+        <div className={`row ${styles.row} w-100 flex-lg-row flex-column align-items-center align-items-lg-start`}>
           <div className="col-lg-3 col-md-10 col-12">
             <nav
               className={`sidebar d-flex flex-column align-item-start p-3 h-100 align-items-center`}
@@ -53,7 +53,7 @@ const Sidebar = () => {
                   onChange={handleChange}
                   value={value}
                   aria-label="Tabs where selection follows focus"
-                  variant="fullWidth"
+                  variant="scrollable"
                   selectionFollowsFocus
                 >
                   <Tab onClick={() => navigate("")} icon={<i className="fa-solid fa-user"></i>} iconPosition="start" label="User Info" />

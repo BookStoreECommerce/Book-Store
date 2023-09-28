@@ -16,7 +16,7 @@ import book12 from '../../../../assets/12.jpg'
 
 
 const NewBooks = () => {
-    const [newBooks, setNewBooks] = useState([
+    const [newBooks] = useState([
         {
             id: 0,
             image: book,
@@ -154,8 +154,8 @@ const NewBooks = () => {
     return (
         <>
             <section id="NewBooks" data-testid='NewBooks'>
-            <div className={`container ${styles.paddingSection}`} >
-                <div className={`row justify-content-center align-items-center  ${styles.gap}`}>
+            <div className={`container`} >
+                <div className={`row justify-content-center align-items-center`}>
                     <h2 className="blueHeader text-center mt-md-5 mb-2 pt-5" >New Arrivals</h2>
                     <div className="d-flex justify-content-end mb-3">
                         <button data-testid="left" className={`${leftBtn ? styles.disabled : styles.enabled} ${styles.btn} ${styles.leftBtn} `} id="leftBtn" onClick={shiftLeft} ><i className="fa-solid fa-arrow-left"></i></button>

@@ -1,5 +1,5 @@
-import { CssBaseline, ThemeProvider, createTheme, useMediaQuery } from "@mui/material";
-import React, { createContext, useCallback, useMemo, useState } from "react";
+import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+import React, { createContext, useMemo } from "react";
 
 const ThemeContext = createContext({ toggleColorMode: () => { } });
 

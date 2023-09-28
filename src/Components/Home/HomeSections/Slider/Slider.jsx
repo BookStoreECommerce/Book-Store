@@ -16,7 +16,7 @@ const Slider = () => {
         <>
             <div id="carouselExampleInterval" className="carousel slide mb-5" data-bs-ride="carousel" data-testid='Slider'>
                 <div className="carousel-inner">
-                    <div className={`carousel-item active ${styles.sliderImgOne}`}>
+                    <div className={`carousel-item active`}>
                         <div className={styles.carusouelContent}>
                             <h1 className={styles.headerContent}>Buy <span className={styles.colorHeader}>your</span><br /> favourite <span className={styles.colorHeader}>Book</span> <br />from <span className={styles.colorHeader}>Here</span></h1>
                             <button className={`${styles.shopBtn} btn px-lg-4 py-lg-2`}>Shop Now <i className="fa-solid fa-arrow-right ms-2 fw-bold"></i></button>
@@ -24,7 +24,7 @@ const Slider = () => {
                         <img src={slide1} className={`${styles.landscapeBg} w-100`} alt="..." />
                         <img src={bg1} className={`${styles.portritBg} w-100 `} alt="..." />
                     </div>
-                    <div className={`carousel-item ${styles.sliderImgTwo}`}>
+                    <div className={`carousel-item`}>
                         <div className={styles.carusouelContent}>
                             <h1 className={styles.headerContent}>A book is a <span className={styles.colorHeader}> Dream</span><br />
                                 that you <span className={styles.colorHeader}> Hold</span>
@@ -36,7 +36,7 @@ const Slider = () => {
                         <img src={slide2} className={`${styles.landscapeBg} w-100`} alt="..." />
                         <img src={bg2} className={`${styles.portritBg} w-100`} alt="..." />
                     </div>
-                    <div className={`carousel-item  ${styles.sliderImgThree}`}>
+                    <div className={`carousel-item`}>
                         <div className={styles.carusouelContent}>
                             <h1 className={styles.headerContent}>There is <span className={styles.colorHeader}>no</span><br /> friend as <span className={styles.colorHeader}>Loyal</span> <br />as a <span className={styles.colorHeader}>Book</span></h1>
                             <button className={`${styles.shopBtn} btn px-lg-4 py-lg-2`}>Shop Now <i className="fa-solid fa-arrow-right ms-2 fw-bold"></i></button>
@@ -44,7 +44,7 @@ const Slider = () => {
                         <img src={slide3} className={`${styles.landscapeBg} w-100`} alt="..." />
                         <img src={bg3} className={`${styles.portritBg} w-100 `} alt="..." />
                     </div>
-                    <div className={`carousel-item ${styles.sliderImgFour}`}>
+                    <div className={`carousel-item`}>
                         <div className={styles.carusouelContent}>
                             <h1 className={styles.headerContent}>Today a <span className={styles.colorHeader}>reader</span><br /> tomorrow a <span className={styles.colorHeader}>Leader</span> </h1>
                             <button className={`${styles.shopBtn} btn px-lg-4 py-lg-2`}>Shop Now <i className="fa-solid fa-arrow-right ms-2 fw-bold"></i></button>

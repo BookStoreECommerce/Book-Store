@@ -18,7 +18,7 @@ import book12 from '../../../../assets/12.jpg';
 import BookCard from "../../../ReusableComponents/BookCard/BookCard";
 
 const BestSeller = () => {
-    const [bestSeller, setBestSeller] = useState([
+    const [bestSeller] = useState([
         {
             id: 0,
             image: book,

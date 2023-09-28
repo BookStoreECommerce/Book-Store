@@ -20,7 +20,7 @@ function Timer({ setDisabled, clicked, setClicked }) {
     }
 
     return () => clearInterval(timer);
-  }, [setDisabled, counter, clicked]);
+  }, [setDisabled, counter, clicked, setClicked, setCounter]);
 
   return (
     <>

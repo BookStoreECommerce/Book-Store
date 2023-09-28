@@ -1,8 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
 import NavBar from "../Navbar/NavBar";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import Footer from "../Footer/Footer";
-import Styles from "./error.module.css"
 import { useDispatch, useSelector } from "react-redux";
 import { removeFooterMargin, setFooterMargin, setHeight } from "../../Redux/Slicies/appSlice";
 import { useNavigate } from "react-router-dom";
@@ -12,15 +11,15 @@ const ErrorBoundry = () => {
     // const [footerHeight, setFooterHeight] = useState(0);
     const navRef = useRef(null);
     const footerRef = useRef(null);
-    const { footerH, navH, footerNoMargin } = useSelector((state) => state.app);
+    const { footerH, navH } = useSelector((state) => state.app);
     const dispatch = useDispatch();
     const navigated = useNavigate()
-    const navigateToHome = useCallback(() => navigated('/'), [])
+    const navigateToHome = useCallback(() => navigated('/'), [navigated])
     useEffect(() => {
         dispatch(setHeight({ footerH: footerRef.current.clientHeight, navH: navRef.current.clientHeight }));
         dispatch(removeFooterMargin());
         return () => dispatch(setFooterMargin())
-    }, [])
+    }, [dispatch])
     return (
         <>
             <NavBar navRef={navRef} />

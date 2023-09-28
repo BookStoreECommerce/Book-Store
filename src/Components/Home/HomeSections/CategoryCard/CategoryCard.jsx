@@ -6,8 +6,6 @@ import { Link } from "react-router-dom";
 
 const CategoryCard = ({ shuffledArray }) => {
 
-    const recievedArray = shuffledArray;
-
     useEffect(() => {
         AOS.init();
         window.addEventListener('load', AOS.refresh);

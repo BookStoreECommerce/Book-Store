@@ -20,7 +20,7 @@ export const indexLoader = async() => {
 
 export const authSocialLoginLoader = async({ request, params }) => {
     const { token } = params;
-    const allow = new URL(request.url).searchParams.get("allow");
+    // const allow = new URL(request.url).searchParams.get("allow");
     if (token) {
       return null;
     }
