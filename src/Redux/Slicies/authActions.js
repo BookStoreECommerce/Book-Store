@@ -59,7 +59,6 @@ export const getUserProfile = createAsyncThunk("users/profile", async (_, { reje
 export const forgetPassword = createAsyncThunk(
     "auth/forgetPassword",
     async (values, { rejectWithValue }) => {
-    async (values, { rejectWithValue }) => {
         try {
             const response = await axiosInstance.post('auth/forgetPassword', values)
             return response.data;
