@@ -25,6 +25,7 @@ axiosInstance.interceptors.response.use(res => res, async(error) => {
             const response = await axiosInstance.post('auth/refresh', {}, { withCredentials: true });
             if(response.status === 201){
                 const token = response.data.token;
+                localStorage.setItem('access-token', token);
                 axiosInstance.defaults.headers.common["Authorization"] = token;
                 return axiosInstance(error.config)
             }
