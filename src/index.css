@@ -93,10 +93,14 @@ color: var(--navyBlue)!important;
   background-image:   url('./assets/next.svg') !important;
 }
 .carousel-control-next{
-  width: 5%;
+  width: 6%;
+  right: 20px;
+  top: 70px;
 }
 .carousel-control-prev{
-  width: 5%;
+  width:6%;
+  left: 20px;
+  top: 70px;
 }
 .carousel-control-prev-icon{
   background-image: url('./assets/prev.svg') !important;

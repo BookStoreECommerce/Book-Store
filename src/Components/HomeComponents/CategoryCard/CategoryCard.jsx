@@ -71,7 +71,7 @@ const CategoryCard = ({ shuffledArray }) => {
                             </div>
                         </div>
                         <div className="col-12">
-                            <Link to='#' className="text-decoration-none"><p className={styles.fontpargraph}>See more ....</p></Link>
+                            <Link to='categories' className="text-decoration-none"><p className={styles.fontpargraph}>See All Categories</p></Link>
                         </div>
                     </div>
                 </div>
