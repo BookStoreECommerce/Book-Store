@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styles from './CategoryCard.module.css'
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { Link } from "react-router-dom";
+
 
 const CategoryCard = ({ shuffledArray }) => {
 
@@ -70,9 +70,7 @@ const CategoryCard = ({ shuffledArray }) => {
                                 <img className="w-100 rounded-4" src={shuffledArray[5].img} alt='' loading="lazy" />
                             </div>
                         </div>
-                        <div className="col-12">
-                            <Link to='categories' className="text-decoration-none"><p className={styles.fontpargraph}>See All Categories...</p></Link>
-                        </div>
+                       
                     </div>
                 </div>
 

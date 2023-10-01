@@ -9,3 +9,20 @@
       padding: 0px 15px;
    }
 }
+
+.fontpargraph{
+   font-size: 22px;
+   font-weight: bold;
+ 
+   color: var(--navyBlue);
+   padding-top: 15px;
+   margin-bottom: 0;
+   display: flex;
+ justify-content: center;
+   align-items: center;
+   transition: all 0.2s ease-in-out;
+ }
+ .fontpargraph:hover{
+   color: var(--mainColor);
+ 
+ }
