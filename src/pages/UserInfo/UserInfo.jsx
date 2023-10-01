@@ -53,7 +53,8 @@ const UserInfo = () => {
                   onChange={handleChange}
                   value={value}
                   aria-label="Tabs where selection follows focus"
-                  variant="scrollable"
+                  // variant="scrollable"
+                  variant="fullWidth"
                   selectionFollowsFocus
                 >
                   <Tab onClick={() => navigate("")} icon={<i className="fa-solid fa-user"></i>} iconPosition="start" label="User Info" />
