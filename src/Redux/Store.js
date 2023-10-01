@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { authReducer } from "./Slicies/authSlice";
 import { dialogReducer } from "./Slicies/dialogSlice";
 import { appReducer } from "./Slicies/appSlice";
+import { catReducer } from "./Slicies/categoriesSlice";
 
 
 const store = configureStore({
@@ -9,6 +10,7 @@ const store = configureStore({
         dialog: dialogReducer,
         auth: authReducer,
         app: appReducer,
+        cat:catReducer,
     }
 })
 

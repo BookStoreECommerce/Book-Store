@@ -1,9 +1,21 @@
 import React from "react";
+import { useSelector } from 'react-redux';
+
 const Categories = () => {
+    const {categories } = useSelector((state) => state.cat)
+   
+   
     return (
-        <div className="my-5 d-flex justifiy-content-center align-items-center">
-        <h1 className="pt-5">Categories</h1>
-        </div>
+        <>
+  <div className="container " style={{"marginTop":"150px"}}>
+  {categories?.map((cat) => (
+    <p className="pt-5">{cat}</p>
+ ))}
+  </div>
+              
+      
+        </>
+
     );
 }
 
