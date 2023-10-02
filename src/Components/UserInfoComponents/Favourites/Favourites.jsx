@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCategories } from "../../../Redux/Slicies/favActions";
+import {
+  getAllCategories,
+  setFavCategories,
+} from "../../../Redux/Slicies/favActions";
 import { useFormik } from "formik";
 import styles from "./Favourites.module.css";
 import * as Yup from "yup";
@@ -10,7 +13,7 @@ import { Button } from "@mui/material";
 
 const Favourites = () => {
   const dispatch = useDispatch();
-  const { isLoading, msgError, allCategoriesName } = useSelector(
+  const { isLoading, msgError, allCategories, allCategoriesName } = useSelector(
     (state) => state.favourites
   );
   const [myOptions, setMyOptions] = useState([]);
@@ -20,7 +23,7 @@ const Favourites = () => {
     dispatch(getAllCategories());
   }, [dispatch]);
 
-  const getDataFromAPI = () => {
+  const searchCategories = () => {
     setMyOptions(allCategoriesName);
   };
 
@@ -43,12 +46,19 @@ const Favourites = () => {
     favCategory: Yup.string().required("This field is required"),
   });
 
-  const handleSubmit = async (values) => {
-    // call fav category api
-    // const { payload } = await dispatch(register(values));
-    // if (payload.message === "success") {
-    //
-    // }
+  let categoriesFilterArray = [];
+  const concatIdAndName = () => {
+    for (let i = 0; i < chosenFavCategory.length; i++) {
+      categoriesFilterArray.push(allCategories.find((category) => category.name === chosenFavCategory[i]));
+    }
+  };
+  
+  const handleSubmit = async () => {
+    concatIdAndName();
+    const { payload } = await dispatch(setFavCategories(categoriesFilterArray));
+    if (payload.message === "success") {
+      // console.log(payload);
+    }
   };
 
   let formik = useFormik({
@@ -57,19 +67,24 @@ const Favourites = () => {
     },
     validationSchema,
     isInitialValid: false,
-    onSubmit: handleSubmit,
   });
 
   return (
     <>
       <div className={`favourites row ${styles.row} justify-content-center`}>
-        <form className="d-flex col-11 col-lg-10 text-center flex-column gap-md-4 gap-3" onSubmit={formik.handleSubmit} noValidate>
+        <form
+          className="d-flex col-11 col-lg-10 text-center flex-column gap-md-4 gap-3"
+          onSubmit={formik.handleSubmit}
+          noValidate
+        >
           {msgError ? (
             <div className="ps-2 alert alert-danger mb-4">{msgError}</div>
           ) : null}
-          <h3 className={`${styles.mainTitle}`}>Add you Favourite Categories</h3>
+          <h3 className={`${styles.mainTitle}`}>
+            Add you Favourite Categories
+          </h3>
           <Autocomplete
-            style={{ width: '75%' }}
+            style={{ width: "75%" }}
             freeSolo
             autoComplete
             autoHighlight
@@ -78,7 +93,7 @@ const Favourites = () => {
             renderInput={(params) => (
               <TextField
                 {...params}
-                onChange={getDataFromAPI}
+                onChange={searchCategories}
                 variant="outlined"
                 label="Favourite Categories"
                 name="favCategory"
@@ -95,9 +110,14 @@ const Favourites = () => {
           />
 
           {chosenFavCategory.length !== 0 && (
-            <div className={`d-flex flex-wrap gap-2 w-100 px-3 py-4 ${styles.FavCategoryWrapper}`}>
+            <div
+              className={`d-flex flex-wrap gap-2 w-100 px-3 py-4 ${styles.FavCategoryWrapper}`}
+            >
               {chosenFavCategory.map((FavCategory, index) => (
-                <div key={index} className={`p-2 rounded ${styles.FavCategory}`}>
+                <div
+                  key={index}
+                  className={`p-2 rounded ${styles.FavCategory}`}
+                >
                   {FavCategory}
                   <i
                     className={`fa-regular fa-circle-xmark ms-2 ${styles.xmarkPointer}`}
@@ -112,10 +132,10 @@ const Favourites = () => {
 
           <Button
             variant="outlined"
-            type="submit"
+            onClick={() => handleSubmit()}
             endIcon={
               isLoading &&
-              allCategoriesName.length !== 0 && (
+              allCategories.length !== 0 && (
                 <i className="fas fa-spinner fa-spin"></i>
               )
             }

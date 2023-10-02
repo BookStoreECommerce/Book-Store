@@ -1,10 +1,11 @@
 import {
     createSlice
 } from "@reduxjs/toolkit";
-import { getAllCategories } from "./favActions";
+import { getAllCategories, setFavCategories } from "./favActions";
 
 const initialState = {
-    favCategories: [],
+    // favCategories: [],
+    getCategoriesResult: [],
     allCategories: [],
     allCategoriesName: [],
     isLoading: false,
@@ -24,16 +25,33 @@ const favSlice = createSlice({
         })
         builder.addCase(getAllCategories.fulfilled, (state, action) => {
             state.isLoading = false;
-            state.allCategories = action.payload.result;
+            state.getCategoriesResult = action.payload.result;
+            const categoriesArray = [];
             const categoriesNameArray = [];
-            for (const result of state.allCategories) {
+            for (const result of state.getCategoriesResult) {
+                let categoryObj = {};
+                categoryObj.id = result._id;
+                categoryObj.name = result.name;
+                categoriesArray.push(categoryObj);
                 categoriesNameArray.push(result.name);
+                state.allCategories = categoriesArray;
                 state.allCategoriesName = categoriesNameArray;
             }
         })
         builder.addCase(getAllCategories.rejected, (state, action) => {
             state.msgError = action.payload.error
             state.isLoading = false
+        })
+        //setFavCategories
+        builder.addCase(setFavCategories.pending, (state, action) => {
+            state.isLoading = true
+        })
+        builder.addCase(setFavCategories.fulfilled, (state, action) => {
+            state.isLoading = false;
+        })
+        builder.addCase(setFavCategories.rejected, (state, action) => {
+            state.msgError = action.payload.error
+            state.isLoading = false;
         })
     }
 })
