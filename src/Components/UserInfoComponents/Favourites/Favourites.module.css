@@ -1,0 +1,24 @@
+.FavCategoryWrapper {
+    background-color: #F5F5F5;
+}
+
+.FavCategory {
+    color: var(--mainColor);
+    border: 2px solid var(--mainColor) !important;
+}
+
+.xmarkPointer {
+    cursor: pointer;
+}
+
+.row{
+    --bs-gutter-x: 0  !important;
+}
+
+.wFitContent{
+    width: fit-content;
+}
+
+.mainTitle{
+    color: var(--navyBlue);
+}
