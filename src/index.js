@@ -77,7 +77,7 @@ const router = createBrowserRouter([
         },
       },
       {
-        path: "book/:id",
+        path: "books/:slug",
         async lazy() {
           const { default: CategoriesBook } = await import(
             "./pages/CategoriesBook/CategoriesBook"

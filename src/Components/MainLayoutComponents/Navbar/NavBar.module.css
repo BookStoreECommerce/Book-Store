@@ -71,10 +71,9 @@
     background-color: var(--beigeColor) !important;
 
 }
-.dropItemActivetran,.dropItemActivetran:hover,.dropItemActivetran:focus{
+.dropItemActivetran,.dropItemActivetran:hover,.dropItemActivetran:focus,.dropItemActivetran:active{
     background-color: #fff!important;
 }
-
 
 .colorUser {
     color:#fff !important;

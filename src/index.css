@@ -8,9 +8,9 @@ box-sizing: border-box;
 }
 
 :root {
-  --navyBlue: #2b3a55;
+  --navyBlue: rgb(43, 58, 85);
   --white: #ffffff;
-  --mainColor: #ce7777;
+  --mainColor: rgb(206, 119, 119);
   --secondaryColor: rgb(232, 196, 196);
   --beigeColor: rgb(242, 229, 229);
 }
@@ -105,7 +105,9 @@ color: var(--navyBlue)!important;
 .carousel-control-prev-icon{
   background-image: url('./assets/prev.svg') !important;
 }
-
+.dropdown-item:active {
+  background-color: #fff!important;
+}
 @media screen and (min-width:300px) and (max-width:768px){
   .blueHeader{
     font-size: 26px;

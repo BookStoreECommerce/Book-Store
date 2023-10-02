@@ -2,12 +2,12 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import Rating from "../Rating/Rating";
 import styles from './BookCard.module.css'
-
+import bookImage from '../../../assets/book.jpg'
 
 const BookCard = ({ id, image, name, price, author, rate, section, cardStyle ,sale}) => {
     return (
         <>
-            <div data-testid='BookCard' className={section === "newBooks" ? `col-lg-3 col-sm-6 col-12 mb-5 ${styles.font}` : ''}>
+            <div data-testid='BookCard' className={section === "newBooks" || section === 'catBook'? `col-lg-3 col-sm-6 col-12 my-5 ${styles.font}` : ''}>
                 <div className={`mb-2 position-relative ${styles.imgContainer}`} style={cardStyle}>
                     <div className={styles.overLay}>
 
@@ -38,7 +38,7 @@ const BookCard = ({ id, image, name, price, author, rate, section, cardStyle ,sa
 
                     </div>
 
-                    <img src={image} className={`w-100 ${styles.cardImg}`} alt="" />
+                    <img src={image? image:bookImage} className={`w-100 ${styles.cardImg}`} alt="" />
                   {section === 'bestSeller' && sale ?<>
                   <div className={`position-absolute ${styles.priceSeller}`}>
                         <span>{sale}% OFF</span>
@@ -47,7 +47,7 @@ const BookCard = ({ id, image, name, price, author, rate, section, cardStyle ,sa
 
                 </div>
                 <div className={`d-flex flex-column justify-content-start text-center`} >
-                    {section === "bestSeller" ? '' : <span className={styles.bookName}>{name}</span>}
+                    {section === "bestSeller" ? '' : <span className={styles.bookName}>{name.length>20 ? name.slice(0,25)+ '...' : name}</span>}
                     {section === "bestSeller" ? '' : <span className={styles.bookAuthor}>By {author}</span>}
                     {section === "bestSeller" ? '' : <span className={styles.price}> {price + ` EGP`} </span>}
                   

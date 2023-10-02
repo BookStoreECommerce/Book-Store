@@ -112,7 +112,9 @@
 .colorStar{
     color: #ffc107;
 }
-
+/* .cardImg{
+    max-height: 290px;
+} */
 @media screen and (min-width:300px) and (max-width:700px){
     .headerFont{
 font-size: 19px;

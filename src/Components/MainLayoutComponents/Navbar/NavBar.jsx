@@ -9,6 +9,8 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import { logout } from "../../../Redux/Slicies/authSlice";
 import { signout } from "../../../Redux/Slicies/authActions";
+import { getCatBooks } from '../../../Redux/Slicies/CategoriesBookActions';
+
 
 function NavBar({ navRef }) {
   const navigate = useNavigate();
@@ -27,6 +29,14 @@ function NavBar({ navRef }) {
     changeBackground();
     window.addEventListener("scroll", changeBackground);
   });
+
+
+  let { categoriesBooks } = useSelector((state) => state.book)
+let category = { categoriesBooks }.categoriesBooks.result
+  console.log({ categoriesBooks });
+  useEffect(() => {
+    dispatch(getCatBooks())
+  }, [])
 
   const handleLogout = () => {
     dispatch(logout());
@@ -101,9 +111,9 @@ function NavBar({ navRef }) {
             >
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className={`nav-item me-2 ${styles.navItem}`}>
-                  <NavLink 
-                  
-                    className={({isActive}) => isActive? linkStyle + styles.itemActive: linkStyle}
+                  <NavLink
+
+                    className={({ isActive }) => isActive ? linkStyle + styles.itemActive : linkStyle}
                     to="/"
                     end
                   >
@@ -112,7 +122,7 @@ function NavBar({ navRef }) {
                 </li>
                 <li className={`nav-item me-2 ${styles.navItem}`}>
                   <NavLink
-                    className={({isActive}) => isActive? linkStyle + styles.itemActive: linkStyle}
+                    className={({ isActive }) => isActive ? linkStyle + styles.itemActive : linkStyle}
                     to="shop"
                   >
                     Shop
@@ -121,7 +131,7 @@ function NavBar({ navRef }) {
 
                 <li className={`nav-item dropdown me-2 ${styles.navItem}`}>
                   <NavLink
-                    className={({isActive}) => isActive? dropStyle + styles.itemActive: dropStyle}
+                    className={({ isActive }) => isActive ? dropStyle + styles.itemActive : dropStyle}
                     to="Categories"
                     role="button"
                     data-bs-toggle="dropdown"
@@ -132,43 +142,46 @@ function NavBar({ navRef }) {
                   </NavLink>
 
                   <ul className={`dropdown-menu ${styles.dropdownMenu}`}>
-                    <li>
-                      <NavLink className={({isActive}) => isActive? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}`: linkStyle + ` dropdown-item ${styles.item}`} to="book/1">
-                        Science
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink className={({isActive}) => isActive? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}`: linkStyle + ` dropdown-item ${styles.item}`} to="book/2">
+                    {category?.slice(0,7)?.map((cat,index)=>
+                           <li key={index}>
+                           <NavLink className={({ isActive }) => isActive ? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}` : linkStyle + ` dropdown-item ${styles.item}`} to={`books/${cat._id}`}>
+                             {cat.name}
+                           </NavLink>
+                         </li>
+                    )}
+             
+                    {/* <li>
+                      <NavLink className={({ isActive }) => isActive ? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}` : linkStyle + ` dropdown-item ${styles.item}`} to="book/2">
                         children
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink className={({isActive}) => isActive? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}`: linkStyle + ` dropdown-item ${styles.item}`} to="book/3">
+                      <NavLink className={({ isActive }) => isActive ? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}` : linkStyle + ` dropdown-item ${styles.item}`} to="book/3">
                         Cooking
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink className={({isActive}) => isActive? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}`: linkStyle + ` dropdown-item ${styles.item}`} to="book/4">
+                      <NavLink className={({ isActive }) => isActive ? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}` : linkStyle + ` dropdown-item ${styles.item}`} to="book/4">
                         Science Fiction
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink className={({isActive}) => isActive? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}`: linkStyle + ` dropdown-item ${styles.item}`} to="book/5">
+                      <NavLink className={({ isActive }) => isActive ? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}` : linkStyle + ` dropdown-item ${styles.item}`} to="book/5">
                         Business
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink className={({isActive}) => isActive? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}`: linkStyle + ` dropdown-item ${styles.item}`} to="book/6">
+                      <NavLink className={({ isActive }) => isActive ? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}` : linkStyle + ` dropdown-item ${styles.item}`} to="book/6">
                         Music
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink className={({isActive}) => isActive? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}`: linkStyle + ` dropdown-item ${styles.item}`} to="book/7">
+                      <NavLink className={({ isActive }) => isActive ? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}` : linkStyle + ` dropdown-item ${styles.item}`} to="book/7">
                         Architecture
                       </NavLink>
-                    </li>
+                    </li> */}
                     <li>
-                      <NavLink className={({isActive}) => isActive? linkStyle + styles.dropItemActivetran + ` dropdown-item text-center ${styles.itemColor}`: linkStyle + ` dropdown-item text-center ${styles.itemColor}`} to="Categories">
+                      <NavLink className={({ isActive }) => isActive ? linkStyle + styles.dropItemActivetran + ` dropdown-item text-center ${styles.itemColor}` : linkStyle + ` dropdown-item text-center ${styles.itemColor}`} to="Categories">
                         see more
                       </NavLink>
                     </li>
@@ -176,7 +189,7 @@ function NavBar({ navRef }) {
                 </li>
                 <li className={`nav-item me-2 ${styles.navItem}`}>
                   <NavLink
-                    className={({isActive}) => isActive? linkStyle + styles.itemActive: linkStyle}
+                    className={({ isActive }) => isActive ? linkStyle + styles.itemActive : linkStyle}
                     to="contact"
                   >
                     Contact
