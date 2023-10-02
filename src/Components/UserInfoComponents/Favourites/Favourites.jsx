@@ -19,20 +19,19 @@ const Favourites = () => {
   const dispatch = useDispatch();
   const { isLoading, msgError, allCategoriesName } = useSelector(
     (state) => state.favourites
-    );
-    const [myOptions, setMyOptions] = useState([]);
-    
-    console.log(myOptions);
+  );
+  const [myOptions, setMyOptions] = useState([]);
 
-    useEffect(() => {
-      setMyOptions(allCategoriesName)
-    },[allCategoriesName])
+  console.log(myOptions);
+
+  useEffect(() => {
+    dispatch(getAllCategories());
+  }, [dispatch]);
 
   const getDataFromAPI = () => {
-     dispatch(getAllCategories());
+    setMyOptions(allCategoriesName);
   };
 
-  
   return (
     <>
       <div>
