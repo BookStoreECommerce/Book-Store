@@ -1,0 +1,8 @@
+.search-btn {
+    border: none;
+    border-radius: 20%;
+    color: #CE7777;
+}
+.search-btn:not(:hover) {
+    background-color: transparent;
+}
