@@ -108,6 +108,9 @@ color: var(--navyBlue)!important;
 .dropdown-item:active {
   background-color: #fff!important;
 }
+.offcanvas{
+  background-image: linear-gradient(-26deg, var(--beigeColor), white)!important;
+}
 @media screen and (min-width:300px) and (max-width:768px){
   .blueHeader{
     font-size: 26px;

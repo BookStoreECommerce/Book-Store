@@ -19,7 +19,7 @@ function NavBar({ navRef }) {
   const { user } = useSelector((state) => state.auth);
   const token = localStorage.getItem('access-token');
   const changeBackground = () => {
-    if (window.scrollY >= 100) {
+    if (window.scrollY >= 60) {
       setNavbar(true);
     } else {
       setNavbar(false);
@@ -142,44 +142,13 @@ let category = { categoriesBooks }.categoriesBooks.result
                   </NavLink>
 
                   <ul className={`dropdown-menu ${styles.dropdownMenu}`}>
-                    {category?.slice(0,7)?.map((cat,index)=>
+                    {category?.slice(0,8)?.map((cat,index)=>
                            <li key={index}>
-                           <NavLink className={({ isActive }) => isActive ? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}` : linkStyle + ` dropdown-item ${styles.item}`} to={`books/${cat._id}`}>
+                           <NavLink className={({ isActive }) => isActive ? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}` : linkStyle + ` dropdown-item ${styles.item}`} to={`books/${cat.slug}`}>
                              {cat.name}
                            </NavLink>
                          </li>
                     )}
-             
-                    {/* <li>
-                      <NavLink className={({ isActive }) => isActive ? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}` : linkStyle + ` dropdown-item ${styles.item}`} to="book/2">
-                        children
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink className={({ isActive }) => isActive ? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}` : linkStyle + ` dropdown-item ${styles.item}`} to="book/3">
-                        Cooking
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink className={({ isActive }) => isActive ? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}` : linkStyle + ` dropdown-item ${styles.item}`} to="book/4">
-                        Science Fiction
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink className={({ isActive }) => isActive ? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}` : linkStyle + ` dropdown-item ${styles.item}`} to="book/5">
-                        Business
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink className={({ isActive }) => isActive ? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}` : linkStyle + ` dropdown-item ${styles.item}`} to="book/6">
-                        Music
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink className={({ isActive }) => isActive ? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}` : linkStyle + ` dropdown-item ${styles.item}`} to="book/7">
-                        Architecture
-                      </NavLink>
-                    </li> */}
                     <li>
                       <NavLink className={({ isActive }) => isActive ? linkStyle + styles.dropItemActivetran + ` dropdown-item text-center ${styles.itemColor}` : linkStyle + ` dropdown-item text-center ${styles.itemColor}`} to="Categories">
                         see more

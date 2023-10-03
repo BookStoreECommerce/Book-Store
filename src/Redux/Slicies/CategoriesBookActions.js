@@ -12,7 +12,7 @@ export const getCatBooks = createAsyncThunk("books/getCatBooks", async (_, { rej
 
 export const getCatBooksBySlug = createAsyncThunk("books/getCatBooksBySlug", async (slug, { rejectWithValue }) => {
     try {
-        const { data } = await axiosInstance.get(`books/category?category=${slug}`);
+        const { data } = await axiosInstance.get(`book/category?slug=${slug}`);
         return data
     } catch (error) {
         return rejectWithValue(error.response.data)
