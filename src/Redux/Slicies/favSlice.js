@@ -7,7 +7,6 @@ const initialState = {
     // favCategories: [],
     getCategoriesResult: [],
     allCategories: [],
-    allCategoriesName: [],
     isLoading: false,
     msgError: null,
     // token: null,
@@ -26,16 +25,11 @@ const favSlice = createSlice({
         builder.addCase(getAllCategories.fulfilled, (state, action) => {
             state.isLoading = false;
             state.getCategoriesResult = action.payload.result;
-            const categoriesArray = [];
-            const categoriesNameArray = [];
             for (const result of state.getCategoriesResult) {
                 let categoryObj = {};
                 categoryObj.id = result._id;
                 categoryObj.name = result.name;
-                categoriesArray.push(categoryObj);
-                categoriesNameArray.push(result.name);
-                state.allCategories = categoriesArray;
-                state.allCategoriesName = categoriesNameArray;
+                state.allCategories.push(categoryObj);
             }
         })
         builder.addCase(getAllCategories.rejected, (state, action) => {

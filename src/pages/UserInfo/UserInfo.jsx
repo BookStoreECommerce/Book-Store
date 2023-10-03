@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import styles from "./UserInfo.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -12,23 +12,31 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { useMediaQuery } from "@mui/material";
 
+const paths = [undefined, 'favourites', 'settings'];
+
 const UserInfo = () => {
   const { footerH, navH } = useSelector((state) => state.app);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const location = useLocation();
+  const [value, setValue] = useState(0);
   useEffect(() => {
     dispatch(removeFooterMargin());
     return () => dispatch(setFooterMargin());
   }, [dispatch]);
 
-  const [value, setValue] = React.useState(0);
+  useEffect(()=> {
+    const url = location.pathname.split("/")[2];
+    const index = paths.indexOf(url)
+    setValue(index);
+  }, [location])
+  
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  const isSmallScreen = useMediaQuery('(max-width:991px)');
-
+  const flipScreen = useMediaQuery('(max-width:991px)');
+  const isSmallScreen = useMediaQuery('(max-width:440px)');
   return (
     <>
       <Box
@@ -48,13 +56,12 @@ const UserInfo = () => {
 
               <Box sx={{ width: "100%" }}>
                 <Tabs
-                  orientation={isSmallScreen? "horizontal" : "vertical"}
-                  sx={isSmallScreen?{ borderBottom: 1, borderColor: "divider" }:{ borderRight: 1, borderColor: "divider" }}
+                  orientation={flipScreen? "horizontal" : "vertical"}
+                  sx={flipScreen?{ borderBottom: 1, borderColor: "divider" }:{ borderRight: 1, borderColor: "divider" }}
                   onChange={handleChange}
                   value={value}
                   aria-label="Tabs where selection follows focus"
-                  // variant="scrollable"
-                  variant="fullWidth"
+                  variant= {isSmallScreen? "scrollable" : "fullWidth"}
                   selectionFollowsFocus
                 >
                   <Tab onClick={() => navigate("")} icon={<i className="fa-solid fa-user"></i>} iconPosition="start" label="User Info" />

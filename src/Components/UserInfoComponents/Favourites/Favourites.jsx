@@ -13,22 +13,24 @@ import { Button } from "@mui/material";
 
 const Favourites = () => {
   const dispatch = useDispatch();
-  const { isLoading, msgError, allCategories, allCategoriesName } = useSelector(
+  const { isLoading, msgError, allCategories } = useSelector(
     (state) => state.favourites
   );
+  const { user } = useSelector((state) => state.auth);
+  const onlyNames = user.fav_cats.map((ele) => ele.name);
   const [myOptions, setMyOptions] = useState([]);
-  const [chosenFavCategory, setChosenFavCategory] = useState([]);
+  const [chosenFavCategory, setChosenFavCategory] = useState(onlyNames || []);
 
   useEffect(() => {
-    dispatch(getAllCategories());
-  }, [dispatch]);
+    if (allCategories.length === 0) dispatch(getAllCategories());
+  }, [dispatch, allCategories]);
 
   const searchCategories = () => {
-    setMyOptions(allCategoriesName);
+    setMyOptions(allCategories.map((ele) => ele.name));
   };
 
   const setfavCategory = (event, value) => {
-    let chosenFavCategoryArray = [...chosenFavCategory];
+    const chosenFavCategoryArray = [...chosenFavCategory];
     if (value !== null && !chosenFavCategoryArray.includes(value)) {
       chosenFavCategoryArray.push(value);
       formik.values.favCategory = value;
@@ -37,7 +39,7 @@ const Favourites = () => {
   };
 
   const deletefavCategory = (index) => {
-    let deletedFavCategoryArray = [...chosenFavCategory];
+    const deletedFavCategoryArray = [...chosenFavCategory];
     deletedFavCategoryArray.splice(index, 1);
     setChosenFavCategory(deletedFavCategoryArray);
   };
@@ -49,19 +51,18 @@ const Favourites = () => {
   let categoriesFilterArray = [];
   const concatIdAndName = () => {
     for (let i = 0; i < chosenFavCategory.length; i++) {
-      categoriesFilterArray.push(allCategories.find((category) => category.name === chosenFavCategory[i]));
-    }
-  };
-  
-  const handleSubmit = async () => {
-    concatIdAndName();
-    const { payload } = await dispatch(setFavCategories(categoriesFilterArray));
-    if (payload.message === "success") {
-      // console.log(payload);
+      categoriesFilterArray.push(
+        allCategories.find((category) => category.name === chosenFavCategory[i])
+      );
     }
   };
 
-  let formik = useFormik({
+  const handleSubmit = async () => {
+    concatIdAndName();
+    await dispatch(setFavCategories(categoriesFilterArray));
+  };
+
+  const formik = useFormik({
     initialValues: {
       favCategory: "",
     },
@@ -94,6 +95,9 @@ const Favourites = () => {
               <TextField
                 {...params}
                 onChange={searchCategories}
+                onFocus={() =>
+                  setMyOptions(allCategories.map((ele) => ele.name))
+                }
                 variant="outlined"
                 label="Favourite Categories"
                 name="favCategory"
@@ -109,11 +113,11 @@ const Favourites = () => {
             )}
           />
 
-          {chosenFavCategory.length !== 0 && (
-            <div
-              className={`d-flex flex-wrap gap-2 w-100 px-3 py-4 ${styles.FavCategoryWrapper}`}
-            >
-              {chosenFavCategory.map((FavCategory, index) => (
+          <div
+            className={`d-flex flex-wrap gap-2 w-100 px-3 py-4 ${styles.FavCategoryWrapper}`}
+          >
+            {chosenFavCategory &&
+              chosenFavCategory.map((FavCategory, index) => (
                 <div
                   key={index}
                   className={`p-2 rounded ${styles.FavCategory}`}
@@ -127,11 +131,13 @@ const Favourites = () => {
                   ></i>
                 </div>
               ))}
-            </div>
-          )}
+          </div>
 
           <Button
             variant="outlined"
+            sx={{
+              padding: "5px 15px !important",
+            }}
             onClick={() => handleSubmit()}
             endIcon={
               isLoading &&

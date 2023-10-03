@@ -64,28 +64,18 @@ const ThemeContextProvider = ({ children }) => {
                 // WebkitTextFillColor: '#fff'
               },
               ':hover': {
-                // borderColor: '#2b3a55 !important'
                 borderColor: '#e8c4c4 !important'
               },
             },
             root: {
               "&.Mui-focused": {
                 "& .MuiOutlinedInput-notchedOutline": {
-                  // borderColor: '#2b3a55 !important'
                   borderColor: '#e8c4c4 !important'
                 },
               }
             },
           },
         },
-        // MuiFormHelperText: {
-        //   styleOverrides: {
-        //     root: {
-        //       width: '100px',
-        //       // whiteSpace: 'nowrap'
-        //     }
-        //   },
-        // },
       },
     }),
     []
