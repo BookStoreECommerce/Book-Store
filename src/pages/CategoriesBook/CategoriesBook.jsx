@@ -16,21 +16,21 @@ const CategoriesBook = () => {
     const { footerH, navH } = useSelector((state) => state.app);
     let { catBySlug } = useSelector((state) => state.catbook);
     let category = { catBySlug }.catBySlug.book;
-    let [params, setParams] = useState(null);
+    const [params, setParams] = useState(null);
     const [paginate, setPaginate] = useState(12);
+     let Params = useParams();
+    const dispatch = useDispatch();
+    // console.log(Params.slug);
+    console.log(category);
+
+    
     const load_more = (e) => {
         setPaginate((prevValue) => prevValue + 12);
     }
 
-    let Params = useParams();
-    const dispatch = useDispatch();
-
-    console.log(Params.slug);
-    console.log(category);
-
     useEffect(() => {
-        setParams(Params)
         dispatch(getCatBooksBySlug(Params.slug))
+        setParams(Params)
     }, [Params]);
 
     useEffect(() => {
@@ -42,10 +42,10 @@ const CategoriesBook = () => {
         <ScrollToTop />
         <Box sx={{ marginTop: `${navH}px`, minHeight: `calc(100vh - ${footerH + navH}px)`, }} className={styles.flex}>
             <div className={styles.badge}>
-                <span className={styles.slug}>{category[0].category.name} books</span>
+                <span className={styles.slug}>{category?category[0].category.name:''} books</span>
                 <div className={styles.content}>
                     <Link to='/'> <i className="fa-solid fa-home"></i> </Link>
-                    <span className={styles.slash}> / <Link to='/Categories'>Categories</Link> / <Link to=''>{category[0].category.name}</Link></span>
+                    <span className={styles.slash}> / <Link to='/Categories'>Categories</Link> / <Link to=''>{category?category[0].category.name:''}</Link></span>
 
                 </div>
             </div>

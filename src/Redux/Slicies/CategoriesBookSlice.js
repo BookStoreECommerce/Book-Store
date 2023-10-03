@@ -18,6 +18,10 @@ const CategoriesBookSlice = createSlice({
         builder.addCase(getCatBooks.fulfilled, (state,action)=>{
             state.categoriesBooks = action.payload;
         })
+        builder.addCase(getCatBooks.rejected, (state, action) => {
+            state.msgError = action.payload.error
+            state.isLoading = false
+        })
     
     }
 })
@@ -31,6 +35,10 @@ const CategoriesBookBySlug = createSlice({
         })
         builder.addCase(getCatBooksBySlug.fulfilled, (state,action)=>{
             state.catBySlug = action.payload;
+        })
+        builder.addCase(getCatBooksBySlug.rejected, (state, action) => {
+            state.msgError = action.payload.error
+            state.isLoading = false
         })
 
     }
