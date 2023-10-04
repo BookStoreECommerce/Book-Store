@@ -21,10 +21,10 @@
 .overlayCat {
   position: absolute;
   width: 80%;
-  top: 80%;
+  /* top: 61%; */
   left: 10%;
   right: 0;
-  bottom: 3%;
+  bottom: 4%;
   border-radius: 12px;
   display: flex;
   justify-content: center;
@@ -34,6 +34,7 @@
   z-index: 99;
   text-align: center;
   padding: 5px;
+  height: fit-content;
 
 }
 
@@ -83,4 +84,11 @@
   .overlayCat p {
     font-size: 18px;
   }
+
+
+}
+@media screen and (max-width:575px) {
+  .cardImg img {
+    height: unset !important;
+}
 }
