@@ -113,7 +113,7 @@ function NavBar({ navRef }) {
                 <li className={`nav-item me-2 ${styles.navItem}`}>
                   <NavLink
                     className={({isActive}) => isActive? linkStyle + styles.itemActive: linkStyle}
-                    to="shop"
+                    to="book"
                   >
                     Shop
                   </NavLink>

@@ -108,3 +108,14 @@ export const signout = createAsyncThunk("auth/logout", async (_, { rejectWithVal
         return rejectWithValue(error.response.data)
     }
 })
+
+
+export const getAllBooks = createAsyncThunk(`books`, async (page, { rejectWithValue }) => {
+    try {
+        const { data } = await axiosInstance.get(`book?page=${page}`);
+        console.log(data);
+        return data
+    } catch (error) {
+        return rejectWithValue(error.response.data)
+    }
+})

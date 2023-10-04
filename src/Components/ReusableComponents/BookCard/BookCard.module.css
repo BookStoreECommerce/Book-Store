@@ -2,7 +2,7 @@
 .font{
     font-family: 'Jost', sans-serif;
 }
-.cardImg{
+.cardImg,.cardImgNew{
     border-radius: 15px;
     }
     
@@ -62,8 +62,22 @@
 
     .imgContainer:hover .overLay{
         top:0;
+  
     }
 
+.badge{
+    background-color: var(--secondaryColor);
+margin-top: 5px;
+    width: fit-content;
+    padding: 0px 12px;
+    border-radius: 30px;
+    margin-bottom: 7px;
+font-size: 15px;
+font-weight: 500;
+    font-family: 'Jost', sans-serif;
+    color: var(--navyBlue);
+
+}
 .icon{
     width: 40px;
     height: 30px;
@@ -112,9 +126,52 @@
 .colorStar{
     color: #ffc107;
 }
+@media screen and (min-width:1701px) and (max-width:2000px){
+    .cardImg{
+        height: 340px;
+    }
+}
+@media screen and (min-width:1400px) and (max-width:1700px){
+    .cardImg{
+        max-height: 321px;
+   
+    }
+}
+@media screen and (min-width:1200px) and (max-width:1399px){
+    .cardImg{
+        max-height: 255px;
+    }
+}
+@media screen and (min-width:1000px) and (max-width:1199px){
+    .cardImg{
+        max-height: 307px;
+    }
+}
+@media screen and (min-width:750px) and (max-width:999px){
+    .cardImg{
+        max-height: 360px;
+    }
+}
 
+@media screen and (min-width:577px) and (max-width:794px){
+    .cardImg{
+        max-height: 366px;
+    
+    }
+}
 @media screen and (min-width:300px) and (max-width:700px){
     .headerFont{
 font-size: 19px;
     }
   }
+
+
+
+
+.textLength {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 75%;
+}
+
