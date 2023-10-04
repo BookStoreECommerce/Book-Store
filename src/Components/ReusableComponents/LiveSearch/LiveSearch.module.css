@@ -1,7 +1,11 @@
 .search-btn {
-    border: none;
+    position: absolute;
     border-radius: 20%;
     color: #CE7777;
+    padding-inline: 10px;
+    height: 100%;
+    border: none;
+    right: 0;
 }
 .search-btn:not(:hover) {
     background-color: transparent;
