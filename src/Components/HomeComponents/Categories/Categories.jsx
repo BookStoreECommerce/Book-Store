@@ -72,7 +72,7 @@ const Categories = () => {
                                 {
                                     shuffledArray.map((singleCat) =>
 
-                                        <CategoryCard catName={singleCat.catName} img={singleCat.img} />
+                                        <CategoryCard sectionName="home" catName={singleCat.catName} img={singleCat.img} />
                                     )
                                 }
                             </div>
