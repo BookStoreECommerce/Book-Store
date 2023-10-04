@@ -1,4 +1,3 @@
-
 import store from "../Redux/Store";
 import { baseUrl } from "../util/util";
 import axios from "axios";
@@ -25,7 +24,9 @@ axiosInstance.interceptors.response.use(res => res, async(error) => {
         try{
             const response = await axiosInstance.post('auth/refresh', {}, { withCredentials: true });
             if(response.status === 201){
-                axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${response.data.token}`;
+                const token = response.data.token;
+                localStorage.setItem('access-token', token);
+                axiosInstance.defaults.headers.common["Authorization"] = token;
                 return axiosInstance(error.config)
             }
         }catch(error) {

@@ -79,7 +79,7 @@ const UserProfile = () => {
       const { payload } = await dispatch(userProfile(values));
       if (payload.message === "success") {
         dispatch(setUser(values))
-        navigate("");
+        // navigate("");
       }
     }
   };
@@ -92,7 +92,7 @@ const UserProfile = () => {
 
   return (
     <>
-      <div className="profile row justify-content-center">
+      <div className={`profile row ${styles.row} justify-content-center`}>
         <form
           onSubmit={handleSubmit}
           noValidate
