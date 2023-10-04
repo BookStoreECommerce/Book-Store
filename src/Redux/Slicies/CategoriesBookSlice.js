@@ -35,6 +35,7 @@ const CategoriesBookBySlug = createSlice({
         })
         builder.addCase(getCatBooksBySlug.fulfilled, (state,action)=>{
             state.catBySlug = action.payload;
+            state.isLoading = false
         })
         builder.addCase(getCatBooksBySlug.rejected, (state, action) => {
             state.msgError = action.payload.error

@@ -11,6 +11,7 @@ const store = configureStore({
         app: appReducer,
         book: categoriesBooksReducer,
         catbook: categoriesBooksSlugReducer,
+        loading: categoriesBooksSlugReducer,
     }
 })
 
