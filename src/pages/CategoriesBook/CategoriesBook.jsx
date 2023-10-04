@@ -18,6 +18,7 @@ const CategoriesBook = () => {
     console.log(isLoading);
     let category = { catBySlug }.catBySlug.book;
     const [params, setParams] = useState(null);
+    let [page, setPage] = useState(1);
     // const [paginate, setPaginate] = useState(12);
     let Params = useParams();
     const dispatch = useDispatch();
@@ -36,6 +37,12 @@ const CategoriesBook = () => {
         dispatch(removeFooterMargin());
         return () => dispatch(setFooterMargin());
     }, [dispatch])
+
+    const handleChange = (e, p) => {
+        console.log(p);
+        setPage(p);
+        // _DATA.jump(p);
+      };
 
     return (<>
     {isLoading?<Loading/>:<>
@@ -66,7 +73,7 @@ const CategoriesBook = () => {
               <div className="d-flex justify-content-center align-items-center mb-5">
               {category?.length > 12 ? <Stack spacing={2}>
                    
-                   <Pagination count={3} variant="outlined" shape="rounded" color="primary"/>
+                   <Pagination count={3} variant="outlined" shape="rounded" color="primary" onChange={handleChange}/>
                </Stack> : ''}
               </div>
                 {/* { paginate <= category?.length ? <button onClick={ load_more } className={`btn mx-auto d-flex py-2 px-3 fs-6 mb-5 ${styles.btnMore}`}>More Books.... </button>:null} */}
