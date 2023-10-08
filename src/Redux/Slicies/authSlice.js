@@ -1,7 +1,7 @@
 import {
     createSlice
 } from "@reduxjs/toolkit";
-import { forgetPassword, getUserProfile, register, registerVerification, resendCode, resetPassword, signin, signinWithToken, userProfile, varifyPasswordEmail, signout, getAllBooks } from "./authActions";
+import { forgetPassword, getUserProfile, register, registerVerification, resendCode, resetPassword, signin, signinWithToken, userProfile, varifyPasswordEmail, signout } from "./authActions";
 
 const initialState = {
     user: null,
@@ -202,27 +202,6 @@ const authSlice = createSlice({
                 state.msgError = action.payload.errors[0].message
             }
         })
-
-        // getAllBooks
-        builder.addCase(getAllBooks.pending, (state, action) => {
-            state.isLoading = true;
-        })
-        builder.addCase(getAllBooks.fulfilled, (state, action) => {
-            state.isLoading = false;
-            console.log(action);
-        })
-        builder.addCase(getAllBooks.rejected, (state, action) => {
-            state.isLoading = false
-            state.msgError = action.payload.error
-            if (action.error) {
-                state.msgError = action.error
-            } else {
-                state.msgError = action.errors[0].message
-            }
-            console.log(action.payload.error);
-        })
-
-
     }
 })
 

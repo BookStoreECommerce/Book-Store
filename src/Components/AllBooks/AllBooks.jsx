@@ -1,78 +1,98 @@
 import React, { useEffect, useState } from 'react'
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-// import axios from 'axios'
-// import book from '../../assets/1.jpg'
-// import book2 from '../../assets/2.jpg'
-// import book3 from '../../assets/3.jpg'
-// import book4 from '../../assets/4.jpg'
-// import book5 from '../../assets/5.jpg'
-// import book6 from '../../assets/6.jpg'
-// import book7 from '../../assets/7.jpg'
-// import book8 from '../../assets/8.jpg'
-// import book9 from '../../assets/9.jpg'
-// import book10 from '../../assets/10.jpg'
-// import book11 from '../../assets/11.jpg'
-// import book12 from '../../assets/12.jpg'
-// import { baseUrl } from '../../util/util'
-// import axiosInstance from '../../axios/axios-instance'
-// import { isRejectedWithValue } from '@reduxjs/toolkit'
 import BookCard from '../ReusableComponents/BookCard/BookCard'
 import styles from './AllBooks.module.css'
-import { getAllBooks, getAllBooksNumber } from "../../Redux/Slicies/authActions";
+import { getAllBooks, getBooksByWord } from "../../Redux/Slicies/bookActions";
 import { useDispatch, useSelector } from 'react-redux'
-import { Typography } from '@mui/material';
+import LiveSearch from '../ReusableComponents/LiveSearch/LiveSearch';
+import { baseUrl } from '../../util/util';
+import { removeFooterMargin, setFooterMargin } from '../../Redux/Slicies/appSlice';
+import { Box } from '@mui/material';
 
 function AllBook({ sectionName }) {
   let [books, setBooks] = useState([]);
   let [numBooks, setNumBooks] = useState(0)
-  const { msgError } = useSelector((state) => state.auth);
+  const { isLoading, msgError } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const nBookPerPage = 12;
   const [page, setPage] = useState(1);
+
+  const { footerH, navH } = useSelector((state) => state.app);
+
+  useEffect(() => {
+    dispatch(removeFooterMargin());
+    return () => dispatch(setFooterMargin());
+  }, [dispatch]);
+
   const handleChange = (e, page) => {
     console.log(page);
     setPage(page);
   };
-  
+
   async function getBooks() {
-    const response = await dispatch(getAllBooks(page)); 
+    const response = await dispatch(getAllBooks(page));
 
     if (response.type === "books/fulfilled") {
       const totalCount = response.payload.totalCount;
-      const numBooks = Math.ceil(totalCount / nBookPerPage)
+      numBooks = Math.ceil(totalCount / nBookPerPage)
       setNumBooks(numBooks)
       setBooks(response.payload.result)
-      
+
     } else {
       console.log(response.error.message);
     }
   }
+  async function getBooksBySearch(searchKeyword) {
+
+    const response = await dispatch(getBooksByWord(searchKeyword));
+    console.log(response.payload.result)
+    setNumBooks(Math.ceil(response.payload.result.length / nBookPerPage))
+    console.log(response.payload.result.length)
+    setBooks(response.payload.result)
+  }
   useEffect(() => {
+
     getBooks()
   }, [page])
 
+
+  // const searchBooks = (searchKeyword) => {
+  //   getBooksBySearch(searchKeyword)
+  // }
+  const url = `${baseUrl}book/?keyword=searchValue`;
+
   return (
     <>
-      <div className='row'>
-        {msgError ? (
-          <div className="ps-2 alert alert-danger mb-4">{msgError}</div>
-        ) : null}
-        {books?.map((book, index) => (
-          <div key={index} className={` col-lg-3 col-sm-6 col-12 mb-5 ${styles.bookCard}`}>
-            <BookCard key={book.id} image={book.image.secure_url} category={book.category} desc={book.desc} name={book.name} price={book.price} author={book.author} rate={book.rate} section={sectionName} />
+    <Box
+      sx={{
+        marginTop: `${navH}px`,
+        minHeight: `calc(100vh - ${footerH + navH}px)`,
+      }}
+    >
+    <div className='row'>
+          {msgError ? (
+            <div className="ps-2 alert alert-danger mb-4">{msgError}</div>
+          ) : null}
+          <div className=''>
+            <LiveSearch minCharToSearch="1" label="search books" url={url} keyword="searchValue" onSubmit={getBooksBySearch} />
           </div>
-        ))}
-      </div>
+          {books?.map((book, index) => (
+            <div key={index} className={` col-lg-3 col-sm-6 col-12 mb-5 ${styles.bookCard}`}>
+              <BookCard key={book.id} image={book.image.secure_url} category={book.category} desc={book.desc} name={book.name} price={book.price} author={book.author} rate={book.rate} section={sectionName} />
+            </div>
+          ))}
 
-      <div className="mt-5 pt-5 d-flex justify-content-center">
-        <Stack spacing={2}>
-          <Typography>Page: {page}</Typography>
-          <Pagination count={numBooks} page={page} size="large" shape="rounded" variant="outlined" color="primary" onChange={handleChange} />
-        </Stack>
-      </div>
-    </>
-  )
+        </div>
+
+        <div className="my-5 pt-5 d-flex justify-content-center">
+          <Stack spacing={2}>
+            <Pagination count={numBooks} page={page} size="large" shape="rounded" variant="outlined" color="primary" onChange={handleChange} />
+          </Stack>
+        </div>
+        </Box>
+      </>
+      )
 }
 
-export default AllBook
+      export default AllBook

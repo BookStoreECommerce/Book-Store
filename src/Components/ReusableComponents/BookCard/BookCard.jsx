@@ -38,7 +38,7 @@ const BookCard = ({ id, image, name, price, author, rate, section, cardStyle ,sa
 
                     </div>
                {section === "bestSeller" || section === "newBooks"?<img src={image? image:bookImage} className={`w-100 ${styles.cardImgNew}`} alt="" />:
-               <img src={image? image:bookImage} className={`w-100 ${styles.cardImg}`} alt="" />
+               <img src={image? image:bookImage} className={`w-100 ${styles.cardImg}`} alt="page not found" />
                }
                     
                   {section === 'bestSeller' && sale ?<>
