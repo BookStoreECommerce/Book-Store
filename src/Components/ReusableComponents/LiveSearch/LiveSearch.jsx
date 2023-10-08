@@ -36,7 +36,7 @@ const LiveSearch = ({ label, url, keyword, minCharToSearch, onSubmit }) => {
   );
 
   return (
-      <form onSubmit={handleSubmit} noValidate>
+      <form onSubmit={handleSubmit} noValidate >
         <Autocomplete
           onInputChange={(e, val) => handleInputChange(val)}
           open={open}
@@ -47,6 +47,7 @@ const LiveSearch = ({ label, url, keyword, minCharToSearch, onSubmit }) => {
           options={options}
           renderOption={(props, option) => (
             <Box
+      
               component="li"
               sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
               {...props}

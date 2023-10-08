@@ -74,6 +74,24 @@ const router = createBrowserRouter([
           },
         ],
       },
+      {
+        path: "Categories",
+        async lazy() {
+          const { default: Categories } = await import(
+            "./pages/Categories/Categories"
+          );
+          return { Component: Categories };
+        },
+      },
+      {
+        path: "books/:slug",
+        async lazy() {
+          const { default: CategoriesBook } = await import(
+            "./pages/CategoriesBook/CategoriesBook"
+          );
+          return { Component: CategoriesBook };
+        },
+      },
     ],
   },
   {

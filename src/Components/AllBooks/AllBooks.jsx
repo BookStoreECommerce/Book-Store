@@ -38,6 +38,7 @@ function AllBook({ sectionName }) {
       numBooks = Math.ceil(totalCount / nBookPerPage)
       setNumBooks(numBooks)
       setBooks(response.payload.result)
+      // console.log('zzzzzzzzzz ', response.payload.result)
 
     } else {
       console.log(response.error.message);
@@ -79,7 +80,7 @@ function AllBook({ sectionName }) {
           </div>
           {books?.map((book, index) => (
             <div key={index} className={` col-lg-3 col-sm-6 col-12 mb-5 ${styles.bookCard}`}>
-              <BookCard key={book.id} image={book.image.secure_url} category={book.category} desc={book.desc} name={book.name} price={book.price} author={book.author} rate={book.rate} section={sectionName} />
+              <BookCard key={book.id} image={book.image.secure_url} category={book.category.name} desc={book.desc} name={book.name} price={book.price} author={book.author} rate={book.rate} section={sectionName} />
             </div>
           ))}
 

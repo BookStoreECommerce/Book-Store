@@ -38,7 +38,7 @@ const BookCard = ({ id, image, name, price, author, rate, section, cardStyle ,sa
 
                     </div>
                {section === "bestSeller" || section === "newBooks"?<img src={image? image:bookImage} className={`w-100 ${styles.cardImgNew}`} alt="" />:
-               <img src={image? image:bookImage} className={`w-100 ${styles.cardImg}`} alt="page not found" />
+               <img src={image? image:bookImage} className={`w-100 ${styles.cardImg}`} alt="" />
                }
                     
                   {section === 'bestSeller' && sale ?<>
@@ -50,8 +50,8 @@ const BookCard = ({ id, image, name, price, author, rate, section, cardStyle ,sa
                 </div>
                 <div className={`d-flex flex-column justify-content-start text-center align-items-center`} >
       
-                    {section === "bestSeller" ? '' : <span className={styles.badge}>{category.name}</span>}
-                    {section === "bestSeller" ? '' : <span className={`${styles.bookName} ${styles.textLength}` } >{name}</span>}
+                    {section === "bestSeller" ? '' : <span className={styles.badge}>{category}</span>}
+                    {section === "bestSeller" ? '' : <span className={`${styles.bookName} ${styles.textLength}`}>{name}</span>}
                     {section === "bestSeller" ? '' : <span className={styles.bookAuthor}>By {author}</span>}
                     {section === "bestSeller" ? '' : <span className={styles.price}> {price + ` EGP`} </span>}
                   

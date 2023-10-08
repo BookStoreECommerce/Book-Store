@@ -8,7 +8,7 @@ import cooking from '../../../assets/cooking.jpg';
 import scienceFiction from '../../../assets/sci-fiction.jpg';
 import children from '../../../assets/children.jpg';
 import business from '../../../assets/business.jpg';
-
+import { Link } from "react-router-dom";
 
 
 const Categories = () => {
@@ -60,6 +60,11 @@ const Categories = () => {
                 <div className={`container text-center ${styles.paddingSection}`}>
                     <h2 className="blueHeader">Categories</h2>
                   <CategoryCard shuffledArray={shuffledArray} />
+                  <div className="row">
+                  <div className="col-12">
+                            <Link to='categories' className="text-decoration-none"><p className={styles.fontpargraph}>See All Categories...</p></Link>
+                        </div>
+                  </div>
                 </div>
             </section>
         </>
