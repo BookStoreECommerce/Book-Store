@@ -33,7 +33,7 @@ function NavBar({ navRef }) {
 
   let { categoriesBooks } = useSelector((state) => state.book)
 let category = { categoriesBooks }.categoriesBooks.result
-  // console.log({ categoriesBooks });
+  console.log(category);
   useEffect(() => {
     dispatch(getCatBooks())
   }, [])
@@ -186,6 +186,7 @@ let category = { categoriesBooks }.categoriesBooks.result
 
                     <li className="nav-item">
                       <Link
+                      to=""
                         className={`nav-link ${styles.navLink}`}
                         onClick={() => {
                           dispatch(handleClickOpen({ name: "login" }));
@@ -196,6 +197,7 @@ let category = { categoriesBooks }.categoriesBooks.result
                     </li>
                     <li className="nav-item">
                       <Link
+                      to=""
                         className={`nav-link ${styles.navLink}`}
                         onClick={() => {
                           dispatch(handleClickOpen({ name: "register" }));

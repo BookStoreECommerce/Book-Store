@@ -11,22 +11,20 @@ import ScrollToTop from "../../Components/ReusableComponents/ScrollToTop/ScrollT
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import Loading from '../../Components/ReusableComponents/Loading/Loading.jsx'
+import LiveSearch from "../../Components/ReusableComponents/LiveSearch/LiveSearch.jsx";
+import { baseUrl } from "../../util/util.js";
 const CategoriesBook = () => {
     const { footerH, navH } = useSelector((state) => state.app);
     let { catBySlug } = useSelector((state) => state.catbook);
     let {isLoading } = useSelector((state)=>state.loading);
-    console.log(isLoading);
     let category = { catBySlug }.catBySlug.book;
-    const [params, setParams] = useState(null);
-    let [page, setPage] = useState(1);
-    // const [paginate, setPaginate] = useState(12);
     let Params = useParams();
+    const [params, setParams] = useState(null);
+    const [page, setPage] = useState(1);
     const dispatch = useDispatch();
-    // console.log(Params.slug);
+
     console.log(category);
-    // const load_more = (e) => {
-    //     setPaginate((prevValue) => prevValue + 12);
-    // }
+ 
 
     useEffect(() => {
         dispatch(getCatBooksBySlug(Params.slug))
@@ -38,10 +36,14 @@ const CategoriesBook = () => {
         return () => dispatch(setFooterMargin());
     }, [dispatch])
 
+const searchBooks = (searchKeyword) => {
+  console.log(searchKeyword);
+}
+
+const url = `${baseUrl}category?page=1&sort=name&keyword=searchValue&fields=name,image`;
     const handleChange = (e, p) => {
         console.log(p);
         setPage(p);
-        // _DATA.jump(p);
       };
 
     return (<>
@@ -59,16 +61,11 @@ const CategoriesBook = () => {
             <div className="container pt-1">
                 <div className="row justify-content-center align-items-center py-5">
                     <div className={styles.searchBar}>
-                        <i className={`fa-solid fa-search ${styles.searchicon}`}></i>
-                        <input type="text" className={`form-control rounded-pill ${styles.form}`} placeholder="search ....." />
-
+                     <LiveSearch minCharToSearch="1" label={`Search ${Params.slug} Books`} url={url} keyword="searchValue" onSubmit={searchBooks} />
                     </div>
                     {category?.map((book, index) => (
                         <BookCard key={index} image={book.image?.secure_url} name={book.name} price={book.price} author={book.author} rate={book.rate} section="catBook" category={book.category?.name} />
                     ))}
-                    {/* {category?.slice(0,paginate).map((book, index) => (
-                        <BookCard key={index} image={book.image?.secure_url} name={book.name} price={book.price} author={book.author} rate={book.rate} section="catBook" category={book.category?.name} />
-                    ))} */}
                 </div>
               <div className="d-flex justify-content-center align-items-center mb-5">
               {category?.length > 12 ? <Stack spacing={2}>
@@ -76,7 +73,6 @@ const CategoriesBook = () => {
                    <Pagination count={3} variant="outlined" shape="rounded" color="primary" onChange={handleChange}/>
                </Stack> : ''}
               </div>
-                {/* { paginate <= category?.length ? <button onClick={ load_more } className={`btn mx-auto d-flex py-2 px-3 fs-6 mb-5 ${styles.btnMore}`}>More Books.... </button>:null} */}
             </div>
         </Box>
     </>}

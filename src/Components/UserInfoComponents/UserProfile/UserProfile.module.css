@@ -10,3 +10,6 @@
 .mainTitle{
     color: var(--navyBlue);
 }
+.row{
+    --bs-gutter-x: 0  !important;
+}
