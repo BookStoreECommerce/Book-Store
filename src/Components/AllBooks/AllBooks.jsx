@@ -76,7 +76,7 @@ function AllBook({ sectionName }) {
             <div className="ps-2 alert alert-danger mb-4">{msgError}</div>
           ) : null}
           <div className=''>
-            <LiveSearch minCharToSearch="1" label="search books" url={url} keyword="searchValue" onSubmit={getBooksBySearch} />
+            <LiveSearch minCharToSearch="1" label="search books" url={url} keyword="searchValue" onSubmit={getBooksBySearch} hasImage="true" />
           </div>
           {books?.map((book, index) => (
             <div key={index} className={` col-lg-3 col-sm-6 col-12 mb-5 ${styles.bookCard}`}>
