@@ -42,7 +42,7 @@
 
 .transparent {
     background-color: transparent;
-    transition: all 1s;
+    transition: all 0.7s;
 }
 
 .size {
@@ -52,18 +52,27 @@
 
 .dropdownMenu {
     border: 1px #dee2e6 solid !important;
-    font-weight: 400;
+    font-weight: 300!important;
     font-family: 'Jost', sans-serif;
     font-size: 16px !important;
 }
 .item{
-    font-weight: 400;
+    font-weight:300!important;
     font-family: 'Jost', sans-serif;
-    font-size: 16px !important; 
+    font-size: 17px !important; 
+}
+.itemColor{
+    color: var(--mainColor)!important;
+    font-size: 18px !important; 
+    font-weight:300 !important;
+    text-decoration: underline;
 }
 .item:hover, .item.dropItemActive {
     background-color: var(--beigeColor) !important;
 
+}
+.dropItemActivetran,.dropItemActivetran:hover,.dropItemActivetran:focus,.dropItemActivetran:active{
+    background-color: #fff!important;
 }
 
 .colorUser {
@@ -111,7 +120,7 @@
 .colorNav {
 
     background-color: var(--beigeColor);
-    transition: all 2s;
+    transition: all 0.8s;
 }
 .badgeNumber{
     display: flex;

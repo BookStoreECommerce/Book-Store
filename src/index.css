@@ -8,10 +8,10 @@ box-sizing: border-box;
 }
 
 :root {
-  --navyBlue: #2b3a55;
+  --navyBlue: rgb(43, 58, 85);
   --white: #ffffff;
-  --mainColor: #ce7777;
-  --secondaryColor: rgb(232, 196, 196);
+  --mainColor: rgb(206, 119, 119);
+  --secondaryColor: #e8c4c4;
   --beigeColor: rgb(242, 229, 229);
 }
 
@@ -93,13 +93,23 @@ color: var(--navyBlue)!important;
   background-image:   url('./assets/next.svg') !important;
 }
 .carousel-control-next{
-  width: 5%;
+  width: 6%;
+  right: 20px;
+  top: 70px;
 }
 .carousel-control-prev{
-  width: 5%;
+  width:6%;
+  left: 20px;
+  top: 70px;
 }
 .carousel-control-prev-icon{
   background-image: url('./assets/prev.svg') !important;
+}
+.dropdown-item:active {
+  background-color: #fff!important;
+}
+.offcanvas{
+  background-image: linear-gradient(-26deg, var(--beigeColor), white)!important;
 }
 
 @media screen and (min-width:300px) and (max-width:768px){

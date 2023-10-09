@@ -4,6 +4,7 @@ import { dialogReducer } from "./Slicies/dialogSlice";
 import { appReducer } from "./Slicies/appSlice";
 import { favReducer } from "./Slicies/favSlice";
 
+import { categoriesBooksReducer, categoriesBooksSlugReducer} from './Slicies/CategoriesBookSlice.js'
 
 const store = configureStore({
     reducer:{
@@ -11,6 +12,9 @@ const store = configureStore({
         auth: authReducer,
         app: appReducer,
         favourites: favReducer,
+        book: categoriesBooksReducer,
+        catbook: categoriesBooksSlugReducer,
+        loading: categoriesBooksSlugReducer,
     }
 })
 
