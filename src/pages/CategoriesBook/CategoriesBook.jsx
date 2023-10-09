@@ -27,8 +27,8 @@ const CategoriesBook = () => {
     let Params = useParams();
 
     
-    async function getCatBooks() {
-        const response = await dispatch(getCatBooksBySlug({ slug: Params.slug, page: 1 }));
+    async function getCatBooks(p) {
+        const response = await dispatch(getCatBooksBySlug({ slug: Params.slug, page: p }));
         if (response.type === "books/getCatBooksBySlug/fulfilled") {
             const totalCount = response.payload.totalCount;
             numBooks = Math.ceil(totalCount / nBookPerPage)
@@ -52,7 +52,7 @@ const CategoriesBook = () => {
 
 
     useEffect(() => {
-        getCatBooks()
+        getCatBooks(1)
         setParams(Params)
     }, [Params]);
 
@@ -66,7 +66,8 @@ const CategoriesBook = () => {
     const handleChange = (e, p) => {
         console.log(p);
         setPage(p)
-        dispatch(getCatBooksBySlug({ slug: Params.slug, page: p }))
+        getCatBooks(p)
+        // dispatch(getCatBooksBySlug({ slug: Params.slug, page: p }))
     };
 
     return (<>
