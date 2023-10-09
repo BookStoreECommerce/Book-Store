@@ -51,6 +51,7 @@ const LiveSearch = ({ label, url, keyword, minCharToSearch, onSubmit }) => {
               component="li"
               sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
               {...props}
+              key={option._id}
             >
               <img
                 loading="lazy"

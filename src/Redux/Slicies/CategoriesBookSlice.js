@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {getCatBooks} from './CategoriesBookActions.js';
 import {getCatBooksBySlug} from './CategoriesBookActions.js';
+import {getBooksByWord} from './CategoriesBookActions.js';
 
 const initialState = {
    categoriesBooks :[],
    catBySlug:[],
+   bookSearch:[],
     isLoading: false
 }
 
@@ -44,5 +46,25 @@ const CategoriesBookBySlug = createSlice({
 
     }
 })
+
+const BookCatSearch = createSlice({
+    name:'bookSearchCat',
+    initialState:initialState,
+    extraReducers:(builder)=>{
+        builder.addCase(getBooksByWord.pending, (state, action) => {
+            state.isLoading = true
+        })
+        builder.addCase(getBooksByWord.fulfilled, (state,action)=>{
+            state.catBySlug = action.payload;
+            state.isLoading = false
+        })
+        builder.addCase(getBooksByWord.rejected, (state, action) => {
+            state.msgError = action.payload.error
+            state.isLoading = false
+        })
+
+    }
+})
 export const categoriesBooksReducer = CategoriesBookSlice.reducer;
 export const categoriesBooksSlugReducer = CategoriesBookBySlug.reducer;
+export const categoriesSearchBooksReducer = BookCatSearch.reducer;
