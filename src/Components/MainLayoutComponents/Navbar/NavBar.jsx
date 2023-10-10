@@ -144,7 +144,7 @@ let category = { categoriesBooks }.categoriesBooks.result
                   <ul className={`dropdown-menu ${styles.dropdownMenu}`}>
                     {category?.slice(0,8)?.map((cat,index)=>
                            <li key={index}>
-                           <NavLink className={({ isActive }) => isActive ? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}` : linkStyle + ` dropdown-item ${styles.item}`} to={`books/${cat.slug}`}>
+                           <NavLink className={({ isActive }) => isActive ? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}` : linkStyle + ` dropdown-item ${styles.item}`} to={`Categories/books/${cat.slug}`}>
                              {cat.name}
                            </NavLink>
                          </li>

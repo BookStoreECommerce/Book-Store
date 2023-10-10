@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit';
 import { appReducer } from '../../../../Redux/Slicies/appSlice';
 import { authReducer } from '../../../../Redux/Slicies/authSlice';
+import { categoriesBooksReducer } from '../../../../Redux/Slicies/CategoriesBookSlice';
 
 
 const mockUsedNavigate = jest.fn();
@@ -20,7 +21,8 @@ describe("Navbar Content", () => {
     const mockStore = () => configureStore({
         reducer: {
             auth: authReducer,
-            app: appReducer
+            app: appReducer,
+            book: categoriesBooksReducer,
         }
     });
 

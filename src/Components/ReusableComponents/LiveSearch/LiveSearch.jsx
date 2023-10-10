@@ -57,7 +57,7 @@ const LiveSearch = ({
         onClose={(event, reason) => {
           if (reason === "selectOption") {
             setTimeout(() => {
-              console.log(event.target.defaultValue || event.target.innerText);
+              // console.log(event.target.defaultValue || event.target.innerText);
               onSubmit(event.target.defaultValue || event.target.innerText);
             }, 1);
           }

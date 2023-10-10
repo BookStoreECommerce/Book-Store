@@ -7,7 +7,8 @@ const initialState = {
    categoriesBooks :[],
    catBySlug:[],
    bookSearch:[],
-    isLoading: false
+    isLoading: false,
+
 }
 
 const CategoriesBookSlice = createSlice({
@@ -19,9 +20,9 @@ const CategoriesBookSlice = createSlice({
         })
         builder.addCase(getCatBooks.fulfilled, (state,action)=>{
             state.categoriesBooks = action.payload;
+            state.isLoading = false
         })
         builder.addCase(getCatBooks.rejected, (state, action) => {
-            state.msgError = action.payload.error
             state.isLoading = false
         })
     
@@ -40,7 +41,6 @@ const CategoriesBookBySlug = createSlice({
             state.isLoading = false
         })
         builder.addCase(getCatBooksBySlug.rejected, (state, action) => {
-            state.msgError = action.payload.error
             state.isLoading = false
         })
 
@@ -59,7 +59,6 @@ const BookCatSearch = createSlice({
             state.isLoading = false
         })
         builder.addCase(getBooksByWord.rejected, (state, action) => {
-            state.msgError = action.payload.error
             state.isLoading = false
         })
 

@@ -13,11 +13,14 @@ import Stack from '@mui/material/Stack';
 import Loading from '../../Components/ReusableComponents/Loading/Loading.jsx'
 import LiveSearch from "../../Components/ReusableComponents/LiveSearch/LiveSearch.jsx";
 import { baseUrl } from "../../util/util.js";
+
+
 const CategoriesBook = () => {
     const { footerH, navH } = useSelector((state) => state.app);
     let { catBySlug } = useSelector((state) => state.catbook);
     let category = { catBySlug }.catBySlug.result;
-    const { isLoading, msgError } = useSelector((state) => state.loading);
+    let { isLoading } = useSelector((state) => state.loading);
+    let { msgError } = useSelector((state) => state.auth);
     const [params, setParams] = useState(null);
     let [books, setBooks] = useState([]);
     let [numBooks, setNumBooks] = useState(0)
@@ -26,7 +29,6 @@ const CategoriesBook = () => {
     const dispatch = useDispatch();
     let Params = useParams();
 
-    
     async function getCatBooks(p) {
         const response = await dispatch(getCatBooksBySlug({ slug: Params.slug, page: p }));
         if (response.type === "books/getCatBooksBySlug/fulfilled") {
@@ -34,22 +36,16 @@ const CategoriesBook = () => {
             numBooks = Math.ceil(totalCount / nBookPerPage)
             setNumBooks(numBooks)
             setBooks(response.payload.result)
-            console.log(response.payload.result);
         } else {
             console.log(response.error.message);
         }
     }
 
-
     async function getBooksBySearch(searchKeyword) {
-
         const response = await dispatch(getBooksByWord({ slug: Params.slug, keyword: searchKeyword }))
-        console.log(response.payload.result)
         setNumBooks(Math.ceil(response.payload.result.length / nBookPerPage))
-        console.log(response.payload.result.length)
         setBooks(response.payload.result)
     }
-
 
     useEffect(() => {
         getCatBooks(1)
@@ -64,16 +60,14 @@ const CategoriesBook = () => {
     const url = `${baseUrl}book/category?slug=${Params.slug}&keyword=searchValue`;
 
     const handleChange = (e, p) => {
-        console.log(p);
         setPage(p)
         getCatBooks(p)
-        // dispatch(getCatBooksBySlug({ slug: Params.slug, page: p }))
     };
 
     return (<>
         {isLoading ? <Loading /> : <>
             <ScrollToTop />
-            <Box sx={{ marginTop: `${navH}px`, minHeight: `calc(100vh - ${footerH + navH}px)`, }} className={styles.flex}>
+            <Box sx={{ marginTop: `${navH}px`, minHeight: `calc(100vh - ${footerH + navH}px)`, }} className={styles.flex} >
                 <div className={styles.badge}>
                     <span className={styles.slug}>{category ? category[0].category.name : ''} books</span>
                     <div className={styles.content}>
@@ -88,7 +82,7 @@ const CategoriesBook = () => {
                             <div className="ps-2 alert alert-danger mb-4">{msgError}</div>
                         ) : null}
                         <div className={styles.searchBar}>
-                            <LiveSearch minCharToSearch="1" label={`search ${Params.slug} books`} url={url} keyword="searchValue" onSubmit={getBooksBySearch} />
+                            <LiveSearch minCharToSearch="1" label={`search ${Params.slug} books`} url={url} keyword="searchValue" onSubmit={getBooksBySearch} hasImage="true"/>
                         </div>
                         {books?.map((book, index) => (
                             <BookCard key={index} image={book.image?.secure_url} name={book.name} price={book.price} author={book.author} rate={book.rate} section="catBook" category={book.category?.name} />
