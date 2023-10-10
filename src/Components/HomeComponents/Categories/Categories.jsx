@@ -26,7 +26,7 @@ const Categories = () => {
 
     const [category] = useState([
         {
-            catName: "Self-Help / Personal Development",
+            catName: "Science",
             img: science
         },
         {
