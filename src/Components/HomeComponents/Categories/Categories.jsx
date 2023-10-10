@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from './Categories.module.css';
 import CategoryCard from "../CategoryCard/CategoryCard";
 import music from '../../../assets/music.jpg'
@@ -9,14 +9,24 @@ import scienceFiction from '../../../assets/sci-fiction.jpg';
 import children from '../../../assets/children.jpg';
 import business from '../../../assets/business.jpg';
 import { Link } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+
 
 
 const Categories = () => {
 
-    
+
+    useEffect(() => {
+        AOS.init();
+        window.addEventListener('load', AOS.refresh);
+   
+    }, []);
+
     const [category] = useState([
         {
-            catName: "Science",
+            catName: "Self-Help / Personal Development",
             img: science
         },
         {
@@ -46,6 +56,7 @@ const Categories = () => {
     ])
 
     const shuffle = (array) => {
+        // console.log(array.length);
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [array[i], array[j]] = [array[j], array[i]];
@@ -59,12 +70,24 @@ const Categories = () => {
             <section className='pt-4 pb-5' data-testid='Categories'>
                 <div className={`container text-center ${styles.paddingSection}`}>
                     <h2 className="blueHeader">Categories</h2>
-                  <CategoryCard shuffledArray={shuffledArray} />
-                  <div className="row">
-                  <div className="col-12">
+                    <div className="row justifiy-content-center align-items-center gy-4 mt-4" data-testid='CategoryCard'>
+                        <div className="col-lg-12 col-md-12" data-aos="fade-up" data-aos-duration="800">
+
+                            <div className="row gy-4">
+                                {
+                                    shuffledArray.map((singleCat) =>
+
+                                        <CategoryCard sectionName="home" catName={singleCat.catName} img={singleCat.img} />
+                                    )
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-12">
                             <Link to='categories' className="text-decoration-none"><p className={styles.fontpargraph}>See All Categories...</p></Link>
                         </div>
-                  </div>
+                    </div>
                 </div>
             </section>
         </>

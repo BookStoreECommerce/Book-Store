@@ -3,6 +3,8 @@ import { authReducer } from "./Slicies/authSlice";
 import { dialogReducer } from "./Slicies/dialogSlice";
 import { appReducer } from "./Slicies/appSlice";
 import { categoriesBooksReducer, categoriesBooksSlugReducer} from './Slicies/CategoriesBookSlice.js'
+import { catReducer } from "./Slicies/categoriesSlice";
+
 
 const store = configureStore({
     reducer:{
@@ -12,6 +14,7 @@ const store = configureStore({
         book: categoriesBooksReducer,
         catbook: categoriesBooksSlugReducer,
         loading: categoriesBooksSlugReducer,
+        cat:catReducer,
     }
 })
 
