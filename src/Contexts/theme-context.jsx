@@ -62,6 +62,7 @@ const ThemeContextProvider = ({ children }) => {
                 WebkitBoxShadow: '0 0 0 100px transparent inset',
                 // textAlign: "center"
                 // WebkitTextFillColor: '#fff'
+                
               },
               ':hover': {
                 // borderColor: '#2b3a55 !important'
@@ -74,7 +75,12 @@ const ThemeContextProvider = ({ children }) => {
                   // borderColor: '#2b3a55 !important'
                   borderColor: '#e8c4c4 !important'
                 },
-              }
+              },
+              "& .MuiOutlinedInput-notchedOutline": {
+                border: '1px solid #e8c4c4 !important',
+                color:"gray",
+                
+              },
             },
           },
         },

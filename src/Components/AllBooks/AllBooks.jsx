@@ -78,19 +78,22 @@ function AllBook({ sectionName }) {
 
   return (
     <>
-      {isLoading ? <Loading /> : <Box
-        sx={{
-          marginTop: `${navH}px`,
-          minHeight: `calc(100vh - ${footerH + navH}px)`,
-        }}
-      >
-        <div className='row'>
-          <div className='mt-3'>
-            <LiveSearch minCharToSearch="2" label="search books" values={searchWord} url={url} keyword="searchValue" onSubmit={getBooksBySearch} />
+    <Box
+      sx={{
+        marginTop: `${navH}px`,
+        minHeight: `calc(100vh - ${footerH + navH}px)`,
+      }}
+    >
+    <div className='row'>
+          {msgError ? (
+            <div className="ps-2 alert alert-danger mb-4">{msgError}</div>
+          ) : null}
+          <div className=''>
+            <LiveSearch minCharToSearch="1" label="search books" url={url} keyword="searchValue" hasImage='true' onSubmit={getBooksBySearch} />
           </div>
           {books?.map((book, index) => (
             <div key={index} className={` col-lg-3 col-sm-6 col-12 mb-5 ${styles.bookCard}`}>
-              <BookCard key={book._id} image={book.image.secure_url} category={book.category.name} desc={book.desc} name={book.name} price={book.price} author={book.author} rate={book.rate} section={sectionName} />
+              <BookCard key={book.id} image={book.image.secure_url} category={book.category} desc={book.desc} name={book.name} price={book.price} author={book.author} rate={book.rate} section={sectionName} />
             </div>
           ))}
 
