@@ -11,7 +11,7 @@ const Categories = () => {
         (state) => state.favourites
     );
 
-    const formatAllCat = getCategoriesResult.map((ele) => {return {"catName": ele.name, "img": ele.image.secure_url}}); 
+    const formatAllCat = getCategoriesResult.map((ele) => {return {"catName": ele.name, "img": ele.image.secure_url, "slug": ele.slug}}); 
 
     const shuffle = (array) => {
         for (let i = array.length - 1; i > 0; i--) {
@@ -22,8 +22,7 @@ const Categories = () => {
     };
     const shuffledArray = shuffle(formatAllCat);
 
-    const userFavCat = user.fav_cats.map((ele) => {return {"catName": ele.name, "img": ele.image.secure_url}});
-
+    const userFavCat = user.fav_cats.map((ele) => {return {"catName": ele.name, "img": ele.image.secure_url, "slug": ele.slug}});
     const names = new Set(userFavCat.map(({ catName }) => catName));
     const catNotRepeated = shuffledArray.filter(({ catName }) => !names.has(catName));
 

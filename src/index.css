@@ -89,6 +89,11 @@ color: var(--navyBlue)!important;
   transition: scale 2s ease-in-out ;
 }
 
+.Suggested .slick-current{
+  transform: scale(1.04);
+  transition: scale 2s ease-in-out ;
+}
+
 .carousel-control-next-icon{
   background-image:   url('./assets/next.svg') !important;
 }

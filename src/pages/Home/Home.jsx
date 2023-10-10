@@ -6,6 +6,8 @@ import Reviews from '../../Components/HomeComponents/Reviews/Reviews';
 import Categories from '../../Components/HomeComponents/Categories/Categories';
 import ScrollToTop from '../../Components/ReusableComponents/ScrollToTop/ScrollToTop';
 import BestSeller from '../../Components/HomeComponents/BestSeller/BestSeller';
+import Suggested from '../../Components/HomeComponents/Suggested/Suggested';
+import LastSearch from '../../Components/HomeComponents/LastSearch/LastSearch';
 
 
 export default function Home() {
@@ -13,6 +15,8 @@ export default function Home() {
   return (
     <>
       <Slider />
+      <Suggested/>
+      <LastSearch/>
       <NewBooks />
       <Categories />
       <AboutUs />
