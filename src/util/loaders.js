@@ -1,5 +1,5 @@
 import { redirect } from "react-router-dom";
-import { getUserProfile, signinWithToken } from "../Redux/Slicies/authActions";
+import { getSearchedBooks, getUserProfile, signinWithToken } from "../Redux/Slicies/authActions";
 import bcryptjs from "bcryptjs"
 import store from "../Redux/Store";
 import { getAllCategories } from "../Redux/Slicies/favActions";
@@ -18,6 +18,7 @@ export const indexLoader = async () => {
     }
     await store.dispatch(getUserProfile())
     await store.dispatch(getAllCategories());
+    await store.dispatch(getSearchedBooks());
     return null
 }
 
