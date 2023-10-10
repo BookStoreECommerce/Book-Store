@@ -2,7 +2,7 @@ import styles from './CategoryCard.module.css'
 
 
 
-const CategoryCard = ({ catName , img , sectionName }) => {
+const CategoryCard = ({ catName , img , sectionName  }) => {
 
   
     return (

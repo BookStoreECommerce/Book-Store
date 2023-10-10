@@ -6,69 +6,87 @@ import { baseUrl } from "../../util/util.js";
 import LiveSearch from "../../Components/ReusableComponents/LiveSearch/LiveSearch.jsx";
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import Loading from '../../Components/ReusableComponents/Loading/Loading'
+import { removeFooterMargin, setFooterMargin } from "../../Redux/Slicies/appSlice.js";
+import Box from "@mui/material/Box";
 
 const Categories = () => {
-    const { categories } = useSelector((state) => state.cat)
-    const [page, setPageState]=useState(1)
-    const [search, setSearch]=useState("")
+    const { categories } = useSelector((state) => state.cat);
+    const { isLoading } = useSelector((state) => state.cat);
+    const { footerH, navH } = useSelector((state) => state.app);
 
+    const [page, setPageState]=useState(1);
+    const [search, setSearch]=useState("");
+
+   
     let catArray = categories.result;
     let totalCategoriesCount = categories.totalCount;
     let totalPages = Math.ceil((totalCategoriesCount / 12));
 
-    console.log(totalPages);
+   
 
-    console.log(totalCategoriesCount);
-    console.log(catArray);
+    const dispatch = useDispatch();
 
-
-    const dispach = useDispatch();
-
-
+ ;
 
     useEffect(() => {
-        dispach(getCategories({page,searchTerm:search}));
-
-    }, [dispach])
+        dispatch(getCategories({searchTerm:search}));
+        dispatch(removeFooterMargin());
+        return () => dispatch(setFooterMargin());
+    }, [dispatch])
     // Pagination
     const setPage = (e, p) => {
-        console.log(p);
+      
         setPageState(p)
-        dispach(getCategories({page:p}));
+        dispatch(getCategories({page:p}));
     }
     // Search
     const searchBooks = (searchKeyword) => {
-        console.log(searchKeyword);
+       
         setSearch(searchKeyword)
-        dispach(getCategories({page,searchTerm:searchKeyword}));
+        dispatch(getCategories({page,searchTerm:searchKeyword}));
        
 
     }
 
     const url = `${baseUrl}category?page=1&sort=name&keyword=searchValue&fields=name,image`;
     return (
+        isLoading ? <Loading/> :
         <>
-            <div className="container mb-3 " style={{ "marginTop": "150px" }}>
-                <div className="py-4">
-                    <LiveSearch minCharToSearch="2" label="search categories" url={url} keyword="searchValue" onSubmit={searchBooks} />
-
-                </div>
-                <div className="row gy-4">
-                    {catArray?.map((cat) => (
-                        <CategoryCard sectionName="" catName={cat.name} img={cat.image.secure_url} />
-                    ))}
-                </div>
-
-                <div className="d-flex flex-column justify-content-center align-items-center mt-3">
-                    <Stack spacing={2}>
-                        <Pagination count={totalPages} color="primary" shape="rounded" variant="outlined" onChange={setPage} />
-                    </Stack>
-                </div>
+        <Box
+        sx={{
+          marginTop: `${navH}px`,
+          minHeight: `calc(100vh - ${footerH + navH}px)`,
+        }}
+      >
+        <div className="container mb-3 " style={{ "marginTop": "150px" }}>
+            <div className="py-4">
+                <LiveSearch minCharToSearch="2" label="search categories" url={url} keyword="searchValue" onSubmit={searchBooks} />
 
             </div>
+            <div className="row gy-4">
+                {catArray?.map((cat,idx) => (
+                    <CategoryCard sectionName="" key={idx} catName={cat.name} img={cat.image.secure_url} />
+                ))}
+            </div>
+                    {
+                        totalCategoriesCount > 12 ? 
+                        <div className="d-flex flex-column justify-content-center align-items-center mt-3">
+                        <Stack spacing={2}>
+                            <Pagination count={totalPages} page={page} color="primary" shape="rounded" variant="outlined" onChange={setPage} />
+                        </Stack>
+                    </div>
+                    :
+                    ''
+                    }
+           
 
+        </div>
+</Box>
 
-        </>
+    </>
+    
+       
 
     );
 }

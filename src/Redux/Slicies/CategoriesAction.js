@@ -6,7 +6,7 @@ export const getCategories = createAsyncThunk("/categories",async ({page = 1 , s
 console.log(searchTerm);
     try {
         if(searchTerm){
-            const {data} = await axiosInstance.get(`category?page=${page}&keyword=${searchTerm}`);
+            const {data} = await axiosInstance.get(`category?keyword=${searchTerm}`);
             return data;
 
         }

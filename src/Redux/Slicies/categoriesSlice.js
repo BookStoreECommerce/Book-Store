@@ -15,11 +15,12 @@ const catSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(getCategories.pending, (state, action) => {
-            state.isLoading = true
+            state.isLoading = true;
         })
         builder.addCase(getCategories.fulfilled, (state, action) => {
             state.categories = action.payload;
-            state.isLoading = 'false';
+            state.isLoading = false;
+          
             state.msgError = action.payload.message;
         })
     }

@@ -14,10 +14,14 @@ import "aos/dist/aos.css";
 
 
 
+
 const Categories = () => {
+
+
     useEffect(() => {
         AOS.init();
         window.addEventListener('load', AOS.refresh);
+   
     }, []);
 
     const [category] = useState([
@@ -52,6 +56,7 @@ const Categories = () => {
     ])
 
     const shuffle = (array) => {
+        // console.log(array.length);
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [array[i], array[j]] = [array[j], array[i]];
