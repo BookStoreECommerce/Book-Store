@@ -43,7 +43,7 @@ const CategoriesBook = () => {
 
     async function getBooksBySearch(searchKeyword) {
 
-        const response = await dispatch(getBooksByWord({ slug: Params.slug, page: 1, keyword: searchKeyword }))
+        const response = await dispatch(getBooksByWord({ slug: Params.slug, keyword: searchKeyword }))
         console.log(response.payload.result)
         setNumBooks(Math.ceil(response.payload.result.length / nBookPerPage))
         console.log(response.payload.result.length)
@@ -61,7 +61,7 @@ const CategoriesBook = () => {
         return () => dispatch(setFooterMargin());
     }, [dispatch])
 
-    const url = `${baseUrl}book/category?slug=${Params.slug}&page=${page}&keyword=searchValue`;
+    const url = `${baseUrl}book/category?slug=${Params.slug}&keyword=searchValue`;
 
     const handleChange = (e, p) => {
         console.log(p);
