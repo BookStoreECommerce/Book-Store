@@ -13,8 +13,8 @@ const LastSearch = () => {
         <>
             <section id="lastSearchedBooks" data-testid='lastSearchedBooks'>
             <div className={`container`} >
+                <h2 className="blueHeader text-center mt-md-5 mb-2 pt-5" >Your Last Search</h2>
                 <div className={`row justify-content-center align-items-center`}>
-                    <h2 className="blueHeader text-center mt-md-5 mb-2 pt-5" >Your Last Search</h2>
                     <BookList NewBooks={cutLastSearch} sectionName={"newBooks"} />
                 </div>
             </div>

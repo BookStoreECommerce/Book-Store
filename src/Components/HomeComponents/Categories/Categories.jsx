@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styles from './Categories.module.css';
 import CategoryCard from "../CategoryCard/CategoryCard";
 import { Link } from "react-router-dom";
@@ -31,12 +31,13 @@ const Categories = () => {
     };
     const shuffledArray = shuffle(formatAllCat);
 
-    const userFavCat = user.fav_cats.map((ele) => {return {"catName": ele.name, "img": ele.image.secure_url, "slug": ele.slug}});
+    const userFavCat = user?user.fav_cats.map((ele) => {return {"catName": ele.name, "img": ele.image.secure_url, "slug": ele.slug}}) : [];
     const names = new Set(userFavCat.map(({ catName }) => catName));
-    const catNotRepeated = shuffledArray.filter(({ catName }) => !names.has(catName));
+    const shuffledArraForUser = [...shuffledArray];
+    const catNotRepeated = shuffledArraForUser.filter(({ catName }) => !names.has(catName));
 
     userFavCat.map((ele) => {return catNotRepeated.unshift(ele)});
-    const displayedCat = catNotRepeated.slice(0, 6);
+    const displayedCat = user? catNotRepeated.slice(0, 6) : shuffledArray.slice(0, 6);
 
     return (
         <>

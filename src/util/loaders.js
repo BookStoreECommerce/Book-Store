@@ -12,12 +12,12 @@ const getToken = () => {
 
 export const indexLoader = async () => {
     const token = getToken();
+    await store.dispatch(getAllCategories());
     const isLogedin = store.getState().auth.user !== null;
     if (isLogedin || !token) {
         return null;
     }
     await store.dispatch(getUserProfile())
-    await store.dispatch(getAllCategories());
     await store.dispatch(getSearchedBooks());
     await store.dispatch(getSuggestedBooks());
     return null
