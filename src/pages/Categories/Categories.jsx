@@ -42,7 +42,7 @@ const Categories = () => {
     }
     // Search
     const searchBooks = (searchKeyword) => {
-        searchKeyword = searchKeyword.replace(/\*|\[|\]|\(|\)/g, '')
+        searchKeyword = searchKeyword.replace(/\*|\[|\]|\(|\)|\\/g, '')
         // searchKeyword = searchKeyword.replace(/\[|\] () */g, '')
         setSearch(searchKeyword)
         dispatch(getCategories({page,searchTerm:searchKeyword}));
