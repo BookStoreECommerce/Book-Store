@@ -42,7 +42,7 @@
 
 .transparent {
     background-color: transparent;
-    transition: all 1s;
+    transition: all 0.7s;
 }
 
 .size {
@@ -71,10 +71,9 @@
     background-color: var(--beigeColor) !important;
 
 }
-.dropItemActivetran,.dropItemActivetran:hover,.dropItemActivetran:focus{
+.dropItemActivetran,.dropItemActivetran:hover,.dropItemActivetran:focus,.dropItemActivetran:active{
     background-color: #fff!important;
 }
-
 
 .colorUser {
     color:#fff !important;
@@ -121,7 +120,7 @@
 .colorNav {
 
     background-color: var(--beigeColor);
-    transition: all 2s;
+    transition: all 0.8s;
 }
 .badgeNumber{
     display: flex;

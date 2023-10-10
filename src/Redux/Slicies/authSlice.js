@@ -55,9 +55,9 @@ const authSlice = createSlice({
             state.token = token
         })
         builder.addCase(register.rejected, (state, action) => {
-            if(action.payload.error){
+            if (action.payload.error) {
                 state.msgError = action.payload.error
-            }else{
+            } else {
                 state.msgError = action.payload.errors[0].message
             }
             state.isLoading = false;
@@ -72,9 +72,9 @@ const authSlice = createSlice({
             state.token = token
         })
         builder.addCase(registerVerification.rejected, (state, action) => {
-            if(action.payload.error){
+            if (action.payload.error) {
                 state.msgError = action.payload.error
-            }else{
+            } else {
                 state.msgError = action.payload.errors[0].message
             }
             state.isLoading = false;
@@ -89,9 +89,9 @@ const authSlice = createSlice({
             state.token = token
         })
         builder.addCase(resendCode.rejected, (state, action) => {
-            if(action.payload.error){
+            if (action.payload.error) {
                 state.msgError = action.payload.error
-            }else{
+            } else {
                 state.msgError = action.payload.errors[0].message
             }
             state.isLoading = false;
@@ -122,9 +122,9 @@ const authSlice = createSlice({
         })
         builder.addCase(userProfile.rejected, (state, action) => {
             state.isLoading = false
-            if(action.payload.error){
+            if (action.payload.error) {
                 state.msgError = action.payload.error
-            }else{
+            } else {
                 state.msgError = action.payload.errors[0].message
             }
         })
@@ -138,9 +138,9 @@ const authSlice = createSlice({
         })
         builder.addCase(getUserProfile.rejected, (state, action) => {
             state.isLoading = false
-            if(action.payload.error){
+            if (action.payload.error) {
                 state.msgError = action.payload.error
-            }else{
+            } else {
                 state.msgError = action.payload.errors[0].message
             }
         })
@@ -187,8 +187,8 @@ const authSlice = createSlice({
             state.msgError = action.payload.error
             state.isLoading = false;
         });
-         // signout
-         builder.addCase(signout.pending, (state, action) => {
+        // signout
+        builder.addCase(signout.pending, (state, action) => {
             state.isLoading = true;
         })
         builder.addCase(signout.fulfilled, (state, action) => {
@@ -196,9 +196,9 @@ const authSlice = createSlice({
         })
         builder.addCase(signout.rejected, (state, action) => {
             state.isLoading = false
-            if(action.payload.error){
+            if (action.payload.error) {
                 state.msgError = action.payload.error
-            }else{
+            } else {
                 state.msgError = action.payload.errors[0].message
             }
         })

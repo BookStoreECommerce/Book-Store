@@ -30,6 +30,13 @@ const router = createBrowserRouter([
         },
       },
       {
+        path: 'book',
+        async lazy() {
+          const { default: Books } = await import("./pages/Books/Books");
+          return { Component: Books };
+        },
+      },
+      {
         path: "userInfo",
         async lazy() {
           const { default: UserInfo } = await import(
@@ -77,7 +84,7 @@ const router = createBrowserRouter([
         },
       },
       {
-        path: "book/:id",
+        path: "books/:slug",
         async lazy() {
           const { default: CategoriesBook } = await import(
             "./pages/CategoriesBook/CategoriesBook"
