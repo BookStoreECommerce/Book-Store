@@ -7,7 +7,7 @@ const initialState = {
    categoriesBooks :[],
    catBySlug:[],
    bookSearch:[],
-    isLoading: false,
+   isLoading: false,
 
 }
 

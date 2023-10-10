@@ -9,6 +9,7 @@ import LiveSearch from '../ReusableComponents/LiveSearch/LiveSearch';
 import { baseUrl } from '../../util/util';
 import { removeFooterMargin, setFooterMargin } from '../../Redux/Slicies/appSlice';
 import { Box } from '@mui/material';
+import ScrollToTop from '../ReusableComponents/ScrollToTop/ScrollToTop';
 
 function AllBook({ sectionName }) {
   let [books, setBooks] = useState([]);
@@ -65,13 +66,15 @@ function AllBook({ sectionName }) {
 
   return (
     <>
-    <Box
-      sx={{
-        marginTop: `${navH}px`,
-        minHeight: `calc(100vh - ${footerH + navH}px)`,
-      }}
-    >
-    <div className='row'>
+      <ScrollToTop />
+
+      <Box
+        sx={{
+          marginTop: `${navH}px`,
+          minHeight: `calc(100vh - ${footerH + navH}px)`,
+        }}
+      >
+        <div className='row'>
           {msgError ? (
             <div className="ps-2 alert alert-danger mb-4">{msgError}</div>
           ) : null}
@@ -87,13 +90,13 @@ function AllBook({ sectionName }) {
         </div>
 
         <div className="my-5 pt-5 d-flex justify-content-center">
-          <Stack spacing={2}>
-            <Pagination count={numBooks} page={page} size="large" shape="rounded" variant="outlined" color="primary" onChange={handleChange} />
-          </Stack>
+          {books && numBooks > 1 ? <Stack spacing={2}>
+            <Pagination count={numBooks} page={page} variant="outlined" shape="rounded" color="primary" onChange={handleChange} />
+          </Stack> : ''}
         </div>
-        </Box>
-      </>
-      )
+      </Box>
+    </>
+  )
 }
 
-      export default AllBook
+export default AllBook

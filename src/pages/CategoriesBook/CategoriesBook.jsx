@@ -88,11 +88,13 @@ const CategoriesBook = () => {
                             <BookCard key={index} image={book.image?.secure_url} name={book.name} price={book.price} author={book.author} rate={book.rate} section="catBook" category={book.category?.name} />
                         ))}
                     </div>
+                    {books && numBooks > 1 ?
                     <div className="d-flex justify-content-center align-items-center mb-5">
-                        {books && numBooks > 1 ? <Stack spacing={2}>
+                     <Stack spacing={2}>
                             <Pagination count={numBooks} page={page} variant="outlined" shape="rounded" color="primary" onChange={handleChange} />
-                        </Stack> : ''}
+                        </Stack> 
                     </div>
+                    : ''}
                 </div>
             </Box>
         </>}

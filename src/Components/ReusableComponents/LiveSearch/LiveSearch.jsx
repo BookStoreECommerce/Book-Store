@@ -92,7 +92,7 @@ const LiveSearch = ({
             InputProps={{
               ...params.InputProps,
               endAdornment: loading ? (
-                <CircularProgress color="inherit" size={20} />
+                <CircularProgress color="primary" size={20} />
               ) : (
                 <button type="submit" className={classes["search-btn"]}>
                   <SearchIcon />
