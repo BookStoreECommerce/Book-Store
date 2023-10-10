@@ -17,9 +17,10 @@ const LiveSearch = ({
   const [options, setOptions] = useState([]);
   const [searchValue, setSearchValue] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e, val = searchValue) => {
     e.preventDefault();
-    searchValue.length > 0 && onSubmit(searchValue);
+    // searchValue.length > 0 &&
+    onSubmit(val);
   };
 
   const handleInputChange = useCallback(
@@ -32,14 +33,14 @@ const LiveSearch = ({
         setOpen(false);
         return;
       }
-      setOptions([]);
+      // setOptions([]);
       try {
         const { data } = await axiosInstance(
           url.replace(`=${keyword}`, `=${val}`)
         );
         data.result.length && setOptions(data.result);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
       setLoading(false);
     },
@@ -50,18 +51,27 @@ const LiveSearch = ({
     <form onSubmit={handleSubmit} noValidate>
       <Autocomplete
         onInputChange={(e, val) => handleInputChange(val)}
+        clearOnBlur={false}
         open={open}
         onOpen={(e) => setOpen(e.target?.value?.length >= +minCharToSearch)}
-        onClose={() => setOpen(false)}
+        onClose={(event, reason) => {
+          if (reason === "selectOption") {
+            setTimeout(() => {
+              console.log(event.target.defaultValue || event.target.innerText);
+              onSubmit(event.target.defaultValue || event.target.innerText);
+            }, 1);
+          }
+          setOpen(false);
+        }}
         isOptionEqualToValue={(option, value) => option?.name === value.name}
         getOptionLabel={(option) => option?.name}
         options={options}
         renderOption={(props, option) => (
           <Box
-          component="li"
-          sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
-          {...props}
-          key={option._id}
+            component="li"
+            sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+            {...props}
+            key={option._id}
           >
             {hasImage.toLowerCase() === "true" && (
               <img
