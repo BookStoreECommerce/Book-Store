@@ -90,7 +90,7 @@ color: var(--navyBlue)!important;
 }
 
 .Suggested .slick-current{
-  transform: scale(1.04);
+  transform: scale(1.03);
   transition: scale 2s ease-in-out ;
 }
 
