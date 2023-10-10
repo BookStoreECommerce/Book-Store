@@ -118,4 +118,13 @@ export const getSearchedBooks = createAsyncThunk(`book/searched-books`, async (_
     }
 })
 
+export const getSuggestedBooks = createAsyncThunk(`book/for-you`, async (_, { rejectWithValue }) => {
+    try {
+        const { data } = await axiosInstance.get(`book/for-you`);
+        return data
+    } catch (error) {
+        return rejectWithValue(error.response.data)
+    }
+})
+
 
