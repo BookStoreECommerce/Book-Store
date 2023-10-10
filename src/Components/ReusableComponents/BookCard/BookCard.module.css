@@ -22,7 +22,6 @@
     color: gray;
     font-size: 16px;
 
-
 }
 
 .price {
@@ -139,6 +138,32 @@
 
 .colorStar {
     color: #ffc107;
+}
+@media screen and (min-width:1701px) and (max-width:2000px){
+    .cardImg{
+        height: 340px;
+    }
+}
+@media screen and (min-width:1400px) and (max-width:1700px){
+    .cardImg{
+        max-height: 321px;
+   
+    }
+}
+@media screen and (min-width:1200px) and (max-width:1399px){
+    .cardImg{
+        max-height: 255px;
+    }
+}
+@media screen and (min-width:1000px) and (max-width:1199px){
+    .cardImg{
+        max-height: 307px;
+    }
+}
+@media screen and (min-width:750px) and (max-width:999px){
+    .cardImg{
+        max-height: 360px;
+    }
 }
 
 @media screen and (min-width:1701px) and (max-width:2000px) {

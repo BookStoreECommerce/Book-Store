@@ -63,3 +63,8 @@ const BookCard = ({ id, image, name, price, author, rate, section, cardStyle ,sa
 }
 
 export default BookCard;
+
+
+
+
+

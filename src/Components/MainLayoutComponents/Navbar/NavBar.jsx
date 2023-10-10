@@ -33,7 +33,7 @@ function NavBar({ navRef }) {
 
   let { categoriesBooks } = useSelector((state) => state.book)
 let category = { categoriesBooks }.categoriesBooks.result
-  console.log(category);
+  // console.log(category);
   useEffect(() => {
     dispatch(getCatBooks())
   }, [])
@@ -122,8 +122,8 @@ let category = { categoriesBooks }.categoriesBooks.result
                 </li>
                 <li className={`nav-item me-2 ${styles.navItem}`}>
                   <NavLink
-                    className={({ isActive }) => isActive ? linkStyle + styles.itemActive : linkStyle}
-                    to="shop"
+                    className={({isActive}) => isActive? linkStyle + styles.itemActive: linkStyle}
+                    to="book"
                   >
                     Shop
                   </NavLink>
