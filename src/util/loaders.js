@@ -2,6 +2,7 @@ import { redirect } from "react-router-dom";
 import { getUserProfile, signinWithToken } from "../Redux/Slicies/authActions";
 import bcryptjs from "bcryptjs"
 import store from "../Redux/Store";
+import { getAllCategories } from "../Redux/Slicies/favActions";
 
 
 const getToken = () => {
@@ -16,6 +17,7 @@ export const indexLoader = async () => {
         return null;
     }
     await store.dispatch(getUserProfile())
+    await store.dispatch(getAllCategories());
     return null
 }
 

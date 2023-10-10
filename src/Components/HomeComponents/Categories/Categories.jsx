@@ -1,49 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from './Categories.module.css';
 import CategoryCard from "../CategoryCard/CategoryCard";
-import music from '../../../assets/music.jpg'
-import architure from '../../../assets/arc.jpg';
-import science from '../../../assets/sciencee.jpg';
-import cooking from '../../../assets/cooking.jpg';
-import scienceFiction from '../../../assets/sci-fiction.jpg';
-import children from '../../../assets/children.jpg';
-import business from '../../../assets/business.jpg';
 import { Link } from "react-router-dom";
-
+import {  useSelector } from "react-redux";
 
 const Categories = () => {
+    const { user } = useSelector((state) => state.auth);
 
-    
-    const [category] = useState([
-        {
-            catName: "Science",
-            img: science
-        },
-        {
-            catName: "Children",
-            img: children
-        },
-        {
-            catName: "Cooking",
-            img: cooking
-        },
-        {
-            catName: "Science Fiction",
-            img: scienceFiction
-        },
-        {
-            catName: "Business",
-            img: business
-        },
-        {
-            catName: "Music",
-            img: music
-        },
-        {
-            catName: "Architecture",
-            img: architure
-        },
-    ])
+    const { getCategoriesResult } = useSelector(
+        (state) => state.favourites
+    );
+
+    const formatAllCat = getCategoriesResult.map((ele) => {return {"catName": ele.name, "img": ele.image.secure_url}}); 
 
     const shuffle = (array) => {
         for (let i = array.length - 1; i > 0; i--) {
@@ -52,14 +20,22 @@ const Categories = () => {
         }
         return array;
     };
-    const shuffledArray = shuffle(category).slice(0, 6);
+    const shuffledArray = shuffle(formatAllCat);
+
+    const userFavCat = user.fav_cats.map((ele) => {return {"catName": ele.name, "img": ele.image.secure_url}});
+
+    const names = new Set(userFavCat.map(({ catName }) => catName));
+    const catNotRepeated = shuffledArray.filter(({ catName }) => !names.has(catName));
+
+    userFavCat.map((ele) => {return catNotRepeated.unshift(ele)});
+    const displayedCat = catNotRepeated.slice(0, 6);
 
     return (
         <>
             <section className='pt-4 pb-5' data-testid='Categories'>
                 <div className={`container text-center ${styles.paddingSection}`}>
                     <h2 className="blueHeader">Categories</h2>
-                  <CategoryCard shuffledArray={shuffledArray} />
+                  <CategoryCard shuffledArray={displayedCat} />
                   <div className="row">
                   <div className="col-12">
                             <Link to='categories' className="text-decoration-none"><p className={styles.fontpargraph}>See All Categories...</p></Link>
