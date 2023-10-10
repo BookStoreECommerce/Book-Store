@@ -51,8 +51,7 @@ const Categories = () => {
 
     const url = `${baseUrl}category?page=1&sort=name&keyword=searchValue&fields=name,image`;
     return (
-        isLoading ? <Loading/> :
-        <>
+        
         <Box
         sx={{
           marginTop: `${navH}px`,
@@ -61,9 +60,10 @@ const Categories = () => {
       >
         <div className="container mb-3 " style={{ "marginTop": "150px" }}>
             <div className="py-4">
-                <LiveSearch minCharToSearch="2" label="search categories" url={url} keyword="searchValue" onSubmit={searchBooks} />
+                <LiveSearch minCharToSearch="2" label="search categories" url={url} keyword="searchValue" onSubmit={searchBooks} hasImage="true" />
 
             </div>
+            {isLoading ? <Loading/> :<>
             <div className="row gy-4">
                 {catArray?.map((cat,idx) => (
                     <CategoryCard sectionName="" key={idx} catName={cat.name} img={cat.image.secure_url} />
@@ -79,12 +79,10 @@ const Categories = () => {
                     :
                     ''
                     }
-           
+           </>}
 
         </div>
 </Box>
-
-    </>
     
        
 
