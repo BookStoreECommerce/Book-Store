@@ -42,7 +42,7 @@ const Categories = () => {
     }
     // Search
     const searchBooks = (searchKeyword) => {
-        searchKeyword = searchKeyword.replace(/\*|\[|\]|\(|\)|\\/g, '')
+        searchKeyword = searchKeyword.replace(/\*|\[|\]|\(|\)|\\|#/g, '')
         // searchKeyword = searchKeyword.replace(/\[|\] () */g, '')
         setSearch(searchKeyword)
         dispatch(getCategories({page,searchTerm:searchKeyword}));
@@ -50,7 +50,7 @@ const Categories = () => {
 
     }
 
-    const url = `${baseUrl}category?page=1&sort=name&keyword=searchValue&fields=name,image`;
+    const url = `${baseUrl}category?page=1&sort=name&keyword=searchValue`;
     return (
         
         <Box
@@ -61,13 +61,13 @@ const Categories = () => {
       >
         <div className="container mb-3 " style={{ "marginTop": "150px" }}>
             <div className="py-4">
-                <LiveSearch minCharToSearch="2" label="search categories" url={url} keyword="searchValue" onSubmit={searchBooks} hasImage="true" />
+                <LiveSearch minCharToSearch="2" label="search categories" url={url} keyword="searchValue" onSubmit={searchBooks} hasImage="true" navParam='categories' />
 
             </div>
             {isLoading ? <Loading/> :<>
             <div className="row gy-4">
                 {catArray?.map((cat,idx) => (
-                    <CategoryCard sectionName="" key={idx} catName={cat.name} img={cat.image.secure_url} />
+                    <CategoryCard sectionName="" key={idx} catName={cat.name} img={cat.image.secure_url} slug={cat.slug} />
                 ))}
             </div>
                     {
