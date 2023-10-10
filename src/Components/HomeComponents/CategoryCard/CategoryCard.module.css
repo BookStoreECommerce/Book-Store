@@ -9,15 +9,22 @@
 .imgCat img {
   transition: transform 0.5s ease-in-out;
 
+
+}
+
+
+.cardImg img {
+
+
 }
 
 .overlayCat {
   position: absolute;
   width: 80%;
-  top: 80%;
+  /* top: 61%; */
   left: 10%;
   right: 0;
-  bottom: 3%;
+  bottom: 4%;
   border-radius: 12px;
   display: flex;
   justify-content: center;
@@ -25,6 +32,9 @@
   background-color: rgba(242, 229, 229, 0.7);
   transition: all 0.5s 0.1s ease-in-out;
   z-index: 99;
+  text-align: center;
+  padding: 5px;
+  height: fit-content;
 
 }
 
@@ -44,19 +54,41 @@
   transform: scale(1.1, 1.1);
 
 }
-.fontpargraph{
-  font-size: 22px;
-  font-weight: bold;
 
-  color: var(--navyBlue);
-  padding-top: 15px;
-  margin-bottom: 0;
-  display: flex;
-justify-content: center;
-  align-items: center;
-  transition: all 0.2s ease-in-out;
+
+
+/* Screens */
+
+@media screen and (width:1024px) {
+  .cardImg img {
+    height: 236px !important;
+
+  }
+
+  .overlayCat {
+    position: absolute;
+    width: 90%;
+    top: 70%;
+    left: 5%;
+    right: 0;
+    bottom: 3%;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(242, 229, 229, 0.7);
+    transition: all 0.5s 0.1s ease-in-out;
+    z-index: 99;
+  }
+
+  .overlayCat p {
+    font-size: 18px;
+  }
+
+
 }
-.fontpargraph:hover{
-  color: var(--mainColor);
-
+@media screen and (max-width:575px) {
+  .cardImg img {
+    height: unset !important;
+}
 }

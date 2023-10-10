@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from './Categories.module.css';
 import CategoryCard from "../CategoryCard/CategoryCard";
 import { Link } from "react-router-dom";
 import {  useSelector } from "react-redux";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 
 const Categories = () => {
     const { user } = useSelector((state) => state.auth);
@@ -12,6 +15,12 @@ const Categories = () => {
     );
 
     const formatAllCat = getCategoriesResult.map((ele) => {return {"catName": ele.name, "img": ele.image.secure_url, "slug": ele.slug}}); 
+
+    useEffect(() => {
+        AOS.init();
+        window.addEventListener('load', AOS.refresh);
+   
+    }, []);
 
     const shuffle = (array) => {
         for (let i = array.length - 1; i > 0; i--) {
@@ -34,12 +43,23 @@ const Categories = () => {
             <section className='pt-4 pb-5' data-testid='Categories'>
                 <div className={`container text-center ${styles.paddingSection}`}>
                     <h2 className="blueHeader">Categories</h2>
-                  <CategoryCard shuffledArray={displayedCat} />
-                  <div className="row">
-                  <div className="col-12">
+                    <div className="row justifiy-content-center align-items-center gy-4 mt-4" data-testid='CategoryCard'>
+                        <div className="col-lg-12 col-md-12" data-aos="fade-up" data-aos-duration="800">
+
+                            <div className="row gy-4">
+                                {
+                                    displayedCat.map((singleCat, index) =>
+                                        <CategoryCard key={index} sectionName="home" catName={singleCat.catName} img={singleCat.img} slug={singleCat.slug} />
+                                    )
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-12">
                             <Link to='categories' className="text-decoration-none"><p className={styles.fontpargraph}>See All Categories...</p></Link>
                         </div>
-                  </div>
+                    </div>
                 </div>
             </section>
         </>
