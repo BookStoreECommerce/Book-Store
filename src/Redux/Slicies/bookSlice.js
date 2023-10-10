@@ -4,13 +4,11 @@ import {
 import { getAllBooks, getBooksByWord } from "./bookActions";
 
 const initialState = {
-    user: null,
     isLoading: false,
-    token: null,
     msgError: null
 }
 
-const authSlice = createSlice({
+const bookSlice = createSlice({
     name: "authentication",
     initialState,
     reducers: {
@@ -32,23 +30,26 @@ const authSlice = createSlice({
             state.isLoading = true;
         })
         builder.addCase(getAllBooks.fulfilled, (state, action) => {
-            state.isLoading = false;
-            console.log(action);
+            // state.isLoading = false;
+            console.log("fullfilled",action);
         })
         builder.addCase(getAllBooks.rejected, (state, action) => {
             state.isLoading = false
-            state.msgError = action.payload.error
-            if (action.error) {
-                state.msgError = action.error
-            } else {
-                state.msgError = action.errors[0].message
-            }
-            console.log(action.payload.error);
-            if (action.payload.error) {
-                state.msgError = action.payload.error
-            } else {
-                state.msgError = action.payload.errors[0].message
-            }
+            // state.msgError = action.payload.error
+            console.log("rejected",action.payload.error);
+            console.log("rejected",state);
+            console.log("rejected",action);
+            // if (action.error) {
+            //     state.msgError = action.error
+            // } else {
+            //     state.msgError = action.errors[0].message
+            // }
+            // console.log(action.payload.error);
+            // if (action.payload.error) {
+            //     state.msgError = action.payload.error
+            // } else {
+            //     state.msgError = action.payload.errors[0].message
+            // }
         })
 
 
@@ -65,22 +66,22 @@ const authSlice = createSlice({
         builder.addCase(getBooksByWord.rejected, (state, action) => {
             state.isLoading = false
             state.msgError = action.payload.error
-            if (action.error) {
-                state.msgError = action.error
-            } else {
-                state.msgError = action.errors[0].message
-            }
-            console.log(action.payload.error);
-            if (action.payload.error) {
-                state.msgError = action.payload.error
-            } else {
-                state.msgError = action.payload.errors[0].message
-            }
+            // if (action.error) {
+            //     state.msgError = action.error
+            // } else {
+            //     state.msgError = action.errors[0].message
+            // }
+            // console.log(action.payload.error);
+            // if (action.payload.error) {
+            //     state.msgError = action.payload.error
+            // } else {
+            //     state.msgError = action.payload.errors[0].message
+            // }
         })
 
 
     }
 })
 
-export const authReducer = authSlice.reducer;
-export const { clearError, setUser, logout } = authSlice.actions;
+export const authReducer = bookSlice.reducer;
+export const { clearError, setUser, logout } = bookSlice.actions;

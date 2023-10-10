@@ -9,14 +9,23 @@ import LiveSearch from '../ReusableComponents/LiveSearch/LiveSearch';
 import { baseUrl } from '../../util/util';
 import { removeFooterMargin, setFooterMargin } from '../../Redux/Slicies/appSlice';
 import { Box } from '@mui/material';
-
+import AOS from "aos";
+import "aos/dist/aos.css";
+import Loading from '../ReusableComponents/Loading/Loading';
 function AllBook({ sectionName }) {
+
+  useEffect(() => {
+    AOS.init();
+    window.addEventListener('load', AOS.refresh);
+  }, []);
+
   let [books, setBooks] = useState([]);
-  let [numBooks, setNumBooks] = useState(0)
-  const { isLoading, msgError } = useSelector((state) => state.auth);
+  let [searchWord, setSearchWord] = useState('');
+  let [numOfPages, setNumOfPages] = useState(0)
+  let { isLoading, msgError } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const nBookPerPage = 12;
-  const [page, setPage] = useState(1);
+  const [pageNumber, setPageNumber] = useState(1);
 
   const { footerH, navH } = useSelector((state) => state.app);
 
@@ -25,74 +34,78 @@ function AllBook({ sectionName }) {
     return () => dispatch(setFooterMargin());
   }, [dispatch]);
 
-  const handleChange = (e, page) => {
-    console.log(page);
-    setPage(page);
+  const handleChange = (e, pageNumber) => {
+    isLoading = true;
+    console.log(isLoading);
+    setPageNumber(pageNumber);
   };
 
+  // get all books
   async function getBooks() {
-    const response = await dispatch(getAllBooks(page));
+    const response = await dispatch(getAllBooks({ pageNumber, searchWord }));
 
     if (response.type === "books/fulfilled") {
-      const totalCount = response.payload.totalCount;
-      numBooks = Math.ceil(totalCount / nBookPerPage)
-      setNumBooks(numBooks)
+      const totalCountOfBooks = response.payload.totalCount;
+      numOfPages = Math.ceil(totalCountOfBooks / nBookPerPage)
+      setNumOfPages(numOfPages)
       setBooks(response.payload.result)
-
     } else {
-      console.log(response.error.message);
+      console.log(response);
     }
   }
+
+  // filter books by search
   async function getBooksBySearch(searchKeyword) {
-
     const response = await dispatch(getBooksByWord(searchKeyword));
-    console.log(response.payload.result)
-    setNumBooks(Math.ceil(response.payload.result.length / nBookPerPage))
-    console.log(response.payload.result.length)
-    setBooks(response.payload.result)
+    setSearchWord(searchKeyword)
+    const totalCountOfBooks = response.payload.totalCount;
+    console.log("totalCountOfBooks", totalCountOfBooks);
+    if (response.type === "books/fulfilled") {
+      setNumOfPages(Math.ceil(totalCountOfBooks / nBookPerPage))
+      console.log("numOfPages", numOfPages);
+      setBooks(response.payload.result)
+    } else {
+      console.log(msgError);
+    }
   }
+
   useEffect(() => {
-
     getBooks()
-  }, [page])
+  }, [pageNumber])
 
 
-  // const searchBooks = (searchKeyword) => {
-  //   getBooksBySearch(searchKeyword)
-  // }
   const url = `${baseUrl}book/?keyword=searchValue`;
 
   return (
     <>
-    <Box
-      sx={{
-        marginTop: `${navH}px`,
-        minHeight: `calc(100vh - ${footerH + navH}px)`,
-      }}
-    >
-    <div className='row'>
-          {msgError ? (
-            <div className="ps-2 alert alert-danger mb-4">{msgError}</div>
-          ) : null}
-          <div className=''>
-            <LiveSearch minCharToSearch="1" label="search books" url={url} keyword="searchValue" onSubmit={getBooksBySearch} />
+      {isLoading ? <Loading /> : <Box
+        sx={{
+          marginTop: `${navH}px`,
+          minHeight: `calc(100vh - ${footerH + navH}px)`,
+        }}
+      >
+        <div className='row'>
+          <div className='mt-3'>
+            <LiveSearch minCharToSearch="2" label="search books" values={searchWord} url={url} keyword="searchValue" onSubmit={getBooksBySearch} />
           </div>
           {books?.map((book, index) => (
             <div key={index} className={` col-lg-3 col-sm-6 col-12 mb-5 ${styles.bookCard}`}>
-              <BookCard key={book.id} image={book.image.secure_url} category={book.category} desc={book.desc} name={book.name} price={book.price} author={book.author} rate={book.rate} section={sectionName} />
+              <BookCard key={book._id} image={book.image.secure_url} category={book.category.name} desc={book.desc} name={book.name} price={book.price} author={book.author} rate={book.rate} section={sectionName} />
             </div>
           ))}
 
         </div>
 
-        <div className="my-5 pt-5 d-flex justify-content-center">
+        {books && numOfPages > 1 ? <div className="my-5 pt-5 d-flex justify-content-center">
           <Stack spacing={2}>
-            <Pagination count={numBooks} page={page} size="large" shape="rounded" variant="outlined" color="primary" onChange={handleChange} />
+            <Pagination count={numOfPages} page={pageNumber} size="large" shape="rounded" variant="outlined" color="primary" onChange={handleChange} />
           </Stack>
-        </div>
-        </Box>
-      </>
-      )
+        </div> : ''}
+
+      </Box>}
+
+    </>
+  )
 }
 
-      export default AllBook
+export default AllBook

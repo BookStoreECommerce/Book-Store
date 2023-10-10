@@ -2,13 +2,13 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../axios/axios-instance";
 
 
-export const getAllBooks = createAsyncThunk(`books`, async (page, { rejectWithValue }) => {
+export const getAllBooks = createAsyncThunk(`books`, async ({pageNumber, searchWord=''}, { rejectWithValue }) => {
     try {
-        const { data } = await axiosInstance.get(`book?page=${page}`);
-        console.log(data);
+        const { data } = await axiosInstance.get(`book?page=${pageNumber}&keyword=${searchWord}`);
         return data
     } catch (error) {
-        return rejectWithValue(error.response.data)
+        console.log(error);
+        return rejectWithValue(error)
     }
 })
 
