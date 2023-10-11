@@ -25,7 +25,7 @@ export const getBooksByWord = createAsyncThunk(`books/getData`, async (word, { r
 
 export const getNewBooks = createAsyncThunk(`books/newBooks`, async (_, { rejectWithValue }) => {
     try {
-        const { data } = await axiosInstance.get(`book?sort=published`);
+        const { data } = await axiosInstance.get(`book?sort=-published`);
         return data
     } catch (error) {
         return rejectWithValue(error.response.data)
