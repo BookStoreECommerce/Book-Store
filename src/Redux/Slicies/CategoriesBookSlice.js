@@ -12,7 +12,8 @@ const CategoriesBookSlice = createSlice({
     name:'books',
     initialState:initialState,
     extraReducers:(builder)=>{
-     builder.addCase(getCatBooks.pending, (state, action) => {
+        // getCatBooks
+        builder.addCase(getCatBooks.pending, (state, action) => {
             state.isLoading = true
         })
         builder.addCase(getCatBooks.fulfilled, (state,action)=>{
@@ -22,14 +23,8 @@ const CategoriesBookSlice = createSlice({
             state.msgError = action.payload.error
             state.isLoading = false
         })
-    
-    }
-})
 
-const CategoriesBookBySlug = createSlice({
-    name:'bookCat',
-    initialState:initialState,
-    extraReducers:(builder)=>{
+        // getCatBooksBySlug
         builder.addCase(getCatBooksBySlug.pending, (state, action) => {
             state.isLoading = true
         })
@@ -41,8 +36,27 @@ const CategoriesBookBySlug = createSlice({
             state.msgError = action.payload.error
             state.isLoading = false
         })
-
+    
     }
 })
+
+// const CategoriesBookBySlug = createSlice({
+//     name:'bookCat',
+//     initialState:initialState,
+//     extraReducers:(builder)=>{
+//         builder.addCase(getCatBooksBySlug.pending, (state, action) => {
+//             state.isLoading = true
+//         })
+//         builder.addCase(getCatBooksBySlug.fulfilled, (state,action)=>{
+//             state.catBySlug = action.payload;
+//             state.isLoading = false
+//         })
+//         builder.addCase(getCatBooksBySlug.rejected, (state, action) => {
+//             state.msgError = action.payload.error
+//             state.isLoading = false
+//         })
+
+//     }
+// })
 export const categoriesBooksReducer = CategoriesBookSlice.reducer;
-export const categoriesBooksSlugReducer = CategoriesBookBySlug.reducer;
+// export const categoriesBooksSlugReducer = CategoriesBookBySlug.reducer;

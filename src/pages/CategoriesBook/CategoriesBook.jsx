@@ -23,7 +23,6 @@ const CategoriesBook = () => {
     const [page, setPage] = useState(1);
     const dispatch = useDispatch();
 
-    console.log(category);
  
 
     useEffect(() => {
