@@ -96,6 +96,13 @@ color: var(--navyBlue)!important;
     .content{
         padding: 0;
     }
+    .notFoundContainer p{
+        font-size: 35px;
+    
+        }
+        .badge{
+            flex-wrap: wrap;
+        }
 }
 @media screen and (min-width:350px) and (max-width:549px){
     .slug{
@@ -113,4 +120,8 @@ color: var(--navyBlue)!important;
         padding: 15px;
         flex-wrap: wrap;
     }
+    .notFoundContainer p{
+        font-size: 46px;
+    
+        }
 }

@@ -82,7 +82,7 @@ function AllBook({ sectionName }) {
             <LiveSearch minCharToSearch="1" label="search books" url={url} keyword="searchValue" onSubmit={getBooksBySearch} hasImage="true" />
           </div>
           {books?.map((book, index) => (
-            <div key={index} className={` col-lg-3 col-sm-6 col-12 mb-5 ${styles.bookCard}`}>
+            <div key={index} className={`col-xl-3 col-lg-4 col-sm-6 col-12 mb-3 ${styles.bookCard}`}>
               <BookCard key={book.id} image={book.image.secure_url} category={book.category.name} desc={book.desc} name={book.name} price={book.price} author={book.author} rate={book.rate} section={sectionName} />
             </div>
           ))}
