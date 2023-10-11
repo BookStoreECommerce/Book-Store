@@ -78,7 +78,7 @@ input:-webkit-autofill:active{
 }
 
 section{
-  margin-top: 3rem !important;
+  /* margin-top: 3rem !important; */
 }
 
 .slick-prev:before, .slick-next:before{

@@ -1,0 +1,9 @@
+
+.book_profile{
+    height: 100vh;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: contain;
+    /* background-image: url(./BG1.png); */
+    background-color: #faf5f5;
+}
