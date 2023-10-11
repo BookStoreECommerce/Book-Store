@@ -12,6 +12,7 @@ const LiveSearch = ({
   keyword,
   minCharToSearch,
   onSubmit,
+  pageNumber,
   hasImage = "false",
 }) => {
   const [open, setOpen] = useState(false);
@@ -32,6 +33,7 @@ const LiveSearch = ({
       if (val === '') onSubmit(val); //show all if removed search word
       if (val.length >= +minCharToSearch) {
         setLoading(true);
+        pageNumber(1);
       } else {
         setOpen(false);
         return;
@@ -47,7 +49,7 @@ const LiveSearch = ({
       }
       setLoading(false);
     },
-    [keyword, url, minCharToSearch]
+    [keyword, url, minCharToSearch, pageNumber]
   );
 
   return (
@@ -77,17 +79,20 @@ const LiveSearch = ({
           }
           setOpen(false);
         }}
-        isOptionEqualToValue={(option, value) => option?.name === value.name}
+        // isOptionEqualToValue={(option, value) => option?.name === 'value.name'}
+        // isOptionEqualToValue={(option, value) => option?.name === value.name}
         getOptionLabel={(option) => option?.name}
         options={options}
         renderOption={(props, option) => (
           <Box
-            component="li"
-            sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
-            {...props}
-            key={option._id}
-            slug={option.slug}
+          component="li"
+          sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+          {...props}
+          key={option._id}
+          slug={option.slug}
           >
+            {/* {console.log('props ', props)}
+            {console.log('option ', option)} */}
             {hasImage.toLowerCase() === "true" && (
               <img
                 loading="lazy"
