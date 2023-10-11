@@ -1,3 +1,21 @@
 .imgCat img  {
     height: 306px !important;
 }
+
+.notFoundContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+  }
+.notFoundContainer p{
+    font-size: 35pt;
+    color: var(--mainColor);
+  }
+
+  .Box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
