@@ -182,7 +182,7 @@ const BestSeller = () => {
         <section className="px-lg-0 px-4" data-testid='BestSeller'>
             <div className="container-fluid">
                 <div className="row justify-content-center">
-                    <h2 className="blueHeader text-center mt-4 mb-5">Best Seller</h2>
+                    <h2 className="blueHeader text-center my-md-5 my-3">Best Seller</h2>
                     <div className={`col-lg-11 ${styles.marginBottom}`}>
                         <Slider {...settings} >
                             {bestSeller.map((bestSeller, index) =>

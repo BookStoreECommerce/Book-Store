@@ -1,7 +1,7 @@
 import React from "react";
 import BookList from "../../ReusableComponents/BookList/BookList";
 import { useSelector } from "react-redux";
-
+import styles from './LastSearch.module.css'
 
 const LastSearch = () => {
     const { searchedBooks } = useSelector((state) => state.auth);
@@ -11,15 +11,17 @@ const LastSearch = () => {
  
     return (
         <>
-            <section id="lastSearchedBooks" data-testid='lastSearchedBooks'>
-            <div className={`container`} >
-                <h2 className="blueHeader text-center mt-md-5 mb-2 pt-5" >Your Last Search</h2>
-                <div className={`row justify-content-center align-items-center`}>
-                    <BookList NewBooks={cutLastSearch} sectionName={"newBooks"} />
+        <section id="lastSearchedBooks" data-testid='lastSearchedBooks'>
+            <h2 className="blueHeader text-center my-md-5 my-3">Your Last Search</h2>
+            <div className={`container-fluid px-0 ${styles.LastSearch} ${styles.fixContainerFluid}`}>
+                <div className="container">
+                    <div className={`row justify-content-center align-items-center`}>
+                        <BookList NewBooks={cutLastSearch} sectionName={"newBooks"} />
+                    </div>
                 </div>
             </div>
-            </section>
-        </>
+        </section>
+    </>
     );
 }
 

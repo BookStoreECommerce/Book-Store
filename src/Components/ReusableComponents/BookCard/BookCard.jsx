@@ -7,7 +7,7 @@ import bookImage from '../../../assets/book.jpg'
 const BookCard = ({ id, image, name, price, author, rate, section, cardStyle ,sale,category}) => {
     return (
         <>
-            <div data-testid='BookCard' className={section === "newBooks" ? `col-lg-3 col-sm-6 col-12 mt-5 mb-3 ${styles.font}` : section === 'catBook'? `col-xl-3 col-lg-4 col-sm-6 col-12 mt-5 mb-3 ${styles.font}` :''}>
+            <div data-testid='BookCard' className={section === "newBooks" ? `col-lg-3 col-sm-6 col-6 mt-3 mb-3 ${styles.font}` : section === 'catBook'? `col-xl-3 col-lg-4 col-sm-6 col-12 mt-5 mb-3 ${styles.font}` :''}>
                 <div className={`mb-2 position-relative ${styles.imgContainer}`} style={cardStyle}>
                     <div className={styles.overLay}>
 

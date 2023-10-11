@@ -80,7 +80,7 @@ const Reviews = () => {
     return (
 
         <>
-            <section className="mt-0" data-testid='Reviews'>
+            <section data-testid='Reviews'>
                 <div className={`container ${style.paddingSection}`}>
                     <div>
                         <Slider {...settings}>

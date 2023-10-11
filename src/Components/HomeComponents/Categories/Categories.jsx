@@ -41,10 +41,10 @@ const Categories = () => {
 
     return (
         <>
-            <section className='pt-4 pb-5' data-testid='Categories'>
+            <section data-testid='Categories'>
                 <div className={`container text-center ${styles.paddingSection}`}>
-                    <h2 className="blueHeader">Categories</h2>
-                    <div className="row justifiy-content-center align-items-center gy-4 mt-4" data-testid='CategoryCard'>
+                    <h2 className="blueHeader my-md-5 my-3">Categories</h2>
+                    <div className="row justifiy-content-center align-items-center gy-4" data-testid='CategoryCard'>
                         <div className="col-lg-12 col-md-12" data-aos="fade-up" data-aos-duration="800">
 
                             <div className="row gy-4">

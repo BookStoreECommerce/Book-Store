@@ -18,11 +18,12 @@ export default function Home() {
   return (
     <>
       <Slider />
-      {user?<><Suggested/><LastSearch/></>:''}
+      {user?<><Suggested/></>:''}
       <NewBooks />
       <Categories />
       <AboutUs />
       <BestSeller />
+      {user?<><LastSearch/></>:''}
       <Reviews />
       <ScrollToTop />
     </>
