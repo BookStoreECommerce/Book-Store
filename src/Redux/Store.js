@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { authReducer } from "./Slicies/authSlice";
 import { dialogReducer } from "./Slicies/dialogSlice";
 import { appReducer } from "./Slicies/appSlice";
-import { categoriesBooksReducer, categoriesBooksSlugReducer,categoriesSearchBooksReducer} from './Slicies/CategoriesBookSlice.js';
+import { categoriesBooksReducer, categoriesBooksSlugReducer} from './Slicies/CategoriesBookSlice.js';
 import { catReducer } from "./Slicies/categoriesSlice";
 
 const store = configureStore({
@@ -12,7 +12,7 @@ const store = configureStore({
         app: appReducer,
         book: categoriesBooksReducer,
         catbook: categoriesBooksSlugReducer,
-        bookSearchCat:categoriesSearchBooksReducer,
+        // bookSearchCat:categoriesSearchBooksReducer,
         loading: categoriesBooksSlugReducer,
         cat:catReducer,
     }

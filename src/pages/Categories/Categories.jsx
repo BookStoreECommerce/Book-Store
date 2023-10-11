@@ -46,6 +46,7 @@ const Categories = () => {
         // searchKeyword = searchKeyword.replace(/\[|\] () */g, '')
         setSearch(searchKeyword)
         dispatch(getCategories({page,searchTerm:searchKeyword}));
+        setPageState(1)
        
 
     }
@@ -64,7 +65,7 @@ const Categories = () => {
                 <LiveSearch minCharToSearch="2" label="search categories" url={url} keyword="searchValue" onSubmit={searchBooks} hasImage="true" navParam='categories' />
 
             </div>
-            {isLoading ? <Loading/> :<>
+            {isLoading ? <Loading sectionName="bookCategories"/> :<>
             <div className="row gy-4">
                 {catArray?.map((cat,idx) => (
                     <CategoryCard sectionName="" key={idx} catName={cat.name} img={cat.image.secure_url} slug={cat.slug} />

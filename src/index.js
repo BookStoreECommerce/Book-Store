@@ -151,7 +151,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
     <ThemeContextProvider>
-      <RouterProvider router={router} fallbackElement={<Loading />}>
+      <RouterProvider router={router} fallbackElement={<Loading sectionName='home'/>}>
         <App />
       </RouterProvider>
     </ThemeContextProvider>

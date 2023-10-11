@@ -6,7 +6,7 @@ const CategoryCard = ({ catName , img , sectionName, slug  }) => {
   
     return (
         <>
-            <div  className={sectionName === 'home' ? "col-lg-4 col-md-6 col-sm-6" : `col-lg-3 col-lg-3 col-md-6 col-sm-6 ${styles.cardImg}`} >
+            <div  className={sectionName === 'home' ? "col-lg-4 col-md-6 col-sm-6" : `col-xl-3 col-lg-4 col-md-6 col-sm-6 ${styles.cardImg}`} >
                 <Link to={sectionName === 'home'?`categories/${slug}`:`${slug}`}>
                     <div className={`${styles.imgCat} ${styles.fontSize} position-relative`} >
                         <div className={`${styles.overlayCat}`}>

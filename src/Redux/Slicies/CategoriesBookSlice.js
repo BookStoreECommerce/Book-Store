@@ -47,23 +47,5 @@ const CategoriesBookBySlug = createSlice({
     }
 })
 
-const BookCatSearch = createSlice({
-    name:'bookSearchCat',
-    initialState:initialState,
-    extraReducers:(builder)=>{
-        builder.addCase(getBooksByWord.pending, (state, action) => {
-            state.isLoading = true
-        })
-        builder.addCase(getBooksByWord.fulfilled, (state,action)=>{
-            state.catBySlug = action.payload;
-            state.isLoading = false
-        })
-        builder.addCase(getBooksByWord.rejected, (state, action) => {
-            state.isLoading = false
-        })
-
-    }
-})
 export const categoriesBooksReducer = CategoriesBookSlice.reducer;
 export const categoriesBooksSlugReducer = CategoriesBookBySlug.reducer;
-export const categoriesSearchBooksReducer = BookCatSearch.reducer;

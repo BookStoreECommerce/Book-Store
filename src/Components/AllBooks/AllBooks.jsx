@@ -49,8 +49,8 @@ function AllBook({ sectionName }) {
 
     const response = await dispatch(getBooksByWord(searchKeyword));
     console.log(response.payload.result)
-    setNumBooks(Math.ceil(response.payload.result.length / nBookPerPage))
-    console.log(response.payload.result.length)
+    setNumBooks(Math.ceil(response.payload.result?.length / nBookPerPage))
+    // console.log(response.payload.result.length)
     setBooks(response.payload.result)
   }
   useEffect(() => {

@@ -10,23 +10,20 @@ export const getCatBooks = createAsyncThunk("books/getCatBooks", async (_, { rej
     }
 })
 
-export const getCatBooksBySlug = createAsyncThunk("books/getCatBooksBySlug", async ({slug,page}, { rejectWithValue }) => {
+export const getCatBooksBySlug = createAsyncThunk("books/getCatBooksBySlug", async ({slug,page = 1,keyword}, { rejectWithValue }) => {
     try {
-        const { data } = await axiosInstance.get(`book/category?slug=${slug}&page=${page}`);
+        if(keyword){
+            const { data } = await axiosInstance.get(`book/category?slug=${slug}&keyword=${keyword}`);
+            return data
+        }else{
+            const { data } = await axiosInstance.get(`book/category?slug=${slug}&page=${page}`);
       
-        return data
+            return data
+        }
+     
     } catch (error) {
         return rejectWithValue(error.response.data)
     }
 })
 
-export const getBooksByWord = createAsyncThunk("books/getBooksByWord", async ({slug,keyword}, { rejectWithValue }) => {
-    try {
-        const { data } = await axiosInstance.get(`book/category?slug=${slug}&keyword=${keyword}`);
-      
-        return data
-    } catch (error) {
-        return rejectWithValue(error.response.data)
-    }
-})
 

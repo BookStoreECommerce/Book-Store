@@ -1,6 +1,6 @@
 
 .body{
-    height: 100vh;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,6 +9,12 @@
     padding: 0;
     box-sizing: border-box;
 }
+.heightBook{
+  height: 50vh;
+}
+.heightBody{
+  height: 100vh;
+}
    .book {
     --color: #2b3a55;
     --duration: 6.8s;
@@ -16,6 +22,12 @@
     height: 12px;
     position: relative;
     margin: 32px 0 0 0;
+  
+  }
+  .zoomIn{
+    zoom: 1;
+  }
+  .zoomOut{
     zoom: 1.5;
   }
   .book .inner {

@@ -1,10 +1,10 @@
 import React from "react";
 import styles from './Loading.module.css';
 
-const Loading = () => {
+const Loading = ({sectionName}) => {
     return ( 
-        <div className={styles.body}>
-         <div className={styles.book} data-testid='Loading'>
+        <div className={sectionName !='home'?`${styles.body} ${styles.heightBook}`:`${styles.body} ${styles.heightBody}`}>
+         <div className={sectionName !='home'?`${styles.book} ${styles.zoomIn}`:`${styles.book} ${styles.zoomOut}`} data-testid='Loading'>
         <div className={styles.Loading}>
           <div className={styles.left}></div>
           <div className={styles.middle}></div>
