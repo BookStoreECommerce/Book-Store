@@ -18,6 +18,7 @@ import { baseUrl } from "../../util/util.js";
 const CategoriesBook = () => {
     const { footerH, navH } = useSelector((state) => state.app);
     let { catBySlug } = useSelector((state) => state.catbook);
+    console.log({catBySlug});
     let category = { catBySlug }.catBySlug.result;
     let { isLoading } = useSelector((state) => state.loading);
     let { msgError } = useSelector((state) => state.auth);
@@ -69,10 +70,10 @@ const CategoriesBook = () => {
             <ScrollToTop />
             <Box sx={{ marginTop: `${navH}px`, minHeight: `calc(100vh - ${footerH + navH}px)`, }} className={styles.flex} >
                 <div className={styles.badge}>
-                    <span className={styles.slug}>{category ? category[0].category.name : ''} books</span>
+                    <span className={styles.slug}>{Params.slug} books</span>
                     <div className={styles.content}>
                         <Link to='/'> <i className="fa-solid fa-home"></i> </Link>
-                        <span className={styles.slash}> / <Link to='/Categories'>Categories</Link> / <Link to=''>{category ? category[0].category.name : ''}</Link></span>
+                        <span className={styles.slash}> / <Link to='/Categories'>Categories</Link> / <Link to=''>{Params.slug}</Link></span>
 
                     </div>
                 </div>
@@ -82,7 +83,7 @@ const CategoriesBook = () => {
                             <div className="ps-2 alert alert-danger mb-4">{msgError}</div>
                         ) : null}
                         <div className={styles.searchBar}>
-                            <LiveSearch minCharToSearch="1" label={`search ${Params.slug} books`} url={url} keyword="searchValue" onSubmit={getBooksBySearch} hasImage="true"/>
+                            <LiveSearch minCharToSearch="1" label={`search ${Params.slug} books`} url={url} keyword="searchValue" onSubmit={getBooksBySearch} hasImage="true" />
                         </div>
                         {books?.map((book, index) => (
                             <BookCard key={index} image={book.image?.secure_url} name={book.name} price={book.price} author={book.author} rate={book.rate} section="catBook" category={book.category?.name} />

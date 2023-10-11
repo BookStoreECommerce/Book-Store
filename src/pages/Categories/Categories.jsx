@@ -72,7 +72,7 @@ const Categories = () => {
             </div>
                     {
                         totalCategoriesCount > 12 ? 
-                        <div className="d-flex flex-column justify-content-center align-items-center mt-3">
+                        <div className="d-flex flex-column justify-content-center align-items-center my-5">
                         <Stack spacing={2}>
                             <Pagination count={totalPages} page={page} color="primary" shape="rounded" variant="outlined" onChange={setPage} />
                         </Stack>
