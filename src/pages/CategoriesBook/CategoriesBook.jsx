@@ -69,10 +69,10 @@ const CategoriesBook = () => {
             <ScrollToTop />
             <Box sx={{ marginTop: `${navH}px`, minHeight: `calc(100vh - ${footerH + navH}px)`, }} className={styles.flex} >
                 <div className={styles.badge}>
-                    <span className={styles.slug}>{category ? category[0].category.name : ''} books</span>
+                    <span className={styles.slug}>{Params.slug} books</span>
                     <div className={styles.content}>
                         <Link to='/'> <i className="fa-solid fa-home"></i> </Link>
-                        <span className={styles.slash}> / <Link to='/Categories'>Categories</Link> / <Link to=''>{category ? category[0].category.name : ''}</Link></span>
+                        <span className={styles.slash}> / <Link to='/Categories'>Categories</Link> / <Link to=''>{Params.slug}</Link></span>
 
                     </div>
                 </div>

@@ -99,5 +99,6 @@ color: var(--navyBlue)!important;
     }
     .badge{
         padding: 15px;
+        flex-wrap: wrap;
     }
 }
