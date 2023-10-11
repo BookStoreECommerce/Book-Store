@@ -11,6 +11,7 @@ const LiveSearch = ({
   minCharToSearch,
   onSubmit,
   hasImage = "false",
+  pageNumber
 }) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -20,6 +21,7 @@ const LiveSearch = ({
   const handleSubmit = (e, val = searchValue) => {
     e.preventDefault();
     // searchValue.length > 0 &&
+
     onSubmit(val);
   };
 
@@ -29,6 +31,7 @@ const LiveSearch = ({
 
       if (val.length >= +minCharToSearch) {
         setLoading(true);
+        pageNumber(1)
       } else {
         setOpen(false);
         return;
