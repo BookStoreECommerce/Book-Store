@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
-import Autocomplete from "@material-ui/lab/Autocomplete";
+import Autocomplete from "@mui/material/Autocomplete";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getAllCategories,
@@ -31,7 +31,7 @@ const Favourites = () => {
 
   const setfavCategory = (event, value) => {
     const chosenFavCategoryArray = [...chosenFavCategory];
-    if (value !== null && !chosenFavCategoryArray.includes(value)) {
+    if (value !== null && !chosenFavCategoryArray.includes(value) && myOptions.includes(value)) {
       chosenFavCategoryArray.push(value);
       formik.values.favCategory = value;
     }
