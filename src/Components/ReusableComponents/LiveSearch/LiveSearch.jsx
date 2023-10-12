@@ -23,17 +23,16 @@ const LiveSearch = ({
 
   const handleSubmit = (e, val = searchValue) => {
     e.preventDefault();
-    // searchValue.length > 0 &&
     onSubmit(val);
   };
 
   const handleInputChange = useCallback(
     async (val) => {
       setSearchValue(val);
-      if (val === '') onSubmit(val); //show all if removed search word
+      if (val === "") onSubmit(val); //show all if removed search word
       if (val.length >= +minCharToSearch) {
         setLoading(true);
-        pageNumber(1);
+        if (pageNumber) pageNumber(1);
       } else {
         setOpen(false);
         return;
@@ -56,9 +55,9 @@ const LiveSearch = ({
     <form onSubmit={handleSubmit} noValidate>
       <Autocomplete
         onInputChange={(_, val) => {
-          handleInputChange(val)
+          handleInputChange(val);
         }}
-        onChange={(_, val)=> {
+        onChange={(_, val) => {
           if (val) {
             const slug = val?.slug;
             if (slug) {
@@ -79,20 +78,22 @@ const LiveSearch = ({
           }
           setOpen(false);
         }}
-        // isOptionEqualToValue={(option, value) => option?.name === 'value.name'}
-        // isOptionEqualToValue={(option, value) => option?.name === value.name}
+        isOptionEqualToValue={(option, value) => option?.name !== value.name}
         getOptionLabel={(option) => option?.name}
         options={options}
+        filterOptions={(options, { inputValue }) => {
+          const name = inputValue.replace(/[^\w\s\'\,\:\"\.\-]/gi, '');
+          return options.filter((option) =>
+            option.name.toLowerCase().includes(name)
+          );
+        }}
         renderOption={(props, option) => (
           <Box
-          component="li"
-          sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
-          {...props}
-          key={option._id}
-          slug={option.slug}
+            component="li"
+            sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+            {...props}
+            key={option._id}
           >
-            {/* {console.log('props ', props)}
-            {console.log('option ', option)} */}
             {hasImage.toLowerCase() === "true" && (
               <img
                 loading="lazy"
