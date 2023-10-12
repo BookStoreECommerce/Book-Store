@@ -25,13 +25,13 @@ const CategoriesBook = () => {
     let Params = useParams();
 
     let category = { catBySlug }.catBySlug.result;
-    // console.log(category);
+    console.log(category);
     let totalCount = { catBySlug }.catBySlug.totalCount;
     let totalPages = Math.ceil((totalCount / 12));
 
 
     async function getBooksBySearch(searchKeyword) {
-        searchKeyword = searchKeyword.replace(/\*|\[|\]|\(|\)|\\|#/g, '')
+        // searchKeyword = searchKeyword.replace(/\*|\[|\]|\(|\)|\\|#/g, '')
         console.log(searchKeyword);
         dispatch(getCatBooksBySlug({ slug: Params.slug, keyword: searchKeyword }))
         setPage(1)
@@ -64,7 +64,7 @@ const CategoriesBook = () => {
             </div>
             <div className="container py-5">
                 <div className={styles.searchBar}>
-                    <LiveSearch minCharToSearch="1" label={`search ${Params.slug} books`} url={url} keyword="searchValue" onSubmit={getBooksBySearch} hasImage="true" />
+                    <LiveSearch minCharToSearch="1" label={`search ${Params.slug} books`} url={url} keyword="searchValue" onSubmit={getBooksBySearch} hasImage="true" navParam='book'/>
                 </div>
 
                 {isLoading ? <Loading /> : <>
