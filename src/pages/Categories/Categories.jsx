@@ -43,7 +43,7 @@ const Categories = () => {
     }
     // Search
     const searchBooks = (searchKeyword) => {
-        searchKeyword = searchKeyword.replace(/\*|\[|\]|\(|\)|\\|#/g, '')
+        // searchKeyword = searchKeyword.replace(/\*|\[|\]|\(|\)|\\|#/g, '')
         // searchKeyword = searchKeyword.replace(/\[|\] () */g, '')
         setSearch(searchKeyword)
         dispatch(getCategories({page,searchTerm:searchKeyword}));
@@ -65,7 +65,7 @@ const Categories = () => {
                 <LiveSearch minCharToSearch="2" label="search categories" url={url} keyword="searchValue" onSubmit={searchBooks} hasImage="true" navParam='categories' />
 
             </div>
-            {isLoading ? <Loading/> :<>
+            {isLoading ? <Loading sectionName='bookCategories'/> :<>
             <div className="row gy-4">
             {
                 console.log(catArray)
