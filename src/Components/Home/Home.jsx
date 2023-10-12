@@ -6,7 +6,6 @@ import Reviews from './HomeSections/Reviews/Reviews';
 import Categories from './HomeSections/Categories/Categories';
 import ScrollToTop from '../ReusableComponents/ScrollToTop/ScrollToTop';
 import BestSeller from './HomeSections/BestSeller/BestSeller';
-import BookProfile from '../BookProfile/BookProfile.jsx';
 
 
 export default function Home() {
@@ -20,7 +19,7 @@ export default function Home() {
       <BestSeller />
       <Reviews />
       <ScrollToTop />
-      <BookProfile />
     </>
   )
 }
+

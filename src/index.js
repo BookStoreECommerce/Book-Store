@@ -7,8 +7,8 @@ import "./index.css";
 import { RouterProvider, createBrowserRouter, } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./Redux/Store.js";
-import ThemeContextProvider from "./context/theme-context.jsx";
-import ErrorBoundry from "./Components/ErrorBoundry/ErrorBoundry";
+import ThemeContextProvider from "./Contexts/theme-context";
+import ErrorBoundry from "./pages/ErrorBoundry/ErrorBoundry";
 import Loading from "./Components/ReusableComponents/Loading/Loading";
 import App from './App.js'
 
@@ -16,7 +16,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     async lazy() {
-      const { default: Layout } = await import("./Components/layout/Layout");
+      const { default: Layout } = await import("./Layouts/Layout");
       const { indexLoader } = await import("./util/loaders");
       return { Component: Layout, loader: indexLoader };
     },
@@ -25,24 +25,38 @@ const router = createBrowserRouter([
       {
         index: true,
         async lazy() {
-          const { default: Home } = await import("./Components/Home/Home");
+          const { default: Home } = await import("./pages/Home/Home");
           return { Component: Home };
+        },
+      },
+      {
+        path: 'book',
+        async lazy() {
+          const { default: Books } = await import("./pages/Books/Books");
+          return { Component: Books };
+        },
+      },
+      {
+        path: 'book/:slug',
+        async lazy() {
+          const { default: BookProfile } = await import("./Components/BookProfile/BookProfile");
+          return { Component: BookProfile };
         },
       },
       {
         path: "userInfo",
         async lazy() {
-          const { default: Sidebar } = await import(
-            "./Components/Sidebar/Sidebar"
+          const { default: UserInfo } = await import(
+            "./pages/UserInfo/UserInfo"
           );
-          return { Component: Sidebar };
+          return { Component: UserInfo };
         },
         children: [
           {
             index: true,
             async lazy() {
               const { default: UserProfile } = await import(
-                "./Components/UserProfile/UserProfile"
+                "./Components/UserInfoComponents/UserProfile/UserProfile"
               );
               return { Component: UserProfile };
             },
@@ -51,7 +65,7 @@ const router = createBrowserRouter([
             path: "favourites",
             async lazy() {
               const { default: Favourites } = await import(
-                "./Components/Favourites/Favourites"
+                "./Components/UserInfoComponents/Favourites/Favourites"
               );
               return { Component: Favourites };
             },
@@ -60,12 +74,30 @@ const router = createBrowserRouter([
             path: "settings",
             async lazy() {
               const { default: Settings } = await import(
-                "./Components/Settings/Settings"
+                "./Components/UserInfoComponents/Settings/Settings"
               );
               return { Component: Settings };
             },
           },
         ],
+      },
+      {
+        path: "categories",
+        async lazy() {
+          const { default: Categories } = await import(
+            "./pages/Categories/Categories"
+          );
+          return { Component: Categories };
+        },
+      },
+      {
+        path: "categories/:slug",
+        async lazy() {
+          const { default: CategoriesBook } = await import(
+            "./pages/CategoriesBook/CategoriesBook"
+          );
+          return { Component: CategoriesBook };
+        },
       },
     ],
   },
@@ -73,7 +105,7 @@ const router = createBrowserRouter([
     path: "auth",
     async lazy() {
       const { default: AuthLayout } = await import(
-        "./Components/layout/AuthLayout"
+        "./Layouts/AuthLayout"
       );
       return { Component: AuthLayout };
     },
@@ -82,27 +114,27 @@ const router = createBrowserRouter([
         path: "login",
         async lazy() {
           const { default: LoginLayout } = await import(
-            "./Components/LoginSocialActions/LoginLayout"
+            "./Layouts/SocialLayout"
           );
           const { authSocialLoginLoader } = await import("./util/loaders");
           return { Component: LoginLayout, loader: authSocialLoginLoader };
         },
         children: [
           {
-            path: "success/:token/?",
+            path: "success/:token",
             async lazy() {
               const { default: Success } = await import(
-                "./Components/LoginSocialActions/Success"
+                "./pages/SocialLogin/Success"
               );
-              return { Component: Success };
+              const { loginSocialLoginLoader } = await import("./util/loaders");
+              return { Component: Success, loader: loginSocialLoginLoader };
             },
-            // http://localhost:3000/auth/login/success/ + creatred token"
           },
           {
             path: "failed/?",
             async lazy() {
               const { default: Failed } = await import(
-                "./Components/LoginSocialActions/Failed"
+                "./pages/SocialLogin/Failed"
               );
               return { Component: Failed };
             },
@@ -113,7 +145,7 @@ const router = createBrowserRouter([
         path: "forgotPassword",
         async lazy() {
           const { default: ForgetPasswordStepper } = await import(
-            "./Components/Login/forgetPassword/ForgetPasswordStepper"
+            "./pages/ForgetPassword/ForgetPasswordStepper"
           );
           return { Component: ForgetPasswordStepper };
         },
@@ -126,10 +158,9 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
     <ThemeContextProvider>
-      <RouterProvider router={router} fallbackElement={<Loading/>}>
-        <App/>
+      <RouterProvider router={router} fallbackElement={<Loading />}>
+        <App />
       </RouterProvider>
     </ThemeContextProvider>
   </Provider>
 );
-

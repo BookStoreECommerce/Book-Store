@@ -1,0 +1,15 @@
+.iconFontSize {
+    font-size: 5rem;
+    color: var(--navyBlue);
+}
+
+.mainBtnWidth {
+    width: 30%;
+}
+
+.mainTitle{
+    color: var(--navyBlue);
+}
+.row{
+    --bs-gutter-x: 0  !important;
+}
