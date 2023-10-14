@@ -19,11 +19,9 @@ function AllBook({ sectionName }) {
     window.addEventListener('load', AOS.refresh);
   }, []);
 
-  // let [books, setBooks] = useState([]);
   const [searchWord, setSearchWord] = useState('');
-  // const { isLoading, msgError } = useSelector((state) => state.auth);
   const [numOfPages, setNumOfPages] = useState(0)
-  const { isLoading, msgError, books, totalCount } = useSelector((state) => state.books);
+  const { isLoading, books, totalCount } = useSelector((state) => state.books);
   const nBookPerPage = 12;
   const dispatch = useDispatch();
   const [pageNumber, setPageNumber] = useState(1);
@@ -40,13 +38,13 @@ function AllBook({ sectionName }) {
   };
 
   // get all books
-  async function getBooks() {
-    await dispatch(getAllBooks(pageNumber));
+  function getBooks() {
+    dispatch(getAllBooks(pageNumber));
   }
 
   // filter books by search
-  async function getBooksBySearch(searchKeyword) {
-    await dispatch(getBooksByWord({ pageNumber, searchKeyword }));
+  function getBooksBySearch(searchKeyword) {
+    dispatch(getBooksByWord({ pageNumber, searchKeyword }));
     setSearchWord(searchKeyword)
   }
 
@@ -56,7 +54,6 @@ function AllBook({ sectionName }) {
     } else {
       getBooksBySearch(searchWord)
     }
-
   }, [pageNumber])
 
   useEffect(() => {
@@ -73,27 +70,26 @@ function AllBook({ sectionName }) {
           minHeight: `calc(100vh - ${footerH + navH}px)`,
         }}
       >
-        {msgError ? <h1 className="ps-2  text-danger mb-4">{msgError}</h1>
+        <div className=''>
+          <LiveSearch minCharToSearch="1" label="search books" url={url} keyword="searchValue" hasImage='true' onSubmit={getBooksBySearch} pageNumber={setPageNumber} />
+        </div>
+
+        {isLoading ? <Loading />
           : (<div className='row'>
-            <div className=''>
-              <LiveSearch minCharToSearch="1" label="search books" url={url} keyword="searchValue" hasImage='true' onSubmit={getBooksBySearch} pageNumber={setPageNumber} />
-            </div>
-            {totalCount === 0 && !isLoading ? <h1 className='text-danger text-center my-5'>No Books Found <i className="fa-solid fa-face-frown"></i>, Search again.</h1> :( isLoading ? <Loading /> : books.length > 0 ? books.map((book, index) => (
+
+            {totalCount === 0 && !isLoading ? <h1 className='text-danger text-center my-5'>No Books Found <i className="fa-solid fa-face-frown"></i>, Search again.</h1> : (isLoading ? <Loading /> : books.length > 0 ? books.map((book, index) => (
               <div key={index} className={` col-lg-3 col-sm-6 col-12 mb-5 ${styles.bookCard}`}>
                 <BookCard key={book.id} image={book.image.secure_url} category={book.category} desc={book.desc} name={book.name} price={book.price} author={book.author} rate={book.rate} section={sectionName} />
               </div>
-            )) : <Loading />)}
-           
+            )) : '')}
+            {console.log(books)}
+            {books && numOfPages > 1 ? <div className="my-5 pt-5 d-flex justify-content-center">
+              <Stack spacing={2}>
+                <Pagination count={numOfPages} page={pageNumber} size="large" shape="rounded" variant="outlined" color="primary" onChange={handleChange} />
+              </Stack>
+            </div> : <div className="my-5 pt-5 d-flex justify-content-center"></div>}
 
           </div>)}
-
-
-        {books && numOfPages > 1 ? <div className="my-5 pt-5 d-flex justify-content-center">
-          <Stack spacing={2}>
-            <Pagination count={numOfPages} page={pageNumber} size="large" shape="rounded" variant="outlined" color="primary" onChange={handleChange} />
-          </Stack>
-        </div> : <div className="my-5 pt-5 d-flex justify-content-center"></div>}
-
       </Box>
 
     </>

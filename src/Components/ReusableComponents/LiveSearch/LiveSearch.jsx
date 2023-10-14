@@ -21,17 +21,21 @@ const LiveSearch = ({
   const handleSubmit = (e, val = searchValue) => {
     e.preventDefault();
     // searchValue.length > 0 &&
-
+    if (val.length >= +minCharToSearch && pageNumber)
+      pageNumber(1)
     onSubmit(val);
+    console.log(pageNumber);
   };
 
   const handleInputChange = useCallback(
     async (val) => {
       setSearchValue(val);
-
+      if (val === '') {
+        pageNumber(1)
+        onSubmit(val)
+      }
       if (val.length >= +minCharToSearch) {
         setLoading(true);
-        pageNumber(1)
       } else {
         setOpen(false);
         return;
