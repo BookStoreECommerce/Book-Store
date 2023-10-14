@@ -7,6 +7,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { getBookBySlug } from "../../Redux/Slicies/bookActions.js";
 import Loading from "../ReusableComponents/Loading/Loading.jsx";
 import { Box } from "@mui/material";
+import BestSeller from "../HomeComponents/BestSeller/BestSeller.jsx";
+import SliderScrollBtn from "../ReusableComponents/SliderScrollBtn/SliderScrollBtn.jsx";
+import ScrollToTop from "../ReusableComponents/ScrollToTop/ScrollToTop.jsx";
+import Slider from "../HomeComponents/Slider/Slider.jsx";
+import MainSlider from "../ReusableComponents/MainSlider/MainSlider.jsx";
 export default function BookProfile() {
   const [book, setBook] = useState(null)
   const {slug} = useParams()
@@ -31,12 +36,6 @@ export default function BookProfile() {
       }}>
       <div className="container py-5">
         <div className="row">
-          {/* <div className="col-md-1">
-            <img src={logo} alt="" className="w-100 mb-3" />
-            <img src={logo} alt="" className="w-100 mb-3" />
-            <img src={logo} alt="" className="w-100 mb-3" />
-            <img src={logo} alt="" className="w-100 mb-3" />
-          </div> */}
           <div className="col-md-4 position-relative">
             <h5 className=" position-absolute end-0 opacity-50"><span className="badge bg-secondary py-3 text-light">Discount<br/> 55$</span></h5>
             <img src={specBook?.image?.secure_url} alt="" className="w-100" />
@@ -59,6 +58,7 @@ export default function BookProfile() {
           </div>
         </div>
       </div>
+      <MainSlider arr={bookCategory} title="Suggested for you"/>
     </Box>}
     </>
   );

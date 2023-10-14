@@ -75,9 +75,9 @@ const Categories = () => {
 
                             <div className="row gy-4">
                                 {
-                                    shuffledArray.map((singleCat) =>
+                                    shuffledArray.map((singleCat, i) =>
 
-                                        <CategoryCard sectionName="home" catName={singleCat.catName} img={singleCat.img} />
+                                        <CategoryCard sectionName="home" catName={singleCat.catName} img={singleCat.img} key={i}/>
                                     )
                                 }
                             </div>
