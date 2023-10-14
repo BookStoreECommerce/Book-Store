@@ -12,7 +12,7 @@ const initialState = {
 }
 
 const CategoriesBookSlice = createSlice({
-    name:'books',
+    name:'authentication',
     initialState:initialState,
     extraReducers:(builder)=>{
      builder.addCase(getCatBooks.pending, (state, action) => {

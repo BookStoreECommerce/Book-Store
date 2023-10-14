@@ -1,3 +1,16 @@
+// to use >>>>>
+
+// <LiveSearch
+//   url={url}                 // URL of the API
+//   keyword="searchValue"     // The keyword value refers to the part of URL that should be replaced with the entered value
+//   onSubmit={searchBooks}    // That callback function gets the entered searchValue ((const searchBooks = (searchKeyword) => {}))
+//   navParam="RouteLocation"  // By choosing one of the dropdown items, it navigates to /RouteLocation/slug
+//   label="search categories" // :OPTIONAL -> Default is "Search" -> Label that shows at the top of the searchbar
+//   minCharToSearch="1"       // :OPTIONAL -> Default is 1        -> DropDown shows after that specific characters count
+//   hasImage="true"           // :OPTIONAL -> Default is "false"  -> Set true if dropdown items have images
+//   pageNumber={setPage}      // :OPTIONAL -> Reset your pagination, if you have such const [page, setPage] = useState(1);
+// />;
+
 import { Autocomplete, TextField, Box, CircularProgress } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import axiosInstance from "../../../axios/axios-instance";
@@ -10,7 +23,7 @@ const LiveSearch = ({
   label,
   url,
   keyword,
-  minCharToSearch,
+  minCharToSearch = 1,
   onSubmit,
   pageNumber,
   hasImage = "false",
@@ -23,28 +36,32 @@ const LiveSearch = ({
 
   const handleSubmit = (e, val = searchValue) => {
     e.preventDefault();
+    if (val.length >= +minCharToSearch && pageNumber) pageNumber(1);
     onSubmit(val);
   };
 
   const handleInputChange = useCallback(
     async (val) => {
       setSearchValue(val);
-      if (val === "") onSubmit(val); //show all if removed search word
+      if (val === "") {
+        pageNumber && pageNumber(1);
+        onSubmit(val); //show all if removed search word
+      }
       if (val.length >= +minCharToSearch) {
         setLoading(true);
-        if (pageNumber) pageNumber(1);
+        // if (pageNumber) pageNumber(1);
       } else {
         setOpen(false);
         return;
       }
-      // setOptions([]);
+      setOptions([]);
       try {
         const { data } = await axiosInstance(
           url.replace(`=${keyword}`, `=${val}`)
         );
         data.result.length && setOptions(data.result);
       } catch (error) {
-        // console.log(error);
+        // for future planning if other components asked me for error type!
       }
       setLoading(false);
     },
@@ -62,8 +79,6 @@ const LiveSearch = ({
             const slug = val?.slug;
             if (slug) {
               navigate(`/${navParam}/${slug}`);
-            } else {
-              // navigate(`/${navParam}/${val?._id}`);
             }
           }
         }}
@@ -82,7 +97,7 @@ const LiveSearch = ({
         getOptionLabel={(option) => option?.name}
         options={options}
         filterOptions={(options, { inputValue }) => {
-          const name = inputValue.replace(/[^\w\s\'\,\:\"\.\-]/gi, '');
+          const name = inputValue.replace(/[^\w\s\'\,\:\"\.\-]/gi, "");
           return options.filter((option) =>
             option.name.toLowerCase().includes(name)
           );
@@ -109,7 +124,7 @@ const LiveSearch = ({
         renderInput={(params) => (
           <TextField
             {...params}
-            label={label}
+            label={label ? label : "Search"}
             InputProps={{
               ...params.InputProps,
               endAdornment: loading ? (
@@ -128,11 +143,3 @@ const LiveSearch = ({
 };
 
 export default LiveSearch;
-
-// to use >>>>>
-
-// const searchBooks = (searchKeyword) => {
-//   console.log(searchKeyword);
-// }
-// const url = `${baseUrl}category?page=1&sort=name&keyword=searchValue&fields=name,image`;
-// <LiveSearch minCharToSearch="2" label="search categories" url={url} keyword="searchValue" onSubmit={searchBooks} />

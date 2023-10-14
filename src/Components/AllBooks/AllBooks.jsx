@@ -10,91 +10,90 @@ import { baseUrl } from '../../util/util';
 import { removeFooterMargin, setFooterMargin } from '../../Redux/Slicies/appSlice';
 import { Box } from '@mui/material';
 import ScrollToTop from '../ReusableComponents/ScrollToTop/ScrollToTop';
-
+import AOS from "aos";
+import "aos/dist/aos.css";
+import Loading from '../ReusableComponents/Loading/Loading';
 function AllBook({ sectionName }) {
-  let [books, setBooks] = useState([]);
-  let [numBooks, setNumBooks] = useState(0)
-  const { isLoading, msgError } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
-  const nBookPerPage = 12;
-  const [page, setPage] = useState(1);
 
+  useEffect(() => {
+    AOS.init();
+    window.addEventListener('load', AOS.refresh);
+  }, []);
+
+  const [searchWord, setSearchWord] = useState('');
+  const [numOfPages, setNumOfPages] = useState(0)
+  const { isLoading, books, totalCount } = useSelector((state) => state.books);
+  const nBookPerPage = 12;
+  const dispatch = useDispatch();
+  const [pageNumber, setPageNumber] = useState(1);
   const { footerH, navH } = useSelector((state) => state.app);
+
 
   useEffect(() => {
     dispatch(removeFooterMargin());
     return () => dispatch(setFooterMargin());
   }, [dispatch]);
 
-  const handleChange = (e, page) => {
-    console.log(page);
-    setPage(page);
+  const handleChange = (e, pageNumber) => {
+    setPageNumber(pageNumber);
   };
 
-  async function getBooks() {
-    const response = await dispatch(getAllBooks(page));
-
-    if (response.type === "books/fulfilled") {
-      const totalCount = response.payload.totalCount;
-      numBooks = Math.ceil(totalCount / nBookPerPage)
-      setNumBooks(numBooks)
-      setBooks(response.payload.result)
-      // console.log('zzzzzzzzzz ', response.payload.result)
-
-    } else {
-      console.log(response.error.message);
-    }
+  // get all books
+  function getBooks() {
+    dispatch(getAllBooks(pageNumber));
   }
-  async function getBooksBySearch(searchKeyword) {
 
-    const response = await dispatch(getBooksByWord(searchKeyword));
-    console.log(response.payload.result)
-    setNumBooks(Math.ceil(response.payload.result?.length / nBookPerPage))
-    // console.log(response.payload.result.length)
-    setBooks(response.payload.result)
+  // filter books by search
+  function getBooksBySearch(searchKeyword) {
+    dispatch(getBooksByWord({ pageNumber, searchKeyword }));
+    setSearchWord(searchKeyword)
   }
+
   useEffect(() => {
+    if (searchWord === '') {
+      getBooks()
+    } else {
+      getBooksBySearch(searchWord)
+    }
+  }, [pageNumber])
 
-    getBooks()
-  }, [page])
+  useEffect(() => {
+    setNumOfPages(Math.ceil(totalCount / nBookPerPage))
+  }, [totalCount])
 
-
-  // const searchBooks = (searchKeyword) => {
-  //   getBooksBySearch(searchKeyword)
-  // }
   const url = `${baseUrl}book/?keyword=searchValue`;
 
   return (
     <>
-      <ScrollToTop />
-
       <Box
         sx={{
           marginTop: `${navH}px`,
           minHeight: `calc(100vh - ${footerH + navH}px)`,
         }}
       >
-        <div className='row'>
-          {msgError ? (
-            <div className="ps-2 alert alert-danger mb-4">{msgError}</div>
-          ) : null}
-          <div className=''>
-            <LiveSearch minCharToSearch="1" label="search books" url={url} keyword="searchValue" onSubmit={getBooksBySearch} hasImage="true" />
-          </div>
-          {books?.map((book, index) => (
-            <div key={index} className={`col-xl-3 col-lg-4 col-sm-6 col-12 mb-3 ${styles.bookCard}`}>
-              <BookCard key={book.id} image={book.image.secure_url} category={book.category.name} desc={book.desc} name={book.name} price={book.price} author={book.author} rate={book.rate} section={sectionName} />
-            </div>
-          ))}
-
+        <div className=''>
+          <LiveSearch minCharToSearch="1" label="search books" url={url} keyword="searchValue" hasImage='true' onSubmit={getBooksBySearch} pageNumber={setPageNumber} />
         </div>
 
-        <div className="my-5 pt-5 d-flex justify-content-center">
-          {books && numBooks > 1 ? <Stack spacing={2}>
-            <Pagination count={numBooks} page={page} variant="outlined" shape="rounded" color="primary" onChange={handleChange} />
-          </Stack> : ''}
-        </div>
+        {isLoading ? <Loading />
+          : (<div className='row'>
+
+            {totalCount === 0 && !isLoading ? <div className={styles.notFoundContainer }>
+                    <p>No Books Found</p>
+                    </div>: (isLoading ? <Loading /> : books.length > 0 ? books.map((book, index) => (
+              <div key={index} className={` col-lg-3 col-sm-6 col-12 mb-5 ${styles.bookCard}`}>
+                <BookCard key={book.id} image={book.image.secure_url} category={book.category} desc={book.desc} name={book.name} price={book.price} author={book.author} rate={book.rate} section={sectionName} />
+              </div>
+            )) : '')}
+            {books && numOfPages > 1 ? <div className="my-5 pt-5 d-flex justify-content-center">
+              <Stack spacing={2}>
+                <Pagination count={numOfPages} page={pageNumber} size="large" shape="rounded" variant="outlined" color="primary" onChange={handleChange} />
+              </Stack>
+            </div> : <div className="my-5 pt-5 d-flex justify-content-center"></div>}
+
+          </div>)}
       </Box>
+
     </>
   )
 }
