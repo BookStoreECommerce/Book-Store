@@ -13,6 +13,7 @@ const store = configureStore({
         app: appReducer,
         book: categoriesBooksReducer,
         catbook: categoriesBooksSlugReducer,
+        cat:catReducer,
         // bookSearchCat:categoriesSearchBooksReducer,
         loading: categoriesBooksSlugReducer,
         books: bookReducer

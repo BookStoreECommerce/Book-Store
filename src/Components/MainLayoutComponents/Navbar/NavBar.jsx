@@ -125,13 +125,13 @@ function NavBar({ navRef }) {
                 <li className={`nav-item dropdown me-2 ${styles.navItem}`}>
                   <NavLink
                     className={({ isActive }) => isActive ? dropStyle + styles.itemActive : dropStyle}
-                    to="Categories"
+                    to="categories"
                     role="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                     end
                   >
-                    Categories
+                    categories
                   </NavLink>
 
                   <ul className={`dropdown-menu ${styles.dropdownMenu}`}>
