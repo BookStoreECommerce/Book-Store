@@ -34,7 +34,7 @@ export const loginSocialLoginLoader = async ({ request, params }) => {
     const { token } = params;
     const splits = token.split(".");
     const secret = splits.slice(0, 3).join(".");
-    console.log(secret);
+    // console.log(secret);
     await store.dispatch(signinWithToken(secret)).unwrap();
     const serverToken = store.getState().auth.token;
     if (serverToken !== null) {

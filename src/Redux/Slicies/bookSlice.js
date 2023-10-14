@@ -33,7 +33,7 @@ const authSlice = createSlice({
         })
         builder.addCase(getAllBooks.fulfilled, (state, action) => {
             state.isLoading = false;
-            console.log(action);
+            // console.log(action);
         })
         builder.addCase(getAllBooks.rejected, (state, action) => {
             state.isLoading = false
@@ -43,7 +43,7 @@ const authSlice = createSlice({
             } else {
                 state.msgError = action.errors[0].message
             }
-            console.log(action.payload.error);
+            // console.log(action.payload.error);
             if (action.payload.error) {
                 state.msgError = action.payload.error
             } else {
@@ -60,7 +60,7 @@ const authSlice = createSlice({
         })
         builder.addCase(getBooksByWord.fulfilled, (state, action) => {
             state.isLoading = false;
-            console.log(action);
+            // console.log(action);
         })
         builder.addCase(getBooksByWord.rejected, (state, action) => {
             state.isLoading = false
@@ -70,7 +70,7 @@ const authSlice = createSlice({
             } else {
                 state.msgError = action.errors[0].message
             }
-            console.log(action.payload.error);
+            // console.log(action.payload.error);
             if (action.payload.error) {
                 state.msgError = action.payload.error
             } else {

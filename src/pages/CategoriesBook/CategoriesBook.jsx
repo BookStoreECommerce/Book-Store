@@ -25,14 +25,14 @@ const CategoriesBook = () => {
     let Params = useParams();
 
     let category = { catBySlug }.catBySlug.result;
-    console.log(category);
+    // console.log(category);
     let totalCount = { catBySlug }.catBySlug.totalCount;
     let totalPages = Math.ceil((totalCount / 12));
 
 
     async function getBooksBySearch(searchKeyword) {
         // searchKeyword = searchKeyword.replace(/\*|\[|\]|\(|\)|\\|#/g, '')
-        console.log(searchKeyword);
+        // console.log(searchKeyword);
         dispatch(getCatBooksBySlug({ slug: Params.slug, keyword: searchKeyword }))
         setPage(1)
     }
