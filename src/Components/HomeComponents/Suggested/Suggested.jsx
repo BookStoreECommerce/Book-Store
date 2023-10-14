@@ -64,31 +64,34 @@ const Suggested = () => {
     };
     
     return (
-
+        <>
+       
+{Suggested.length !== 0 && (
         <section className="Suggested px-lg-0" data-testid='Suggested'>
-            <div className="container-fluid">
-                <div className="row justify-content-center">
-                    <h2 className="blueHeader text-center my-md-5 my-3">Books You May Like</h2>
-                    <div className={`col-lg-11 ${styles.marginBottom}`}>
-                        <Slider {...settings} >
-                            {Suggested.map((Suggested, index) =>
-                                <BookCard
-                                    cardStyle={{ margin: "10px", padding: '0px' }}
-                                    key={Suggested.id}
-                                    image={Suggested.image}
-                                    name={Suggested.name}
-                                    price={Suggested.price}
-                                    author={Suggested.author}
-                                    rate={Suggested.rate}
-                                    sale={Suggested.sale}
-                                    section={"Suggested"} />
-                            )}
-                        </Slider>
-                    </div>
+        <div className="container-fluid">
+            <div className="row justify-content-center">
+                <h2 className="blueHeader text-center my-md-5 my-3">Books You May Like</h2>
+                <div className={`col-lg-11 ${styles.marginBottom}`}>
+                    <Slider {...settings} >
+                        {Suggested.map((Suggested, index) =>
+                            <BookCard
+                                cardStyle={{ margin: "10px", padding: '0px' }}
+                                key={Suggested.id}
+                                image={Suggested.image}
+                                name={Suggested.name}
+                                price={Suggested.price}
+                                author={Suggested.author}
+                                rate={Suggested.rate}
+                                sale={Suggested.sale}
+                                section={"Suggested"} />
+                        )}
+                    </Slider>
                 </div>
             </div>
-        </section>
-
+        </div>
+    </section>
+  )}
+        </>
     );
 }
 

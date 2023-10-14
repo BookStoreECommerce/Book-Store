@@ -11,7 +11,8 @@ const LastSearch = () => {
  
     return (
         <>
-        <section id="lastSearchedBooks" data-testid='lastSearchedBooks'>
+        {cutLastSearch.length !== 0 && ( 
+             <section id="lastSearchedBooks" data-testid='lastSearchedBooks'>
             <h2 className="blueHeader text-center my-md-5 my-3">Your Last Search</h2>
             <div className={`container-fluid px-0 ${styles.LastSearch} ${styles.fixContainerFluid}`}>
                 <div className="container">
@@ -20,8 +21,8 @@ const LastSearch = () => {
                     </div>
                 </div>
             </div>
-        </section>
-    </>
+        </section>)}
+        </>
     );
 }
 
