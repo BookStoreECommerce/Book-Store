@@ -32,7 +32,7 @@ function NavBar({ navRef }) {
 
 
   let { categoriesBooks } = useSelector((state) => state.book)
-let category = { categoriesBooks }.categoriesBooks.result
+  let category = { categoriesBooks }.categoriesBooks.result
   // console.log(category);
   useEffect(() => {
     dispatch(getCatBooks())
@@ -120,14 +120,7 @@ let category = { categoriesBooks }.categoriesBooks.result
                     Home
                   </NavLink>
                 </li>
-                <li className={`nav-item me-2 ${styles.navItem}`}>
-                  <NavLink
-                    className={({isActive}) => isActive? linkStyle + styles.itemActive: linkStyle}
-                    to="book"
-                  >
-                    Shop
-                  </NavLink>
-                </li>
+
 
                 <li className={`nav-item dropdown me-2 ${styles.navItem}`}>
                   <NavLink
@@ -142,12 +135,12 @@ let category = { categoriesBooks }.categoriesBooks.result
                   </NavLink>
 
                   <ul className={`dropdown-menu ${styles.dropdownMenu}`}>
-                    {category?.slice(0,8)?.map((cat,index)=>
-                           <li key={index}>
-                           <NavLink className={({ isActive }) => isActive ? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}` : linkStyle + ` dropdown-item ${styles.item}`} to={`books/${cat.slug}`}>
-                             {cat.name}
-                           </NavLink>
-                         </li>
+                    {category?.slice(0, 8)?.map((cat, index) =>
+                      <li key={index}>
+                        <NavLink className={({ isActive }) => isActive ? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}` : linkStyle + ` dropdown-item ${styles.item}`} to={`books/${cat.slug}`}>
+                          {cat.name}
+                        </NavLink>
+                      </li>
                     )}
                     <li>
                       <NavLink className={({ isActive }) => isActive ? linkStyle + styles.dropItemActivetran + ` dropdown-item text-center ${styles.itemColor}` : linkStyle + ` dropdown-item text-center ${styles.itemColor}`} to="Categories">
@@ -156,6 +149,16 @@ let category = { categoriesBooks }.categoriesBooks.result
                     </li>
                   </ul>
                 </li>
+
+                <li className={`nav-item me-2 ${styles.navItem}`}>
+                  <NavLink
+                    className={({ isActive }) => isActive ? linkStyle + styles.itemActive : linkStyle}
+                    to="book"
+                  >
+                    Books
+                  </NavLink>
+                </li>
+
                 <li className={`nav-item me-2 ${styles.navItem}`}>
                   <NavLink
                     className={({ isActive }) => isActive ? linkStyle + styles.itemActive : linkStyle}
@@ -186,7 +189,7 @@ let category = { categoriesBooks }.categoriesBooks.result
 
                     <li className="nav-item">
                       <Link
-                      to=""
+                        to=""
                         className={`nav-link ${styles.navLink}`}
                         onClick={() => {
                           dispatch(handleClickOpen({ name: "login" }));
@@ -197,7 +200,7 @@ let category = { categoriesBooks }.categoriesBooks.result
                     </li>
                     <li className="nav-item">
                       <Link
-                      to=""
+                        to=""
                         className={`nav-link ${styles.navLink}`}
                         onClick={() => {
                           dispatch(handleClickOpen({ name: "register" }));

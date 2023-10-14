@@ -1,30 +1,16 @@
-import {
-    createSlice
-} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { getAllBooks, getBooksByWord } from "./bookActions";
 
 const initialState = {
-    user: null,
     isLoading: false,
-    token: null,
-    msgError: null
+    msgError: null,
+    books: [],
+    totalCount: 0
 }
 
-const authSlice = createSlice({
-    name: "authentication",
+const bookSlice = createSlice({
+    name: "allBooks",
     initialState,
-    reducers: {
-        clearError: (state) => {
-            state.msgError = null;
-        },
-        setUser: (state, action) => {
-            const user = action.payload;
-            state.user = user;
-        },
-        logout: (state, action) => {
-            localStorage.removeItem('access-token');
-        }
-    },
     extraReducers: builder => {
 
         // getAllBooks
@@ -33,25 +19,13 @@ const authSlice = createSlice({
         })
         builder.addCase(getAllBooks.fulfilled, (state, action) => {
             state.isLoading = false;
-            console.log(action);
+            state.books = action.payload.result;
+            state.totalCount = action.payload.totalCount
         })
         builder.addCase(getAllBooks.rejected, (state, action) => {
             state.isLoading = false
-            state.msgError = action.payload.error
-            if (action.error) {
-                state.msgError = action.error
-            } else {
-                state.msgError = action.errors[0].message
-            }
-            console.log(action.payload.error);
-            if (action.payload.error) {
-                state.msgError = action.payload.error
-            } else {
-                state.msgError = action.payload.errors[0].message
-            }
+
         })
-
-
 
 
         // getBooksByWord
@@ -60,27 +34,16 @@ const authSlice = createSlice({
         })
         builder.addCase(getBooksByWord.fulfilled, (state, action) => {
             state.isLoading = false;
-            console.log(action);
+            state.books = action.payload.result;
+            state.totalCount = action.payload.totalCount
         })
         builder.addCase(getBooksByWord.rejected, (state, action) => {
             state.isLoading = false
-            state.msgError = action.payload.error
-            if (action.error) {
-                state.msgError = action.error
-            } else {
-                state.msgError = action.errors[0].message
-            }
-            console.log(action.payload.error);
-            if (action.payload.error) {
-                state.msgError = action.payload.error
-            } else {
-                state.msgError = action.payload.errors[0].message
-            }
         })
 
 
     }
 })
 
-export const authReducer = authSlice.reducer;
-export const { clearError, setUser, logout } = authSlice.actions;
+export const bookReducer = bookSlice.reducer;
+export const { clearError, setUser, logout } = bookSlice.actions;

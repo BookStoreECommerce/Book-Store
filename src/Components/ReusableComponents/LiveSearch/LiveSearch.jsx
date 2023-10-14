@@ -36,21 +36,20 @@ const LiveSearch = ({
 
   const handleSubmit = (e, val = searchValue) => {
     e.preventDefault();
-    // if(options.length === 1) {
-    //   console.log(options);
-    //   console.log('navigate');
-    // } else if (options.length > 1) {
-      onSubmit(val);
-    // }
+    if (val.length >= +minCharToSearch && pageNumber) pageNumber(1);
+    onSubmit(val);
   };
 
   const handleInputChange = useCallback(
     async (val) => {
       setSearchValue(val);
-      if (val === "") onSubmit(val); //show all if removed search word
+      if (val === "") {
+        pageNumber && pageNumber(1);
+        onSubmit(val); //show all if removed search word
+      }
       if (val.length >= +minCharToSearch) {
         setLoading(true);
-        if (pageNumber) pageNumber(1);
+        // if (pageNumber) pageNumber(1);
       } else {
         setOpen(false);
         return;
@@ -125,7 +124,7 @@ const LiveSearch = ({
         renderInput={(params) => (
           <TextField
             {...params}
-            label={label? label: 'Search'}
+            label={label ? label : "Search"}
             InputProps={{
               ...params.InputProps,
               endAdornment: loading ? (
