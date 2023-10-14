@@ -19,8 +19,9 @@ export default function Home() {
     <>
       <Slider />
       {user?<><Suggested/></>:''}
-      <NewBooks />
       <Categories />
+      <NewBooks />
+
       <AboutUs />
       <BestSeller />
       {user?<><LastSearch/></>:''}

@@ -7,17 +7,16 @@ import { handleClickOpen } from "../../../Redux/Slicies/dialogSlice";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
-import { logout } from "../../../Redux/Slicies/authSlice";
 import { signout } from "../../../Redux/Slicies/authActions";
-import { getCatBooks } from '../../../Redux/Slicies/CategoriesBookActions';
-
+import { logout } from "../../../Redux/Slicies/authSlice";
+import { getCatBooks } from "../../../Redux/Slicies/CategoriesBookActions";
 
 function NavBar({ navRef }) {
   const navigate = useNavigate();
   const [navbar, setNavbar] = useState(false);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-  const token = localStorage.getItem('access-token');
+  const token = localStorage.getItem("access-token");
   const changeBackground = () => {
     if (window.scrollY >= 60) {
       setNavbar(true);
@@ -25,24 +24,25 @@ function NavBar({ navRef }) {
       setNavbar(false);
     }
   };
+
   useEffect(() => {
     changeBackground();
     window.addEventListener("scroll", changeBackground);
   });
 
+  let { categoriesBooks } = useSelector((state) => state.book);
 
-  let { categoriesBooks } = useSelector((state) => state.book)
-let category = { categoriesBooks }.categoriesBooks.result
+  let category = { categoriesBooks }.categoriesBooks.result;
   // console.log(category);
   useEffect(() => {
-    dispatch(getCatBooks())
-  }, [])
+    dispatch(getCatBooks());
+  }, []);
 
   const handleLogout = () => {
     dispatch(logout());
     dispatch(signout());
-    navigate('/');
-  }
+    navigate("/");
+  };
   const linkStyle = `nav-link ${styles.navLink} ${styles.navLinkBorder} `;
   const dropStyle = `nav-link dropdown-toggle ${styles.navLink} ${styles.navLinkBorder} `;
   return (
@@ -72,14 +72,16 @@ let category = { categoriesBooks }.categoriesBooks.result
           {user !== null && token !== null && (
             <>
               <li className="nav-item">
-                <Link className={`nav-link ${styles.navLinkIcon}`} to="userInfo">
+                <Link
+                  className={`nav-link ${styles.navLinkIcon}`}
+                  to="userInfo"
+                >
                   <PersonOutlineOutlinedIcon
                     sx={{ fontSize: { xs: 24, sm: 24, md: 27, lg: 26 } }}
                   />
                   <span className={styles.colorUser}>{user.userName}</span>
                 </Link>
               </li>
-
             </>
           )}
         </div>
@@ -112,8 +114,9 @@ let category = { categoriesBooks }.categoriesBooks.result
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className={`nav-item me-2 ${styles.navItem}`}>
                   <NavLink
-
-                    className={({ isActive }) => isActive ? linkStyle + styles.itemActive : linkStyle}
+                    className={({ isActive }) =>
+                      isActive ? linkStyle + styles.itemActive : linkStyle
+                    }
                     to="/"
                     end
                   >
@@ -122,7 +125,9 @@ let category = { categoriesBooks }.categoriesBooks.result
                 </li>
                 <li className={`nav-item me-2 ${styles.navItem}`}>
                   <NavLink
-                    className={({isActive}) => isActive? linkStyle + styles.itemActive: linkStyle}
+                    className={({ isActive }) =>
+                      isActive ? linkStyle + styles.itemActive : linkStyle
+                    }
                     to="book"
                   >
                     Shop
@@ -131,7 +136,9 @@ let category = { categoriesBooks }.categoriesBooks.result
 
                 <li className={`nav-item dropdown me-2 ${styles.navItem}`}>
                   <NavLink
-                    className={({ isActive }) => isActive ? dropStyle + styles.itemActive : dropStyle}
+                    className={({ isActive }) =>
+                      isActive ? dropStyle + styles.itemActive : dropStyle
+                    }
                     to="Categories"
                     role="button"
                     data-bs-toggle="dropdown"
@@ -142,15 +149,34 @@ let category = { categoriesBooks }.categoriesBooks.result
                   </NavLink>
 
                   <ul className={`dropdown-menu ${styles.dropdownMenu}`}>
-                    {category?.slice(0,8)?.map((cat,index)=>
-                           <li key={index}>
-                           <NavLink className={({ isActive }) => isActive ? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}` : linkStyle + ` dropdown-item ${styles.item}`} to={`books/${cat.slug}`}>
-                             {cat.name}
-                           </NavLink>
-                         </li>
-                    )}
+                    {category?.slice(0, 8)?.map((cat, index) => (
+                      <li key={index}>
+                        <NavLink
+                          className={({ isActive }) =>
+                            isActive
+                              ? linkStyle +
+                                styles.dropItemActive +
+                                ` dropdown-item ${styles.item}`
+                              : linkStyle + ` dropdown-item ${styles.item}`
+                          }
+                          to={`books/${cat.slug}`}
+                        >
+                          {cat.name}
+                        </NavLink>
+                      </li>
+                    ))}
                     <li>
-                      <NavLink className={({ isActive }) => isActive ? linkStyle + styles.dropItemActivetran + ` dropdown-item text-center ${styles.itemColor}` : linkStyle + ` dropdown-item text-center ${styles.itemColor}`} to="Categories">
+                      <NavLink
+                        className={({ isActive }) =>
+                          isActive
+                            ? linkStyle +
+                              styles.dropItemActivetran +
+                              ` dropdown-item text-center ${styles.itemColor}`
+                            : linkStyle +
+                              ` dropdown-item text-center ${styles.itemColor}`
+                        }
+                        to="Categories"
+                      >
                         see more
                       </NavLink>
                     </li>
@@ -158,7 +184,9 @@ let category = { categoriesBooks }.categoriesBooks.result
                 </li>
                 <li className={`nav-item me-2 ${styles.navItem}`}>
                   <NavLink
-                    className={({ isActive }) => isActive ? linkStyle + styles.itemActive : linkStyle}
+                    className={({ isActive }) =>
+                      isActive ? linkStyle + styles.itemActive : linkStyle
+                    }
                     to="contact"
                   >
                     Contact
@@ -166,10 +194,9 @@ let category = { categoriesBooks }.categoriesBooks.result
                 </li>
               </ul>
 
-              {user !== null && token !== null ?
+              {user !== null && token !== null ? (
                 <>
                   <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-
                     <li className={`nav-item me-2 ${styles.navItem}`}>
                       <Link
                         className={`nav-link ${styles.navLink}`}
@@ -180,13 +207,12 @@ let category = { categoriesBooks }.categoriesBooks.result
                     </li>
                   </ul>
                 </>
-
-                : <>
+              ) : (
+                <>
                   <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-
                     <li className="nav-item">
                       <Link
-                      to=""
+                        to=""
                         className={`nav-link ${styles.navLink}`}
                         onClick={() => {
                           dispatch(handleClickOpen({ name: "login" }));
@@ -197,7 +223,7 @@ let category = { categoriesBooks }.categoriesBooks.result
                     </li>
                     <li className="nav-item">
                       <Link
-                      to=""
+                        to=""
                         className={`nav-link ${styles.navLink}`}
                         onClick={() => {
                           dispatch(handleClickOpen({ name: "register" }));
@@ -207,9 +233,8 @@ let category = { categoriesBooks }.categoriesBooks.result
                       </Link>
                     </li>
                   </ul>
-                </>}
-
-
+                </>
+              )}
             </div>
           </div>
         </nav>

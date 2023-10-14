@@ -3,8 +3,10 @@ import SearchIcon from "@mui/icons-material/Search";
 import axiosInstance from "../../../axios/axios-instance";
 import { useCallback, useState } from "react";
 import classes from "./LiveSearch.module.css";
+import { useNavigate } from "react-router";
 
 const LiveSearch = ({
+  navParam,
   label,
   url,
   keyword,
@@ -16,6 +18,7 @@ const LiveSearch = ({
   const [loading, setLoading] = useState(false);
   const [options, setOptions] = useState([]);
   const [searchValue, setSearchValue] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e, val = searchValue) => {
     e.preventDefault();
@@ -26,7 +29,7 @@ const LiveSearch = ({
   const handleInputChange = useCallback(
     async (val) => {
       setSearchValue(val);
-
+      if (val === '') onSubmit(val); //show all if removed search word
       if (val.length >= +minCharToSearch) {
         setLoading(true);
       } else {
@@ -50,14 +53,26 @@ const LiveSearch = ({
   return (
     <form onSubmit={handleSubmit} noValidate>
       <Autocomplete
-        onInputChange={(e, val) => handleInputChange(val)}
+        onInputChange={(_, val) => {
+          handleInputChange(val)
+        }}
+        onChange={(_, val)=> {
+          if (val) {
+            const slug = val?.slug;
+            if (slug) {
+              // navigate(`/${navParam}/${slug}`);
+              navigate(`/book/${slug}`);
+            } else {
+              // navigate(`/${navParam}/${val?._id}`);
+            }
+          }
+        }}
         clearOnBlur={false}
         open={open}
         onOpen={(e) => setOpen(e.target?.value?.length >= +minCharToSearch)}
         onClose={(event, reason) => {
           if (reason === "selectOption") {
             setTimeout(() => {
-              console.log(event.target.defaultValue || event.target.innerText);
               onSubmit(event.target.defaultValue || event.target.innerText);
             }, 1);
           }
@@ -72,6 +87,7 @@ const LiveSearch = ({
             sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
             {...props}
             key={option._id}
+            slug={option.slug}
           >
             {hasImage.toLowerCase() === "true" && (
               <img

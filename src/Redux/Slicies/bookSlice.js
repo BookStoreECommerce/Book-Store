@@ -1,92 +1,109 @@
-import {
-    createSlice
-} from "@reduxjs/toolkit";
-import { getAllBooks, getBooksByWord, getNewBooks } from "./bookActions";
+import { createSlice } from "@reduxjs/toolkit";
+import { getAllBooks, getBookBySlug, getBooksByWord, getNewBooks } from "./bookActions";
 
 const initialState = {
-    isLoading: false,
-    msgError: null,
-    newBooksArray: [],
-}
+  user: null,
+  isLoading: false,
+  token: null,
+  msgError: null,
+  specBook: {},
+  bookCategory:[],
+  newBooksArray: []
+};
 
 const booksSlice = createSlice({
-    name: "books",
-    initialState,
-    reducers: {
-        clearError: (state) => {
-            state.msgError = null;
-        },
+  name: "books",
+  initialState,
+  reducers: {
+    clearError: (state) => {
+      state.msgError = null;
     },
-    extraReducers: builder => {
+    setUser: (state, action) => {
+      const user = action.payload;
+      state.user = user;
+    },
+    logout: (state, action) => {
+      localStorage.removeItem("access-token");
+    },
+  },
+  extraReducers: (builder) => {
+    // getAllBooks
+    builder.addCase(getAllBooks.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getAllBooks.fulfilled, (state, action) => {
+      state.isLoading = false;
+      console.log(action);
+    });
+    builder
+      .addCase(getAllBooks.rejected, (state, action) => {
+        state.isLoading = false;
+        state.msgError = action.payload.error;
+        if (action.error) {
+          state.msgError = action.error;
+        } else {
+          state.msgError = action.errors[0].message;
+        }
+        console.log(action.payload.error);
+        if (action.payload.error) {
+          state.msgError = action.payload.error;
+        } else {
+          state.msgError = action.payload.errors[0].message;
+        }
+      })
 
-        // getAllBooks
-        builder.addCase(getAllBooks.pending, (state, action) => {
-            state.isLoading = true;
-        })
-        builder.addCase(getAllBooks.fulfilled, (state, action) => {
-            state.isLoading = false;
-            console.log(action);
-        })
-        builder.addCase(getAllBooks.rejected, (state, action) => {
-            state.isLoading = false
-            state.msgError = action.payload.error
-            if (action.error) {
-                state.msgError = action.error
-            } else {
-                state.msgError = action.errors[0].message
-            }
-            console.log(action.payload.error);
-            if (action.payload.error) {
-                state.msgError = action.payload.error
-            } else {
-                state.msgError = action.payload.errors[0].message
-            }
-        })
 
-        // getBooksByWord
-        builder.addCase(getBooksByWord.pending, (state, action) => {
-            state.isLoading = true;
-        })
-        builder.addCase(getBooksByWord.fulfilled, (state, action) => {
-            state.isLoading = false;
-            console.log(action);
-        })
-        builder.addCase(getBooksByWord.rejected, (state, action) => {
-            state.isLoading = false
-            state.msgError = action.payload.error
-            if (action.error) {
-                state.msgError = action.error
-            } else {
-                state.msgError = action.errors[0].message
-            }
-            console.log(action.payload.error);
-            if (action.payload.error) {
-                state.msgError = action.payload.error
-            } else {
-                state.msgError = action.payload.errors[0].message
-            }
-        })
+      // get Book By Slug
+      builder.addCase(getBookBySlug.pending, (state, actions) => {
+        state.isLoading = true;
+      })
+      .addCase(getBookBySlug.fulfilled, (state, {payload}) => {
+        state.isLoading = false;
+        state.specBook = payload.result
+        state.bookCategory = payload.bookCategory
+      })
+      .addCase(getBookBySlug.rejected, (state, {payload}) => {
+        state.isLoading = false;
+        state.msgError = payload.error
+        state.specBook = null
+      });
 
-        
-        // getNewBooks
-        builder.addCase(getNewBooks.pending, (state, action) => {
-            state.isLoading = true;
-        })
-        builder.addCase(getNewBooks.fulfilled, (state, action) => {
-            state.isLoading = false;
-            state.newBooksArray = action.payload.result;
-        })
-        builder.addCase(getNewBooks.rejected, (state, action) => {
-            state.isLoading = false
-            if (action.payload.error) {
-                state.msgError = action.payload.error
-            } else {
-                state.msgError = action.payload.errors[0].message
-            }
-        })
-
-    }
-})
+    // getBooksByWord
+    builder.addCase(getBooksByWord.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getBooksByWord.fulfilled, (state, action) => {
+      state.isLoading = false;
+      console.log(action);
+    });
+    builder.addCase(getBooksByWord.rejected, (state, action) => {
+      state.isLoading = false;
+      state.msgError = action.payload.error;
+      if (action.error) {
+        state.msgError = action.error;
+      } else {
+        state.msgError = action.errors[0].message;
+      }
+      console.log(action.payload.error);
+      if (action.payload.error) {
+        state.msgError = action.payload.error;
+      } else {
+        state.msgError = action.payload.errors[0].message;
+      }
+    });
+    //newBooksArray
+    builder.addCase(getNewBooks.pending, (state, {payload}) => {
+      state.isLoading = true
+    })
+    .addCase(getNewBooks.fulfilled, (state, {payload})=>{
+      state.isLoading = true
+      state.newBooksArray = payload
+    })
+    .addCase(getNewBooks.rejected, (state, {payload})=>{
+      state.isLoading = true
+    })
+  },
+});
 
 export const booksReducer = booksSlice.reducer;
-export const { clearError } = booksSlice.actions;
+export const { clearError, setUser, logout } = booksSlice.actions;

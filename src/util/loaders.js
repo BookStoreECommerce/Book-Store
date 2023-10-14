@@ -12,6 +12,7 @@ const getToken = () => {
 }
 
 export const indexLoader = async () => {
+// export const indexLoader = async () => {
     const token = getToken();
     await store.dispatch(getAllCategories());
     await store.dispatch(getNewBooks());

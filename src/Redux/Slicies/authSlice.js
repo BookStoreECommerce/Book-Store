@@ -57,9 +57,11 @@ const authSlice = createSlice({
             state.token = token
         })
         builder.addCase(register.rejected, (state, action) => {
+            // if (action.payload.error) {
             if (action.payload.error) {
                 state.msgError = action.payload.error
             } else {
+            // } else {
                 state.msgError = action.payload.errors[0].message
             }
             state.isLoading = false;

@@ -9,6 +9,7 @@ import Stack from '@mui/material/Stack';
 import Loading from '../../Components/ReusableComponents/Loading/Loading'
 import { removeFooterMargin, setFooterMargin } from "../../Redux/Slicies/appSlice.js";
 import Box from "@mui/material/Box";
+import styles from './Categories.module.css'
 
 const Categories = () => {
     const { categories } = useSelector((state) => state.cat);
@@ -42,36 +43,48 @@ const Categories = () => {
     }
     // Search
     const searchBooks = (searchKeyword) => {
-       
+        searchKeyword = searchKeyword.replace(/\*|\[|\]|\(|\)|\\|#/g, '')
+        // searchKeyword = searchKeyword.replace(/\[|\] () */g, '')
         setSearch(searchKeyword)
         dispatch(getCategories({page,searchTerm:searchKeyword}));
-       
+        setPageState(1);
 
     }
 
-    const url = `${baseUrl}category?page=1&sort=name&keyword=searchValue&fields=name,image`;
+    const url = `${baseUrl}category?page=1&sort=name&keyword=searchValue`;
     return (
         
-        <Box
+        <Box className={styles.Box}
         sx={{
           marginTop: `${navH}px`,
           minHeight: `calc(100vh - ${footerH + navH}px)`,
         }}
       >
-        <div className="container mb-3 " style={{ "marginTop": "150px" }}>
+        <div className="container mb-3 " >
             <div className="py-4">
-                <LiveSearch minCharToSearch="2" label="search categories" url={url} keyword="searchValue" onSubmit={searchBooks} hasImage="true" />
+                <LiveSearch minCharToSearch="2" label="search categories" url={url} keyword="searchValue" onSubmit={searchBooks} hasImage="true" navParam='categories' />
 
             </div>
             {isLoading ? <Loading/> :<>
             <div className="row gy-4">
-                {catArray?.map((cat,idx) => (
-                    <CategoryCard sectionName="" key={idx} catName={cat.name} img={cat.image.secure_url} />
-                ))}
+            {
+                console.log(catArray)
+            }
+                {catArray?.length !== 0 ? 
+                    
+                    catArray?.map((cat,idx) => (
+                    <CategoryCard sectionName="" key={idx} catName={cat.name} img={cat.image.secure_url} slug={cat.slug} />
+                ))
+            :
+            <div className={styles.notFoundContainer }>
+            <p>No Categories Found</p>
+            
+            </div>
+            }
             </div>
                     {
                         totalCategoriesCount > 12 ? 
-                        <div className="d-flex flex-column justify-content-center align-items-center mt-3">
+                        <div className="d-flex flex-column justify-content-center align-items-center my-5">
                         <Stack spacing={2}>
                             <Pagination count={totalPages} page={page} color="primary" shape="rounded" variant="outlined" onChange={setPage} />
                         </Stack>

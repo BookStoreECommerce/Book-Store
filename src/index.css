@@ -9,8 +9,10 @@ box-sizing: border-box;
 
 :root {
   --navyBlue: rgb(43, 58, 85);
+  --navyBlue: rgb(43, 58, 85);
   --white: #ffffff;
   --mainColor: rgb(206, 119, 119);
+  --secondaryColor: #e8c4c4;
   --secondaryColor: #e8c4c4;
   --beigeColor: rgb(242, 229, 229);
 }
@@ -85,12 +87,12 @@ section{
 color: var(--navyBlue)!important;
 }
 .slick-current{
-  transform: scale(1.1);
+  /* transform: scale(1.1); */
   transition: scale 2s ease-in-out ;
 }
 
 .Suggested .slick-current{
-  transform: scale(1.03);
+  /* transform: scale(1.03); */
   transition: scale 2s ease-in-out ;
 }
 
@@ -110,6 +112,7 @@ color: var(--navyBlue)!important;
 .carousel-control-prev-icon{
   background-image: url('./assets/prev.svg') !important;
 }
+
 .dropdown-item:active {
   background-color: #fff!important;
 }
