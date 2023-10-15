@@ -70,7 +70,7 @@ const CategoriesBook = () => {
                     {category?.length != 0?
                     <>
                          {category?.map((book, index) => (
-                            <BookCard key={index} image={book.image?.secure_url} name={book.name} price={book.price} author={book.author} rate={book.rate} section="catBook" category={book.category?.name} />
+                            <BookCard key={index} image={book.image?.secure_url} name={book.name} price={book.price} author={book.author} rate={book.rate} slug={book.slug} section="catBook" sectionName='without/' category={book.category?.name} />
                         ))}
                     </>
                     :<div className={styles.notFoundContainer }>

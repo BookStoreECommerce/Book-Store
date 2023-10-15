@@ -95,6 +95,7 @@ const Suggested = () => {
                       rate={Suggested.rate}
                       sale={Suggested.sale}
                       section={"Suggested"}
+                      slug= {Suggested.slug}
                     />
                   ))}
                 </Slider>

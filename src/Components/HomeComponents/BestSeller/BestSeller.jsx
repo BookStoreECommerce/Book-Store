@@ -195,7 +195,8 @@ const BestSeller = () => {
                                     author={bestSeller.author}
                                     rate={bestSeller.rate}
                                     sale={bestSeller.sale}
-                                    section={"bestSeller"} />
+                                    section={"bestSeller"}
+                                    book={bestSeller} />
                             )}
                         </Slider>
                     </div>

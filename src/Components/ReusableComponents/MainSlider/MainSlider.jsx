@@ -2,7 +2,7 @@ import React from 'react'
 import Slider from 'react-slick';
 import BookCard from '../BookCard/BookCard.jsx';
 
-export default function MainSlider({arr, title,autoplay= true}) {
+export default function MainSlider({arr, title,autoplay= true, sectionName}) {
     const settings = {
         className: "center",
         centerMode: true,
@@ -64,6 +64,7 @@ export default function MainSlider({arr, title,autoplay= true}) {
                 <Slider {...settings}>
                   {arr.map((book, index) => (
                     <BookCard
+                      sectionName = {sectionName}
                       cardStyle={{ margin: "10px", padding: "0px" }}
                       key={book._id}
                       image={book.image.secure_url }
@@ -74,6 +75,7 @@ export default function MainSlider({arr, title,autoplay= true}) {
                       sale={book.sale}
                       section={title}
                       book={book}
+                      slug= {book.slug}
                     />
                   ))}
                 </Slider>

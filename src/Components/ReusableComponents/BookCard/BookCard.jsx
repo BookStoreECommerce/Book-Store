@@ -5,6 +5,7 @@ import styles from "./BookCard.module.css";
 import bookImage from "../../../assets/book.jpg";
 
 const BookCard = ({
+  sectionName,
   book,
   id,
   image,
@@ -16,6 +17,7 @@ const BookCard = ({
   cardStyle,
   sale,
   category,
+  slug
 }) => {
   return (
     <>
@@ -36,7 +38,7 @@ const BookCard = ({
           <div className={styles.overLay}>
             {section !== "bestSeller" ? (
               <>
-                <Link to="detailsBook" className="text-decoration-none">
+                <Link to={sectionName === 'without/'? `/book/${slug}`:`book/${slug}`} className="text-decoration-none">
                   <span className={styles.icon}>
                     <i className="fa-regular fa-eye"></i>
                   </span>

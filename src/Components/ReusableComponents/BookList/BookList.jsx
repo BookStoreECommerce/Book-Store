@@ -12,6 +12,7 @@ const BookList = ({ NewBooks, sectionName }) => {
           author={book.author}
           rate={book.rate}
           section={sectionName}
+          slug={book?.slug}
         />
       ))}
     </>
