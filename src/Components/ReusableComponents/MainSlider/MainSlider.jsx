@@ -2,7 +2,7 @@ import React from 'react'
 import Slider from 'react-slick';
 import BookCard from '../BookCard/BookCard.jsx';
 
-export default function MainSlider({arr, title,autoplay= true, sectionName}) {
+export default function MainSlider({arr, title,autoplay= true}) {
     const settings = {
         className: "center",
         centerMode: true,
@@ -62,9 +62,8 @@ export default function MainSlider({arr, title,autoplay= true, sectionName}) {
               <h2 className="blueHeader text-center mt-4 mb-5">{title}</h2>
               <div className={`col-lg-11 mb-5`}>
                 <Slider {...settings}>
-                  {arr.map((book, index) => (
+                  {arr?.map((book, index) => (
                     <BookCard
-                      sectionName = {sectionName}
                       cardStyle={{ margin: "10px", padding: "0px" }}
                       key={book._id}
                       image={book.image.secure_url }
@@ -75,7 +74,7 @@ export default function MainSlider({arr, title,autoplay= true, sectionName}) {
                       sale={book.sale}
                       section={title}
                       book={book}
-                      slug= {book.slug}
+                      slug={book.slug}
                     />
                   ))}
                 </Slider>

@@ -5,7 +5,6 @@ import styles from "./BookCard.module.css";
 import bookImage from "../../../assets/book.jpg";
 
 const BookCard = ({
-  sectionName,
   book,
   id,
   image,
@@ -17,7 +16,7 @@ const BookCard = ({
   cardStyle,
   sale,
   category,
-  slug
+  slug,
 }) => {
   return (
     <>
@@ -38,7 +37,10 @@ const BookCard = ({
           <div className={styles.overLay}>
             {section !== "bestSeller" ? (
               <>
-                <Link to={sectionName === 'without/'? `/book/${slug}`:`book/${slug}`} className="text-decoration-none">
+                <Link
+                  to={`/book/${slug}`}
+                  className="text-decoration-none"
+                >
                   <span className={styles.icon}>
                     <i className="fa-regular fa-eye"></i>
                   </span>
@@ -68,11 +70,13 @@ const BookCard = ({
           </div>
           {section === "bestSeller" || section === "newBooks" ? (
             <img
-              src={book?.image?.secure_url
-                ? book?.image?.secure_url
-                : image
-                ? image
-                : bookImage}
+              src={
+                book?.image?.secure_url
+                  ? book?.image?.secure_url
+                  : image
+                  ? image
+                  : bookImage
+              }
               className={`w-100 ${styles.cardImgNew}`}
               alt=""
             />
@@ -90,31 +94,46 @@ const BookCard = ({
             />
           )}
 
-                    {/* </div> */}
-               {/* {section === "bestSeller" || section === "newBooks"?<img src={image? image:bookImage} 
-               className={`w-100 ${styles.cardImgNew}`} alt="" />:
-               <img src={image? image:bookImage} className={`w-100 ${styles.cardImg}`} alt="" />
-               } */}
-                    
-                  {section === 'bestSeller' && sale ?<>
-                  <div className={`position-absolute ${styles.priceSeller}`}>
-                        <span>{sale}% OFF</span>
-                    </div>
-                  </>:''}
 
-                </div>
-                <div className={`d-flex flex-column justify-content-start text-center align-items-center`} >
-      
-                    {section === "bestSeller" ? '' : <span className={styles.badge}>{category?.name}</span>}
-                    {section === "bestSeller" ? '' : <span className={`${styles.bookName} ${styles.textLength}` } >{name}</span>}
-                    {section === "bestSeller" ? '' : <span className={styles.bookAuthor}>By {author}</span>}
-                    {section === "bestSeller" ? '' : <span className={styles.price}> {price + ` EGP`} </span>}
-
-                </div>
-            </div>
-
-        </>
-    );
-}
+          {section === "bestSeller" && sale ? (
+            <>
+              <div className={`position-absolute ${styles.priceSeller}`}>
+                <span>{sale}% OFF</span>
+              </div>
+            </>
+          ) : (
+            ""
+          )}
+        </div>
+        <div
+          className={`d-flex flex-column justify-content-start text-center align-items-center`}
+        >
+          {section === "bestSeller" ? (
+            ""
+          ) : (
+            <span className={styles.badge}>{category?.name}</span>
+          )}
+          {section === "bestSeller" ? (
+            ""
+          ) : (
+            <span className={`${styles.bookName} ${styles.textLength}`}>
+              {name}
+            </span>
+          )}
+          {section === "bestSeller" ? (
+            ""
+          ) : (
+            <span className={styles.bookAuthor}>By {author}</span>
+          )}
+          {section === "bestSeller" ? (
+            ""
+          ) : (
+            <span className={styles.price}> {price + ` EGP`} </span>
+          )}
+        </div>
+      </div>
+    </>
+  );
+};
 
 export default BookCard;

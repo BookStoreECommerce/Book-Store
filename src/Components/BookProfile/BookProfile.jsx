@@ -66,7 +66,7 @@ export default function BookProfile() {
             </div>
           </div>
         </div>
-        <MainSlider arr={bookCategory} sectionName='without/' title="Suggested for you" />
+        <MainSlider autoplay={false} arr={bookCategory} title="Suggested for you" />
       </>
     }
     </Box>
