@@ -3,7 +3,6 @@ import Slider from 'react-slick';
 import BookCard from '../BookCard/BookCard.jsx';
 
 export default function MainSlider({arr, title,autoplay= true}) {
-  console.log(autoplay);
     const settings = {
         className: "center",
         centerMode: true,
