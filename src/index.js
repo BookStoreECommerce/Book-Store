@@ -9,6 +9,8 @@ import { Provider } from "react-redux";
 import store from "./Redux/Store.js";
 import ThemeContextProvider from "./Contexts/theme-context";
 import ErrorBoundry from "./pages/ErrorBoundry/ErrorBoundry";
+// import ThemeContextProvider from "./Contexts/theme-context";
+// import ErrorBoundry from "./pages/ErrorBoundry/ErrorBoundry";
 import Loading from "./Components/ReusableComponents/Loading/Loading";
 import App from './App.js'
 
@@ -17,6 +19,7 @@ const router = createBrowserRouter([
     path: "/",
     async lazy() {
       const { default: Layout } = await import("./Layouts/Layout");
+      // const { default: Layout } = await import("./Layouts/Layout");
       const { indexLoader } = await import("./util/loaders");
       return { Component: Layout, loader: indexLoader };
     },
@@ -26,6 +29,7 @@ const router = createBrowserRouter([
         index: true,
         async lazy() {
           const { default: Home } = await import("./pages/Home/Home");
+          // const { default: Home } = await import("./pages/Home/Home");
           return { Component: Home };
         },
       },
@@ -34,6 +38,13 @@ const router = createBrowserRouter([
         async lazy() {
           const { default: Books } = await import("./pages/Books/Books");
           return { Component: Books };
+        },
+      },
+      {
+        path: 'book/:slug',
+        async lazy() {
+          const { default: BookProfile } = await import("./Components/BookProfile/BookProfile");
+          return { Component: BookProfile };
         },
       },
       {

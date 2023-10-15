@@ -9,6 +9,7 @@ import Stack from '@mui/material/Stack';
 import Loading from '../../Components/ReusableComponents/Loading/Loading'
 import { removeFooterMargin, setFooterMargin } from "../../Redux/Slicies/appSlice.js";
 import Box from "@mui/material/Box";
+import styles from './Categories.module.css'
 
 const Categories = () => {
     const { categories } = useSelector((state) => state.cat);
@@ -54,13 +55,13 @@ const Categories = () => {
     const url = `${baseUrl}category?page=1&sort=name&keyword=searchValue`;
     return (
         
-        <Box
+        <Box className={styles.Box}
         sx={{
           marginTop: `${navH}px`,
           minHeight: `calc(100vh - ${footerH + navH}px)`,
         }}
       >
-        <div className="container mb-3 " style={{ "marginTop": "150px" }}>
+        <div className="container mb-3 " >
             <div className="py-4">
                 <LiveSearch minCharToSearch="2" label="search categories" url={url} keyword="searchValue" onSubmit={searchBooks} hasImage="true" navParam='categories' />
 

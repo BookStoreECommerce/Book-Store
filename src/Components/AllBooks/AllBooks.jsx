@@ -9,7 +9,6 @@ import LiveSearch from '../ReusableComponents/LiveSearch/LiveSearch';
 import { baseUrl } from '../../util/util';
 import { removeFooterMargin, setFooterMargin } from '../../Redux/Slicies/appSlice';
 import { Box } from '@mui/material';
-import ScrollToTop from '../ReusableComponents/ScrollToTop/ScrollToTop';
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Loading from '../ReusableComponents/Loading/Loading';
@@ -72,7 +71,7 @@ function AllBook({ sectionName }) {
         }}
       >
         <div className=''>
-          <LiveSearch minCharToSearch="1" label="search books" url={url} keyword="searchValue" hasImage='true' onSubmit={getBooksBySearch} pageNumber={setPageNumber} />
+          <LiveSearch minCharToSearch="1" label="search books" url={url} keyword="searchValue" hasImage='true' onSubmit={getBooksBySearch} pageNumber={setPageNumber} navParam='book' />
         </div>
 
         {isLoading ? <Loading />
@@ -82,7 +81,7 @@ function AllBook({ sectionName }) {
                     <p>No Books Found</p>
                     </div>: (isLoading ? <Loading /> : books.length > 0 ? books.map((book, index) => (
               <div key={index} className={` col-lg-3 col-sm-6 col-12 mb-5 ${styles.bookCard}`}>
-                <BookCard key={book.id} image={book.image.secure_url} category={book.category} desc={book.desc} name={book.name} price={book.price} author={book.author} rate={book.rate} section={sectionName} />
+                <BookCard key={book.id} image={book.image.secure_url} category={book.category} desc={book.desc} name={book.name} price={book?.price} author={book.author} rate={book.rate} section={sectionName} />
               </div>
             )) : '')}
             {books && numOfPages > 1 ? <div className="my-5 pt-5 d-flex justify-content-center">
@@ -99,3 +98,4 @@ function AllBook({ sectionName }) {
 }
 
 export default AllBook
+

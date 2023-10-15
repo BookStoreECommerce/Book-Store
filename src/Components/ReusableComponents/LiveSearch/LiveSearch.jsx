@@ -108,6 +108,7 @@ const LiveSearch = ({
             sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
             {...props}
             key={option._id}
+            slug={option.slug}
           >
             {hasImage.toLowerCase() === "true" && (
               <img

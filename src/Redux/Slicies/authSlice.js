@@ -1,13 +1,15 @@
 import {
     createSlice
 } from "@reduxjs/toolkit";
-import { forgetPassword, getUserProfile, register, registerVerification, resendCode, resetPassword, signin, signinWithToken, userProfile, varifyPasswordEmail, signout } from "./authActions";
+import { forgetPassword, getUserProfile, register, registerVerification, resendCode, resetPassword, signin, signinWithToken, userProfile, varifyPasswordEmail, signout, getSearchedBooks, getSuggestedBooks } from "./authActions";
 
 const initialState = {
     user: null,
     isLoading: false,
     token: null,
-    msgError: null
+    msgError: null,
+    searchedBooks: [],
+    suggestedBooks: [],
 }
 
 const saveUserData = (token) => {
@@ -55,9 +57,11 @@ const authSlice = createSlice({
             state.token = token
         })
         builder.addCase(register.rejected, (state, action) => {
+            // if (action.payload.error) {
             if (action.payload.error) {
                 state.msgError = action.payload.error
             } else {
+            // } else {
                 state.msgError = action.payload.errors[0].message
             }
             state.isLoading = false;
@@ -195,6 +199,38 @@ const authSlice = createSlice({
             state.isLoading = false;
         })
         builder.addCase(signout.rejected, (state, action) => {
+            state.isLoading = false
+            if (action.payload.error) {
+                state.msgError = action.payload.error
+            } else {
+                state.msgError = action.payload.errors[0].message
+            }
+        })
+        // getSearchedBooks
+        builder.addCase(getSearchedBooks.pending, (state, action) => {
+            state.isLoading = true;
+        })
+        builder.addCase(getSearchedBooks.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.searchedBooks = action.payload.result;
+        })
+        builder.addCase(getSearchedBooks.rejected, (state, action) => {
+            state.isLoading = false
+            if (action.payload.error) {
+                state.msgError = action.payload.error
+            } else {
+                state.msgError = action.payload.errors[0].message
+            }
+        })
+        // getSuggestedBooks
+        builder.addCase(getSuggestedBooks.pending, (state, action) => {
+            state.isLoading = true;
+        })
+        builder.addCase(getSuggestedBooks.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.suggestedBooks = action.payload.result;
+        })
+        builder.addCase(getSuggestedBooks.rejected, (state, action) => {
             state.isLoading = false
             if (action.payload.error) {
                 state.msgError = action.payload.error

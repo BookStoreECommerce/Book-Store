@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Jost&family=PT+Serif:wght@700&display=swap');
+
+.bookName{
+    color: var(--navyBlue);
+    font-size: 32px;
+    font-family: 'Libre Baskerville', serif;
+    font-weight: bold;
+}
+.bookAuthor{
+    font-size: 20px;
+    color: #A2A1A1;
+    font-family: 'Jost', sans-serif;
+
+}
+.price{
+    margin-top: 18px;
+   font-size: 18px;
+   font-family: 'Jost', sans-serif;
+   
+
+}
+/* .price span{
+    color: ;
+} */
+.category{
+    font-size: 17px;
+    background-color: var(--mainColor);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    width: fit-content;
+    margin-top: 15px;
+}
+.description{
+    margin-top: 35px;
+    color: gray;
+}
+.gap{
+    gap: 10px;
+}
+.gap span{
+    background-color: var(--navyBlue);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+.discount{
+    font-size: 12px;
+    background-color: var(--beigeColor);
+    color: var(--navyBlue);
+    padding: 20px 5px;
+    border-radius: 50%;
+}
+.btnSeeMore{
+    text-decoration: underline !important;
+    color: var(--mainColor)!important;
+    border: none !important;
+}
+.btnSeeMore:hover,.btnSeeMore:focus{
+    text-decoration: underline!important;
+    color: var(--navyBlue)!important;
+    background-color: transparent!important;
+    border: none!important;
+}

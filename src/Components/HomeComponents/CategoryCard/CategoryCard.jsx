@@ -3,7 +3,6 @@ import styles from './CategoryCard.module.css'
 
 const CategoryCard = ({ catName , img , sectionName, slug  }) => {
 
-  
     return (
         <>
             <div  className={sectionName === 'home' ? "col-lg-4 col-md-6 col-sm-6" : `col-xl-3 col-lg-4 col-md-6 col-sm-6 ${styles.cardImg}`} >
