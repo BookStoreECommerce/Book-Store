@@ -33,7 +33,6 @@ function NavBar({ navRef }) {
 
   let { categoriesBooks } = useSelector((state) => state.book)
   let category = { categoriesBooks }.categoriesBooks.result
-  // console.log(category);
   useEffect(() => {
     dispatch(getCatBooks())
   }, [])

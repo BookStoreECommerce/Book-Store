@@ -48,7 +48,7 @@ const bookSlice = createSlice({
       .addCase(getBookBySlug.fulfilled, (state, {payload}) => {
         state.isLoading = false;
         state.specBook = payload.result
-        state.bookCategory = payload.bookCategory
+        state.bookCategory = payload.bookCategory.length < 7 ? payload.books : payload.bookCategory;
       })
       .addCase(getBookBySlug.rejected, (state, {payload}) => {
         state.isLoading = false;

@@ -28,7 +28,7 @@ export default function BookProfile() {
   }
   useEffect(()=>{
     getBookData()
-  }, [])
+  }, [slug])
 
   useEffect(() => {
     dispatch(removeFooterMargin());

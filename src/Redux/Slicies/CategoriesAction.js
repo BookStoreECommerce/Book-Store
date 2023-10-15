@@ -3,7 +3,6 @@ import axiosInstance from "../../axios/axios-instance";
 
 export const getCategories = createAsyncThunk("/categories",async ({page = 1 , searchTerm  } , { rejectWithValue })=>{
 // let kword= searchTerm || "history";
-// console.log(searchTerm);
     try {
         if(searchTerm){
             const {data} = await axiosInstance.get(`category?keyword=${searchTerm}`);

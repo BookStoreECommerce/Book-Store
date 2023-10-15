@@ -83,7 +83,6 @@ const VerifyPassword = ({ onSubmit: moveToNext }) => {
             >
               Verify
             </Button>
-            {console.log(formik.isValid)}
           </div>
   
           <div className="d-flex gap-2 text-muted justify-content-center align-items-center">

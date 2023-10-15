@@ -13,7 +13,6 @@ const ForgotPassword = ({ onSubmit: moveToNext }) => {
   const { isLoading, msgError } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const handleForgotPassword = async (values) => {
-    // console.log(values);
     const { payload } = await dispatch(forgetPassword(values));
     if (payload.message === "success") {
       moveToNext();
