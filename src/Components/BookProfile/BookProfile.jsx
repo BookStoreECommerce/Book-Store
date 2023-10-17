@@ -47,7 +47,7 @@ export default function BookProfile() {
         {isLoading ? <Loading sectionName='profile' /> :
           <>
             <div className="container py-5">
-              <div className="row mt-lg-5 mt-0 justify-content-center">
+              <div className="row mt-lg-5 mt-0 ">
                 <div className="col-lg-3 col-md-6 col-8 position-relative">
                   <div className={`${styles.hide} d-flex justify-content-center align-items-center flex-column`}>
                     <ReactImageMagnify {...{
