@@ -84,9 +84,13 @@
 .show{
     display: none;
 }
+.zoom{
+    margin-top: 10px;
+    color: var(--mainColor);
+}
 @media screen and (max-width:767px) {
     .hide{
-        display: none;
+        display: none!important;
     }
     .show{
         display: block;

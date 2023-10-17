@@ -47,12 +47,12 @@ export default function BookProfile() {
         {isLoading ? <Loading sectionName='profile' /> :
           <>
             <div className="container py-5">
-              <div className="row mt-5">
-                <div className="col-lg-3 col-md-6 position-relative">
-                  <div className={styles.hide}>
+              <div className="row mt-lg-5 mt-0 justify-content-center">
+                <div className="col-lg-3 col-md-6 col-8 position-relative">
+                  <div className={`${styles.hide} d-flex justify-content-center align-items-center flex-column`}>
                     <ReactImageMagnify {...{
                       smallImage: {
-                        alt: 'Wristwatch by Ted Baker London',
+                        alt: '',
                         isFluidWidth: true,
                         src: specBook?.image?.secure_url,
 
@@ -62,14 +62,21 @@ export default function BookProfile() {
                         width: 1200,
                         height: 1800,
                       },
+                      shouldUsePositiveSpaceLens: true,
+                      lensStyle:{
+                        cursor:'pointer',
+                   
+                      }
+                      
                     }} />
+                    <p className={styles.zoom}>Roll over image to zoom in</p>
                   </div>
                   <div className={styles.show}> 
                   <img src={specBook?.image?.secure_url} className="w-100" alt="" />
                   </div>
 
                 </div>
-                <div className=" col-lg-9 col-md-12">
+                <div className=" col-lg-9 col-md-12 mt-3 mt-md-0">
                   <h2 className={styles.bookAuthor}>{specBook?.author} </h2>
                   <h2 className={styles.bookName}>{specBook?.name} </h2>
                   <h3 className={styles.category}>{specBook?.category?.name}</h3>
