@@ -12,6 +12,7 @@ import { Box } from '@mui/material';
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Loading from '../ReusableComponents/Loading/Loading';
+import ScrollToTop from '../ReusableComponents/ScrollToTop/ScrollToTop';
 function AllBook({ sectionName }) {
 
   useEffect(() => {
@@ -64,17 +65,19 @@ function AllBook({ sectionName }) {
 
   return (
     <>
+    <ScrollToTop/>
       <Box
         sx={{
           marginTop: `${navH}px`,
           minHeight: `calc(100vh - ${footerH + navH}px)`,
         }}
       >
-        <div className=''>
+   <div className="container py-5">
+   <div className=''>
           <LiveSearch minCharToSearch="1" label="search books" url={url} keyword="searchValue" hasImage='true' onSubmit={getBooksBySearch} pageNumber={setPageNumber} navParam='book' />
         </div>
-
-        {isLoading ? <Loading />
+ 
+        {isLoading ? <Loading sectionName='AllBooks'/>
           : (<div className='row'>
 
             {totalCount === 0 && !isLoading ? <div className={styles.notFoundContainer }>
@@ -91,6 +94,7 @@ function AllBook({ sectionName }) {
             </div> : <div className="my-5 pt-5 d-flex justify-content-center"></div>}
 
           </div>)}
+   </div>
       </Box>
 
     </>

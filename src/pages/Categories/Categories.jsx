@@ -10,6 +10,7 @@ import Loading from '../../Components/ReusableComponents/Loading/Loading'
 import { removeFooterMargin, setFooterMargin } from "../../Redux/Slicies/appSlice.js";
 import Box from "@mui/material/Box";
 import styles from './Categories.module.css'
+import ScrollToTop from "../../Components/ReusableComponents/ScrollToTop/ScrollToTop.jsx";
 
 const Categories = () => {
     const { categories } = useSelector((state) => state.cat);
@@ -54,7 +55,8 @@ const Categories = () => {
 
     const url = `${baseUrl}category?page=1&sort=name&keyword=searchValue`;
     return (
-        
+        <>
+        <ScrollToTop/>
         <Box className={styles.Box}
         sx={{
           marginTop: `${navH}px`,
@@ -86,6 +88,7 @@ const Categories = () => {
 
         </div>
 </Box>
+        </>
     
        
 

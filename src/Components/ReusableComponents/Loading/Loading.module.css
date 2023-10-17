@@ -15,6 +15,12 @@
 .heightBody{
   height: 100vh;
 }
+.heightProfile{
+  height: 75vh;
+}
+.heightAllBooks{
+  height: 65vh;
+}
    .book {
     --color: #2b3a55;
     --duration: 6.8s;
