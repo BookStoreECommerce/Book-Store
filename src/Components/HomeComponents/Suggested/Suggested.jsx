@@ -17,6 +17,7 @@ const Suggested = () => {
       author: ele.author,
       price: ele.price,
       sale: ele.discount,
+      category:ele.category,
     };
   });
 
@@ -96,6 +97,8 @@ const Suggested = () => {
                       sale={Suggested.sale}
                       section={"Suggested"}
                       slug= {Suggested.slug}
+                      category = {Suggested.category}
+                      sectionName="whislist"
                     />
                   ))}
                 </Slider>

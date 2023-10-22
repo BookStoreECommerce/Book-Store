@@ -3,53 +3,30 @@ import { Link } from "react-router-dom";
 import Rating from "../Rating/Rating";
 import styles from "./BookCard.module.css";
 import bookImage from "../../../assets/book.jpg";
+import { useDispatch, useSelector } from "react-redux";
+import { handleClickOpen } from "../../../Redux/Slicies/dialogSlice";
 
 const BookCard = ({
-  book,
-  id,
-  image,
-  name,
-  price,
-  author,
-  rate,
-  section,
-  cardStyle,
-  sale,
-  category,
-  slug,
-}) => {
+  book,id,image, name,price, author,section,cardStyle,sale,category,slug,sectionName,}) => {
+
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+  console.log(user);
+  const token = localStorage.getItem('access-token');
+
   return (
     <>
-      <div
-        data-testid="BookCard"
-        className={
-          section === "newBooks"
-            ? `col-lg-3 col-sm-6 col-12 mt-5 mb-3 ${styles.font}`
-            : section === "catBook"
-            ? `col-xl-3 col-lg-4 col-sm-6 col-12 mt-5 mb-3 ${styles.font}`
-            : ""
-        }
-      >
-        <div
-          className={`mb-2 position-relative ${styles.imgContainer}`}
-          style={cardStyle}
-        >
+      <div data-testid="BookCard" className={ section === "newBooks" ? `col-lg-3 col-sm-6 col-12 mt-5 mb-3 ${styles.font}` : section === "catBook"? `col-xl-3 col-lg-4 col-sm-6 col-12 mt-5 mb-3 ${styles.font}`: ""}>
+        <div className={`mb-2 position-relative ${styles.imgContainer}`} style={cardStyle}>
           <div className={styles.overLay}>
             {section !== "bestSeller" ? (
               <>
-                <Link
-                  to={`/book/${slug}`}
-                  className="text-decoration-none"
-                >
+                <Link to={`/book/${slug}`} className="text-decoration-none">
                   <span className={styles.icon}>
                     <i className="fa-regular fa-eye"></i>
                   </span>
                 </Link>
-                <Link to="favorite" className="text-decoration-none">
-                  <span className={styles.icon}>
-                    <i className="fa-solid fa-heart "></i>
-                  </span>
-                </Link>
+
                 <Link to="cart" className="text-decoration-none">
                   <span className={styles.icon}>
                     <i className="fa-solid fa-cart-shopping"></i>
@@ -59,41 +36,17 @@ const BookCard = ({
             ) : (
               <>
                 <div className={styles.bestSellerCard}>
-                  <p className={styles.headerFont}>
-                    {book?.name.slice(0, 12)}...
-                  </p>
+                  <p className={styles.headerFont}>{book?.name.slice(0, 12)}...</p>
                   <p>{author}</p>
-                  <Rating rate={rate} id={book?._id} />
                 </div>
               </>
             )}
           </div>
           {section === "bestSeller" || section === "newBooks" ? (
-            <img
-              src={
-                book?.image?.secure_url
-                  ? book?.image?.secure_url
-                  : image
-                  ? image
-                  : bookImage
-              }
-              className={`w-100 ${styles.cardImgNew}`}
-              alt=""
-            />
+            <img src={book?.image?.secure_url? book?.image?.secure_url: image? image: bookImage} className={`w-100 ${styles.cardImgNew}`} alt=""/>
           ) : (
-            <img
-              src={
-                book?.image?.secure_url
-                  ? book?.image?.secure_url
-                  : image
-                  ? image
-                  : bookImage
-              }
-              className={`w-100 ${styles.cardImg}`}
-              alt=""
-            />
+            <img src={ book?.image?.secure_url ? book?.image?.secure_url: image? image: bookImage} className={`w-100 ${styles.cardImg}`} alt=""/>
           )}
-
 
           {section === "bestSeller" && sale ? (
             <>
@@ -106,9 +59,9 @@ const BookCard = ({
           )}
         </div>
         <div
-          className={`d-flex flex-column justify-content-start text-center align-items-center`}
+          className={`d-flex flex-column justify-content-start ${styles.paddingParagraph}`}
         >
-          {section === "bestSeller" ? (
+          {section === "bestSeller" || sectionName === "whislist"  || section ==="catBook" || sectionName === "Books"? (
             ""
           ) : (
             <span className={styles.badge}>{category?.name}</span>
@@ -130,6 +83,33 @@ const BookCard = ({
           ) : (
             <span className={styles.price}> {price + ` EGP`} </span>
           )}
+          {section === "bestSeller" ? "" :
+            <>
+              <div className="d-flex justifiy-content-center align-items-center">
+              
+                  {sectionName === "whislist" || section === "catBook" || sectionName ==="Books"? <><span className={styles.badge}>{category?.name}</span></> : ""}
+                 
+                  {user !== null && token !== null ? <>
+                    <button className={`text-decoration-none btn ms-auto ${styles.btn}`} >
+                    <span className={styles.whishlisticon}>
+                      <i className="fa-regular fa-heart"></i>
+                    </span>
+                  </button>
+                  </>:
+                  <>
+                       <button className={`text-decoration-none btn ms-auto ${styles.btn}`} onClick={() => {
+                      dispatch(handleClickOpen({ name: "login" }));
+                    }}>
+                    <span className={styles.whishlisticon}>
+                      <i className="fa-regular fa-heart"></i>
+                    </span>
+                  </button>
+                  </>
+  }
+             
+
+              </div>
+            </>}
         </div>
       </div>
     </>

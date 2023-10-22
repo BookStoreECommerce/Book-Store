@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Jost&family=PT+Serif:wght@700&display=swap');
+
+.badge{
+    background-image: linear-gradient(45deg,var(--secondaryColor),var(--beigeColor));
+    padding: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.slug{
+    font-family: 'Jost', sans-serif;
+    font-size: 28px;
+    font-weight: 500;
+    padding-left: 30px;
+    color: var(--navyBlue);
+}
+.content i{
+    margin-right: 10px;
+font-size: 15px;
+color: var(--navyBlue)!important;
+
+}
+.content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 30px;
+}
+.slash{
+    font-size: 19px;
+    font-family: 'Jost', sans-serif;
+    color: var(--navyBlue)!important;
+}
+.slash a{
+    color: var(--navyBlue)!important;
+    text-decoration: none;
+}
+.imgWidth{
+    width: 50%;
+}
+.cartProduct{
+    padding: 25px;
+    min-height: 200px;
+    background-color: #F5F5F5;
+    position: relative;
+}
+.cartButton{
+    background-color: var(--navyBlue)!important;
+    border: none!important;
+    border-radius: 0px !important;
+    padding: 10px 0px!important;
+    color: white !important;
+    font-size: 16px;
+    font-family: 'Jost', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cartButton:hover, .cartButton:focus{
+    background-color: var(--mainColor)!important;
+    transition: all 0.6s ease;
+    border: none!important;
+}
+.removeBtn{
+    border: none !important;
+    border-radius: 50%!important;
+    color: var(--navyBlue)!important;
+    background-color: white !important;
+    padding: 5px 10px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 16px;
+    
+}
+.discount{
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: var(--mainColor);
+    font-family: 'Inter', sans-serif;
+    font-weight: lighter;
+    font-size: 14px;
+    border-radius: 5px;
+}
+.removeBtn:hover, .removeBtn:focus{
+    color: var(--mainColor)!important;
+    transition: all 0.6s ease;
+    border: none!important;
+}
+.bookName{
+    color: var(--navyBlue);
+    font-weight: bold;
+    font-size: 20px;
+    font-family: 'Jost', sans-serif;
+    margin-bottom: 0!important;
+    padding-top: 10px;
+}
+.bookAuthor{
+    color: gray;
+    font-size: 15px;
+    font-family: 'Jost', sans-serif;
+    margin-bottom: 0!important;
+}
+.bookPrice{
+    color: var(--mainColor);
+    font-weight: bold;
+    font-size: 16px;
+    font-family: 'Jost', sans-serif;
+    margin-bottom: 0!important;
+}
+
+.items{
+    font-size: 16px;
+    font-family: 'Jost', sans-serif;
+    color: gray;
+}
+@media screen and (min-width:550px) and (max-width:794px){
+    .slug{
+        padding: 0;
+    }
+    .content{
+        padding: 0;
+    }
+  
+    .badge{
+        flex-wrap: wrap;
+    }
+}
+@media screen and (min-width:350px) and (max-width:549px){
+    .slug{
+        padding: 0;
+        font-size: 20px;
+    }
+    .content{
+        padding: 0;
+        font-size: 20px;
+    }
+    .slash{
+        font-size: 15px;
+    }
+    .badge{
+        padding: 15px;
+        flex-wrap: wrap;
+    }
+
+}

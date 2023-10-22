@@ -6,7 +6,7 @@ export default function Books() {
 
   return (
 
-        <AllBook />
+        <AllBook/>
 
   )
 }

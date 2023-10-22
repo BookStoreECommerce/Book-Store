@@ -49,7 +49,7 @@ function NavBar({ navRef }) {
       <div data-testid="NavBar" className="fixed-top" ref={navRef}>
         <div className={styles.navTop}>
           <li className="nav-item me-5 position-relative">
-            <Link className={`nav-link  ${styles.navLinkIcon}`} to="favourites">
+            <Link className={`nav-link  ${styles.navLinkIcon}`} to="whishlist">
               <FavoriteBorderOutlinedIcon
                 sx={{ fontSize: { xs: 24, sm: 24, md: 27, lg: 24 } }}
               />
