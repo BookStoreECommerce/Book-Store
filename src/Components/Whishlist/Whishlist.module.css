@@ -36,13 +36,21 @@ color: var(--navyBlue)!important;
     text-decoration: none;
 }
 .imgWidth{
-    width: 50%;
+    width: 100%;
+    min-height: 229px;
+    max-height: 230px;
+    max-width: 160px;
+    min-width: 160px;
 }
 .cartProduct{
     padding: 25px;
-    min-height: 200px;
+    min-height: 300px;
+    max-height: 300px;
     background-color: #F5F5F5;
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .cartButton{
     background-color: var(--navyBlue)!important;
@@ -68,8 +76,8 @@ color: var(--navyBlue)!important;
     background-color: white !important;
     padding: 5px 10px;
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: 7px;
+    right: 7px;
     font-size: 16px;
     
 }
@@ -95,6 +103,8 @@ color: var(--navyBlue)!important;
     font-family: 'Jost', sans-serif;
     margin-bottom: 0!important;
     padding-top: 10px;
+
+
 }
 .bookAuthor{
     color: gray;

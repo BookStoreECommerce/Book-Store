@@ -8,7 +8,7 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import { logout } from "../../../Redux/Slicies/authSlice";
-import { signout } from "../../../Redux/Slicies/authActions";
+import {signout } from "../../../Redux/Slicies/authActions";
 import { getCatBooks } from '../../../Redux/Slicies/CategoriesBookActions';
 
 
@@ -17,7 +17,11 @@ function NavBar({ navRef }) {
   const [navbar, setNavbar] = useState(false);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+
   const token = localStorage.getItem('access-token');
+  let arr = JSON.parse(localStorage.getItem('whishList'))
+
+
   const changeBackground = () => {
     if (window.scrollY >= 60) {
       setNavbar(true);
@@ -26,6 +30,7 @@ function NavBar({ navRef }) {
     }
   };
   useEffect(() => {
+
     changeBackground();
     window.addEventListener("scroll", changeBackground);
   });
@@ -54,7 +59,7 @@ function NavBar({ navRef }) {
                 sx={{ fontSize: { xs: 24, sm: 24, md: 27, lg: 24 } }}
               />
               <div className={` ${styles.number}`}>
-                <span className={`${styles.num}`}>0</span>
+                <span className={`${styles.num}`}>{arr?.length}</span>
               </div>
             </Link>
           </li>

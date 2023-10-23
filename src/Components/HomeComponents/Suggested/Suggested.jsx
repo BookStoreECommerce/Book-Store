@@ -85,6 +85,7 @@ const Suggested = () => {
               </h2>
               <div className={`col-lg-11 ${styles.marginBottom}`}>
                 <Slider {...settings}>
+              
                   {Suggested.map((Suggested, index) => (
                     <BookCard
                       cardStyle={{ margin: "10px", padding: "0px" }}
@@ -99,6 +100,8 @@ const Suggested = () => {
                       slug= {Suggested.slug}
                       category = {Suggested.category}
                       sectionName="whislist"
+                      id={Suggested.id}
+             
                     />
                   ))}
                 </Slider>

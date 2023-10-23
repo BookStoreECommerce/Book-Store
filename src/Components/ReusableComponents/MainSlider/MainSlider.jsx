@@ -67,6 +67,7 @@ export default function MainSlider({arr, title,autoplay= true}) {
                       cardStyle={{ margin: "10px", padding: "0px" }}
                       key={book._id}
                       image={book.image.secure_url }
+                      id={book._id}
                       name={book.name}
                       price={book.price}
                       author={book.author}
