@@ -14,10 +14,8 @@
 }
 .price{
     margin-top: 18px;
-   font-size: 18px;
-   font-family: 'Jost', sans-serif;
-   
-
+    font-size: 18px;
+    font-family: 'Jost', sans-serif;
 }
 /* .price span{
     color: ;
@@ -67,15 +65,15 @@
 .details{
     font-size: 22px;
     color: var(--navyBlue);
-   font-family: 'Jost', sans-serif;
-   margin-top: 30px
+    font-family: 'Jost', sans-serif;
+    margin-top: 30px
 
 }
 .textColor{
     font-size: 18px;
     font-weight: 500;
     color: var(--navyBlue);
-   font-family: 'Jost', sans-serif;
+    font-family: 'Jost', sans-serif;
 }
 .textColorDetails{
     color: gray;

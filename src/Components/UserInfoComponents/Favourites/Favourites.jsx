@@ -75,7 +75,7 @@ const Favourites = () => {
     <>
       <div className={`favourites row ${styles.row} justify-content-center`}>
         <form
-          className="d-flex col-11 col-lg-10 text-center flex-column gap-md-4 gap-3"
+          className="d-flex col-11 col-lg-10 text-center flex-column gap-md-4 gap-3" 
           onSubmit={formik.handleSubmit}
           noValidate
         >
