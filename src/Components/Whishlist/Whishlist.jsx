@@ -8,7 +8,8 @@ import styles from './Whishlist.module.css';
 import { getWhishList, getWhishListBooks } from '../../Redux/Slicies/whishlistActions';
 import { getUserProfile } from '../../Redux/Slicies/authActions';
 import Loading from '../ReusableComponents/Loading/Loading';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Whishlist() {
     const { footerH, navH } = useSelector((state) => state.app);
@@ -26,6 +27,7 @@ export default function Whishlist() {
         let arr = JSON.parse(localStorage.getItem('whishList'))
         console.log(arr);
         await dispatch(getUserProfile())
+        
         setLoading(true)
     }
 

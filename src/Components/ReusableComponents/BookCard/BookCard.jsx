@@ -6,6 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { handleClickOpen } from "../../../Redux/Slicies/dialogSlice";
 import { getWhishList } from "../../../Redux/Slicies/whishlistActions";
 import { getUserProfile } from "../../../Redux/Slicies/authActions";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const BookCard = ({ book, id, image, name, price, author, section, cardStyle, sale, category, slug, sectionName, }) => {
 
@@ -18,24 +21,45 @@ const BookCard = ({ book, id, image, name, price, author, section, cardStyle, sa
   const WhishList = async (bookId) => {
     await dispatch(getWhishList(bookId))
     await dispatch(getUserProfile())
- 
+
     let arr = JSON.parse(localStorage.getItem('whishList'))
     if (arr.includes(bookId)) {
       setFilled(true)
-    }else{
+      toast.success('Add To WishList!', {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        
+      });
+    } else {
       setFilled(false)
+      toast.error("Remove from wishlist!", {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     }
   }
-  
-useEffect(()=>{
-  let arr = JSON.parse(localStorage.getItem('whishList'))
 
-  if (arr.includes(id)) {
-    setFilled(true)
-  }else{
-    setFilled(false)
-  }
-},[filled])
+  useEffect(() => {
+    let arr = JSON.parse(localStorage.getItem('whishList'))
+
+    if (arr.includes(id)) {
+      setFilled(true)
+    } else {
+      setFilled(false)
+    }
+  }, [filled])
   const token = localStorage.getItem('access-token');
   return (
     <>
@@ -99,10 +123,21 @@ useEffect(()=>{
                 {sectionName === "whislist" || section === "catBook" || sectionName === "Books" ? <><span className={styles.badge}>{category?.name}</span></> : ""}
                 {user !== null && token !== null ? <>
                   <button className={`text-decoration-none btn ms-auto ${styles.btn}`} onClick={() => WhishList(id)}>
+
                     <span className={styles.whishlisticon}>
                       <i className={filled ? "fa-solid fa-heart" : "fa-regular fa-heart"}></i>
                     </span>
                   </button>
+                  <ToastContainer position="top-center"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light" />
                 </> :
                   <>
                     <button className={`text-decoration-none btn ms-auto ${styles.btn}`} onClick={() => {
