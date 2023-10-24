@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getCart, addCart } from './cartAction';
+import { getCart, addCart, updateCart } from './cartAction';
 const initialState = {
     cartBooks: [],
     discount: 0,
@@ -36,23 +36,51 @@ const cartSlice = createSlice({
             state.isLoading = false
             state.msgError = action.payload.error
         })
-
+        
         // add cart
         builder.addCase(addCart.pending, (state, action) => {
             state.isLoading = true;
         })
-
+        
         builder.addCase(addCart.fulfilled, (state, action) => {
-
+            
             state.cartBooks = action.payload.cart.books;
             console.log(state.cartBooks);
             state.discount = action.payload.cart.discount;
             state.totalAmount = action.payload.cart.totalAmount;
             state.totalAmountAfterDisc = action.payload.cart.totalAmountAfterDisc;
             state.isLoading = false;
+            state.msgError = action.payload.error
+            console.log(action);
         })
 
         builder.addCase(addCart.rejected, (state, action) => {
+            console.log("error in reducer",action.payload);
+            state.isLoading = false
+            // state.msgError = action.payload.error
+        })
+
+
+        // update Cart
+
+        builder.addCase(updateCart.pending, (state, action) => {
+            state.isLoading = true;
+        })
+
+        builder.addCase(updateCart.fulfilled, (state, action) => {
+            
+            state.cartBooks = action.payload.cart.books;
+            console.log(state.cartBooks);
+            state.discount = action.payload.cart.discount;
+            state.totalAmount = action.payload.cart.totalAmount;
+            state.totalAmountAfterDisc = action.payload.cart.totalAmountAfterDisc;
+            state.isLoading = false;
+            state.msgError = action.payload.error
+            console.log(action);
+        })
+
+        builder.addCase(updateCart.rejected, (state, action) => {
+            console.log("error in reducer",action.payload);
             state.isLoading = false
             state.msgError = action.payload.error
         })
