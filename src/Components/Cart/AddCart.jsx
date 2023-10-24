@@ -2,9 +2,9 @@ import React from 'react'
 import { addCart } from '../../Redux/Slicies/cartAction';
 import { useDispatch } from 'react-redux';
 import styles from "./AddCart.module.css";
+
 function AddCart({ id }) {
   const dispatch = useDispatch();
-  // const { totalCartBooks } = useSelector((state) => state.cart);
 
   const addCartProduct = async () => {
     await dispatch(addCart({ book: id }));

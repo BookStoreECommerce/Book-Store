@@ -64,7 +64,7 @@ function NavBar({ navRef }) {
               </div>
             </Link>
           </li>
-          <li className="nav-item me-5 position-relative">
+          <li readOnly className="nav-item me-5 position-relative">
             <Link className={`nav-link ${styles.navLinkIcon}`} to="cart">
               <ShoppingCartOutlinedIcon
                 sx={{ fontSize: { xs: 24, sm: 24, md: 27, lg: 24 } }}
