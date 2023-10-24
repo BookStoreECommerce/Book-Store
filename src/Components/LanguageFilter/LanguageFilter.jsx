@@ -2,24 +2,26 @@ import React from 'react';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import { setFilterObj } from '../../Redux/Slicies/filterSlice';
+import { useDispatch } from 'react-redux';
 
-const LanguageFilter = ({filterObj, setFilterObj}) => {
+const LanguageFilter = () => {
+    const dispatch = useDispatch();
 
     const handleChange = (e) => {
-        if (e.target.checked === true) {
-            setFilterObj((prev)=> ({...prev, lang: [prev.lang, e.target.name]}));
-        } else {
-            const lang = filterObj.lang.filter((ele) => ele !== e.target.name);
-            setFilterObj((prev)=> ({...prev, lang: lang}));
-        }
+        let method;
+        if (e.target.checked === true) method = 'add'
+        else method = 'delete'
+           
+        dispatch(setFilterObj({method, name: e.target.name, value: e.target.value}));
     };
 
   return (
     <>
     <FormGroup>
       <h6>Language</h6>
-      <FormControlLabel control={<Checkbox name="English" onChange={handleChange}/>} label="English" />
-      <FormControlLabel control={<Checkbox name="Arabic" onChange={handleChange}/>} label="Arabic" />
+      <FormControlLabel control={<Checkbox name="lang" value="English" onChange={handleChange}/>} label="English" />
+      <FormControlLabel control={<Checkbox name="lang" value="Arabic" onChange={handleChange}/>} label="Arabic" />
     </FormGroup>
     </>
   )

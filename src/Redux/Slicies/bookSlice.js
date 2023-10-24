@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import store from "../Store";
 import { getAllBooks, getBookBySlug, getBooksByWord, getNewBooks } from "./bookActions";
 
 const initialState = {

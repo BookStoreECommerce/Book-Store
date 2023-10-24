@@ -4,10 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import AllBook from "../../Components/AllBooks/AllBooks";
 import FilterPanel from "../../Components/FilterPanel/FilterPanel";
 import ScrollToTop from "../../Components/ReusableComponents/ScrollToTop/ScrollToTop";
-import {
-  removeFooterMargin,
-  setFooterMargin,
-} from "../../Redux/Slicies/appSlice";
+import {removeFooterMargin,setFooterMargin,} from "../../Redux/Slicies/appSlice";
 export default function Books() {
   const dispatch = useDispatch();
   const { footerH, navH } = useSelector((state) => state.app);
@@ -24,8 +21,7 @@ export default function Books() {
         sx={{
           marginTop: `${navH}px`,
           minHeight: `calc(100vh - ${footerH + navH}px)`,
-        }}
-      >
+        }}>
         <div className="container-fluid justify-content-evenly row w-100 py-5">
           <div className="col-lg-3 col-md-10 col-12">
             <FilterPanel />

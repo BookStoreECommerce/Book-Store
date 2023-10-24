@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { booksFilter } from "./filterActions";
 
 const initialState = {
+    filterObj: {lang: [], price: []},
     filter: [],
     isLoading: false,
     msgError: null,
@@ -11,6 +12,13 @@ const booksFilterSlice = createSlice({
     name: "booksFilter",
     initialState,
     reducers: {
+        setFilterObj: (state, {payload}) => {
+            if (payload.method === 'add') {
+                state.filterObj[payload.name].push(payload.value);
+            } else {
+                state.filterObj[payload.name] = state.filterObj[payload.name].filter((ele) => ele !== payload.value);
+            }
+        }
     },
     extraReducers: builder => {
         //booksFilter
@@ -28,3 +36,4 @@ const booksFilterSlice = createSlice({
 })
 
 export const booksFilterReducer = booksFilterSlice.reducer;
+export const { setFilterObj } = booksFilterSlice.actions;
