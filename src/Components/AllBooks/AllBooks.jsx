@@ -10,6 +10,7 @@ import { baseUrl } from "../../util/util";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Loading from "../ReusableComponents/Loading/Loading";
+import { setFilterObj } from "../../Redux/Slicies/filterSlice";
 function AllBook({ sectionName }) {
   useEffect(() => {
     AOS.init();
@@ -19,12 +20,19 @@ function AllBook({ sectionName }) {
   const [searchWord, setSearchWord] = useState("");
   const [numOfPages, setNumOfPages] = useState(0);
   const { isLoading, books, totalCount } = useSelector((state) => state.books);
+  // const { filterObj } = useSelector((state) => state.booksFilter);
+  const { language , price } = useSelector((state) => state.booksFilter.filterObj);
   const nBookPerPage = 12;
   const dispatch = useDispatch();
   const [pageNumber, setPageNumber] = useState(1);
 
   const handleChange = (e, pageNumber) => {
     setPageNumber(pageNumber);
+  };
+  const deleteFilter = (e) => {
+    const name = e.target.getAttribute('name');
+    const value = e.target.getAttribute('value');
+    dispatch(setFilterObj({method: "delete", name, value}));
   };
 
   // get all books
@@ -66,6 +74,29 @@ function AllBook({ sectionName }) {
             navParam="book"
           />
         </div>
+
+        {/* needs to be modefied >>> global for all filters */}
+        {language.length !== 0 && 
+          <div
+            className={`d-flex flex-wrap gap-2 w-100 px-3 py-4 ${styles.filterWrapper}`}
+          >
+            {language.map((lang, index) => (
+                <div
+                  key={index}
+                  className={`p-2 rounded ${styles.filter}`}
+                >
+                  {lang}
+                  <i
+                    className={`fa-regular fa-circle-xmark ms-2 ${styles.xmarkPointer}`}
+                    value= {lang}
+                    name= "language"
+                    onClick={(e) => {
+                      deleteFilter(e);
+                    }}
+                  ></i>
+                </div>
+              ))}
+          </div>}
 
         {isLoading ? (
           <Loading sectionName="AllBooks" />

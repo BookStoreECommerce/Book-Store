@@ -20,8 +20,8 @@ const LanguageFilter = () => {
     <>
     <FormGroup>
       <h6>Language</h6>
-      <FormControlLabel control={<Checkbox name="lang" value="English" onChange={handleChange}/>} label="English" />
-      <FormControlLabel control={<Checkbox name="lang" value="Arabic" onChange={handleChange}/>} label="Arabic" />
+      <FormControlLabel control={<Checkbox name="language" value="English" onChange={handleChange}/>} label="English" />
+      <FormControlLabel control={<Checkbox name="language" value="Arabic" onChange={handleChange}/>} label="Arabic" />
     </FormGroup>
     </>
   )

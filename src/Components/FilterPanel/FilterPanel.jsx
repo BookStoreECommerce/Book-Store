@@ -13,8 +13,8 @@ const FilterPanel = () => {
 
   useEffect(() => {
         let languagesFilter = '';
-        if(filterObj.lang.length !== 0) {
-          filterObj.lang.forEach((ele, index) => {
+        if(filterObj.language.length !== 0) {
+          filterObj.language.forEach((ele, index) => {
               languagesFilter += `&lang=${ele}`
             })
             dispatch(booksFilter(languagesFilter));
