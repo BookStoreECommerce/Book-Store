@@ -114,11 +114,11 @@ const Favourites = () => {
             )}
           />
 
+          {chosenFavCategory.length !== 0 && 
           <div
             className={`d-flex flex-wrap gap-2 w-100 px-3 py-4 ${styles.FavCategoryWrapper}`}
           >
-            {chosenFavCategory &&
-              chosenFavCategory.map((FavCategory, index) => (
+            {chosenFavCategory.map((FavCategory, index) => (
                 <div
                   key={index}
                   className={`p-2 rounded ${styles.FavCategory}`}
@@ -132,7 +132,7 @@ const Favourites = () => {
                   ></i>
                 </div>
               ))}
-          </div>
+          </div>}
 
           <Button
             variant="outlined"
