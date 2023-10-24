@@ -16,8 +16,7 @@ const Categories = () => {
     const { categories } = useSelector((state) => state.cat);
     const { isLoading } = useSelector((state) => state.cat);
     const { footerH, navH } = useSelector((state) => state.app);
-    // const { cartBooks} = useSelector((state) => state.cart);
-    // console.log(cartBooks);
+    
 
     const [page, setPageState]=useState(1);
     const [search, setSearch]=useState("");

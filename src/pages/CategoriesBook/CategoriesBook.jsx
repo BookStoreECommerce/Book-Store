@@ -28,6 +28,7 @@ const CategoriesBook = () => {
     let totalCount = { catBySlug }.catBySlug.totalCount;
     let totalPages = Math.ceil((totalCount / 12));
 
+    console.log(category);
 
     async function getBooksBySearch(searchKeyword) {
         dispatch(getCatBooksBySlug({ slug: Params.slug, keyword: searchKeyword }))
@@ -48,7 +49,8 @@ const CategoriesBook = () => {
         dispatch(getCatBooksBySlug({ slug: Params.slug, page: p }))
     };
 
-    return (<>
+    return (
+        <>
         <ScrollToTop />
         <Box sx={{ marginTop: `${navH}px`, minHeight: `calc(100vh - ${footerH + navH}px)`, }} className={styles.flex} >
             <div className={styles.badge}>
@@ -88,7 +90,9 @@ const CategoriesBook = () => {
                 </>}
             </div>
         </Box>
-    </>);
+    </>
+    
+    );
 }
 
 export default CategoriesBook;
