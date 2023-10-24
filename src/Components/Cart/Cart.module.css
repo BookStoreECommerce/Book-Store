@@ -1,35 +1,38 @@
-.badge{
-    background-image: linear-gradient(45deg,var(--secondaryColor),var(--beigeColor));
+.badge {
+    background-image: linear-gradient(45deg, var(--secondaryColor), var(--beigeColor));
     padding: 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.content i{
+.content i {
     margin-right: 10px;
-font-size: 15px;
-color: var(--navyBlue)!important;
+    font-size: 15px;
+    color: var(--navyBlue) !important;
 
 }
-.content{
+
+.content {
     display: flex;
     justify-content: center;
     align-items: center;
     padding-right: 30px;
 }
-.slash{
+
+.slash {
     font-size: 19px;
     font-family: 'Jost', sans-serif;
-    color: var(--navyBlue)!important;
+    color: var(--navyBlue) !important;
 }
-.slash a{
-    color: var(--navyBlue)!important;
+
+.slash a {
+    color: var(--navyBlue) !important;
     text-decoration: none;
 }
 
 
-.orderCard{
+.orderCard {
     background-color: var(--beigeColor);
     margin-bottom: 25px;
     padding: 20px 35px;
@@ -37,34 +40,35 @@ color: var(--navyBlue)!important;
     width: 60%;
 }
 
-.bookCoverWrapper{
+.bookCoverWrapper {
     width: 100%;
 }
-.bookCoverWrapper img{
+
+.bookCoverWrapper img {
     width: 100%;
     border-radius: 10px;
 }
 
-.bookDetails{
+.bookDetails {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.bookTitle{
+.bookTitle {
     font-size: 22px;
     color: #2B3A55;
     font-weight: bold;
 }
 
-.bookAuthor{
+.bookAuthor {
     font-size: 16px;
     font-style: italic;
     color: #928e8e;
 }
 
 .bookPrice,
-.bookSubTotal{
+.bookSubTotal {
     font-size: 20px;
     color: #2B3A55;
     font-weight: bold;
@@ -72,14 +76,16 @@ color: var(--navyBlue)!important;
 }
 
 /* Quantity */
-.quantityWrapper{
+.quantityWrapper {
     width: 80%;
 }
-.quantityContent{
+
+.quantityContent {
     display: flex;
     width: 100%;
 }
-.btn{
+
+.btn {
     width: 30px;
     border: none;
 }
@@ -89,29 +95,33 @@ color: var(--navyBlue)!important;
     width: 50px;
     border: none;
 }
-.quantityInput:focus-visible{
+
+.quantityInput:focus-visible {
     border: none;
     outline: none;
 }
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
-.decBtn{
+
+.decBtn {
     border-radius: 10px 0 0 10px;
 }
-.incBtn{
+
+.incBtn {
     border-radius: 0px 10px 10px 0px;
 }
 
 
-.deleteBook{
+.deleteBook {
     display: flex;
     justify-content: end;
 }
 
-.trashIcon{
+.trashIcon {
     background: #fff;
     width: 35px;
     height: 35px;
@@ -120,16 +130,31 @@ input::-webkit-inner-spin-button {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
+    cursor: pointer;
 }
 
-.trashIcon:hover{
+.trashIcon:hover {
     color: var(--mainColor);
 }
 
 
-.deleteAndSubTotal{
+.deleteAndSubTotal {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-end;
+}
+
+
+/* Media Query */
+@media screen and (max-width:1024px) {
+    .bookTitle {
+        font-size: 18px;
+    }
+
+    .bookPrice,
+    .bookSubTotal {
+        font-size: 16px;
+    }
+
 }

@@ -10,7 +10,8 @@ const initialState = {
     token: null,
     totalQty: 0,
     user: null,
-    totalCartBooks: 0
+    totalCartBooks: 0,
+    loading:{}
 };
 
 
@@ -65,10 +66,12 @@ const cartSlice = createSlice({
 
         builder.addCase(updateCart.pending, (state, action) => {
             state.isLoading = true;
+            state.loading["cart/patchData"] = true
         })
 
         builder.addCase(updateCart.fulfilled, (state, action) => {
             
+            console.log(action.payload);
             state.cartBooks = action.payload.cart.books;
             console.log(state.cartBooks);
             state.discount = action.payload.cart.discount;
@@ -76,7 +79,6 @@ const cartSlice = createSlice({
             state.totalAmountAfterDisc = action.payload.cart.totalAmountAfterDisc;
             state.isLoading = false;
             state.msgError = action.payload.error
-            console.log(action);
         })
 
         builder.addCase(updateCart.rejected, (state, action) => {

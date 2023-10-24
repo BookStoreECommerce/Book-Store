@@ -9,9 +9,9 @@ import { addCart, updateCart } from '../../Redux/Slicies/cartAction';
 
 
 export default function Cart() {
-    const { isLoading } = useSelector((state) => state.cat);
+    // const { isLoading } = useSelector((state) => state.cart);
     const { footerH, navH } = useSelector((state) => state.app);
-    const { cartBooks } = useSelector((state) => state.cart);
+    const { cartBooks , isLoading, loading } = useSelector((state) => state.cart);
     const cartArray = cartBooks;
     console.log(cartArray);
     // const [cartArray , setCartArray] = useState([
@@ -58,7 +58,7 @@ export default function Cart() {
 
 
     // product Quantity
-
+console.log(isLoading);
     const dispatch = useDispatch();
 
     function decrease(book,index) {
@@ -120,7 +120,7 @@ export default function Cart() {
 
                                                             <div className={styles.quantityWrapper}>
                                                                 <div className={styles.quantityContent}>
-                                                                    <button onClick={() => decrease(  book?.book._id ,index)} className={`${styles.btn}  ${styles.decBtn}`}>-</button>
+                                                                    <button disabled={book.qty == 1}  onClick={() => decrease(  book?.book._id ,index)} className={`${styles.btn}  ${styles.decBtn}`}>-</button>
                                                                     <input type='number' className={styles.quantityInput} value={book.qty} />
                                                                     <button onClick={() => increase(  book?.book._id ,index)} className={`${styles.btn}  ${styles.incBtn}`}>+</button>
                                                                 </div>
@@ -128,7 +128,7 @@ export default function Cart() {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className={`${styles.deleteAndSubTotal} col-md-2 `}>
+                                                <div className={`${styles.deleteAndSubTotal} col-md-3 `}>
                                                     <div className={styles.deleteBook}>
                                                         <i className={` ${styles.trashIcon} fa-regular fa-trash-can`}></i>
                                                     </div>
@@ -137,9 +137,14 @@ export default function Cart() {
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    ))}
-                                </>
+                                            </div>
+                                            
+                                            ))}
+                                            
+                                            </>
+                                          
+                                           
+                                          
                                 : <div className={styles.notFoundContainer}>
                                     <p>Your cart is empty</p>
                                 </div>}
@@ -147,6 +152,9 @@ export default function Cart() {
 
 
                     </>}
+                    
+                    
+                    
                 </div>
             </Box>
         </>
