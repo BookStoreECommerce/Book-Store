@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import store from "../Store";
 import { getAllBooks, getBookBySlug, getBooksByWord, getNewBooks } from "./bookActions";
 
 const initialState = {
@@ -11,8 +12,14 @@ const initialState = {
 const bookSlice = createSlice({
     name: "allBooks",
     initialState,
+    reducers:{
+      setBooks: (state, action) => {
+        const {books, totalCount} = action.payload
+        state.books = books;
+        state.totalCount = totalCount
+      }
+    },
     extraReducers: builder => {
-
         // getAllBooks
         builder.addCase(getAllBooks.pending, (state, action) => {
             state.isLoading = true;
@@ -71,6 +78,5 @@ const bookSlice = createSlice({
 
     }
 })
-
 export const booksReducer = bookSlice.reducer;
-export const { clearError, setUser, logout } = bookSlice.actions;
+export const { setBooks } = bookSlice.actions;

@@ -19,7 +19,6 @@ const booksFilterSlice = createSlice({
         })
         builder.addCase(booksFilter.fulfilled, (state, action) => {
             state.isLoading = false;
-            console.log(action.payload.result);
         })
         builder.addCase(booksFilter.rejected, (state, action) => {
             state.msgError = action.payload.error
