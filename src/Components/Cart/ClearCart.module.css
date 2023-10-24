@@ -1,0 +1,24 @@
+.deleteBook {
+  display: flex;
+  justify-content: end;
+}
+
+.trashIcon {
+  background: #fff;
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.trashIcon:hover {
+  color: var(--mainColor);
+}
+
+.fitContent {
+  width: fit-content !important;
+}

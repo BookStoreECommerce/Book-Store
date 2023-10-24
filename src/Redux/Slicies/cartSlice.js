@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getCart, addCart, updateCart } from './cartAction';
+import { getCart, addCart, updateCart,clearCart, deleteCartItem } from './cartAction';
 const initialState = {
     cartBooks: [],
     discount: 0,
@@ -36,53 +36,81 @@ const cartSlice = createSlice({
             state.isLoading = false
             state.msgError = action.payload.error
         })
-        
+
         // add cart
         builder.addCase(addCart.pending, (state, action) => {
             state.isLoading = true;
         })
-        
+
         builder.addCase(addCart.fulfilled, (state, action) => {
-            
+
             state.cartBooks = action.payload.cart.books;
-            console.log(state.cartBooks);
             state.discount = action.payload.cart.discount;
             state.totalAmount = action.payload.cart.totalAmount;
             state.totalAmountAfterDisc = action.payload.cart.totalAmountAfterDisc;
             state.isLoading = false;
             state.msgError = action.payload.error
-            console.log(action);
+        })
+        builder.addCase(addCart.rejected, (state, action) => {
+            state.isLoading = false
+            // state.msgError = action.payload.error
         })
 
-        builder.addCase(addCart.rejected, (state, action) => {
-            console.log("error in reducer",action.payload);
+        // update Cart
+        builder.addCase(updateCart.pending, (state, action) => {
+            state.isLoading = true;
+        })
+        builder.addCase(updateCart.fulfilled, (state, action) => {
+            state.cartBooks = action.payload.cart.books;
+            state.discount = action.payload.cart.discount;
+            state.totalAmount = action.payload.cart.totalAmount;
+            state.totalAmountAfterDisc = action.payload.cart.totalAmountAfterDisc;
+            state.isLoading = false;
+            state.msgError = action.payload.error
+        })
+        builder.addCase(updateCart.rejected, (state, action) => {
+            state.isLoading = false
+            state.msgError = action.payload.error
+        })
+
+
+        // delete CartItem
+        builder.addCase(deleteCartItem.pending, (state, action) => {
+            state.isLoading = true;
+        })
+
+        builder.addCase(deleteCartItem.fulfilled, (state, action) => {
+            state.cartBooks = action.payload.cart.books;
+            state.discount = action.payload.cart.discount;
+            state.totalAmount = action.payload.cart.totalAmount;
+            state.totalAmountAfterDisc = action.payload.cart.totalAmountAfterDisc;
+            state.isLoading = false;
+            state.msgError = action.payload.error
+        })
+
+        builder.addCase(deleteCartItem.rejected, (state, action) => {
             state.isLoading = false
             // state.msgError = action.payload.error
         })
 
 
-        // update Cart
-
-        builder.addCase(updateCart.pending, (state, action) => {
+         // delete Cart
+         builder.addCase(clearCart.pending, (state, action) => {
             state.isLoading = true;
         })
 
-        builder.addCase(updateCart.fulfilled, (state, action) => {
-            
+        builder.addCase(clearCart.fulfilled, (state, action) => {
             state.cartBooks = action.payload.cart.books;
-            console.log(state.cartBooks);
             state.discount = action.payload.cart.discount;
             state.totalAmount = action.payload.cart.totalAmount;
             state.totalAmountAfterDisc = action.payload.cart.totalAmountAfterDisc;
             state.isLoading = false;
             state.msgError = action.payload.error
-            console.log(action);
         })
 
-        builder.addCase(updateCart.rejected, (state, action) => {
-            console.log("error in reducer",action.payload);
+        builder.addCase(clearCart.rejected, (state, action) => {
             state.isLoading = false
-            state.msgError = action.payload.error
+            // state.msgError = action.payload.error
         })
     }
 })
