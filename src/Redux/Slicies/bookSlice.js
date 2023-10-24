@@ -20,6 +20,7 @@ const bookSlice = createSlice({
     builder.addCase(getAllBooks.fulfilled, (state, action) => {
       state.isLoading = false;
       state.books = action.payload.result;
+      console.log(state.books);
       state.totalCount = action.payload.totalCount
     })
     builder.addCase(getAllBooks.rejected, (state, action) => {

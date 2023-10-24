@@ -34,6 +34,7 @@ color: var(--navyBlue)!important;
     margin-bottom: 25px;
     padding: 20px 35px;
     border-radius: 15px;
+    width: 60%;
 }
 
 .bookCoverWrapper{
@@ -62,7 +63,8 @@ color: var(--navyBlue)!important;
     color: #928e8e;
 }
 
-.bookPrice{
+.bookPrice,
+.bookSubTotal{
     font-size: 20px;
     color: #2B3A55;
     font-weight: bold;
@@ -78,13 +80,13 @@ color: var(--navyBlue)!important;
     width: 100%;
 }
 .btn{
-    width: 50px;
+    width: 30px;
     border: none;
 }
 
 .quantityInput {
     text-align: center;
-    width: inherit;
+    width: 50px;
     border: none;
 }
 .quantityInput:focus-visible{
@@ -122,4 +124,12 @@ input::-webkit-inner-spin-button {
 
 .trashIcon:hover{
     color: var(--mainColor);
+}
+
+
+.deleteAndSubTotal{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
 }
