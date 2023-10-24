@@ -13,68 +13,68 @@ export default function Cart() {
     const { isLoading } = useSelector((state) => state.cat);
     const { footerH, navH } = useSelector((state) => state.app);
     const { cartBooks } = useSelector((state) => state.cart);
-    const [cartArray , setCartArray] = useState([
+    const [cartArray, setCartArray] = useState([
         {
-            id:1,
+            id: 1,
             title: '1984 Paperback',
             price: 756,
             author: 'George Orwell',
             img_url: image1,
-            quantity:1
+            quantity: 1
         },
         {
-            id:2,
+            id: 2,
 
             title: '1984 Paperback',
             price: 756,
             author: 'George Orwell',
             img_url: image1,
-            quantity:1
+            quantity: 1
         },
         {
-            id:3,
+            id: 3,
 
             title: '1984 Paperback',
             price: 756,
             author: 'George Orwell',
             img_url: image1,
-            quantity:1
+            quantity: 1
         },
         {
-            id:4,
+            id: 4,
 
             title: '1984 Paperback',
             price: 756,
             author: 'George Orwell',
             img_url: image1,
-            quantity:2
+            quantity: 2
 
 
 
         }
     ])
-  
 
 
-      // product Quantity
-function decrease(idx){
-    let newArr = [...cartArray]; // copying the old datas array
-    newArr[idx].quantity -=1 ;
-    if (newArr[idx].quantity <= 0){
-        newArr[idx].quantity =1
+
+    // product Quantity
+    function decrease(idx) {
+        let newArr = [...cartArray]; // copying the old datas array
+        newArr[idx].quantity -= 1;
+        if (newArr[idx].quantity <= 0) {
+            newArr[idx].quantity = 1
+        }
+
+        setCartArray(newArr)
+
     }
-  
-    setCartArray(newArr)
+    function increase(idx) {
 
-}
-function increase(idx){
+        let newArr = [...cartArray]; // copying the old datas array
+        newArr[idx].quantity += 1;
 
-    let newArr = [...cartArray]; // copying the old datas array
-    newArr[idx].quantity +=1 ;
-  
-    setCartArray(newArr)
+        setCartArray(newArr)
 
-}
+    }
     return (
         <>
             <ScrollToTop />
@@ -84,14 +84,10 @@ function increase(idx){
                     <div className={styles.content}>
                         <Link to='/'> <i className="fa-solid fa-home"></i> </Link>
                         <span className={styles.slash}> / <Link to='/Categories'>Your Cart</Link> </span>
-
                     </div>
                 </div>
                 <div className="container py-5">
-
-
                     {isLoading ? <Loading /> : <>
-
                         <div className="row justify-content-center align-items-center pb-2">
                             {cartArray?.length != 0 ?
                                 <>
@@ -121,18 +117,18 @@ function increase(idx){
 
                                                             <div className={styles.quantityWrapper}>
                                                                 <div className={styles.quantityContent}>
-                                                                    <button onClick={()=>decrease(index)} className={`${styles.btn}  ${styles.decBtn}`}>-</button>
+                                                                    <button onClick={() => decrease(index)} className={`${styles.btn}  ${styles.decBtn}`}>-</button>
                                                                     <input type='number' className={styles.quantityInput} value={book.quantity} />
-                                                                    <button onClick={()=>increase(index)} className={`${styles.btn}  ${styles.incBtn}`}>+</button>
+                                                                    <button onClick={() => increase(index)} className={`${styles.btn}  ${styles.incBtn}`}>+</button>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div className='col-md-2'>
-                                                <div className={styles.deleteBook}>
-                                                <i class={` ${styles.trashIcon} fa-regular fa-trash-can`}></i>
-                                                </div>
+                                                    <div className={styles.deleteBook}>
+                                                        <i class={` ${styles.trashIcon} fa-regular fa-trash-can`}></i>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
