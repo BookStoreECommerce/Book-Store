@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Rating from "../Rating/Rating";
 import styles from "./BookCard.module.css";
 import bookImage from "../../../assets/book.jpg";
+import AddCart from "../../Cart/AddCart";
 
 const BookCard = ({
   book,
@@ -26,8 +27,8 @@ const BookCard = ({
           section === "newBooks"
             ? `col-lg-3 col-sm-6 col-12 mt-5 mb-3 ${styles.font}`
             : section === "catBook"
-            ? `col-xl-3 col-lg-4 col-sm-6 col-12 mt-5 mb-3 ${styles.font}`
-            : ""
+              ? `col-xl-3 col-lg-4 col-sm-6 col-12 mt-5 mb-3 ${styles.font}`
+              : ""
         }
       >
         <div
@@ -50,11 +51,9 @@ const BookCard = ({
                     <i className="fa-solid fa-heart "></i>
                   </span>
                 </Link>
-                <Link to="cart" className="text-decoration-none">
-                  <span className={styles.icon}>
-                    <i className="fa-solid fa-cart-shopping"></i>
-                  </span>
-                </Link>
+
+                <AddCart id={book?._id} />
+
               </>
             ) : (
               <>
@@ -74,8 +73,8 @@ const BookCard = ({
                 book?.image?.secure_url
                   ? book?.image?.secure_url
                   : image
-                  ? image
-                  : bookImage
+                    ? image
+                    : bookImage
               }
               className={`w-100 ${styles.cardImgNew}`}
               alt=""
@@ -86,8 +85,8 @@ const BookCard = ({
                 book?.image?.secure_url
                   ? book?.image?.secure_url
                   : image
-                  ? image
-                  : bookImage
+                    ? image
+                    : bookImage
               }
               className={`w-100 ${styles.cardImg}`}
               alt=""
