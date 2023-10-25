@@ -1,19 +1,19 @@
-import React, { useRef, useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import ScrollToTop from '../ReusableComponents/ScrollToTop/ScrollToTop';
 import { Box } from '@mui/material';
-import styles from './Cart.module.css'
 import { Link } from 'react-router-dom';
 import Loading from '../ReusableComponents/Loading/Loading';
-import { addCart, updateCart } from '../../Redux/Slicies/cartAction';
 import ClearCart from './ClearCart';
 import DeleteCartItem from './DeleteCartItem';
+import { updateCart } from '../../Redux/Slicies/cartAction';
+import styles from './Cart.module.css'
 
 
 export default function Cart() {
     // const { isLoading } = useSelector((state) => state.cart);
     const { footerH, navH } = useSelector((state) => state.app);
-    const { cartBooks , isLoading, loading } = useSelector((state) => state.cart);
+    const { cartBooks , isLoading} = useSelector((state) => state.cart);
     const cartArray = cartBooks;
 
     const dispatch = useDispatch();
@@ -39,22 +39,25 @@ export default function Cart() {
                         <span className={styles.slash}> / <Link to='/cart'>Your Cart</Link> </span>
                     </div>
                 </div>
-                <div className="container py-5">
+                <div className="container position-relative ">
                     {isLoading ? <Loading /> : <>
-                        <div className="row justify-content-center align-items-center pb-2">
+                    <div>
+                        <button className={`${styles.checkoutBtn}`}>Checkout</button>
+                    </div>
+                        <div className="row justify-content-center align-items-center pb-2 py-5">
                             {cartArray?.length !== 0 ?
                                 <>
                                     {cartArray?.map((book, index) => (
-                                        <div className={styles.orderCard} key={index}>
-                                            <div className='row justify-content-between'>
-                                                <div className='col-md-9'>
+                                        <div className={`${styles.orderCard} col-lg-7 col-md-8 col-sm-10 col-10` } key={index}>
+                                            <div className={`row justify-content-between ${styles.cardParent}`}>
+                                                <div className='col-md-11'>
                                                     <div className='row'>
-                                                        <div className='col-3'>
+                                                        <div className='col-sm-3 col-4'>
                                                             <div className={styles.bookCoverWrapper}>
                                                                 <img src={book.book.image.secure_url} alt="Book Cover" />
                                                             </div>
                                                         </div>
-                                                        <div className={`${styles.bookDetails} col-9`}>
+                                                        <div className={`${styles.bookDetails} col-sm-9 col-8 ps-0`}>
                                                             <div className={styles.titleAndPrice}>
                                                                 <div className={styles.bookTitle}>
                                                                     {book.book.name}
@@ -70,8 +73,7 @@ export default function Cart() {
 
                                                             <div className={styles.quantityWrapper}>
                                                                 <div className={styles.quantityContent}>
-                                                                    <button disabled={book.qty == 1}  onClick={() => decrease(  book?.book._id ,index)} className={`${styles.btn}  ${styles.decBtn}`}>-</button>
-                                                                    <button onClick={() => decrease(book?.book._id, index)} className={`${styles.btn}  ${styles.decBtn}`}>-</button>
+                                                                    <button disabled={book.qty === 1}  onClick={() => decrease(  book?.book._id ,index)} className={`${styles.btn}  ${styles.decBtn}`}>-</button>
                                                                     <input type='number' className={styles.quantityInput} value={book.qty} />
                                                                     <button onClick={() => increase(book?.book._id, index)} className={`${styles.btn}  ${styles.incBtn}`}>+</button>
                                                                 </div>
@@ -79,12 +81,13 @@ export default function Cart() {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className={`${styles.deleteAndSubTotal} col-md-2 `}>
+                                                <div className={` ${styles.deleteAndSubTotal}  `}>
                                                     <DeleteCartItem id={book?.book._id} />
-                                                    <div className={styles.bookSubTotal}>
-                                                        {book.book.price * book.qty} EGP
-                                                    </div>
+                                                   
                                                 </div>
+                                                <div className={styles.bookSubTotal}>
+                                                {book.book.price * book.qty} EGP
+                                            </div>
                                             </div>
                                         </div>
                                     ))}

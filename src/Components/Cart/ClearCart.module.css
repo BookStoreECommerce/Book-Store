@@ -1,6 +1,5 @@
 .deleteBook {
-  display: flex;
-  justify-content: end;
+ width: fit-content;
 }
 
 .trashIcon {

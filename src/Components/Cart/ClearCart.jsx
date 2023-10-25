@@ -3,7 +3,6 @@ import { clearCart } from '../../Redux/Slicies/cartAction';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from "./ClearCart.module.css";
 import { Button } from "@mui/material";
-import { useFormik } from "formik";
 
 function ClearCart() {
   const { isLoading } = useSelector((state) => state.cart);

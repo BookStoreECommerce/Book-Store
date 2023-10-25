@@ -1,6 +1,8 @@
 .deleteBook {
-  display: flex;
-  justify-content: end;
+  /* display: flex;
+  justify-content: end; */
+  position: absolute;
+  right: 0px;
 }
 
 .trashIcon {
@@ -17,4 +19,13 @@
 
 .trashIcon:hover {
   color: var(--mainColor);
+}
+
+
+@media  screen and (max-width:375px) {
+ .deleteBook{
+  position: absolute;
+  right: -10px;
+  top: -5px;
+ } 
 }

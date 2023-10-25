@@ -40,7 +40,7 @@ const cartSlice = createSlice({
 
         // add cart
         builder.addCase(addCart.pending, (state, action) => {
-            state.isLoading = true;
+            // state.isLoading = true;
         })
 
         builder.addCase(addCart.fulfilled, (state, action) => {
@@ -59,7 +59,7 @@ const cartSlice = createSlice({
 
         // update Cart
         builder.addCase(updateCart.pending, (state, action) => {
-            state.isLoading = true;
+            // state.isLoading = true;
             state.loading["cart/patchData"] = true
         })
         builder.addCase(updateCart.fulfilled, (state, action) => {
@@ -78,7 +78,7 @@ const cartSlice = createSlice({
 
         // delete CartItem
         builder.addCase(deleteCartItem.pending, (state, action) => {
-            state.isLoading = true;
+            // state.isLoading = true;
         })
 
         builder.addCase(deleteCartItem.fulfilled, (state, action) => {
@@ -98,7 +98,7 @@ const cartSlice = createSlice({
 
          // delete Cart
          builder.addCase(clearCart.pending, (state, action) => {
-            state.isLoading = true;
+            // state.isLoading = true;
         })
 
         builder.addCase(clearCart.fulfilled, (state, action) => {
