@@ -60,7 +60,7 @@ export default function Whishlist() {
                 </div>
             </div>
             <div className="container pt-5">
-                <div className="row mt-2">
+                <div className="row mt-2 justify-content-center align-items-center">
                     {!loading ? <Loading /> : <>
                         <div className="px-3"><p className={styles.items}>Items ({WhishListFilterArray.length})</p><hr /></div>
                         {WhishListFilterArray?.length === 0 ? <>
