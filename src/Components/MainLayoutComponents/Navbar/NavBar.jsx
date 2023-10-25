@@ -54,12 +54,12 @@ function NavBar({ navRef }) {
       <div data-testid="NavBar" className="fixed-top" ref={navRef}>
         <div className={styles.navTop}>
           <li className="nav-item me-5 position-relative">
-            <Link className={`nav-link  ${styles.navLinkIcon}`} to="whishlist">
+            <Link className={`nav-link  ${styles.navLinkIcon}`} to="wishlist">
               <FavoriteBorderOutlinedIcon
                 sx={{ fontSize: { xs: 24, sm: 24, md: 27, lg: 24 } }}
               />
               <div className={` ${styles.number}`}>
-                <span className={`${styles.num}`}>{arr?.length}</span>
+                <span className={`${styles.num}`}>{arr?.length === undefined || arr?.length === null ? 0 : arr.length}</span>
               </div>
             </Link>
           </li>

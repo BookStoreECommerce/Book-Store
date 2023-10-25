@@ -125,6 +125,32 @@ color: var(--navyBlue)!important;
     font-family: 'Jost', sans-serif;
     color: gray;
 }
+.notFoundContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    text-align: center;
+  }
+.notFoundContainer p{
+    font-size: 35pt;
+    color: var(--mainColor);
+    font-family: 'Jost', sans-serif;
+    font-weight: bold;
+    margin-bottom: 0;
+  }
+  .notFoundContainer h6{
+    font-size: 18px;
+    color: rgb(166, 166, 166);
+    font-family: 'Jost', sans-serif;
+    font-weight: bold;
+    margin-bottom: 25px;
+  }
+  .btn,.btn:hover,.btn:focus{
+    border: 0!important;
+    background-color: var(--mainColor)!important;
+    color: white!important;
+  }
 @media screen and (min-width:550px) and (max-width:794px){
     .slug{
         padding: 0;

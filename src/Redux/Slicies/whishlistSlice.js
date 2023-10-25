@@ -6,6 +6,7 @@ const initialState = {
    whishlist :JSON.parse(localStorage.getItem('whishList')) || [],
    whishListBooks:[],
    isLoading: false,
+   isfilled:false,
    msgError: null,
 
 }

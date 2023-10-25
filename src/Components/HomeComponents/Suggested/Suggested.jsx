@@ -96,7 +96,7 @@ const Suggested = () => {
                       author={Suggested.author}
                       rate={Suggested.rate}
                       sale={Suggested.sale}
-                      section={"Suggested"}
+                      section="Suggested"
                       slug= {Suggested.slug}
                       category = {Suggested.category}
                       sectionName="whislist"

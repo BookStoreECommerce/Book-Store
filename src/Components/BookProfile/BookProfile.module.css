@@ -19,9 +19,26 @@
    
 
 }
+.textright{
+    text-align: right;
+}
 /* .price span{
     color: ;
 } */
+.wishListBtn{
+    border: none!important;
+    margin-top: 20px;
+    background-color: var(--mainColor)!important;
+    color: white!important;
+
+}
+.removewishListBtn{
+    border: 1px solid var(--mainColor)!important;
+    margin-top: 20px;
+    background-color:white !important;
+    color: var(--mainColor)!important;
+
+}
 .category{
     font-size: 17px;
     background-color: var(--mainColor);

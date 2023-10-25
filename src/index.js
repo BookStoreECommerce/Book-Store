@@ -48,7 +48,7 @@ const router = createBrowserRouter([
         },
       },
       {
-        path:'whishlist',
+        path:'wishlist',
         async lazy(){
           const {default:Whishlist} = await import('./Components/Whishlist/Whishlist');
           return {Component: Whishlist};

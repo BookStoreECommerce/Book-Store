@@ -24,11 +24,13 @@ const authSlice = createSlice({
             state.msgError = null;
         },
         setUser: (state, action) => {
-            const user = action.payload;
+            const user = action.payload
             state.user = user;
         },
         logout: (state, action) => {
             localStorage.removeItem('access-token');
+            localStorage.removeItem('whishList');
+            console.log(localStorage.getItem('whishList'))
         }
     },
     extraReducers: builder => {
@@ -37,6 +39,7 @@ const authSlice = createSlice({
             state.isLoading = true
         })
         builder.addCase(signin.fulfilled, (state, action) => {
+            console.log(action.payload);
             const token = action.payload.token
             saveUserData(token)
             state.token = token
@@ -110,6 +113,8 @@ const authSlice = createSlice({
             state.isLoading = false;
             state.token = token
             saveUserData(token)
+
+            
         })
         builder.addCase(signinWithToken.rejected, (state, action) => {
             state.isLoading = false
@@ -138,7 +143,10 @@ const authSlice = createSlice({
         })
         builder.addCase(getUserProfile.fulfilled, (state, action) => {
             state.isLoading = false;
+            console.log(action.payload.user.wish_List);
             state.user = action.payload.user
+            localStorage.setItem('whishList', JSON.stringify(action.payload.user.wish_List));
+
         })
         builder.addCase(getUserProfile.rejected, (state, action) => {
             state.isLoading = false

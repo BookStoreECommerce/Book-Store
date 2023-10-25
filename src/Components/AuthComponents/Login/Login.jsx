@@ -11,6 +11,7 @@ import SocialMediaBtns from "../../ReusableComponents/SocialMediaBtns/SocialMedi
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { signin } from "../../../Redux/Slicies/authActions";
 import { clearError } from "../../../Redux/Slicies/authSlice";
+import { getWhishList } from "../../../Redux/Slicies/whishlistActions";
 
 const Login = () => {
   // const [messageError, setMessageError] = useState("");
@@ -35,6 +36,7 @@ const Login = () => {
     await dispatch(signin(values));
     if (localStorage.getItem("access-token")) {
       dispatch(handleClose());
+      // dispatch(getWhishList())
       navigate('/');
     }
   };

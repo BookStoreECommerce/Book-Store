@@ -13,6 +13,7 @@ import Slider from "../HomeComponents/Slider/Slider.jsx";
 import MainSlider from "../ReusableComponents/MainSlider/MainSlider.jsx";
 import { removeFooterMargin, setFooterMargin } from "../../Redux/Slicies/appSlice";
 import ReactImageMagnify from 'react-image-magnify';
+import WishListButton from "../ReusableComponents/WishListButton/WishListButton";
 
 export default function BookProfile() {
   const [book, setBook] = useState(null)
@@ -21,15 +22,19 @@ export default function BookProfile() {
   const dispatch = useDispatch()
   const { isLoading, bookCategory, specBook } = useSelector(({ books }) => books)
   const { footerH, navH } = useSelector((state) => state.app);
+  const { user} = useSelector((state) => state.auth);
 
   const getBookData = async () => {
     if (slug) {
       dispatch(getBookBySlug(slug))
+      console.log(user.wish_List.includes(specBook?._id));
     }
   }
+
   useEffect(() => {
     getBookData()
   }, [slug])
+
 
   useEffect(() => {
     dispatch(removeFooterMargin());
@@ -77,6 +82,9 @@ export default function BookProfile() {
 
                 </div>
                 <div className=" col-lg-9 col-md-12 mt-3 mt-md-0">
+           <div className={styles.textright}>
+           <WishListButton bookId={specBook?._id} section="profile"/>
+           </div>
                   <h2 className={styles.bookAuthor}>{specBook?.author} </h2>
                   <h2 className={styles.bookName}>{specBook?.name} </h2>
                   <h3 className={styles.category}>{specBook?.category?.name}</h3>
@@ -92,6 +100,8 @@ export default function BookProfile() {
                     <p className={styles.textColorDetails}><span className={styles.textColor}>Language:</span> {specBook?.lang}</p>
                     <p className={styles.textColorDetails}><span className={styles.textColor}>Paperback:</span> {specBook?.pages}</p>
                     <p className={styles.textColorDetails}><span className={styles.textColor}>ISBN:</span> {specBook?.ISBN}</p>
+                 
+
                   </div>
                 </div>
               </div>
