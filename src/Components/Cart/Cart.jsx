@@ -7,6 +7,8 @@ import Loading from '../ReusableComponents/Loading/Loading';
 import ClearCart from './ClearCart';
 import DeleteCartItem from './DeleteCartItem';
 import { updateCart } from '../../Redux/Slicies/cartAction';
+import { Button } from "@mui/material";
+
 import styles from './Cart.module.css'
 
 
@@ -41,9 +43,21 @@ export default function Cart() {
                 </div>
                 <div className="container position-relative ">
                     {isLoading ? <Loading /> : <>
-                    <div>
-                        <button className={`${styles.checkoutBtn}`}>Checkout</button>
-                    </div>
+                    <Button
+          variant="outlined"
+          type="submit"
+          endIcon={
+            isLoading ? (
+              <i className="fas fa-spinner fa-spin"></i>
+            ) : (
+              <i className="fa-solid"></i>
+            )
+          }
+          className={`mainBtn ${styles.fitContent}`}
+          
+        >
+        Clear Cart
+        </Button>
                         <div className="row justify-content-center align-items-center pb-2 py-5">
                             {cartArray?.length !== 0 ?
                                 <>
