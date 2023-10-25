@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 
 const Suggested = () => {
   const { suggestedBooks } = useSelector((state) => state.auth);
+  
   const Suggested = suggestedBooks.map((ele) => {
     return {
       id: ele._id,
@@ -101,7 +102,6 @@ const Suggested = () => {
                       category = {Suggested.category}
                       sectionName="whislist"
                       id={Suggested.id}
-             
                     />
                   ))}
                 </Slider>

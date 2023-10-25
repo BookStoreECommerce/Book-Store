@@ -4,11 +4,12 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { useDispatch, useSelector } from "react-redux";
 import { Box } from '@mui/material';
 import { Link } from 'react-router-dom';
-import styles from './Whishlist.module.css';
 import { getWhishList, getWhishListBooks } from '../../Redux/Slicies/whishlistActions';
 import { getUserProfile } from '../../Redux/Slicies/authActions';
 import Loading from '../ReusableComponents/Loading/Loading';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import styles from './Whishlist.module.css'
 export default function Whishlist() {
     const { footerH, navH } = useSelector((state) => state.app);
     const [loading, setLoading] = useState(false)
@@ -20,13 +21,23 @@ export default function Whishlist() {
 
 
     const WhishList = async (bookId) => {
-        setLoading(false)
+        // setLoading(false)
         await dispatch(getWhishList(bookId))
         let arr = JSON.parse(localStorage.getItem('whishList'))
         console.log(arr);
         await dispatch(getUserProfile())
-
-        setLoading(true)
+        toast.error("Remove from wishlist!", {
+            position: "bottom-left",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            closeButton: false
+        });
+        // setLoading(true)
     }
 
     const handleProduct = async () => {
@@ -60,7 +71,7 @@ export default function Whishlist() {
                 </div>
             </div>
             <div className="container pt-5">
-                <div className="row mt-2 justify-content-center align-items-center">
+                <div className="row mt-2 justify-content-center align-items-center mb-5">
                     {!loading ? <Loading /> : <>
                         <div className="px-3"><p className={styles.items}>Items ({WhishListFilterArray.length})</p><hr /></div>
                         {WhishListFilterArray?.length === 0 ? <>
@@ -68,7 +79,7 @@ export default function Whishlist() {
                                 <div>
                                     <p>Your wishList is empty!</p>
                                     <h6>Explore more and shortlist some items</h6>
-                               <Link to="/book"><button className={`${styles.btn} btn`}>Start Shopping</button></Link>
+                                    <Link to="/book"><button className={`${styles.btn} btn`}>Start Shopping</button></Link>
                                 </div>
                             </div>
                         </> :
@@ -80,6 +91,17 @@ export default function Whishlist() {
                                                 <img src={book?.image?.secure_url} alt="" className={styles.imgWidth} />
                                             </div>
                                             <button className={styles.removeBtn} onClick={() => WhishList(book?._id)}><i className="fa-regular fa-trash-can"></i></button>
+                                            <ToastContainer position="bottom-left"
+                                                autoClose={2000}
+                                                hideProgressBar={false}
+                                                newestOnTop={false}
+                                                closeOnClick={false}
+                                                rtl={false}
+                                                pauseOnFocusLoss
+                                                closeButton={false}
+                                                draggable
+                                                pauseOnHover={false}
+                                                theme="light" />
                                         </div>
                                         <div className="cart-button">
                                             <Link to='cart' className='text-decoration-none'> <button className={`${styles.cartButton} w-100 btn`}>

@@ -27,7 +27,7 @@ export default function BookProfile() {
   const getBookData = async () => {
     if (slug) {
       dispatch(getBookBySlug(slug))
-      console.log(user.wish_List.includes(specBook?._id));
+
     }
   }
 
@@ -106,7 +106,7 @@ export default function BookProfile() {
                 </div>
               </div>
             </div>
-            <MainSlider autoplay={false} arr={bookCategory} title="Suggested for you" />
+            <MainSlider autoplay={false} arr={bookCategory} title="Suggested for you"/>
           </>
         }
       </Box>

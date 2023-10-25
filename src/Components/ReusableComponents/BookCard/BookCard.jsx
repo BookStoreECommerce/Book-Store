@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./BookCard.module.css";
 import bookImage from "../../../assets/book.jpg";
+
 import WishListButton from "../WishListButton/WishListButton";
 
 
