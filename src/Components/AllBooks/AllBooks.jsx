@@ -21,7 +21,7 @@ function AllBook({ sectionName }) {
   const [numOfPages, setNumOfPages] = useState(0);
   const { isLoading, books, totalCount } = useSelector((state) => state.books);
   // const { filterObj } = useSelector((state) => state.booksFilter);
-  const { language , price } = useSelector((state) => state.booksFilter.filterObj);
+  const { language, price, category, author, publication } = useSelector((state) => state.booksFilter.filterObj);
   const nBookPerPage = 12;
   const dispatch = useDispatch();
   const [pageNumber, setPageNumber] = useState(1);
@@ -76,6 +76,27 @@ function AllBook({ sectionName }) {
         </div>
 
         {/* needs to be modefied >>> global for all filters */}
+        {/* {category.length !== 0 && 
+          <div
+            className={`d-flex flex-wrap gap-2 w-100 px-3 py-4 ${styles.filterWrapper}`}
+          >
+            {category.map((cat, index) => (
+                <div
+                  key={index}
+                  className={`p-2 rounded ${styles.filter}`}
+                >
+                  {cat}
+                  <i
+                    className={`fa-regular fa-circle-xmark ms-2 ${styles.xmarkPointer}`}
+                    value= {cat}
+                    name= "category"
+                    onClick={(e) => {
+                      deleteFilter(e);
+                    }}
+                  ></i>
+                </div>
+              ))}
+          </div>} */}
         {language.length !== 0 && 
           <div
             className={`d-flex flex-wrap gap-2 w-100 px-3 py-4 ${styles.filterWrapper}`}

@@ -1,13 +1,13 @@
 import { Autocomplete, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCategories } from "../../Redux/Slicies/favActions";
+import { getAllCategories } from "../../../Redux/Slicies/favActions";
+import { setFilterObj } from "../../../Redux/Slicies/filterSlice";
 
-const AllCategoriesSearch = () => {
+const CategoriesFilter = () => {
   const dispatch = useDispatch();
   const { allCategories } = useSelector((state) => state.favourites);
   const [myOptions, setMyOptions] = useState([]);
-  const [chosenCategory, setChosenCategory] = useState([]);
 
   useEffect(() => {
     if (allCategories.length === 0) dispatch(getAllCategories());
@@ -15,6 +15,11 @@ const AllCategoriesSearch = () => {
 
   const searchCategories = () => {
     setMyOptions(allCategories.map((ele) => ele.name));
+  };
+  
+  const setFilterCategory = (event , value) => {
+    const filteredCat = allCategories.filter((ele) => ele.name === value);
+    dispatch(setFilterObj({method: 'add', name: 'category', value: filteredCat[0].id}));
   };
 
   return (
@@ -24,7 +29,7 @@ const AllCategoriesSearch = () => {
         freeSolo
         autoComplete
         autoHighlight
-        // onChange={setfavCategory}
+        onChange={setFilterCategory}
         options={myOptions}
         renderInput={(params) => (
           <TextField
@@ -42,4 +47,4 @@ const AllCategoriesSearch = () => {
   );
 };
 
-export default AllCategoriesSearch;
+export default CategoriesFilter;

@@ -2,7 +2,7 @@ import { Box } from "@mui/system";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AllBook from "../../Components/AllBooks/AllBooks";
-import FilterPanel from "../../Components/FilterPanel/FilterPanel";
+import FilterPanel from "../../Components/FilterComponents/FilterPanel/FilterPanel";
 import ScrollToTop from "../../Components/ReusableComponents/ScrollToTop/ScrollToTop";
 import {removeFooterMargin,setFooterMargin,} from "../../Redux/Slicies/appSlice";
 export default function Books() {

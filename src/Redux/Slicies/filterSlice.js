@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { booksFilter } from "./filterActions";
 
 const initialState = {
-    filterObj: {language: [], price: []},
+    filterObj: {language: [], price: [], category: [], author: [], publication: []},
     filter: [],
     isLoading: false,
     msgError: null,
