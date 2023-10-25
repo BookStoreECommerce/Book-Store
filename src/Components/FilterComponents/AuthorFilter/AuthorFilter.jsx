@@ -1,25 +1,26 @@
 import { Autocomplete, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCategories } from "../../../Redux/Slicies/favActions";
+import { getAllAuthors } from "../../../Redux/Slicies/filterActions";
 import { setFilterObj } from "../../../Redux/Slicies/filterSlice";
 
-const CategoriesFilter = () => {
+const AuthorFilter = () => {
   const dispatch = useDispatch();
-  const { allCategories } = useSelector((state) => state.favourites);
+  const { allAuthors } = useSelector((state) => state.booksFilter);
   const [myOptions, setMyOptions] = useState([]);
 
   useEffect(() => {
-    if (allCategories.length === 0) dispatch(getAllCategories());
-  }, [dispatch, allCategories]);
+    if (allAuthors.length === 0) dispatch(getAllAuthors());
+  }, [dispatch, allAuthors]);
 
-  const searchCategories = () => {
-    setMyOptions(allCategories.map((ele) => ele.name));
+  const searchAuthor = () => {
+    console.log(allAuthors);
+    setMyOptions(allAuthors.map((ele) => ele));
   };
   
-  const setFilterCategory = (event , value) => {
+  const setFilterAuthor = (event , value) => {
     if (value !== null && myOptions.includes(value)) {
-      dispatch(setFilterObj({method: 'add', name: 'category', value}));
+      dispatch(setFilterObj({method: 'add', name: 'author', value}));
     }
   };
 
@@ -30,16 +31,16 @@ const CategoriesFilter = () => {
         freeSolo
         autoComplete
         autoHighlight
-        onChange={setFilterCategory}
+        onChange={setFilterAuthor}
         options={myOptions}
         renderInput={(params) => (
           <TextField
             {...params}
-            onChange={searchCategories}
-            onFocus={() => setMyOptions(allCategories.map((ele) => ele.name))}
+            onChange={searchAuthor}
+            onFocus={() => setMyOptions(allAuthors.map((ele) => ele))}
             variant="outlined"
-            label="Categories"
-            name="categories"
+            label="Author"
+            name="author"
             type="text"
           />
         )}
@@ -48,4 +49,4 @@ const CategoriesFilter = () => {
   );
 };
 
-export default CategoriesFilter;
+export default AuthorFilter;

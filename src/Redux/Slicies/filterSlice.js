@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { booksFilter } from "./filterActions";
+import { booksFilter, getAllAuthors } from "./filterActions";
 
 const initialState = {
+    allAuthors: [],
     filterObj: {language: [], price: [], category: [], author: [], publication: []},
     filter: [],
     isLoading: false,
@@ -29,6 +30,18 @@ const booksFilterSlice = createSlice({
             state.isLoading = false;
         })
         builder.addCase(booksFilter.rejected, (state, action) => {
+            state.msgError = action.payload.error
+            state.isLoading = false
+        })
+        //getAllAuthors
+        builder.addCase(getAllAuthors.pending, (state, action) => {
+            state.isLoading = true
+        })
+        builder.addCase(getAllAuthors.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.allAuthors = action.payload.authors;
+        })
+        builder.addCase(getAllAuthors.rejected, (state, action) => {
             state.msgError = action.payload.error
             state.isLoading = false
         })

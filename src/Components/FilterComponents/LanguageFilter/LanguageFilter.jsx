@@ -9,11 +9,11 @@ const LanguageFilter = () => {
     const dispatch = useDispatch();
 
     const handleChange = (e) => {
-        let method;
-        if (e.target.checked === true) method = 'add'
-        else method = 'delete'
-           
-        dispatch(setFilterObj({method, name: e.target.name, value: e.target.value}));
+      let method;
+      if (e.target.checked === true) method = 'add'
+      else method = 'delete'
+          
+      dispatch(setFilterObj({method, name: e.target.name, value: e.target.value}));
     };
 
   return (
