@@ -15,7 +15,9 @@ const booksFilterSlice = createSlice({
     reducers: {
         setFilterObj: (state, {payload}) => {
             if (payload.method === 'add') {
-                state.filterObj[payload.name].push(payload.value);
+                if(!(state.filterObj[payload.name].includes(payload.value))) {
+                    state.filterObj[payload.name].push(payload.value);
+                }
             } else {
                 state.filterObj[payload.name] = state.filterObj[payload.name].filter((ele) => ele !== payload.value);
             }

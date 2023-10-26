@@ -7,6 +7,7 @@ import { booksFilter } from "../../../Redux/Slicies/filterActions";
 import CategoriesFilter from "../CategoriesFilter/CategoriesFilter";
 import PriceFilter from "../PriceFilter/PriceFilter";
 import AuthorFilter from "../AuthorFilter/AuthorFilter";
+import PublicationDateFilter from "../PublicationDateFilter/PublicationDateFilter";
 
 const FilterPanel = () => {
   const dispatch = useDispatch();
@@ -23,22 +24,15 @@ const FilterPanel = () => {
     }
     // price
     if(price.length !== 0) {
-      let priceArray = [];
       price.forEach((ele) => {
-        let element = ele.split(',');
-        priceArray.push(element);
+       pricesFilter += `&price=${ele}`;
       })
-      priceArray = priceArray.flat(1);
-      let min = Math.min( ...priceArray );
-      let max = Math.max( ...priceArray );
-      pricesFilter += `&price[gte]=${min}&price[lte]=${max}`;
     }
     // category
     if(category.length !== 0) {
       category.forEach((ele, index) => {
         let element = ele.replace(/[&]/gi, (match) => '.');
         element = element.replace(/[,]/gi, (match) => '@');
-        console.log(element);
         if(index === 0) {
           categoriesFilter += `&category=${element}` 
         } else {
@@ -56,8 +50,14 @@ const FilterPanel = () => {
         }
       })
     }
-
-    dispatch(booksFilter(`${languagesFilter}${pricesFilter}${categoriesFilter}${authorsFilter}`));
+    // publication
+    if(publication.length !== 0) {
+      publication.forEach((ele) => {
+        publicationFilter += `&published=${ele}`;
+      })
+    }
+    let filter = `${languagesFilter}${pricesFilter}${categoriesFilter}${authorsFilter}${publicationFilter}`;
+    dispatch(booksFilter(filter));
   }, [language, price, category, author, publication, dispatch])
 
   return (
@@ -71,6 +71,7 @@ const FilterPanel = () => {
             <LanguageFilter/>
             <PriceFilter/>
             <AuthorFilter/>
+            <PublicationDateFilter/>
         </div>
       </nav>
     </>

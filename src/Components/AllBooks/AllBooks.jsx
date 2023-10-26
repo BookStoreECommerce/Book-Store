@@ -20,7 +20,7 @@ function AllBook({ sectionName }) {
   const [searchWord, setSearchWord] = useState("");
   const [numOfPages, setNumOfPages] = useState(0);
   const { isLoading, books, totalCount } = useSelector((state) => state.books);
-  // const { filterObj } = useSelector((state) => state.booksFilter);
+  // const { language, price, category, author, publication } = useSelector((state) => state.booksFilter);
   const { filterObj } = useSelector((state) => state.booksFilter);
   const nBookPerPage = 12;
   const dispatch = useDispatch();
@@ -29,6 +29,7 @@ function AllBook({ sectionName }) {
   const handleChange = (e, pageNumber) => {
     setPageNumber(pageNumber);
   };
+
   const deleteFilter = (e) => {
     const name = e.target.getAttribute('name');
     const value = e.target.getAttribute('value');
@@ -60,6 +61,11 @@ function AllBook({ sectionName }) {
 
   const url = `${baseUrl}book/?keyword=searchValue`;
 
+  let filterArrays = [];
+  for (const key in filterObj) {
+    filterArrays.push(`${filterObj[key]}`);
+  }
+
   return (
     <>
         <div className="">
@@ -75,63 +81,19 @@ function AllBook({ sectionName }) {
           />
         </div>
 
-        {filterObj && 
+        {!((filterObj.language.length === 0)&&(filterObj.price.length === 0)&&(filterObj.category.length === 0)
+        &&(filterObj.author.length === 0)&&(filterObj.publication.length === 0)) && 
           <div
-          className={`d-flex flex-wrap gap-2 w-100 px-3 py-4 ${styles.filterWrapper}`}
+          className={`d-flex flex-wrap gap-2 w-100 px-3 py-4 mt-4 ${styles.filterWrapper}`}
           >
-            {/* needs to be modefied >>> global for all filters */}
-
-            {/* category */}
-            {filterObj.category.map((cat, index) => (
-                <div
-                  key={index}
-                  className={`p-2 rounded ${styles.filter}`}
-                >
-                  {cat}
-                  <i
-                    className={`fa-regular fa-circle-xmark ms-2 ${styles.xmarkPointer}`}
-                    value= {cat}
-                    name= "category"
-                    onClick={(e) => {
-                      deleteFilter(e);
-                    }}
-                  ></i>
-                </div>
-              ))}
-              {/* author */}
-              {filterObj.author.map((author, index) => (
-                <div
-                  key={index}
-                  className={`p-2 rounded ${styles.filter}`}
-                >
-                  {author}
-                  <i
-                    className={`fa-regular fa-circle-xmark ms-2 ${styles.xmarkPointer}`}
-                    value= {author}
-                    name= "author"
-                    onClick={(e) => {
-                      deleteFilter(e);
-                    }}
-                  ></i>
-                </div>
-              ))}
-              {/* language */}
-              {filterObj.language.map((lang, index) => (
-                <div
-                  key={index}
-                  className={`p-2 rounded ${styles.filter}`}
-                >
-                  {lang}
-                  <i
-                    className={`fa-regular fa-circle-xmark ms-2 ${styles.xmarkPointer}`}
-                    value= {lang}
-                    name= "language"
-                    onClick={(e) => {
-                      deleteFilter(e);
-                    }}
-                  ></i>
-                </div>
-              ))}
+            {filterArrays.map((ele,index)=>
+            index === 1 ? ( ele !== '' && (<div key={index} className={`p-2 rounded ${styles.filter}`}>
+            price:{ele}
+          </div> )) : (    ele !== '' && (<div key={index} className={`p-2 rounded ${styles.filter}`}>
+              {ele}
+            </div> ))
+        
+            )}
         </div>}
 
         {isLoading ? (
@@ -191,3 +153,55 @@ function AllBook({ sectionName }) {
 }
 
 export default AllBook;
+
+// {/* category */}
+// {filterObj.category.map((cat, index) => (
+//   <div
+//     key={index}
+//     className={`p-2 rounded ${styles.filter}`}
+//   >
+//     {cat}
+//     <i
+//       className={`fa-regular fa-circle-xmark ms-2 ${styles.xmarkPointer}`}
+//       value= {cat}
+//       name= "category"
+//       onClick={(e) => {
+//         deleteFilter(e);
+//       }}
+//     ></i>
+//   </div>
+// ))}
+// {/* author */}
+// {filterObj.author.map((author, index) => (
+//   <div
+//     key={index}
+//     className={`p-2 rounded ${styles.filter}`}
+//   >
+//     {author}
+//     <i
+//       className={`fa-regular fa-circle-xmark ms-2 ${styles.xmarkPointer}`}
+//       value= {author}
+//       name= "author"
+//       onClick={(e) => {
+//         deleteFilter(e);
+//       }}
+//     ></i>
+//   </div>
+// ))}
+// {/* language */}
+// {filterObj.language.map((lang, index) => (
+//   <div
+//     key={index}
+//     className={`p-2 rounded ${styles.filter}`}
+//   >
+//     {lang}
+//     <i
+//       className={`fa-regular fa-circle-xmark ms-2 ${styles.xmarkPointer}`}
+//       value= {lang}
+//       name= "language"
+//       onClick={(e) => {
+//         deleteFilter(e);
+//       }}
+//     ></i>
+//   </div>
+// ))}

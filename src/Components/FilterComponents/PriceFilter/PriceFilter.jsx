@@ -51,10 +51,12 @@ const PriceFilter = () => {
     </Box> */}
 
     <FormGroup>
-      <FormControlLabel control={<Checkbox name="price" value="200,300" onChange={handleChange}/>} label="200EGP - 300EGP" />
-      <FormControlLabel control={<Checkbox name="price" value="300,400" onChange={handleChange}/>} label="300EGP - 400EGP" />
-      <FormControlLabel control={<Checkbox name="price" value="400,500" onChange={handleChange}/>} label="400EGP - 500EGP" />
-      <FormControlLabel control={<Checkbox name="price" value="500,600" onChange={handleChange}/>} label="500EGP - 600EGP" />
+      <FormControlLabel control={<Checkbox name="price" value="0-300" onChange={handleChange}/>} label="Less than 300EGP" />
+      <FormControlLabel control={<Checkbox name="price" value="300-400" onChange={handleChange}/>} label="300EGP - 400EGP" />
+      <FormControlLabel control={<Checkbox name="price" value="400-500" onChange={handleChange}/>} label="400EGP - 500EGP" />
+      <FormControlLabel control={<Checkbox name="price" value="500-600" onChange={handleChange}/>} label="500EGP - 600EGP" />
+      <FormControlLabel control={<Checkbox name="price" value="600-700" onChange={handleChange}/>} label="600EGP - 700EGP" />
+      <FormControlLabel control={<Checkbox name="price" value="700-10000" onChange={handleChange}/>} label="More than 700EGP" />
     </FormGroup>
     </>
   )
