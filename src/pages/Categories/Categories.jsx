@@ -16,6 +16,7 @@ const Categories = () => {
     const { categories } = useSelector((state) => state.cat);
     const { isLoading } = useSelector((state) => state.cat);
     const { footerH, navH } = useSelector((state) => state.app);
+    
 
     const [page, setPageState]=useState(1);
     const [search, setSearch]=useState("");
@@ -70,6 +71,7 @@ const Categories = () => {
             </div>
             {isLoading ? <Loading/> :<>
             <div className="row gy-4">
+            
                 {catArray?.map((cat,idx) => (
                     <CategoryCard sectionName="" key={idx} catName={cat.name} img={cat.image.secure_url} slug={cat.slug} />
                 ))}

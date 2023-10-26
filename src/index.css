@@ -119,6 +119,23 @@ color: var(--navyBlue)!important;
 .offcanvas{
   background-image: linear-gradient(-26deg, var(--beigeColor), white)!important;
 }
+.Toastify__toast-theme--colored.Toastify__toast--error {
+
+  background: var(--mainColor)!important;
+}
+.Toastify__toast-theme--colored.Toastify__toast--success {
+  background: var(--navyBlue)!important;
+
+}
+/* .Toastify_toast-theme--colored.Toastify_toast--error {
+
+  background: var(--mainColor)!important;
+}
+
+.Toastify_toast-theme--colored.Toastify_toast--success {
+  background: var(--navyBlue)!important;
+
+} */
 
 @media screen and (min-width:300px) and (max-width:768px){
   .blueHeader{

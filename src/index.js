@@ -13,6 +13,7 @@ import ErrorBoundry from "./pages/ErrorBoundry/ErrorBoundry";
 // import ErrorBoundry from "./pages/ErrorBoundry/ErrorBoundry";
 import Loading from "./Components/ReusableComponents/Loading/Loading";
 import App from './App.js'
+// import Cart from "./Components/Cart/Cart";
 import Checkout from "./Components/Checkout/Checkout";
 
 const router = createBrowserRouter([
@@ -109,6 +110,15 @@ const router = createBrowserRouter([
             "./pages/CategoriesBook/CategoriesBook"
           );
           return { Component: CategoriesBook };
+        },
+      },
+      {
+        path: "cart",
+        async lazy() {
+          const { default: Cart } = await import(
+            "./Components/Cart/Cart"
+          );
+          return { Component: Cart };
         },
       },
     ],

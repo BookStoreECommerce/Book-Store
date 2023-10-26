@@ -12,7 +12,7 @@ import ScrollToTop from "../ReusableComponents/ScrollToTop/ScrollToTop.jsx";
 import Slider from "../HomeComponents/Slider/Slider.jsx";
 import MainSlider from "../ReusableComponents/MainSlider/MainSlider.jsx";
 import { removeFooterMargin, setFooterMargin } from "../../Redux/Slicies/appSlice";
-import ReactImageMagnify from 'react-image-magnify';
+// import ReactImageMagnify from 'react-image-magnify';
 
 export default function BookProfile() {
   const [book, setBook] = useState(null)
@@ -50,26 +50,7 @@ export default function BookProfile() {
               <div className="row mt-lg-5 mt-0 ">
                 <div className="col-lg-3 col-md-6 col-8 position-relative">
                   <div className={`${styles.hide} d-flex justify-content-center align-items-center flex-column`}>
-                    <ReactImageMagnify {...{
-                      smallImage: {
-                        alt: '',
-                        isFluidWidth: true,
-                        src: specBook?.image?.secure_url,
-
-                      },
-                      largeImage: {
-                        src: specBook?.image?.secure_url,
-                        width: 1200,
-                        height: 1800,
-                      },
-                      shouldUsePositiveSpaceLens: true,
-                      lensStyle:{
-                        cursor:'pointer',
                    
-                      }
-                      
-                    }} />
-                    <p className={styles.zoom}>Roll over image to zoom in</p>
                   </div>
                   <div className={styles.show}> 
                   <img src={specBook?.image?.secure_url} className="w-100" alt="" />

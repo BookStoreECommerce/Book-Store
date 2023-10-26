@@ -24,6 +24,7 @@ import {
 import {
     booksReducer
 } from "./Slicies/bookSlice";
+import { cartReducer } from "./Slicies/cartSlice";
 
 const store = configureStore({
     reducer: {
@@ -36,6 +37,7 @@ const store = configureStore({
         loading: categoriesBooksReducer,
         cat: catReducer,
         books: booksReducer,
+        cart: cartReducer,
     }
 })
 

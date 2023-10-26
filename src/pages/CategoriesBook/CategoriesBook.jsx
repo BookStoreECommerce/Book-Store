@@ -28,6 +28,7 @@ const CategoriesBook = () => {
     let totalCount = { catBySlug }.catBySlug.totalCount;
     let totalPages = Math.ceil((totalCount / 12));
 
+    console.log(category);
 
     async function getBooksBySearch(searchKeyword) {
         dispatch(getCatBooksBySlug({ slug: Params.slug, keyword: searchKeyword }))
@@ -48,7 +49,8 @@ const CategoriesBook = () => {
         dispatch(getCatBooksBySlug({ slug: Params.slug, page: p }))
     };
 
-    return (<>
+    return (
+        <>
         <ScrollToTop />
         <Box sx={{ marginTop: `${navH}px`, minHeight: `calc(100vh - ${footerH + navH}px)`, }} className={styles.flex} >
             <div className={styles.badge}>
@@ -69,8 +71,9 @@ const CategoriesBook = () => {
                     <div className="row justify-content-center align-items-center pb-2">
                     {category?.length != 0?
                     <>
+
                          {category?.map((book, index) => (
-                            <BookCard key={index} image={book.image?.secure_url} name={book.name} price={book.price} author={book.author} rate={book.rate} slug={book.slug} section="catBook" sectionName='without/' category={book.category?.name} />
+                             <BookCard key={index} book={book} image={book.image?.secure_url} name={book.name} price={book.price} author={book.author} rate={book.rate} slug={book.slug} section="catBook" sectionName='without/' category={book.category?.name} />
                         ))}
                     </>
                     :<div className={styles.notFoundContainer }>
@@ -88,7 +91,9 @@ const CategoriesBook = () => {
                 </>}
             </div>
         </Box>
-    </>);
+    </>
+    
+    );
 }
 
 export default CategoriesBook;

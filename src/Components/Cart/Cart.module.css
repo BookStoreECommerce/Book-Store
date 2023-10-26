@@ -1,0 +1,294 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Jost&family=PT+Serif:wght@700&display=swap');
+.badge {
+    background-image: linear-gradient(45deg, var(--secondaryColor), var(--beigeColor));
+    padding: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.slug{
+    font-family: 'Jost', sans-serif;
+    font-size: 28px;
+    font-weight: 500;
+    padding-left: 30px;
+    color: var(--navyBlue);
+}
+.content i {
+    margin-right: 10px;
+    font-size: 15px;
+    color: var(--navyBlue) !important;
+
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 30px;
+}
+
+.slash {
+    font-size: 19px;
+    font-family: 'Jost', sans-serif;
+    color: var(--navyBlue) !important;
+}
+
+.slash a {
+    color: var(--navyBlue) !important;
+    text-decoration: none;
+}
+/* .checkoutBtn{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-block: 25px
+
+} */
+/*  */
+ .checkoutBtn{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-block: 25px
+
+ }
+.deleteBook {
+    width: fit-content;
+  
+   }
+   
+   .trashIcon {
+     background: #fff;
+     width: 35px;
+     height: 35px;
+     text-align: center;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     border-radius: 50%;
+     cursor: pointer;
+   }
+   
+   .trashIcon:hover {
+     color: var(--mainColor);
+   }
+   
+   .fitContent {
+     /* width: fit-content !important; */
+    display: flex;
+    justify-content: end;
+   }
+/* 
+ */
+.orderCard {
+    background-color: var(--beigeColor);
+    margin-bottom: 25px;
+    padding: 20px 35px;
+    border-radius: 15px;
+    /* width: 60%; */
+}
+
+.cardParent {
+    position: relative;
+}
+
+.bookCoverWrapper {
+    width: 100%;
+}
+
+.bookCoverWrapper img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.bookDetails {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.bookTitle {
+    font-size: 22px;
+    color: #2B3A55;
+    font-weight: bold;
+}
+
+.bookAuthor {
+    font-size: 16px;
+    font-style: italic;
+    color: #928e8e;
+}
+
+.bookPrice,
+.bookSubTotal {
+    font-size: 20px;
+    color: #2B3A55;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.bookSubTotal {
+    position: absolute;
+    bottom: -6%;
+    right: 0;
+    text-align: end;
+    width: fit-content;
+
+}
+
+/* Quantity */
+.quantityWrapper {
+    width: 80%;
+}
+
+.quantityContent {
+    display: flex;
+    width: 100%;
+}
+
+.btn {
+    width: 30px;
+    border: none;
+}
+
+.quantityInput {
+    text-align: center;
+    width: 50px;
+    border: none;
+}
+
+.quantityInput:focus-visible {
+    border: none;
+    outline: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.decBtn {
+    border-radius: 10px 0 0 10px;
+}
+
+.incBtn {
+    border-radius: 0px 10px 10px 0px;
+}
+
+
+
+
+.trashIcon:hover {
+    color: var(--mainColor);
+}
+
+
+.deleteAndSubTotal {
+    position: absolute;
+    /* height: -webkit-fill-available; */
+}
+
+
+/* Media Query */
+@media screen and (max-width:1024px) {
+    .bookTitle {
+        font-size: 18px;
+    }
+
+    .bookPrice,
+    .bookSubTotal {
+        font-size: 16px;
+    }
+
+}
+
+@media screen and (max-width:375px) {
+    .bookTitle {
+        font-size: 14px;
+    }
+
+    .bookPrice,
+    .bookSubTotal {
+        font-size: 14px;
+    }
+
+    .quantityInput {
+        width: 35px;
+        font-size: 14px;
+    }
+
+    .orderCard {
+        padding-left: 15px;
+    }
+
+    .btn {
+        width: 20px;
+    }
+}
+
+
+
+
+
+.notFoundContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
+
+.notFoundContainer p {
+    font-size: 35pt;
+    color: var(--mainColor);
+    font-family: "Jost", sans-serif;
+    font-weight: bold;
+}
+
+@media screen and (min-width: 550px) and (max-width: 794px) {
+    .notFoundContainer p {
+        font-size: 35px;
+    }
+}
+
+@media screen and (min-width: 350px) and (max-width: 549px) {
+    .notFoundContainer p {
+        font-size: 46px;
+    }
+}
+
+/* 
+ */
+
+ 
+@media screen and (min-width:550px) and (max-width:794px){
+    .slug{
+        padding: 0;
+    }
+    .content{
+        padding: 0;
+    }
+   
+        .badge{
+            flex-wrap: wrap;
+        }
+}
+@media screen and (min-width:350px) and (max-width:549px){
+    .slug{
+        padding: 0;
+        font-size: 20px;
+    }
+    .content{
+        padding: 0;
+        font-size: 20px;
+    }
+    .slash{
+        font-size: 15px;
+    }
+    .badge{
+        padding: 15px;
+        flex-wrap: wrap;
+    }
+    
+}
+
