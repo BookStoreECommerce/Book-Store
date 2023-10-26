@@ -40,7 +40,7 @@ export default function BookProfile() {
     dispatch(removeFooterMargin());
     return () => dispatch(setFooterMargin());
   }, [dispatch]);
-  console.log(specBook);
+ 
 
   return (
     <>

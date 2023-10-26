@@ -24,7 +24,6 @@ export default function Whishlist() {
         // setLoading(false)
         await dispatch(getWhishList(bookId))
         let arr = JSON.parse(localStorage.getItem('whishList'))
-        console.log(arr);
         await dispatch(getUserProfile())
         toast.error("Remove from wishlist!", {
             position: "bottom-left",
@@ -71,7 +70,7 @@ export default function Whishlist() {
                 </div>
             </div>
             <div className="container pt-5">
-                <div className="row mt-2 justify-content-center align-items-center mb-5">
+                <div className="row mt-2 justify-content-center align-items-center mb-5 px-lg-0 px-4">
                     {!loading ? <Loading /> : <>
                         <div className="px-3"><p className={styles.items}>Items ({WhishListFilterArray.length})</p><hr /></div>
                         {WhishListFilterArray?.length === 0 ? <>
@@ -86,10 +85,12 @@ export default function Whishlist() {
                             <>
                                 {WhishListFilterArray.map((book, index) =>
                                     <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pt-5" key={index}>
-                                        <div className={styles.cartProduct}>
+                                      <div className={styles.cartProduct}>
+                                      <Link to={`/book/${book?.slug}`} className='text-decoration-none'> 
                                             <div className={` d-flex justify-content-center align-items-center ${styles.cartImage}`}>
                                                 <img src={book?.image?.secure_url} alt="" className={styles.imgWidth} />
                                             </div>
+                                            </Link>
                                             <button className={styles.removeBtn} onClick={() => WhishList(book?._id)}><i className="fa-regular fa-trash-can"></i></button>
                                             <ToastContainer position="bottom-left"
                                                 autoClose={2000}
@@ -109,11 +110,13 @@ export default function Whishlist() {
                                                 <span className='ms-2'>Add To Cart</span>
                                             </button></Link>
                                         </div>
+                                        <Link to={`/book/${book?.slug}`} className='text-decoration-none'> 
                                         <div className="cart-content d-flex flex-column justify-content-center align-items-center">
                                             <p className={styles.bookName} >{book?.name.length > 20 ? book?.name.slice(0, 20) : book?.name}{book?.name.length > 20 ? `...` : ''}</p>
                                             <p className={styles.bookAuthor}>{book?.author}</p>
                                             <p className={styles.bookPrice}>{book?.price} EGP</p>
                                         </div>
+                                        </Link>
                                     </div>
                                 )}
 

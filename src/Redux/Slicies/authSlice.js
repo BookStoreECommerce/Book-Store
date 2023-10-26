@@ -30,7 +30,7 @@ const authSlice = createSlice({
         logout: (state, action) => {
             localStorage.removeItem('access-token');
             localStorage.removeItem('whishList');
-            console.log(localStorage.getItem('whishList'))
+
         }
     },
     extraReducers: builder => {
@@ -39,7 +39,6 @@ const authSlice = createSlice({
             state.isLoading = true
         })
         builder.addCase(signin.fulfilled, (state, action) => {
-            console.log(action.payload);
             const token = action.payload.token
             saveUserData(token)
             state.token = token
@@ -143,7 +142,6 @@ const authSlice = createSlice({
         })
         builder.addCase(getUserProfile.fulfilled, (state, action) => {
             state.isLoading = false;
-            console.log(action.payload.user.wish_List);
             state.user = action.payload.user
             localStorage.setItem('whishList', JSON.stringify(action.payload.user.wish_List));
 
@@ -194,6 +192,7 @@ const authSlice = createSlice({
         builder.addCase(resetPassword.fulfilled, (state, action) => {
             state.isLoading = false;
             localStorage.removeItem('access-token');
+            
         });
         builder.addCase(resetPassword.rejected, (state, action) => {
             state.msgError = action.payload.error
