@@ -1,0 +1,13 @@
+.checkout-container {
+    margin-top: 150px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.checkout-content {
+    grid-area: 1 / 5;
+}
+
+.sidebar {
+    grid-area: 1 / 4;
+}
