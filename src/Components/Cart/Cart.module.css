@@ -37,14 +37,21 @@
     color: var(--navyBlue) !important;
     text-decoration: none;
 }
-.checkoutBtn{
-    position: fixed;
-    right: 30px;
-    top: 243px
+/* .checkoutBtn{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-block: 25px
 
-}
+} */
 /*  */
+ .checkoutBtn{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-block: 25px
 
+ }
 .deleteBook {
     width: fit-content;
   
@@ -67,10 +74,9 @@
    }
    
    .fitContent {
-     width: fit-content !important;
-     /* position: fixed; */
-     right: 30px;
-     top: 244px;
+     /* width: fit-content !important; */
+    display: flex;
+    justify-content: end;
    }
 /* 
  */

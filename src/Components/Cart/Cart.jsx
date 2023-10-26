@@ -17,6 +17,7 @@ export default function Cart() {
     const { footerH, navH } = useSelector((state) => state.app);
     const { cartBooks , isLoading} = useSelector((state) => state.cart);
     const cartArray = cartBooks;
+    console.log(cartArray);
 
     const dispatch = useDispatch();
 
@@ -41,24 +42,28 @@ export default function Cart() {
                         <span className={styles.slash}> / <Link to='/cart'>Your Cart</Link> </span>
                     </div>
                 </div>
-                <div className="container position-relative ">
+                <div className="container  ">
                     {isLoading ? <Loading /> : <>
+
+                    <div className={styles.checkoutBtn}>
                     <Button
-          variant="outlined"
-          type="submit"
-          endIcon={
-            isLoading ? (
-              <i className="fas fa-spinner fa-spin"></i>
-            ) : (
-              <i className="fa-solid"></i>
-            )
-          }
-          className={`mainBtn ${styles.fitContent}`}
-          
-        >
-        Clear Cart
-        </Button>
-                        <div className="row justify-content-center align-items-center pb-2 py-5">
+                    variant="outlined"
+                    type="submit"
+                    endIcon={
+                      isLoading ? (
+                        <i className="fas fa-spinner fa-spin"></i>
+                      ) : (
+                        <i className="fa-solid"></i>
+                      )
+                    }
+                    className={`mainBtn ${styles.fitContent}`}
+                    
+                  >
+                  Ckeckout
+                  </Button>
+                    </div>
+                    
+                        <div className="row justify-content-center align-items-center pb-2">
                             {cartArray?.length !== 0 ?
                                 <>
                                     {cartArray?.map((book, index) => (
@@ -67,9 +72,13 @@ export default function Cart() {
                                                 <div className='col-md-11'>
                                                     <div className='row'>
                                                         <div className='col-sm-3 col-4'>
-                                                            <div className={styles.bookCoverWrapper}>
+                                                        <Link to={`/book/${book.book.slug}`}>
+                                                        <div className={styles.bookCoverWrapper}>
                                                                 <img src={book.book.image.secure_url} alt="Book Cover" />
                                                             </div>
+                                                        
+                                                        </Link>
+                                                            
                                                         </div>
                                                         <div className={`${styles.bookDetails} col-sm-9 col-8 ps-0`}>
                                                             <div className={styles.titleAndPrice}>
@@ -113,11 +122,11 @@ export default function Cart() {
                                     </div>
                                 </div>}
                         </div>
-
+                       
 
                     </>}
                     
-                    
+                   
                     
                 </div>
             </Box>
