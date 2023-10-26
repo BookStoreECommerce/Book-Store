@@ -89,7 +89,7 @@ const Suggested = () => {
               
                   {Suggested.map((Suggested, index) => (
                     <BookCard
-                      cardStyle={{ margin: "10px", padding: "0px" }}
+                      cardStyle={{margin: "10px", padding: "10px", minHeight:"300px", maxHeight:"300px", display:"flex", justifyContent:"center" ,alignItems:"center"}}
                       key={Suggested.id}
                       image={Suggested.image}
                       name={Suggested.name}

@@ -11,7 +11,7 @@ const BookCard = ({ book, id, image, name, price, author, section, cardStyle, sa
   return (
     <>
       <div data-testid="BookCard" className={section === "newBooks" ? `col-lg-3 col-sm-6 col-12 mt-5 mb-3 ${styles.font}` : section === "catBook" ? `col-xl-3 col-lg-4 col-sm-6 col-12 mt-5 mb-3 ${styles.font}` : ""}>
-        <div className={`mb-2 position-relative ${styles.imgContainer}`} style={cardStyle}>
+        <div className={sectionName==="whislist"?`mb-2 position-relative ${styles.imgContainer} ${styles.height}`:`mb-2 position-relative ${styles.imgContainer} `} style={cardStyle}>
           <div className={styles.overLay}>
             {section !== "bestSeller" ? (
               <>
@@ -38,9 +38,16 @@ const BookCard = ({ book, id, image, name, price, author, section, cardStyle, sa
           </div>
           {section === "bestSeller" ? (
             <img src={book?.image?.secure_url ? book?.image?.secure_url : image ? image : bookImage} className={`w-100 ${styles.cardImgNew}`} alt="" />
-          ) : (
-            <img src={book?.image?.secure_url ? book?.image?.secure_url : image ? image : bookImage} className={`w-100 ${styles.cardImg}`} alt="" />
-          )}
+          ) : 
+          sectionName === "whislist"?
+          (
+            <img src={book?.image?.secure_url ? book?.image?.secure_url : image ? image : bookImage} className={`w-100 ${styles.cardStyle}`} alt="" />
+          )
+        :
+        (
+          <img src={book?.image?.secure_url ? book?.image?.secure_url : image ? image : bookImage} className={`w-100 ${styles.cardImg}`} alt="" />
+        )
+        }
 
           {section === "bestSeller" && sale ?
             <>
