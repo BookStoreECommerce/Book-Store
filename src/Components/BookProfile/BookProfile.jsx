@@ -1,4 +1,3 @@
-import logo from "./Book1.png";
 import React, { useEffect, useState } from "react";
 import styles from "./BookProfile.module.css"
 import { useParams } from "react-router-dom";
@@ -6,16 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { getBookBySlug } from "../../Redux/Slicies/bookActions.js";
 import Loading from "../ReusableComponents/Loading/Loading.jsx";
 import { Box } from "@mui/material";
-import BestSeller from "../HomeComponents/BestSeller/BestSeller.jsx";
-import SliderScrollBtn from "../ReusableComponents/SliderScrollBtn/SliderScrollBtn.jsx";
 import ScrollToTop from "../ReusableComponents/ScrollToTop/ScrollToTop.jsx";
-import Slider from "../HomeComponents/Slider/Slider.jsx";
 import MainSlider from "../ReusableComponents/MainSlider/MainSlider.jsx";
 import { removeFooterMargin, setFooterMargin } from "../../Redux/Slicies/appSlice";
+import AddCart from "../Cart/AddCart";
 // import ReactImageMagnify from 'react-image-magnify';
 
 export default function BookProfile() {
-  const [book, setBook] = useState(null)
+  // const [book, setBook] = useState(null)
   const [showMore, setShowMore] = useState(false)
   const { slug } = useParams()
   const dispatch = useDispatch()
@@ -36,6 +33,7 @@ export default function BookProfile() {
     return () => dispatch(setFooterMargin());
   }, [dispatch]);
   console.log(specBook);
+  // console.log(specBook._id);
 
   return (
     <>
@@ -50,10 +48,10 @@ export default function BookProfile() {
               <div className="row mt-lg-5 mt-0 ">
                 <div className="col-lg-3 col-md-6 col-8 position-relative">
                   <div className={`${styles.hide} d-flex justify-content-center align-items-center flex-column`}>
-                   
+
                   </div>
-                  <div className={styles.show}> 
-                  <img src={specBook?.image?.secure_url} className="w-100" alt="" />
+                  <div className={styles.show}>
+                    <img src={specBook?.image?.secure_url} className="w-100" alt="" />
                   </div>
 
                 </div>
@@ -73,6 +71,11 @@ export default function BookProfile() {
                     <p className={styles.textColorDetails}><span className={styles.textColor}>Language:</span> {specBook?.lang}</p>
                     <p className={styles.textColorDetails}><span className={styles.textColor}>Paperback:</span> {specBook?.pages}</p>
                     <p className={styles.textColorDetails}><span className={styles.textColor}>ISBN:</span> {specBook?.ISBN}</p>
+                  </div>
+                  <div className={styles.addToCartSection}>
+                  <div className={styles.addToCartBtn}>
+                  <AddCart id={specBook?._id} />
+                  </div>
                   </div>
                 </div>
               </div>
