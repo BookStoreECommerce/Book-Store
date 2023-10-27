@@ -10,7 +10,6 @@ import store from "./Redux/Store.js";
 import ThemeContextProvider from "./Contexts/theme-context";
 import ErrorBoundry from "./pages/ErrorBoundry/ErrorBoundry";
 // import ThemeContextProvider from "./Contexts/theme-context";
-// import ErrorBoundry from "./pages/ErrorBoundry/ErrorBoundry";
 import Loading from "./Components/ReusableComponents/Loading/Loading";
 import App from './App.js'
 // import Cart from "./Components/Cart/Cart";

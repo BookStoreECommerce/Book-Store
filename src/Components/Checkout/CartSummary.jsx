@@ -13,25 +13,30 @@ import {
   Typography,
 } from "@mui/material";
 
-const CartSummary = () => {
+const CartSummary = ({ isEmpty }) => {
   const [cart, setCart] = useState({});
   const dispatch = useDispatch();
   const getCartDetails = async () => {
     const { payload } = await dispatch(getCart());
-    if (payload.message === "success") {
-      console.log(payload.cart);
+    if (payload.message === "success" && payload.cart.books.length) {
+      // console.log(payload.cart);
       setCart(payload.cart);
+    } else {
+      isEmpty(true);
     }
   };
   useEffect(() => {
     getCartDetails();
   }, []);
+
   return (
     <>
-      <Typography variant="h3" component="h3">
-        CartSummary <Avatar color='info' sx={{display: 'inline-flex'}}>{cart?.books?.length}</Avatar>
+      <Typography variant="h5" component="h5">
+        CartSummary{" "}
+        <Avatar color="info" sx={{ display: "inline-flex" }}>
+          {cart?.books?.length}
+        </Avatar>
       </Typography>
-
       <TableContainer>
         <Table>
           <TableHead>
@@ -60,6 +65,7 @@ const CartSummary = () => {
       </TableContainer>
     </>
   );
+  // return cart.books?.length ? contentData : <></>;
 };
 
 export default CartSummary;
