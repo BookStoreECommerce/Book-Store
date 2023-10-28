@@ -5,31 +5,36 @@ import styles from "./AddCart.module.css";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 
-function AddCart({ id }) {
+function AddCart({ id, book }) {
   const token = localStorage.getItem("access-token");
   const dispatch = useDispatch();
-  let cart ;
-  
+  let cart;
   const cartDetails = {
-    book: {id},
-    price:0,
-    qty:0,
-    totalPrice:0,
+    book: { id: book._id },
+    price: book.price,
+    qty: 1,
+    totalPrice: book.price,
   }
-
+  // console.log(book);
 
   const addCartProduct = async () => {
+
 
     if (token) {
       await dispatch(addCartWithToken({ book: id }));
     } else {
-      // localStorage.removeItem("cartDetails")
-
       cart = JSON.parse(localStorage.getItem("cartDetails") || "[]");
+      if (cart.length > 0) {
+        cart.map((el) => {
+          if (el.book.id === id) {
+            cart = cart.filter((car) => car.book.id !== id)
+            cartDetails.qty++
+            cartDetails.totalPrice = cartDetails.qty * cartDetails.price
+          }
+        })
+      }
       cart.push(cartDetails)
       localStorage.setItem("cartDetails", JSON.stringify(cart))
-      // await dispatch(addCartWithOutToken({ book: id }));
-      // console.log("ay 7aga");
     }
 
     toast.success(`Book added to cart!`, {

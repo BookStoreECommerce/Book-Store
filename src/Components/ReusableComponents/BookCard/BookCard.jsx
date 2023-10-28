@@ -52,7 +52,7 @@ const BookCard = ({
                   </span>
                 </Link>
 
-                <AddCart id={book?._id} />
+                <AddCart id={book?._id} book={book?book:''} />
 
               </>
             ) : (
