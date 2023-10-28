@@ -11,9 +11,10 @@ export const getCart = createAsyncThunk("cart/getData", async (_, { rejectWithVa
 })
 
 
-export const addCart = createAsyncThunk("cart/postData", async (bookId, { rejectWithValue }) => {
+export const addCartWithToken = createAsyncThunk("cart/addWithToken", async (bookId, { rejectWithValue }) => {
     console.log(bookId);
     try {
+        
         const { data } = await axiosInstance.post('cart', bookId)
         return data;
     } catch (error) {
@@ -21,6 +22,16 @@ export const addCart = createAsyncThunk("cart/postData", async (bookId, { reject
     }
 });
 
+
+export const addCartWithOutToken = createAsyncThunk("cart/addWithoutToken", async (bookId, { rejectWithValue }) => {
+    try {
+        
+        // const { data } = await axiosInstance.post('cart', bookId)
+        // return data;
+    } catch (error) {
+        return rejectWithValue(error.response.data)
+    }
+});
 export const updateCart = createAsyncThunk("cart/patchData", async (bookId, { rejectWithValue }) => {
     console.log(bookId);
     try {

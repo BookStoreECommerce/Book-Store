@@ -15,7 +15,7 @@ import styles from './Cart.module.css'
 export default function Cart() {
     // const { isLoading } = useSelector((state) => state.cart);
     const { footerH, navH } = useSelector((state) => state.app);
-    const { cartBooks , isLoading} = useSelector((state) => state.cart);
+    const { cartBooks, isLoading } = useSelector((state) => state.cart);
     const cartArray = cartBooks;
     console.log(cartArray);
 
@@ -43,42 +43,45 @@ export default function Cart() {
                     </div>
                 </div>
                 <div className="container  ">
+
                     {isLoading ? <Loading /> : <>
 
-                    <div className={styles.checkoutBtn}>
-                    <Button
-                    variant="outlined"
-                    type="submit"
-                    endIcon={
-                      isLoading ? (
-                        <i className="fas fa-spinner fa-spin"></i>
-                      ) : (
-                        <i className="fa-solid"></i>
-                      )
-                    }
-                    className={`mainBtn ${styles.fitContent}`}
-                    
-                  >
-                  Ckeckout
-                  </Button>
-                    </div>
-                    
+
+
                         <div className="row justify-content-center align-items-center pb-2">
                             {cartArray?.length !== 0 ?
                                 <>
+                                    <div className={styles.checkoutBtn}>
+                                        <Button
+                                            variant="outlined"
+                                            type="submit"
+                                            endIcon={
+                                                isLoading ? (
+                                                    <i className="fas fa-spinner fa-spin"></i>
+                                                ) : (
+                                                    <i className="fa-solid"></i>
+                                                )
+                                            }
+                                            className={`mainBtn ${styles.fitContent}`}
+
+                                        >
+                                            Ckeckout
+                                        </Button>
+                                    </div>
+
                                     {cartArray?.map((book, index) => (
-                                        <div className={`${styles.orderCard} col-lg-7 col-md-8 col-sm-10 col-10` } key={index}>
+                                        <div className={`${styles.orderCard} col-lg-7 col-md-8 col-sm-10 col-10`} key={index}>
                                             <div className={`row justify-content-between ${styles.cardParent}`}>
                                                 <div className='col-md-11'>
                                                     <div className='row'>
                                                         <div className='col-sm-3 col-4'>
-                                                        <Link to={`/book/${book.book.slug}`}>
-                                                        <div className={styles.bookCoverWrapper}>
-                                                                <img src={book.book.image.secure_url} alt="Book Cover" />
-                                                            </div>
-                                                        
-                                                        </Link>
-                                                            
+                                                            <Link to={`/book/${book.book.slug}`}>
+                                                                <div className={styles.bookCoverWrapper}>
+                                                                    <img src={book.book.image.secure_url} alt="Book Cover" />
+                                                                </div>
+
+                                                            </Link>
+
                                                         </div>
                                                         <div className={`${styles.bookDetails} col-sm-9 col-8 ps-0`}>
                                                             <div className={styles.titleAndPrice}>
@@ -96,7 +99,7 @@ export default function Cart() {
 
                                                             <div className={styles.quantityWrapper}>
                                                                 <div className={styles.quantityContent}>
-                                                                    <button disabled={book.qty === 1}  onClick={() => decrease(  book?.book._id ,index)} className={`${styles.btn}  ${styles.decBtn}`}>-</button>
+                                                                    <button disabled={book.qty === 1} onClick={() => decrease(book?.book._id, index)} className={`${styles.btn}  ${styles.decBtn}`}>-</button>
                                                                     <input type='number' className={styles.quantityInput} value={book.qty} />
                                                                     <button onClick={() => increase(book?.book._id, index)} className={`${styles.btn}  ${styles.incBtn}`}>+</button>
                                                                 </div>
@@ -106,15 +109,15 @@ export default function Cart() {
                                                 </div>
                                                 <div className={` ${styles.deleteAndSubTotal}  `}>
                                                     <DeleteCartItem id={book?.book._id} />
-                                                   
+
                                                 </div>
                                                 <div className={styles.bookSubTotal}>
-                                                {book.book.price * book.qty} EGP
-                                            </div>
+                                                    {book.book.price * book.qty} EGP
+                                                </div>
                                             </div>
                                         </div>
                                     ))}
-                                        <ClearCart />
+                                    <ClearCart />
                                 </>
                                 : <div className={styles.notFoundContainer}>
                                     <div className={styles.notFoundContainer}>
@@ -122,12 +125,12 @@ export default function Cart() {
                                     </div>
                                 </div>}
                         </div>
-                       
+
 
                     </>}
-                    
-                   
-                    
+
+
+
                 </div>
             </Box>
         </>

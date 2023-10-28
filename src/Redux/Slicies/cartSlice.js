@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getCart, addCart, updateCart,clearCart, deleteCartItem } from './cartAction';
+import { getCart, addCartWithToken, updateCart, clearCart, deleteCartItem, addCartWithOutToken } from './cartAction';
 const initialState = {
     cartBooks: [],
     discount: 0,
@@ -11,7 +11,7 @@ const initialState = {
     totalQty: 0,
     user: null,
     totalCartBooks: 0,
-    loading:{}
+    loading: {}
 };
 
 
@@ -38,21 +38,44 @@ const cartSlice = createSlice({
             state.msgError = action.payload.error
         })
 
-        // add cart
-        builder.addCase(addCart.pending, (state, action) => {
+        // add cart with token
+        builder.addCase(addCartWithToken.pending, (state, action) => {
             // state.isLoading = true;
         })
 
-        builder.addCase(addCart.fulfilled, (state, action) => {
-
-            state.cartBooks = action.payload.cart.books;
-            state.discount = action.payload.cart.discount;
-            state.totalAmount = action.payload.cart.totalAmount;
-            state.totalAmountAfterDisc = action.payload.cart.totalAmountAfterDisc;
+        builder.addCase(addCartWithToken.fulfilled, (state, action) => {
+            if (action.payload.cart) {
+                console.log(action.payload.cart.books);
+                state.cartBooks = action.payload.cart.books;
+                state.discount = action.payload.cart.discount;
+                state.totalAmount = action.payload.cart.totalAmount;
+                state.totalAmountAfterDisc = action.payload.cart.totalAmountAfterDisc;
+            }
             state.isLoading = false;
             state.msgError = action.payload.error
         })
-        builder.addCase(addCart.rejected, (state, action) => {
+        builder.addCase(addCartWithToken.rejected, (state, action) => {
+            state.isLoading = false
+            // state.msgError = action.payload.error
+        })
+
+
+        // add cart without token
+        builder.addCase(addCartWithOutToken.pending, (state, action) => {
+            // state.isLoading = true;
+        })
+
+        builder.addCase(addCartWithOutToken.fulfilled, (state, action) => {
+            // console.log(action);
+            // state.cartBooks = action.payload.cart.books;
+            // state.discount = action.payload.cart.discount;
+            // state.totalAmount = action.payload.cart.totalAmount;
+            // state.totalAmountAfterDisc = action.payload.cart.totalAmountAfterDisc;
+
+            // state.isLoading = false;
+            // state.msgError = action.payload.error
+        })
+        builder.addCase(addCartWithOutToken.rejected, (state, action) => {
             state.isLoading = false
             // state.msgError = action.payload.error
         })
@@ -96,8 +119,8 @@ const cartSlice = createSlice({
         })
 
 
-         // delete Cart
-         builder.addCase(clearCart.pending, (state, action) => {
+        // delete Cart
+        builder.addCase(clearCart.pending, (state, action) => {
             // state.isLoading = true;
         })
 

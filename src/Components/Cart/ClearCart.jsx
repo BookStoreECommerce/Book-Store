@@ -28,7 +28,7 @@ function ClearCart() {
           className={`mainBtn ${styles.fitContent}`}
           onClick={() => removeCart()}
         >
-        Clear Cart
+          Clear Cart
         </Button>
       </div>
     </>
