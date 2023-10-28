@@ -19,7 +19,7 @@ const CartSummary = ({ cart }) => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell align="center">BookName</TableCell>
+              <TableCell>BookName</TableCell>
               <TableCell align="center">Qty</TableCell>
               <TableCell align="center">price</TableCell>
             </TableRow>
@@ -42,7 +42,7 @@ const CartSummary = ({ cart }) => {
               </TableCell>
               <TableCell align="center" colSpan="2">
                 <Typography variant="h6" component="h6">
-                  {cart?.totalAmount}
+                  {cart.totalAmount}
                 </Typography>
               </TableCell>
             </TableRow>
