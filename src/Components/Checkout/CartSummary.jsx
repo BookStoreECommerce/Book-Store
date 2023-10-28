@@ -1,8 +1,4 @@
-import { useEffect, useState } from "react";
-import { getCart } from "./../../Redux/Slicies/cartAction";
-import { useDispatch } from "react-redux";
 import {
-  Avatar,
   Table,
   TableBody,
   TableCell,
@@ -13,59 +9,48 @@ import {
   Typography,
 } from "@mui/material";
 
-const CartSummary = ({ isEmpty }) => {
-  const [cart, setCart] = useState({});
-  const dispatch = useDispatch();
-  const getCartDetails = async () => {
-    const { payload } = await dispatch(getCart());
-    if (payload.message === "success" && payload.cart.books.length) {
-      // console.log(payload.cart);
-      setCart(payload.cart);
-    } else {
-      isEmpty(true);
-    }
-  };
-  useEffect(() => {
-    getCartDetails();
-  }, []);
-
+const CartSummary = ({ cart }) => {
   return (
-    <>
-      <Typography variant="h5" component="h5">
-        CartSummary{" "}
-        <Avatar color="info" sx={{ display: "inline-flex" }}>
-          {cart?.books?.length}
-        </Avatar>
+    <div>
+      <Typography variant="h6" component="h6">
+        Cart summary
       </Typography>
       <TableContainer>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>BookName</TableCell>
-              <TableCell>Qty</TableCell>
-              <TableCell>price</TableCell>
+              <TableCell align="center">BookName</TableCell>
+              <TableCell align="center">Qty</TableCell>
+              <TableCell align="center">price</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {cart?.books?.map((item) => (
+            {cart.books.map((item) => (
               <TableRow key={item._id}>
                 <TableCell>{item.book.name}</TableCell>
-                <TableCell>{item.qty}</TableCell>
-                <TableCell>{item.price}</TableCell>
+                <TableCell align="center">{item.qty}</TableCell>
+                <TableCell align="center">{item.price}</TableCell>
               </TableRow>
             ))}
           </TableBody>
           <TableFooter>
             <TableRow>
-              <TableCell colSpan="2">Total (USD)</TableCell>
-              <TableCell>{cart?.totalAmount}</TableCell>
+              <TableCell align="center">
+                <Typography variant="h6" component="h6">
+                  Total (USD)
+                </Typography>
+              </TableCell>
+              <TableCell align="center" colSpan="2">
+                <Typography variant="h6" component="h6">
+                  {cart?.totalAmount}
+                </Typography>
+              </TableCell>
             </TableRow>
           </TableFooter>
         </Table>
       </TableContainer>
-    </>
+    </div>
   );
-  // return cart.books?.length ? contentData : <></>;
 };
 
 export default CartSummary;
