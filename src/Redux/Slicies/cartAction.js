@@ -9,6 +9,29 @@ export const getCart = createAsyncThunk("cart/getData", async (_, { rejectWithVa
         return rejectWithValue(error.response.data)
     }
 })
+export const getCartWithoutToken = createAsyncThunk("cart/getDatawithoutToken", async (_, { rejectWithValue }) => {
+    try {
+        const data = JSON.parse(localStorage.getItem('cartDetails'));
+        // console.log(data);
+        return data;
+    } catch (error) {
+        return rejectWithValue(error.response.data)
+    }
+})
+export const setCartInLocalStorage = createAsyncThunk("cart/setCartInLocalStorage", async (cartArray, { rejectWithValue }) => {
+    console.log(cartArray);
+    try {
+      
+        // localStorage.setItem('cartDetails',JSON.stringify(cartArray))
+        return cartArray;
+       
+        
+    } catch (error) {
+        return rejectWithValue(error.response.data)
+    }
+})
+
+
 
 
 export const addCartWithToken = createAsyncThunk("cart/addWithToken", async (bookId, { rejectWithValue }) => {
@@ -32,7 +55,17 @@ export const addCartWithOutToken = createAsyncThunk("cart/addWithoutToken", asyn
         return rejectWithValue(error.response.data)
     }
 });
+
 export const updateCart = createAsyncThunk("cart/patchData", async (bookId, { rejectWithValue }) => {
+    console.log(bookId);
+    try {
+        const { data } = await axiosInstance.patch('cart', bookId)
+        return data;
+    } catch (error) {
+        return rejectWithValue(error.response.data)
+    }
+});
+export const updateCartWithoutToken = createAsyncThunk("cart/patchData", async (bookId, { rejectWithValue }) => {
     console.log(bookId);
     try {
         const { data } = await axiosInstance.patch('cart', bookId)

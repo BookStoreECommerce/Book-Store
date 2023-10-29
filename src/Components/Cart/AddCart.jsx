@@ -1,5 +1,5 @@
 import React from 'react'
-import { addCartWithOutToken, addCartWithToken } from '../../Redux/Slicies/cartAction';
+import { addCartWithOutToken, addCartWithToken, setCartInLocalStorage } from '../../Redux/Slicies/cartAction';
 import { useDispatch } from 'react-redux';
 import styles from "./AddCart.module.css";
 import 'react-toastify/dist/ReactToastify.css';
@@ -8,9 +8,14 @@ import { ToastContainer, toast } from 'react-toastify';
 function AddCart({ id, book }) {
   const token = localStorage.getItem("access-token");
   const dispatch = useDispatch();
+  console.log("book",book);
+  console.log("id",id);
   let cart;
   const cartDetails = {
     book: { id: book._id },
+    name:book.name,
+    image:book.image,
+    author:book.author,
     price: book.price,
     qty: 1,
     totalPrice: book.price,
@@ -23,10 +28,13 @@ function AddCart({ id, book }) {
     if (token) {
       await dispatch(addCartWithToken({ book: id }));
     } else {
+      // localStorage.removeItem("cartDetails")
       cart = JSON.parse(localStorage.getItem("cartDetails") || "[]");
       if (cart.length > 0) {
         cart.map((el) => {
+
           if (el.book.id === id) {
+            console.log("yesssss");
             cart = cart.filter((car) => car.book.id !== id)
             cartDetails.qty++
             cartDetails.totalPrice = cartDetails.qty * cartDetails.price
@@ -34,7 +42,8 @@ function AddCart({ id, book }) {
         })
       }
       cart.push(cartDetails)
-      localStorage.setItem("cartDetails", JSON.stringify(cart))
+      // localStorage.setItem("cartDetails", JSON.stringify(cart))
+      dispatch(setCartInLocalStorage(cart));
     }
 
     toast.success(`Book added to cart!`, {

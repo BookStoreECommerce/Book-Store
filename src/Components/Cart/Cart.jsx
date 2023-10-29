@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import ScrollToTop from '../ReusableComponents/ScrollToTop/ScrollToTop';
 import { Box } from '@mui/material';
@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import Loading from '../ReusableComponents/Loading/Loading';
 import ClearCart from './ClearCart';
 import DeleteCartItem from './DeleteCartItem';
-import { updateCart } from '../../Redux/Slicies/cartAction';
+import { getCartWithoutToken, setCartInLocalStorage, updateCart } from '../../Redux/Slicies/cartAction';
 import { Button } from "@mui/material";
 
 import styles from './Cart.module.css'
@@ -15,22 +15,38 @@ import styles from './Cart.module.css'
 export default function Cart() {
     // const { isLoading } = useSelector((state) => state.cart);
     const { footerH, navH } = useSelector((state) => state.app);
-    const { cartBooks, isLoading } = useSelector((state) => state.cart);
-    const cartArray = cartBooks;
-    console.log(cartArray);
+    const { cartBooks, isLoading ,localStorageCart} = useSelector((state) => state.cart);
+    const {token} = useSelector((state) => state.auth);
+    let cartArray ;
+    console.log("localStorageCart",localStorageCart);
+    if(token){
+        cartArray = cartBooks;
+    }else if(token == null){
+        cartArray = JSON.parse(localStorage.getItem('cartDetails'));
+        // cartArray = localStorageCart;
+    }
+    // console.log(cartArray);
 
     const dispatch = useDispatch();
 
     function decrease(book, index) {
-        let qty = cartArray[index].qty - 1;
-        dispatch(updateCart({ book, qty }));
+        cartArray[index].qty = cartArray[index].qty - 1;
+        dispatch(setCartInLocalStorage(cartArray));
+        // let qty = cartArray[index].qty - 1;
+        // dispatch(updateCart({ book, qty }));
     }
     function increase(book, index) {
-        let qty = cartArray[index].qty + 1;
-
-        console.log({ book, qty });
-        dispatch(updateCart({ book, qty }));
+        console.log(cartArray);
+        cartArray[index].qty = cartArray[index].qty + 1;
+        console.log(cartArray);
+        dispatch(setCartInLocalStorage(cartArray));
+        // localStorage.setItem('cartDetails',JSON.stringify(cartArray))
+        // console.log({ book, qty });
+        // dispatch(updateCart({ book, qty }));
     }
+    useEffect(()=>{
+        dispatch(getCartWithoutToken());
+    },[dispatch])
     return (
         <>
             <ScrollToTop />
@@ -70,6 +86,7 @@ export default function Cart() {
                                     </div>
 
                                     {cartArray?.map((book, index) => (
+                                      console.log("book from map",book),
                                         <div className={`${styles.orderCard} col-lg-7 col-md-8 col-sm-10 col-10`} key={index}>
                                             <div className={`row justify-content-between ${styles.cardParent}`}>
                                                 <div className='col-md-11'>
@@ -77,7 +94,7 @@ export default function Cart() {
                                                         <div className='col-sm-3 col-4'>
                                                             <Link to={`/book/${book.book.slug}`}>
                                                                 <div className={styles.bookCoverWrapper}>
-                                                                    <img src={book.book.image.secure_url} alt="Book Cover" />
+                                                                    <img src={book.image?.secure_url} alt="Book Cover" />
                                                                 </div>
 
                                                             </Link>
@@ -86,15 +103,15 @@ export default function Cart() {
                                                         <div className={`${styles.bookDetails} col-sm-9 col-8 ps-0`}>
                                                             <div className={styles.titleAndPrice}>
                                                                 <div className={styles.bookTitle}>
-                                                                    {book.book.name}
+                                                                    {book.name}
                                                                 </div>
                                                                 <div className={styles.bookAuthor}>
-                                                                    {book.author}
+                                                                   By {book.author}
                                                                 </div>
                                                             </div>
 
                                                             <div className={styles.bookPrice}>
-                                                                {book.book.price} EGP
+                                                                {book.price} EGP
                                                             </div>
 
                                                             <div className={styles.quantityWrapper}>
@@ -108,11 +125,11 @@ export default function Cart() {
                                                     </div>
                                                 </div>
                                                 <div className={` ${styles.deleteAndSubTotal}  `}>
-                                                    <DeleteCartItem id={book?.book._id} />
+                                                    <DeleteCartItem id={book?.book.id}  />
 
                                                 </div>
                                                 <div className={styles.bookSubTotal}>
-                                                    {book.book.price * book.qty} EGP
+                                                    {book.price * book.qty} EGP
                                                 </div>
                                             </div>
                                         </div>

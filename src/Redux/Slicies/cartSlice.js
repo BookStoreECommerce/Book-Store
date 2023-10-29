@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getCart, addCartWithToken, updateCart, clearCart, deleteCartItem, addCartWithOutToken } from './cartAction';
+import { getCart, addCartWithToken, updateCart, clearCart, deleteCartItem, addCartWithOutToken, getCartWithoutToken, setCartInLocalStorage } from './cartAction';
 const initialState = {
     cartBooks: [],
+    localStorageCart:[],
     discount: 0,
     totalAmount: 0,
     totalAmountAfterDisc: 0,
@@ -32,11 +33,44 @@ const cartSlice = createSlice({
                 state.cartBooks = action.payload.cart.books;
             }
             state.msgError = action.payload.message;
+          
         })
         builder.addCase(getCart.rejected, (state, action) => {
             state.isLoading = false
             state.msgError = action.payload.error
         })
+        // get cart without token
+
+  builder.addCase(getCartWithoutToken.fulfilled, (state, action) => {
+   
+            state.isLoading = false;
+            if (action.payload) {
+                state.localStorageCart = action.payload;
+            }
+            state.msgError = action.payload.message;
+          
+        })
+
+        //set LocalStorage Cart
+        builder.addCase(setCartInLocalStorage.fulfilled, (state, action) => {
+            console.log(action);
+            // state.isLoading = false;
+            if (action.payload) {
+                state.localStorageCart = action.payload;
+            }
+            localStorage.setItem('cartDetails',JSON.stringify(state.localStorageCart))
+            state.msgError = action.payload.message;
+          
+        })
+
+
+        builder.addCase(getCartWithoutToken.rejected, (state, action) => {
+            state.isLoading = false
+            state.msgError = action.payload.error
+           
+        })
+
+
 
         // add cart with token
         builder.addCase(addCartWithToken.pending, (state, action) => {

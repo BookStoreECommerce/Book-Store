@@ -17,10 +17,10 @@ function NavBar({ navRef }) {
   const navigate = useNavigate();
   const [navbar, setNavbar] = useState(false);
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.auth);
-  const { cartBooks } = useSelector((state) => state.cart);
+  const { user,token } = useSelector((state) => state.auth);
+  const { cartBooks ,localStorageCart} = useSelector((state) => state.cart);
 
-  const token = localStorage.getItem('access-token');
+  
   const changeBackground = () => {
     if (window.scrollY >= 60) {
       setNavbar(true);
@@ -29,6 +29,18 @@ function NavBar({ navRef }) {
     }
   };
 
+  // Read Cart Number
+  let cartNumber;
+  if(token){
+    cartNumber=localStorageCart.length;
+  }
+  else if(!token && localStorage.getItem('cartDetails')){
+    cartNumber =JSON.parse(localStorage.getItem('cartDetails')).length;
+
+  }
+  else if (!token && !localStorage.getItem('cartDetails')){
+    cartNumber =0;
+  }
   useEffect(() => {
 
     changeBackground();
@@ -70,7 +82,7 @@ function NavBar({ navRef }) {
                 sx={{ fontSize: { xs: 24, sm: 24, md: 27, lg: 24 } }}
               />
               <div className={` ${styles.number}`}>
-                <span className={` ${styles.num}`}>{cartBooks?.length}</span>
+                <span className={` ${styles.num}`}>{cartNumber}</span>
               </div>
             </Link>
           </li>
