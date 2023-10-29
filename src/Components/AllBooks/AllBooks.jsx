@@ -20,7 +20,7 @@ function AllBook({ sectionName }) {
   const [searchWord, setSearchWord] = useState("");
   const [numOfPages, setNumOfPages] = useState(0);
   const { isLoading, books, totalCount } = useSelector((state) => state.books);
-  // const { language, price, category, author, publication } = useSelector((state) => state.booksFilter);
+  // const { language, price, category, author, published } = useSelector((state) => state.booksFilter.filterObj);
   const { filterObj } = useSelector((state) => state.booksFilter);
   const nBookPerPage = 12;
   const dispatch = useDispatch();
@@ -82,7 +82,7 @@ function AllBook({ sectionName }) {
         </div>
 
         {!((filterObj.language.length === 0)&&(filterObj.price.length === 0)&&(filterObj.category.length === 0)
-        &&(filterObj.author.length === 0)&&(filterObj.publication.length === 0)) && 
+        &&(filterObj.author.length === 0)&&(filterObj.published.length === 0)) && 
           <div
           className={`d-flex flex-wrap gap-2 w-100 px-3 py-4 mt-4 ${styles.filterWrapper}`}
           >

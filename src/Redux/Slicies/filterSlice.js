@@ -3,7 +3,7 @@ import { booksFilter, getAllAuthors } from "./filterActions";
 
 const initialState = {
     allAuthors: [],
-    filterObj: {language: [], price: [], category: [], author: [], publication: []},
+    filterObj: {language: [], price: [], category: [], author: [], published: []},
     filter: [],
     isLoading: false,
     msgError: null,
@@ -15,9 +15,13 @@ const booksFilterSlice = createSlice({
     reducers: {
         setFilterObj: (state, {payload}) => {
             if (payload.method === 'add') {
-                if(!(state.filterObj[payload.name].includes(payload.value))) {
+                if(payload.name === 'price') {
+                    state.filterObj[payload.name] = [payload.value];
+                } else {
+                    if(!(state.filterObj[payload.name].includes(payload.value))) {
                     state.filterObj[payload.name].push(payload.value);
                 }
+            }
             } else {
                 state.filterObj[payload.name] = state.filterObj[payload.name].filter((ele) => ele !== payload.value);
             }

@@ -12,7 +12,7 @@ import PublicationDateFilter from "../PublicationDateFilter/PublicationDateFilte
 const FilterPanel = () => {
   const dispatch = useDispatch();
   
-  const { language, price, category, author, publication } = useSelector((state) => state.booksFilter.filterObj);
+  const { language, price, category, author, published } = useSelector((state) => state.booksFilter.filterObj);
   
   useEffect(() => {
     let languagesFilter = '', pricesFilter = '', categoriesFilter = '', authorsFilter = '', publicationFilter = '';
@@ -25,7 +25,7 @@ const FilterPanel = () => {
     // price
     if(price.length !== 0) {
       price.forEach((ele) => {
-       pricesFilter += `&price=${ele}`;
+       pricesFilter = `&price=${ele}`;
       })
     }
     // category
@@ -50,15 +50,15 @@ const FilterPanel = () => {
         }
       })
     }
-    // publication
-    if(publication.length !== 0) {
-      publication.forEach((ele) => {
+    // published
+    if(published.length !== 0) {
+      published.forEach((ele) => {
         publicationFilter += `&published=${ele}`;
       })
     }
     let filter = `${languagesFilter}${pricesFilter}${categoriesFilter}${authorsFilter}${publicationFilter}`;
     dispatch(booksFilter(filter));
-  }, [language, price, category, author, publication, dispatch])
+  }, [language, price, category, author, published, dispatch])
 
   return (
     <>
