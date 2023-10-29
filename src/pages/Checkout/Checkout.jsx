@@ -1,7 +1,6 @@
 import { Card, CardContent, Container } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 
 import styles from "./Checkout.module.css";
 
@@ -11,6 +10,7 @@ import Loading from "./../../Components/ReusableComponents/Loading/Loading";
 import { getCart } from "../../Redux/Slicies/cartAction";
 import { baseUrl } from "../../util/util";
 import axiosInstance from "../../axios/axios-instance";
+import CheckoutError from "../../Components/Checkout/CheckoutError";
 
 const Checkout = () => {
   const dispatch = useDispatch();
@@ -19,28 +19,17 @@ const Checkout = () => {
   const { user } = useSelector((state) => state.auth);
 
   const getCartDetails = useCallback(async () => {
-    if (user) {
-      const { payload } = await dispatch(getCart());
-      if (payload.message === "success" && payload.cart.books.length) {
-        setCart(payload.cart);
-        setIsLoading(false);
-      }
-    } else {
-      // getting cart from localStorage!
-      setCart({
-        books: [
-          { _id: 1, book: { name: "book1" }, qty: 1, price: 10 },
-          { _id: 2, book: { name: "book2" }, qty: 2, price: 15 },
-        ],
-        totalAmount: 40,
-      });
-      setIsLoading(false);
+    const { payload } = await dispatch(getCart());
+    if (payload.message === "success" && payload.cart.books.length) {
+      setCart(payload.cart);
     }
-  }, [dispatch, user]);
+    setIsLoading(false);
+  }, [dispatch]);
   const sendCouponHandler = async (code) => {
+    if (!code.length) return;
     try {
-      // const { data } = await axiosInstance(`${baseUrl}book/?keyword=b`);
-      // console.log(data);
+      const { data } = await axiosInstance.put(`${baseUrl}cart/coupon`,{code});
+      console.log(data);
       // data.result.length && setOptions(data.result);
     } catch (error) {
       // for future planning if other components asked me for error type!
@@ -50,28 +39,31 @@ const Checkout = () => {
     getCartDetails();
   }, [getCartDetails]);
 
-  return (
+  return !user ? (
+    <CheckoutError
+      majorText="401"
+      minorText="Unauthorized"
+    />
+  ) : isLoading ? (
+    <Loading />
+  ) : !cart ? (
+    <CheckoutError
+      majorText="Empty Cart"
+      minorText="Add some books to your cart first"
+    />
+  ) : (
     <div className={styles["checkout-main-container"]}>
-      {isLoading ? (
-        <Loading />
-      ) : !cart ? (
-        <>
-          <h1>Empty Cart</h1>
-          <Link to="/">Back Home</Link>
-        </>
-      ) : (
-        <div className={styles["checkout-container"]}>
-          <Container className={styles["sidebar"]}>
-            <Card>
-              <CardContent className="d-grid gap-5">
-                <CartSummary cart={cart} />
-                <Coupon onSendCoupon={sendCouponHandler} />
-              </CardContent>
-            </Card>
-          </Container>
-          <Container className={styles["checkout-content"]}>checkout</Container>
-        </div>
-      )}
+      <div className={styles["checkout-container"]}>
+        <Container className={styles["sidebar"]}>
+          <Card>
+            <CardContent className="d-grid gap-5">
+              <CartSummary cart={cart} />
+              <Coupon onSendCoupon={sendCouponHandler} />
+            </CardContent>
+          </Card>
+        </Container>
+        <Container className={styles["checkout-content"]}>checkout</Container>
+      </div>
     </div>
   );
 };
