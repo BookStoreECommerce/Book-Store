@@ -18,20 +18,6 @@ export const getCartWithoutToken = createAsyncThunk("cart/getDatawithoutToken", 
         return rejectWithValue(error.response.data)
     }
 })
-export const setCartInLocalStorage = createAsyncThunk("cart/setCartInLocalStorage", async (cartArray, { rejectWithValue }) => {
-    console.log(cartArray);
-    try {
-      
-        // localStorage.setItem('cartDetails',JSON.stringify(cartArray))
-        return cartArray;
-       
-        
-    } catch (error) {
-        return rejectWithValue(error.response.data)
-    }
-})
-
-
 
 
 export const addCartWithToken = createAsyncThunk("cart/addWithToken", async (bookId, { rejectWithValue }) => {
@@ -95,3 +81,26 @@ export const clearCart = createAsyncThunk("cart/clearCart", async (_, { rejectWi
         return rejectWithValue(error.response.data)
     }
 });
+export const clearLocalStorageCArt = createAsyncThunk("cart/clearLocalStorageCArt", async (localStorageName, { rejectWithValue }) => {
+    try {
+     
+        return localStorageName;
+    } catch (error) {
+        return rejectWithValue(error.response.data)
+    }
+});
+
+
+
+export const setCartInLocalStorage = createAsyncThunk("cart/setCartInLocalStorage", async (cartArray, { rejectWithValue }) => {
+    console.log(cartArray);
+    try {
+      
+        // localStorage.setItem('cartDetails',JSON.stringify(cartArray))
+        return cartArray;
+       
+        
+    } catch (error) {
+        return rejectWithValue(error.response.data)
+    }
+})

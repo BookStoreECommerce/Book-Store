@@ -1,5 +1,5 @@
 import React from 'react'
-import { clearCart, setCartInLocalStorage } from '../../Redux/Slicies/cartAction';
+import { clearCart, clearLocalStorageCArt, setCartInLocalStorage } from '../../Redux/Slicies/cartAction';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from "./ClearCart.module.css";
 import { Button } from "@mui/material";
@@ -14,6 +14,8 @@ function ClearCart() {
     if(token == null){
       let cartArray = [];
       dispatch(setCartInLocalStorage(cartArray));
+      dispatch(clearLocalStorageCArt('cartDetails'));
+
     }
     await dispatch(clearCart());
   }

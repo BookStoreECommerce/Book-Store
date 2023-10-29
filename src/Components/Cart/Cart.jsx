@@ -17,8 +17,8 @@ export default function Cart() {
     const { footerH, navH } = useSelector((state) => state.app);
     const { cartBooks, isLoading ,localStorageCart} = useSelector((state) => state.cart);
     const {token} = useSelector((state) => state.auth);
-    let cartArray ;
-    console.log("localStorageCart",localStorageCart);
+    let cartArray = [];
+    console.log("cartArray",cartArray);
     if(token){
         cartArray = cartBooks;
     }else if(token == null){
@@ -65,7 +65,7 @@ export default function Cart() {
 
 
                         <div className="row justify-content-center align-items-center pb-2">
-                            {cartArray?.length !== 0 ?
+                            {cartArray?.length >= 0  ?
                                 <>
                                     <div className={styles.checkoutBtn}>
                                         <Button
