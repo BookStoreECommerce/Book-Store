@@ -21,6 +21,7 @@
 }
 .textright{
     text-align: right;
+    margin-top: -32px;
 }
 
 .wishListBtn{
@@ -44,15 +45,16 @@
     padding: 5px 15px;
     border-radius: 20px;
     width: fit-content;
-    margin-top: 15px;
+    margin-top: 8px;
 }
 .description{
-    margin-top: 35px;
+    margin-top: 14px;
     color: gray;
 }
 .gap{
     gap: 10px;
 }
+
 .gap span{
     background-color: var(--navyBlue);
     padding: 5px 15px;

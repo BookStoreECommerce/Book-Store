@@ -1,6 +1,6 @@
 import React from "react";
 import styles from './Rating.module.css'
-const Rating = ({ rate }) => {
+const Rating = ({ rate,section }) => {
 
     let golden = []
     for (var i = 0; i < rate; i++) {
@@ -13,7 +13,12 @@ const Rating = ({ rate }) => {
 
     return (
         <>
-            <div data-testid='rate'> {golden}{white}</div>
+{section==="profile"?<>
+<div data-testid='rate' className={styles.fontSize}> {golden}{white}</div>
+</>:
+<>
+<div data-testid='rate'> {golden}{white}</div>
+</>}
         </>
     );
 }

@@ -7,6 +7,7 @@ import {catReducer} from "./Slicies/categoriesSlice";
 import {categoriesBooksReducer,} from './Slicies/CategoriesBookSlice.js'
 import {booksReducer} from "./Slicies/bookSlice";
 import {whishListReducer } from "./Slicies/whishlistSlice";
+import { reviewReducer } from "./Slicies/reviewsSlice";
 
 const store = configureStore({
     reducer: {
@@ -21,6 +22,7 @@ const store = configureStore({
         books: booksReducer,
         whishlist:whishListReducer,
         whishListBooks:whishListReducer,
+        review:reviewReducer
     
     }
 })

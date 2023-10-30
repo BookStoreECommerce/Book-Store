@@ -14,6 +14,8 @@ import MainSlider from "../ReusableComponents/MainSlider/MainSlider.jsx";
 import { removeFooterMargin, setFooterMargin } from "../../Redux/Slicies/appSlice";
 import ReactImageMagnify from 'react-image-magnify';
 import WishListButton from "../ReusableComponents/WishListButton/WishListButton";
+import Review from "../Review/Review";
+import Rating from "../ReusableComponents/Rating/Rating";
 
 export default function BookProfile() {
   const [book, setBook] = useState(null)
@@ -23,7 +25,7 @@ export default function BookProfile() {
   const { isLoading, bookCategory, specBook } = useSelector(({ books }) => books)
   const { footerH, navH } = useSelector((state) => state.app);
   const { user} = useSelector((state) => state.auth);
-
+console.log(specBook);
   const getBookData = async () => {
     if (slug) {
       dispatch(getBookBySlug(slug))
@@ -52,31 +54,9 @@ export default function BookProfile() {
         {isLoading ? <Loading sectionName='profile' /> :
           <>
             <div className="container py-5">
-              <div className="row mt-lg-5 mt-0 ">
+              <div className="row mt-lg-5 mt-0">
                 <div className="col-lg-3 col-md-6 col-8 position-relative">
-                  <div className={`${styles.hide} d-flex justify-content-center align-items-center flex-column`}>
-                    <ReactImageMagnify {...{
-                      smallImage: {
-                        alt: '',
-                        isFluidWidth: true,
-                        src: specBook?.image?.secure_url,
-
-                      },
-                      largeImage: {
-                        src: specBook?.image?.secure_url,
-                        width: 1200,
-                        height: 1800,
-                      },
-                      shouldUsePositiveSpaceLens: true,
-                      lensStyle:{
-                        cursor:'pointer',
-                   
-                      }
-                      
-                    }} />
-                    <p className={styles.zoom}>Roll over image to zoom in</p>
-                  </div>
-                  <div className={styles.show}> 
+                  <div> 
                   <img src={specBook?.image?.secure_url} className="w-100" alt="" />
                   </div>
 
@@ -87,6 +67,7 @@ export default function BookProfile() {
            </div>
                   <h2 className={styles.bookAuthor}>{specBook?.author} </h2>
                   <h2 className={styles.bookName}>{specBook?.name} </h2>
+                  <span className={styles.rate}><Rating rate={specBook?.rating} section="profile"/></span>
                   <h3 className={styles.category}>{specBook?.category?.name}</h3>
                   <p className={styles.description}>
                     {specBook?.desc.length > 250 ? <>
@@ -104,6 +85,7 @@ export default function BookProfile() {
 
                   </div>
                 </div>
+                {/* <Review/> */}
               </div>
             </div>
             <MainSlider autoplay={false} arr={bookCategory} title="Suggested for you"/>
