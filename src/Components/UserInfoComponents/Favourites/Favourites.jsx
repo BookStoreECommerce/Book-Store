@@ -46,7 +46,7 @@ const Favourites = () => {
   const concatIdAndName = () => {
     for (let i = 0; i < chosenFavCategory.length; i++) {
       categoriesFilterArray.push(
-        allCategories.find((category) => category.name === chosenFavCategory[i])
+        allCategories.find((category) => category.name === chosenFavCategory[i]).id
       );
     }
   };
