@@ -122,7 +122,6 @@ const authSlice = createSlice({
         })
         builder.addCase(userProfile.fulfilled, (state, action) => {
             state.isLoading = false;
-
         })
         builder.addCase(userProfile.rejected, (state, action) => {
             state.isLoading = false
