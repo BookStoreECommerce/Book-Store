@@ -42,7 +42,7 @@ const CartSummary = ({ cart }) => {
               </TableCell>
               <TableCell align="center" colSpan="2">
                 <Typography variant="h6" component="h6">
-                  {cart.totalAmount}
+                  {cart.totalAmount}, {cart.totalAmountAfterDisc}
                 </Typography>
               </TableCell>
             </TableRow>

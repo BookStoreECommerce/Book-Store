@@ -17,33 +17,30 @@ const Checkout = () => {
   const [cart, setCart] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const { user } = useSelector((state) => state.auth);
+  const cart1 = useSelector((state) => state.cart);
+  // console.log(cartBooks);
 
-  const getCartDetails = useCallback(async () => {
-    const { payload } = await dispatch(getCart());
-    if (payload.message === "success" && payload.cart.books.length) {
-      setCart(payload.cart);
-    }
-    setIsLoading(false);
-  }, [dispatch]);
-  const sendCouponHandler = async (code) => {
-    if (!code.length) return;
-    try {
-      const { data } = await axiosInstance.put(`${baseUrl}cart/coupon`,{code});
-      console.log(data);
-      // data.result.length && setOptions(data.result);
-    } catch (error) {
-      // for future planning if other components asked me for error type!
-    }
-  };
+  console.log("out: ", cart1);
+  const getCartDetails = useCallback(
+    async (cart) => {
+      const { payload } = await dispatch(getCart());
+      // console.log('payload: ', payload.cart);
+      console.log("in: ", cart1);
+      if (payload.message === "success" && payload.cart.books.length) {
+        cart ? setCart(cart) : setCart(payload.cart);
+        console.log("hena");
+      }
+      setIsLoading(false);
+    },
+    [dispatch]
+  );
+
   useEffect(() => {
-    getCartDetails();
-  }, [getCartDetails]);
+    if (cart1?.cartBooks?.length > 0) getCartDetails(cart1);
+  }, [getCartDetails, cart1]);
 
   return !user ? (
-    <CheckoutError
-      majorText="401"
-      minorText="Unauthorized"
-    />
+    <CheckoutError majorText="401" minorText="Unauthorized" />
   ) : isLoading ? (
     <Loading />
   ) : !cart ? (
@@ -58,7 +55,7 @@ const Checkout = () => {
           <Card>
             <CardContent className="d-grid gap-5">
               <CartSummary cart={cart} />
-              <Coupon onSendCoupon={sendCouponHandler} />
+              <Coupon onCouponChange={getCartDetails} code={cart.coupun_code} />
             </CardContent>
           </Card>
         </Container>
