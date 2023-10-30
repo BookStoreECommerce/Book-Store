@@ -1,7 +1,6 @@
 import { Autocomplete, TextField } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCategories } from "../../../Redux/Slicies/favActions";
 import { setFilterObj } from "../../../Redux/Slicies/filterSlice";
 
 const CategoriesFilter = () => {
@@ -9,12 +8,8 @@ const CategoriesFilter = () => {
   const { allCategories } = useSelector((state) => state.favourites);
   const [myOptions, setMyOptions] = useState([]);
 
-  useEffect(() => {
-    if (allCategories.length === 0) dispatch(getAllCategories());
-  }, [dispatch, allCategories]);
-
   const searchCategories = () => {
-    setMyOptions(allCategories.map((ele) => ele.name));
+    setMyOptions(allCategories.map((ele) => ({name: ele.name, slug: ele.slug})));
   };
   
   const setFilterCategory = (event , value) => {
@@ -32,13 +27,14 @@ const CategoriesFilter = () => {
         autoHighlight
         onChange={setFilterCategory}
         options={myOptions}
+        getOptionLabel = {(option) => (option.name)}
         renderInput={(params) => (
           <TextField
             {...params}
             onChange={searchCategories}
-            onFocus={() => setMyOptions(allCategories.map((ele) => ele.name))}
+            onFocus={() => setMyOptions(allCategories.map((ele) => ({name: ele.name, slug: ele.slug})))}
             variant="outlined"
-            label="Categories"
+            placeholder="Categories"
             name="categories"
             type="text"
           />

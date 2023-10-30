@@ -13,7 +13,7 @@ const PublicationDateFilter = () => {
       if (e.target.checked === true) method = 'add'
       else method = 'delete'
 
-      dispatch(setFilterObj({method, name: e.target.name, value: e.target.value}));
+      dispatch(setFilterObj({method, name: e.target.name, value: e.target.value, display: `Published Year: ${e.target.value}`}));
     };
 
   return (

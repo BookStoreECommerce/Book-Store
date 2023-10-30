@@ -17,13 +17,19 @@ const booksFilterSlice = createSlice({
             if (payload.method === 'add') {
                 if(payload.name === 'price') {
                     state.filterObj[payload.name] = [payload.value];
-                } else {
+                } 
+                else {
                     if(!(state.filterObj[payload.name].includes(payload.value))) {
-                    state.filterObj[payload.name].push(payload.value);
+                        state.filterObj[payload.name].push(payload.value);
+                    }
                 }
-            }
             } else {
-                state.filterObj[payload.name] = state.filterObj[payload.name].filter((ele) => ele !== payload.value);
+                if(payload.name === 'category'){
+                    console.log(payload.value);
+                    state.filterObj[payload.name] = state.filterObj[payload.name].filter((ele) => ele.name !== payload.value.name);
+                } else {
+                    state.filterObj[payload.name] = state.filterObj[payload.name].filter((ele) => ele !== payload.value);
+                }
             }
         }
     },

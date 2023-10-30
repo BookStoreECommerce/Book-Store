@@ -20,7 +20,7 @@ const AuthorFilter = () => {
   
   const setFilterAuthor = (event , value) => {
     if (value !== null && myOptions.includes(value)) {
-      dispatch(setFilterObj({method: 'add', name: 'author', value}));
+      dispatch(setFilterObj({method: 'add', name: 'author', value, display: `Author: ${value}`}));
     }
   };
 
@@ -39,7 +39,7 @@ const AuthorFilter = () => {
             onChange={searchAuthor}
             onFocus={() => setMyOptions(allAuthors.map((ele) => ele))}
             variant="outlined"
-            label="Author"
+            placeholder="Author"
             name="author"
             type="text"
           />

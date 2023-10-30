@@ -133,7 +133,7 @@ const PriceFilter = () => {
 
   const go = (e) => {
     let value = `${values.min}-${values.max}`
-    dispatch(setFilterObj({method:'add', name: e.target.name, value}));
+    dispatch(setFilterObj({method:'add', name: e.target.name, value, display: `Price: ${value}`}));
   };
 
   const [values, setValues] = useState({min: '250', max:'1000'});

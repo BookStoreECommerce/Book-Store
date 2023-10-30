@@ -18,8 +18,12 @@ const FilterPanel = () => {
     let languagesFilter = '', pricesFilter = '', categoriesFilter = '', authorsFilter = '', publicationFilter = '';
     // language
     if(language.length !== 0) {
-      language.forEach((ele) => {
-        languagesFilter += `&lang=${ele}`
+      language.forEach((ele, index) => {
+        if(index === 0) {
+          languagesFilter += `&lang=${ele}`
+        } else {
+          languagesFilter += `,${ele}` 
+        }
       })
     }
     // price
@@ -31,12 +35,10 @@ const FilterPanel = () => {
     // category
     if(category.length !== 0) {
       category.forEach((ele, index) => {
-        let element = ele.replace(/[&]/gi, (match) => '.');
-        element = element.replace(/[,]/gi, (match) => '@');
         if(index === 0) {
-          categoriesFilter += `&category=${element}` 
+          categoriesFilter += `&category=${ele.slug}` 
         } else {
-          categoriesFilter += `,${element}` 
+          categoriesFilter += `,${ele.slug}` 
         }
       })
     }

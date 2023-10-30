@@ -1,12 +1,9 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getAllCategories,
-  setFavCategories,
-} from "../../../Redux/Slicies/favActions";
+import { setFavCategories } from "../../../Redux/Slicies/favActions";
 import { useFormik } from "formik";
 import styles from "./Favourites.module.css";
 import * as Yup from "yup";
@@ -21,10 +18,6 @@ const Favourites = () => {
   const onlyNames = user.fav_cats.map((ele) => ele.name);
   const [myOptions, setMyOptions] = useState([]);
   const [chosenFavCategory, setChosenFavCategory] = useState(onlyNames || []);
-
-  useEffect(() => {
-    if (allCategories.length === 0) dispatch(getAllCategories());
-  }, [dispatch, allCategories]);
 
   const searchCategories = () => {
     setMyOptions(allCategories.map((ele) => ele.name));
