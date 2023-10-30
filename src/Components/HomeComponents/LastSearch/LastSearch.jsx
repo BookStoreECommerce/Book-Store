@@ -5,10 +5,10 @@ import styles from './LastSearch.module.css'
 
 const LastSearch = () => {
     const { searchedBooks } = useSelector((state) => state.auth);
-    const lastSearchedBooks = searchedBooks.map((ele) => {return {"id": ele._id, "image": ele.image, "name": ele.name, "slug": ele.slug, "author": ele.author, "price": ele.price, "rate": ele.rating}}); 
+    const lastSearchedBooks = searchedBooks.map((ele) => {return {"id": ele._id, "image": ele.image, "name": ele.name, "slug": ele.slug, "author": ele.author, "price": ele.price, "rating": ele.rating}}); 
 
     let cutLastSearch = lastSearchedBooks.slice(0, 4);
- 
+
     return (
         <>
         {cutLastSearch.length !== 0 && ( 

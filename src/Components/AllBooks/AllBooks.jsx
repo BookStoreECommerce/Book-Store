@@ -27,6 +27,7 @@ function AllBook({ sectionName }) {
   const dispatch = useDispatch();
   const [pageNumber, setPageNumber] = useState(1);
   const { footerH, navH } = useSelector((state) => state.app);
+  console.log(books);
 
 
   useEffect(() => {
@@ -84,7 +85,7 @@ function AllBook({ sectionName }) {
                     <p>No Books Found</p>
                     </div>: (isLoading ? <Loading /> : books.length > 0 ? books.map((book, index) => (
               <div key={index} className={` col-lg-3 col-sm-6 col-12 mb-5 ${styles.bookCard}`}>
-                <BookCard key={book.id} slug={book.slug} image={book.image.secure_url} id={book._id} category={book.category} desc={book.desc} name={book.name} price={book?.price} author={book.author} rate={book.rate} sectionName="Books" />
+                <BookCard key={book.id} slug={book.slug} image={book.image.secure_url} id={book._id} category={book.category} desc={book.desc} name={book.name} price={book?.price} author={book.author} rate={book.rating} sectionName="Books" />
               </div>
             )) : '')}
             {books && numOfPages > 1 ? <div className="my-5 pt-5 d-flex justify-content-center">

@@ -19,6 +19,7 @@ const Suggested = () => {
       price: ele.price,
       sale: ele.discount,
       category:ele.category,
+      rating:ele.rating
     };
   });
 
@@ -95,7 +96,7 @@ const Suggested = () => {
                       name={Suggested.name}
                       price={Suggested.price}
                       author={Suggested.author}
-                      rate={Suggested.rate}
+                      rate={Suggested.rating}
                       sale={Suggested.sale}
                       section="Suggested"
                       slug= {Suggested.slug}
