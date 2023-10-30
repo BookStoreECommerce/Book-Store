@@ -64,11 +64,11 @@ const FilterPanel = () => {
 
   return (
     <>
-      <nav className={`sidebar d-flex flex-column h-100`}>
+      <nav className={`sidebar d-flex flex-column h-100 gap-3`}>
         <h3>
           <div className={`${styles.sidebarHeader} fw-bold`}>Filter By</div>
         </h3>
-        <div>
+        <div className="d-flex flex-column gap-4">
             <CategoriesFilter/>
             <LanguageFilter/>
             <PriceFilter/>

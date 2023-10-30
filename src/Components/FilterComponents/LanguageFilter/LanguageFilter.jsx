@@ -13,17 +13,17 @@ const LanguageFilter = () => {
       if (e.target.checked === true) method = 'add'
       else method = 'delete'
           
-      dispatch(setFilterObj({method, name: e.target.name, value: e.target.value, display: `Language: ${e.target.value}`}));
+      dispatch(setFilterObj({method, name: e.target.name, value: e.target.value}));
     };
 
   return (
-    <>
-    <FormGroup>
+    <div className="filterSections">
       <h6>Language</h6>
-      <FormControlLabel control={<Checkbox name="language" value="English" onChange={handleChange}/>} label="English" />
-      <FormControlLabel control={<Checkbox name="language" value="Arabic" onChange={handleChange}/>} label="Arabic" />
-    </FormGroup>
-    </>
+      <FormGroup>
+        <FormControlLabel control={<Checkbox name="language" value="English" onChange={handleChange}/>} label="English" />
+        <FormControlLabel control={<Checkbox name="language" value="Arabic" onChange={handleChange}/>} label="Arabic" />
+      </FormGroup>
+    </div>
   )
 }
 

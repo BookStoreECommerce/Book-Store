@@ -20,12 +20,13 @@ const AuthorFilter = () => {
   
   const setFilterAuthor = (event , value) => {
     if (value !== null && myOptions.includes(value)) {
-      dispatch(setFilterObj({method: 'add', name: 'author', value, display: `Author: ${value}`}));
+      dispatch(setFilterObj({method: 'add', name: 'author', value}));
     }
   };
 
   return (
-    <>
+    <div className="filterSections">
+      <h6>Author</h6>
       <Autocomplete
         style={{ width: "75%" }}
         freeSolo
@@ -45,7 +46,7 @@ const AuthorFilter = () => {
           />
         )}
       />
-    </>
+    </div>
   );
 };
 

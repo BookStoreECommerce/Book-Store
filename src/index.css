@@ -9,10 +9,8 @@ box-sizing: border-box;
 
 :root {
   --navyBlue: rgb(43, 58, 85);
-  --navyBlue: rgb(43, 58, 85);
   --white: #ffffff;
   --mainColor: rgb(206, 119, 119);
-  --secondaryColor: #e8c4c4;
   --secondaryColor: #e8c4c4;
   --beigeColor: rgb(242, 229, 229);
 }
@@ -135,4 +133,9 @@ color: var(--navyBlue)!important;
 
 .css-6cwnna-MuiSlider-mark {
   background-color: var(--mainColor) !important;
+}
+
+.filterSections {
+  border-bottom: 1px solid grey;
+  padding-bottom: 1rem;
 }

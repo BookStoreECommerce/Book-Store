@@ -90,32 +90,18 @@ function AllBook({ sectionName }) {
         >
           {Object.keys(filterObj).map((key, index) => (
             filterObj[key].map((ele, index) => (
-              (key === 'category') ?
               <div key={index} className={`p-2 rounded ${styles.filter}`}>
                 {key}:&nbsp;
-                {ele.name}
+                {(key === 'category') ? ele.name : ((ele === "0-2000") ? 'Before 2000' : ele)}
                 <i
                   className={`fa-regular fa-circle-xmark ms-2 ${styles.xmarkPointer}`}
-                  value={JSON.stringify(ele)}
+                  value={(key === 'category') ? JSON.stringify(ele) : ele}
                   name={key}
                   onClick={(e) => {
                     deleteFilter(e);
                   }}
                 ></i>
               </div> 
-              :
-              <div key={index} className={`p-2 rounded ${styles.filter}`}>
-                {key}:&nbsp;
-                {ele}
-                <i
-                  className={`fa-regular fa-circle-xmark ms-2 ${styles.xmarkPointer}`}
-                  value={ele}
-                  name={key}
-                  onClick={(e) => {
-                    deleteFilter(e);
-                  }}
-                ></i>
-              </div>
             ))
           ))}
         </div>
