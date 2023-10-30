@@ -41,7 +41,7 @@ const CategoriesBook = () => {
         return () => dispatch(setFooterMargin());
     }, [Params, dispatch]);
 
-    const url = `${baseUrl}book/category?slug=${Params.slug}&keyword=searchValue`;
+    const url = `${baseUrl}book?category=${Params.slug}&keyword=searchValue`;
 
     const handleChange = (e, p) => {
         setPage(p)
