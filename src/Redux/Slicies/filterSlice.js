@@ -16,8 +16,13 @@ const booksFilterSlice = createSlice({
         setFilterObj: (state, {payload}) => {
             if (payload.method === 'add') {
                 if(payload.name === 'price') {
-                    state.filterObj[payload.name] = [payload.value];
+                    state.filterObj.price = [payload.value];
                 } 
+                else if(payload.name === 'category'){
+                    if (state.filterObj.category.filter((ele) => ele.name === payload.value.name).length === 0) {
+                        state.filterObj.category.push(payload.value);
+                    }
+                }
                 else {
                     if(!(state.filterObj[payload.name].includes(payload.value))) {
                         state.filterObj[payload.name].push(payload.value);
@@ -25,8 +30,7 @@ const booksFilterSlice = createSlice({
                 }
             } else {
                 if(payload.name === 'category'){
-                    console.log(payload.value);
-                    state.filterObj[payload.name] = state.filterObj[payload.name].filter((ele) => ele.name !== payload.value.name);
+                    state.filterObj.category = state.filterObj.category.filter((ele) => ele.name !== payload.value.name);
                 } else {
                     state.filterObj[payload.name] = state.filterObj[payload.name].filter((ele) => ele !== payload.value);
                 }

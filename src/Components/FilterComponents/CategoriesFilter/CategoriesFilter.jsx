@@ -27,7 +27,7 @@ const CategoriesFilter = () => {
         autoHighlight
         onChange={setFilterCategory}
         options={myOptions}
-        getOptionLabel = {(option) => (option.name)}
+        getOptionLabel = {(option) => (option.name || '')}
         renderInput={(params) => (
           <TextField
             {...params}
