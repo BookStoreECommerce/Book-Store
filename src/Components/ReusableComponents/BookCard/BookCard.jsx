@@ -8,7 +8,7 @@ import Rating from "../Rating/Rating";
 
 
 const BookCard = ({ book, id, image, name, price, author, section, cardStyle, sale, category, slug, sectionName, rate }) => {
-// console.log(rate);
+
   return (
     <>
       <div data-testid="BookCard" className={section === "newBooks" ? `col-lg-3 col-sm-6 col-12 mt-5 mb-3 ${styles.font}` : section === "catBook" ? `col-xl-3 col-lg-4 col-sm-6 col-12 mt-5 mb-3 ${styles.font}` : ""}>

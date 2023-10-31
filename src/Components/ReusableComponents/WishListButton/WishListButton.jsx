@@ -10,14 +10,16 @@ import styles from './WishListButton.module.css'
 
 const WishListButton = ({bookId,section}) => {
     const [filled, setFilled] = useState(false)
+    const [loading, setLoading] = useState(false)
     const { user } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
 
 
     const WhishList = async (bookId) => {
+      setLoading(true)
         await dispatch(getWhishList(bookId))
         await dispatch(getUserProfile())
-    
+        setLoading(false)
         let arr = JSON.parse(localStorage.getItem('whishList'))
         if (arr.includes(bookId)) {
           setFilled(true)
@@ -65,7 +67,8 @@ const WishListButton = ({bookId,section}) => {
                   <button className={`text-decoration-none btn ms-auto ${styles.btn}` }onClick={() => WhishList(bookId)}>
 
                     <span className={section==="profile"? styles.whishlisticonProfile:styles.whishlisticon}>
-                      <i className={filled ? "fa-solid fa-heart" : "fa-regular fa-heart"}></i>
+                      {loading? <i className="fa fa-spinner fa-spin"></i>:  <i className={filled ? "fa-solid fa-heart" : "fa-regular fa-heart"}></i>}
+                     
                     </span>
                
                   </button>

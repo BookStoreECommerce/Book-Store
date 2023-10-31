@@ -13,6 +13,7 @@ import styles from './Whishlist.module.css'
 export default function Whishlist() {
     const { footerH, navH } = useSelector((state) => state.app);
     const [loading, setLoading] = useState(false)
+    const [spinerLoading, setSpinerLoading] = useState(false)
     const { user } = useSelector((state) => state.auth);
     const { whishlist } = useSelector((state) => state.whishlist);
     const { whishListBooks } = useSelector((state) => state.whishListBooks)
@@ -21,9 +22,9 @@ export default function Whishlist() {
 
 
     const WhishList = async (bookId) => {
-        // setLoading(false)
+        setSpinerLoading(true)
         await dispatch(getWhishList(bookId))
-        let arr = JSON.parse(localStorage.getItem('whishList'))
+      let arr = JSON.parse(localStorage.getItem('whishList'))
         await dispatch(getUserProfile())
         toast.error("Remove from wishlist!", {
             position: "bottom-left",
@@ -36,7 +37,7 @@ export default function Whishlist() {
             theme: "colored",
             closeButton: false
         });
-        // setLoading(true)
+        setSpinerLoading(false)
     }
 
     const handleProduct = async () => {
@@ -72,7 +73,7 @@ export default function Whishlist() {
             <div className="container pt-5">
                 <div className="row mt-2 justify-content-center align-items-center mb-5 px-lg-0 px-4">
                     {!loading ? <Loading /> : <>
-                        <div className="px-3"><p className={styles.items}>Items ({WhishListFilterArray.length})</p><hr /></div>
+                        <div className="px-3"><p className={styles.items}>Items ({WhishListFilterArray.length}) {spinerLoading?<i className="fa fa-spinner fa-spin"></i>:""}</p><hr /></div>
                         {WhishListFilterArray?.length === 0 ? <>
                             <div className={styles.notFoundContainer}>
                                 <div>

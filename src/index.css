@@ -9,11 +9,9 @@ box-sizing: border-box;
 
 :root {
   --navyBlue: rgb(43, 58, 85);
-  --navyBlue: rgb(43, 58, 85);
   --white: #ffffff;
   --mainColor: rgb(206, 119, 119);
-  --secondaryColor: #e8c4c4;
-  --secondaryColor: #e8c4c4;
+  --secondaryColor: rgb(232, 196, 196);
   --beigeColor: rgb(242, 229, 229);
 }
 

@@ -27,8 +27,6 @@ function AllBook({ sectionName }) {
   const dispatch = useDispatch();
   const [pageNumber, setPageNumber] = useState(1);
   const { footerH, navH } = useSelector((state) => state.app);
-  console.log(books);
-
 
   useEffect(() => {
     dispatch(removeFooterMargin());

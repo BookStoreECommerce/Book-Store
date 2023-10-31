@@ -55,7 +55,7 @@ export default function ({arr, title,autoplay= true}) {
           },
         ],
       };
-      console.log(arr);
+
     return (
         <section className="px-lg-0 px-4 " data-testid="BestSeller">
           <div className="container-fluid" >
