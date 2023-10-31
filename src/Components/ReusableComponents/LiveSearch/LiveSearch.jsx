@@ -125,7 +125,7 @@ const LiveSearch = ({
         renderInput={(params) => (
           <TextField
             {...params}
-            label={label ? label : "Search"}
+            placeholder={label ? label : "Search"}
             InputProps={{
               ...params.InputProps,
               endAdornment: loading ? (

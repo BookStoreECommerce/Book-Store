@@ -8,14 +8,15 @@ import CategoriesFilter from "../CategoriesFilter/CategoriesFilter";
 import PriceFilter from "../PriceFilter/PriceFilter";
 import AuthorFilter from "../AuthorFilter/AuthorFilter";
 import PublicationDateFilter from "../PublicationDateFilter/PublicationDateFilter";
+import FormatFilter from "../FormatFilter/FormatFilter";
 
 const FilterPanel = () => {
   const dispatch = useDispatch();
   
-  const { language, price, category, author, published } = useSelector((state) => state.booksFilter.filterObj);
+  const { language, price, category, author, published, format } = useSelector((state) => state.booksFilter.filterObj);
   
   useEffect(() => {
-    let languagesFilter = '', pricesFilter = '', categoriesFilter = '', authorsFilter = '', publicationFilter = '';
+    let languagesFilter = '', pricesFilter = '', categoriesFilter = '', authorsFilter = '', publicationFilter = '', formatFilter = '';
     // language
     if(language.length !== 0) {
       language.forEach((ele, index) => {
@@ -58,9 +59,16 @@ const FilterPanel = () => {
         publicationFilter += `&published=${ele}`;
       })
     }
-    let filter = `${languagesFilter}${pricesFilter}${categoriesFilter}${authorsFilter}${publicationFilter}`;
+    // format
+    if(format.length !== 0) {
+      format.forEach((ele) => {
+        formatFilter += `&format=${ele}`;
+      })
+    }
+
+    let filter = `${languagesFilter}${pricesFilter}${categoriesFilter}${authorsFilter}${publicationFilter}${formatFilter}`;
     dispatch(booksFilter(filter));
-  }, [language, price, category, author, published, dispatch])
+  }, [language, price, category, author, published, format, dispatch])
 
   return (
     <>
@@ -74,6 +82,7 @@ const FilterPanel = () => {
             <PriceFilter/>
             <AuthorFilter/>
             <PublicationDateFilter/>
+            {/* <FormatFilter/> */}
         </div>
       </nav>
     </>

@@ -3,7 +3,7 @@ import { booksFilter, getAllAuthors } from "./filterActions";
 
 const initialState = {
     allAuthors: [],
-    filterObj: {language: [], price: [], category: [], author: [], published: []},
+    filterObj: {language: [], price: [], category: [], author: [], published: [], format: []},
     filter: [],
     isLoading: false,
     msgError: null,
