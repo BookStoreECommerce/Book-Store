@@ -76,11 +76,11 @@ const FilterPanel = () => {
         <h3>
           <div className={`${styles.sidebarHeader} fw-bold`}>Filter By</div>
         </h3>
-        <div className="d-flex flex-column gap-4">
+        <div className="d-flex flex-column">
             <CategoriesFilter/>
-            <LanguageFilter/>
-            <PriceFilter/>
             <AuthorFilter/>
+            <PriceFilter/>
+            <LanguageFilter/>
             <PublicationDateFilter/>
             {/* <FormatFilter/> */}
         </div>

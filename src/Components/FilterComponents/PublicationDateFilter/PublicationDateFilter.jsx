@@ -20,7 +20,7 @@ const PublicationDateFilter = () => {
   let thisYear = date.getFullYear();
 
   return (
-    <div className="filterSections">
+    <div>
       <h6>Publication Date</h6>
       <FormGroup>
         <FormControlLabel control={<Checkbox name="published" value="0-2000" onChange={handleChange}/>} label="Before 2000" />
@@ -28,6 +28,7 @@ const PublicationDateFilter = () => {
         <FormControlLabel control={<Checkbox name="published" value="2010-2020" onChange={handleChange}/>} label="2010 - 2020" />
         <FormControlLabel control={<Checkbox name="published" value={`2020-${thisYear}`} onChange={handleChange}/>} label="After 2020" />
       </FormGroup>
+      {/* <hr /> */}
     </div>
   )
 }

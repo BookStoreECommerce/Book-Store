@@ -25,7 +25,7 @@ const AuthorFilter = () => {
   };
 
   return (
-    <div className="filterSections">
+    <div>
       <h6>Author</h6>
       <Autocomplete
         style={{ width: "75%" }}
@@ -46,6 +46,7 @@ const AuthorFilter = () => {
           />
         )}
       />
+      <hr />
     </div>
   );
 };

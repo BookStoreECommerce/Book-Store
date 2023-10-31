@@ -17,12 +17,13 @@ const LanguageFilter = () => {
     };
 
   return (
-    <div className="filterSections">
+    <div>
       <h6>Language</h6>
       <FormGroup>
         <FormControlLabel control={<Checkbox name="language" value="English" onChange={handleChange}/>} label="English" />
         <FormControlLabel control={<Checkbox name="language" value="Arabic" onChange={handleChange}/>} label="Arabic" />
       </FormGroup>
+      <hr />
     </div>
   )
 }

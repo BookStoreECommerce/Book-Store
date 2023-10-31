@@ -25,6 +25,7 @@ const FormatFilter = () => {
         <FormControlLabel control={<Checkbox name="format" value="paperback" onChange={handleChange}/>} label="Paperback" />
         <FormControlLabel control={<Checkbox name="format" value="audiobook" onChange={handleChange}/>} label="Audiobook" />
       </FormGroup>
+      <hr />
     </div>
   )
 }

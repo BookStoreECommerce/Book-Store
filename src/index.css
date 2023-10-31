@@ -134,8 +134,3 @@ color: var(--navyBlue)!important;
 .css-6cwnna-MuiSlider-mark {
   background-color: var(--mainColor) !important;
 }
-
-.filterSections {
-  border-bottom: 1px solid grey;
-  padding-bottom: 1rem;
-}

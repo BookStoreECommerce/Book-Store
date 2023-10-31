@@ -19,7 +19,7 @@ const CategoriesFilter = () => {
   };
 
   return (
-    <div className="filterSections">
+    <div>
       <h6>Categories</h6>
       <Autocomplete
         style={{ width: "75%" }}
@@ -41,6 +41,7 @@ const CategoriesFilter = () => {
           />
         )}
       />
+      <hr />
     </div>
   );
 };
