@@ -69,7 +69,6 @@ const PriceFilter = () => {
               inputComponent: NumericFormatCustom,
             }}
             variant="standard"
-            className={`${styles.priceInput}`}
           />
           <TextField
             label="to"
@@ -81,7 +80,6 @@ const PriceFilter = () => {
               inputComponent: NumericFormatCustom,
             }}
             variant="standard"
-            className={`${styles.priceInput}`}
           />
         </div>
 

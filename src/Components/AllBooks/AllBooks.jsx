@@ -10,7 +10,9 @@ import { baseUrl } from "../../util/util";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Loading from "../ReusableComponents/Loading/Loading";
-import { setFilterObj } from "../../Redux/Slicies/filterSlice";
+import { handleFilterCheck, setFilterObj } from "../../Redux/Slicies/filterSlice";
+import { booksFilter } from "../../Redux/Slicies/filterActions";
+import { setBooksPageNumber } from "../../Redux/Slicies/bookSlice";
 function AllBook({ sectionName }) {
   useEffect(() => {
     AOS.init();
@@ -19,16 +21,17 @@ function AllBook({ sectionName }) {
 
   const [searchWord, setSearchWord] = useState("");
   const [numOfPages, setNumOfPages] = useState(0);
-  const { isLoading, books, totalCount } = useSelector((state) => state.books);
-  const { filterObj } = useSelector(
+  const { isLoading, books, totalCount, pageNumber } = useSelector((state) => state.books);
+  const { filterObj, filter, filterLoading } = useSelector(
     (state) => state.booksFilter
   );
   const nBookPerPage = 12;
   const dispatch = useDispatch();
-  const [pageNumber, setPageNumber] = useState(1);
+  // const [pageNumber, setPageNumber] = useState(1);
 
-  const handleChange = (e, pageNumber) => {
-    setPageNumber(pageNumber);
+  const handlePageChange = (e, pageNumber) => {
+    // setPageNumber(pageNumber);
+    dispatch(setBooksPageNumber(pageNumber));
   };
 
   const deleteFilter = (e) => {
@@ -39,6 +42,10 @@ function AllBook({ sectionName }) {
     } else {
       value = e.target.getAttribute("value");
     }
+    if (name === 'language' || name === 'published') {
+      dispatch(handleFilterCheck({checkName: value, check: false}));
+    }
+    handlePageChange(e, 1);
     dispatch(setFilterObj({ method: "delete", name, value }));
   };
 
@@ -53,9 +60,18 @@ function AllBook({ sectionName }) {
     setSearchWord(searchKeyword);
   }
 
+  // get filtered books
+  function getFilteredBooks(filter) {
+    dispatch(booksFilter({pageNumber, filter}));
+  }
+
+  const show = Object.keys(filterObj).map((key) => filterObj[key].length !== 0);
+
   useEffect(() => {
-    if (searchWord === "") {
+    if (searchWord === "" && !show.includes(true)) {
       getBooks();
+    } else if (show.includes(true)) {
+      getFilteredBooks(filter)
     } else {
       getBooksBySearch(searchWord);
     }
@@ -67,7 +83,6 @@ function AllBook({ sectionName }) {
 
   const url = `${baseUrl}book/?keyword=searchValue`;
 
-  const show = Object.keys(filterObj).map((key) => filterObj[key].length !== 0);
 
   return (
     <>
@@ -79,7 +94,7 @@ function AllBook({ sectionName }) {
           keyword="searchValue"
           hasImage="true"
           onSubmit={getBooksBySearch}
-          pageNumber={setPageNumber}
+          // pageNumber={setPageNumber}
           navParam="book"
         />
       </div>
@@ -107,7 +122,7 @@ function AllBook({ sectionName }) {
         </div>
       )}
 
-      {isLoading ? (
+      {(isLoading || filterLoading) ? (
         <Loading sectionName="AllBooks" />
       ) : (
         <div className="row">
@@ -150,7 +165,7 @@ function AllBook({ sectionName }) {
                   shape="rounded"
                   variant="outlined"
                   color="primary"
-                  onChange={handleChange}
+                  onChange={handlePageChange}
                 />
               </Stack>
             </div>

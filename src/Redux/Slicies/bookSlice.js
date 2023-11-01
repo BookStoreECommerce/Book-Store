@@ -5,7 +5,8 @@ const initialState = {
     isLoading: false,
     msgError: null,
     books: [],
-    totalCount: 0
+    totalCount: 0,
+    pageNumber: 1,
 }
 
 const bookSlice = createSlice({
@@ -16,6 +17,9 @@ const bookSlice = createSlice({
         const {books, totalCount} = action.payload
         state.books = books;
         state.totalCount = totalCount
+      },
+      setBooksPageNumber: (state, {payload}) => {
+        state.pageNumber = payload;
       }
     },
     extraReducers: builder => {
@@ -78,4 +82,4 @@ const bookSlice = createSlice({
     }
 })
 export const booksReducer = bookSlice.reducer;
-export const { setBooks } = bookSlice.actions;
+export const { setBooks, setBooksPageNumber } = bookSlice.actions;
