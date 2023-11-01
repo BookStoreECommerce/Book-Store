@@ -46,7 +46,12 @@ const booksFilterSlice = createSlice({
                     state.filterObj[payload.name] = state.filterObj[payload.name].filter((ele) => ele !== payload.value);
                 }
             }
-        }
+        },
+        clearFilterObj: (state, {payload}) => {
+            state.filter = '';
+            state.filterCheckBtns = {English: false, Arabic: false, "0-2000": false, "2000-2010": false, "2010-2020": false, finalpubDateCheck: false};
+            state.filterObj = {language: [], price: [], category: [], author: [], published: [], format: []};
+        },
     },
     extraReducers: builder => {
         //booksFilter
@@ -76,4 +81,4 @@ const booksFilterSlice = createSlice({
 })
 
 export const booksFilterReducer = booksFilterSlice.reducer;
-export const { setFilterObj, setFilter, handleFilterCheck } = booksFilterSlice.actions;
+export const { setFilterObj, setFilter, handleFilterCheck, clearFilterObj } = booksFilterSlice.actions;

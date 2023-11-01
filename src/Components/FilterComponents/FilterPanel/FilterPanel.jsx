@@ -8,17 +8,10 @@ import PriceFilter from "../PriceFilter/PriceFilter";
 import AuthorFilter from "../AuthorFilter/AuthorFilter";
 import PublicationDateFilter from "../PublicationDateFilter/PublicationDateFilter";
 // import FormatFilter from "../FormatFilter/FormatFilter";
-import { setFilter } from "../../../Redux/Slicies/filterSlice";
+import { clearFilterObj, setFilter } from "../../../Redux/Slicies/filterSlice";
 import { setBooksPageNumber } from "../../../Redux/Slicies/bookSlice";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
-import Slide from "@mui/material/Slide";
-import { DialogActions, DialogContent, useMediaQuery } from "@mui/material";
+import { AppBar, Button, Dialog, DialogActions, DialogContent, IconButton, Slide, Toolbar, Typography, useMediaQuery } from "@mui/material";
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -29,6 +22,9 @@ const FilterPanel = () => {
   const { pageNumber } = useSelector((state) => state.books);
   const { language, price, category, author, published, format } = useSelector(
     (state) => state.booksFilter.filterObj
+  );
+  const { filter } = useSelector(
+    (state) => state.booksFilter
   );
 
   const [open, setOpen] = useState(false);
@@ -42,6 +38,13 @@ const FilterPanel = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const clearFilter = () => {
+    console.log(filter);
+    dispatch(clearFilterObj());
+    dispatch(setBooksPageNumber(1));
+    dispatch(booksFilter({ pageNumber, filter }));
+  }
 
   const isSmallScreen = useMediaQuery("(max-width: 991px)");
 
@@ -167,8 +170,7 @@ const FilterPanel = () => {
             </DialogContent>
 
             <DialogActions>
-              <Button onClick={handleClose}>Clear</Button>
-              <Button onClick={handleClose}>Apply Filter</Button>
+              <Button onClick={clearFilter}>Clear</Button>
             </DialogActions>
           </Dialog>
         </div>

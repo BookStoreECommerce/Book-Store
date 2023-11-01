@@ -22,7 +22,7 @@ const CategoriesFilter = () => {
     <div>
       <h6>Categories</h6>
       <Autocomplete
-        style={{ width: "75%" }}
+        style={{ width: "100%" }}
         freeSolo
         autoComplete
         autoHighlight
