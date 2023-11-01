@@ -18,9 +18,10 @@ function NavBar({ navRef }) {
   const [navbar, setNavbar] = useState(false);
   const dispatch = useDispatch();
   const { user,token } = useSelector((state) => state.auth);
-  const { cartBooks ,localStorageCart} = useSelector((state) => state.cart);
+  // const token = localStorage.getItem("access-token");
+  const { books, localStorageCart } = useSelector((state) => state.cart);
 
-  
+
   const changeBackground = () => {
     if (window.scrollY >= 60) {
       setNavbar(true);
@@ -31,16 +32,17 @@ function NavBar({ navRef }) {
 
   // Read Cart Number
   let cartNumber;
-  if(token){
-    cartNumber=localStorageCart.length;
+  if (token) {
+    cartNumber = books.length;
   }
-  else if(!token && localStorage.getItem('cartDetails')){
-    cartNumber =JSON.parse(localStorage.getItem('cartDetails')).length;
+  else if (!token && localStorage.getItem('cartDetails')) {
+    cartNumber = JSON.parse(localStorage.getItem('cartDetails')).length;
 
   }
-  else if (!token && !localStorage.getItem('cartDetails')){
-    cartNumber =0;
+  else if (!token && !localStorage.getItem('cartDetails')) {
+    cartNumber = 0;
   }
+
   useEffect(() => {
 
     changeBackground();

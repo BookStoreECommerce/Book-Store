@@ -41,6 +41,7 @@ function AllBook({ sectionName }) {
   // get all books
   function getBooks() {
     dispatch(getAllBooks(pageNumber));
+
   }
 
   // filter books by search
@@ -52,6 +53,7 @@ function AllBook({ sectionName }) {
   useEffect(() => {
     if (searchWord === '') {
       getBooks()
+      console.log(books);
     } else {
       getBooksBySearch(searchWord)
     }

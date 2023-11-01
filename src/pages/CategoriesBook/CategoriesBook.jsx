@@ -28,7 +28,7 @@ const CategoriesBook = () => {
     let totalCount = { catBySlug }.catBySlug.totalCount;
     let totalPages = Math.ceil((totalCount / 12));
 
-    console.log(category);
+
 
     async function getBooksBySearch(searchKeyword) {
         dispatch(getCatBooksBySlug({ slug: Params.slug, keyword: searchKeyword }))

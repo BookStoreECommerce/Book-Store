@@ -27,7 +27,6 @@ const bookSlice = createSlice({
 
     })
 
-
     // getBooksByWord
     builder.addCase(getBooksByWord.pending, (state, action) => {
       state.isLoading = true;

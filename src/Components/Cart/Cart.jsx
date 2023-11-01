@@ -6,47 +6,46 @@ import { Link } from 'react-router-dom';
 import Loading from '../ReusableComponents/Loading/Loading';
 import ClearCart from './ClearCart';
 import DeleteCartItem from './DeleteCartItem';
-import { getCartWithoutToken, setCartInLocalStorage, updateCart } from '../../Redux/Slicies/cartAction';
+import { updateCart } from '../../Redux/Slicies/cartAction';
 import { Button } from "@mui/material";
 
 import styles from './Cart.module.css'
+import { getCartWithoutToken, setCartInLocalStorage } from '../../Redux/Slicies/cartSlice';
 
 
 export default function Cart() {
-    // const { isLoading } = useSelector((state) => state.cart);
+    // <div className={styles.bookAuthor}>
+    //    By {book.book.author}
+    // </div>
+
     const { footerH, navH } = useSelector((state) => state.app);
-    const { cartBooks, isLoading ,localStorageCart} = useSelector((state) => state.cart);
-    const {token} = useSelector((state) => state.auth);
+    const { books, isLoading, localStorageCart } = useSelector((state) => state.cart);
+    const { token } = useSelector((state) => state.auth);
     let cartArray = [];
-    console.log("cartArray",cartArray);
-    if(token){
-        cartArray = cartBooks;
-    }else if(token == null){
+
+    if (token) {
+        cartArray = books;
+        console.log(books);
+    } else if (token == null) {
         cartArray = JSON.parse(localStorage.getItem('cartDetails'));
-        // cartArray = localStorageCart;
+        console.log(cartArray);
     }
-    // console.log(cartArray);
 
     const dispatch = useDispatch();
 
     function decrease(book, index) {
         cartArray[index].qty = cartArray[index].qty - 1;
         dispatch(setCartInLocalStorage(cartArray));
-        // let qty = cartArray[index].qty - 1;
-        // dispatch(updateCart({ book, qty }));
     }
     function increase(book, index) {
-        console.log(cartArray);
         cartArray[index].qty = cartArray[index].qty + 1;
-        console.log(cartArray);
         dispatch(setCartInLocalStorage(cartArray));
-        // localStorage.setItem('cartDetails',JSON.stringify(cartArray))
-        // console.log({ book, qty });
-        // dispatch(updateCart({ book, qty }));
     }
-    useEffect(()=>{
+
+    useEffect(() => {
         dispatch(getCartWithoutToken());
-    },[dispatch])
+    }, [dispatch])
+
     return (
         <>
             <ScrollToTop />
@@ -65,12 +64,13 @@ export default function Cart() {
 
 
                         <div className="row justify-content-center align-items-center pb-2">
-                            {cartArray?.length >= 0  ?
+                            {cartArray?.length >= 0 ?
                                 <>
-                                    <div className={styles.checkoutBtn}>
+                                    {cartArray.length > 0 ? <div className={styles.checkoutBtn}>
                                         <Button
                                             variant="outlined"
-                                            type="submit"
+                                            component={Link}
+                                            to="/checkout"
                                             endIcon={
                                                 isLoading ? (
                                                     <i className="fas fa-spinner fa-spin"></i>
@@ -81,12 +81,11 @@ export default function Cart() {
                                             className={`mainBtn ${styles.fitContent}`}
 
                                         >
-                                            Ckeckout
+                                            Checkout
                                         </Button>
-                                    </div>
+                                    </div> : ''}
 
                                     {cartArray?.map((book, index) => (
-                                      console.log("book from map",book),
                                         <div className={`${styles.orderCard} col-lg-7 col-md-8 col-sm-10 col-10`} key={index}>
                                             <div className={`row justify-content-between ${styles.cardParent}`}>
                                                 <div className='col-md-11'>
@@ -94,7 +93,7 @@ export default function Cart() {
                                                         <div className='col-sm-3 col-4'>
                                                             <Link to={`/book/${book.book.slug}`}>
                                                                 <div className={styles.bookCoverWrapper}>
-                                                                    <img src={book.image?.secure_url} alt="Book Cover" />
+                                                                    <img src={book.book.image?.secure_url} alt="Book Cover" />
                                                                 </div>
 
                                                             </Link>
@@ -103,11 +102,9 @@ export default function Cart() {
                                                         <div className={`${styles.bookDetails} col-sm-9 col-8 ps-0`}>
                                                             <div className={styles.titleAndPrice}>
                                                                 <div className={styles.bookTitle}>
-                                                                    {book.name}
+                                                                    {book.book.name}
                                                                 </div>
-                                                                <div className={styles.bookAuthor}>
-                                                                   By {book.author}
-                                                                </div>
+
                                                             </div>
 
                                                             <div className={styles.bookPrice}>
@@ -125,7 +122,7 @@ export default function Cart() {
                                                     </div>
                                                 </div>
                                                 <div className={` ${styles.deleteAndSubTotal}  `}>
-                                                    <DeleteCartItem id={book?.book.id}  />
+                                                    <DeleteCartItem id={book?.book.id} />
 
                                                 </div>
                                                 <div className={styles.bookSubTotal}>
@@ -134,7 +131,12 @@ export default function Cart() {
                                             </div>
                                         </div>
                                     ))}
-                                    <ClearCart />
+                                    {cartArray.length > 0 ? <ClearCart /> : <div className={styles.notFoundContainer}>
+                                        <div className={styles.notFoundContainer}>
+                                            <p>No Items Found In Cart</p>
+                                        </div>
+                                    </div>}
+
                                 </>
                                 : <div className={styles.notFoundContainer}>
                                     <div className={styles.notFoundContainer}>

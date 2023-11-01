@@ -1,49 +1,63 @@
 import React from 'react'
-import { addCartWithOutToken, addCartWithToken, setCartInLocalStorage } from '../../Redux/Slicies/cartAction';
+import { addCartWithToken } from '../../Redux/Slicies/cartAction';
 import { useDispatch } from 'react-redux';
 import styles from "./AddCart.module.css";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
+import { setCartInLocalStorage } from '../../Redux/Slicies/cartSlice';
 
 function AddCart({ id, book }) {
   const token = localStorage.getItem("access-token");
   const dispatch = useDispatch();
-  console.log("book",book);
-  console.log("id",id);
-  let cart;
-  const cartDetails = {
-    book: { id: book._id },
-    name:book.name,
-    image:book.image,
-    author:book.author,
-    price: book.price,
-    qty: 1,
-    totalPrice: book.price,
+
+  let cart2;
+
+  const cart = {
+    books: [{
+      book: {
+        image: book.image,
+        _id: id,
+        price: book.price,
+        name: book.name,
+        id: id
+      },
+      price: book.price,
+      qty: 1,
+      totalPrice: book.price,
+    }],
+    totalAmount: book.price,
+    totalAmountAfterDisc: book.price,
+    discount: 0
   }
-  // console.log(book);
-
   const addCartProduct = async () => {
-
-
     if (token) {
-      await dispatch(addCartWithToken({ book: id }));
+      // if (!localStorage.getItem("cartDetails")) {
+        await dispatch(addCartWithToken({ book: id }));
+      // }
+      // await dispatch(addCartWithToken({ book: id }));
     } else {
-      // localStorage.removeItem("cartDetails")
-      cart = JSON.parse(localStorage.getItem("cartDetails") || "[]");
-      if (cart.length > 0) {
-        cart.map((el) => {
-
-          if (el.book.id === id) {
-            console.log("yesssss");
-            cart = cart.filter((car) => car.book.id !== id)
-            cartDetails.qty++
-            cartDetails.totalPrice = cartDetails.qty * cartDetails.price
-          }
-        })
+      if (localStorage.getItem("cartDetails")) {
+        cart2 = JSON.parse(localStorage.getItem("cartDetails") || "[]");
+        if (cart2.books.length > 0) {
+          cart2.books.map((el) => {
+            if (el.book.id === id) {
+              cart2.books = cart2.books.filter((car) => car.book.id !== id)
+              el.qty++
+              el.totalPrice = el.qty * el.price
+              cart2.books.push(el)
+            } else {
+              console.log(cart.books[0]);
+              cart2.books.push(cart.books[0])
+              console.log("not equal");
+            }
+            cart2.totalAmount += el.price
+            cart2.totalAmountAfterDisc += el.price
+          })
+        }
+        localStorage.setItem("cartDetails", JSON.stringify(cart2))
+      } else {
+        localStorage.setItem("cartDetails", JSON.stringify(cart))
       }
-      cart.push(cartDetails)
-      // localStorage.setItem("cartDetails", JSON.stringify(cart))
-      dispatch(setCartInLocalStorage(cart));
     }
 
     toast.success(`Book added to cart!`, {

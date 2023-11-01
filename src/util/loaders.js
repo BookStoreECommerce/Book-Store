@@ -17,7 +17,7 @@ export const indexLoader = async () => {
     await store.dispatch(getAllCategories());
     await store.dispatch(getNewBooks());
     const isLogedin = store.getState().auth.user !== null;
-    if (isLogedin || !token) {
+    if (!token) {
         return null;
     }
     await store.dispatch(getUserProfile())

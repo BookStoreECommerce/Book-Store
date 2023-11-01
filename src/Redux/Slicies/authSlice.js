@@ -6,7 +6,7 @@ import { forgetPassword, getUserProfile, register, registerVerification, resendC
 const initialState = {
     user: null,
     isLoading: false,
-    token: null,
+    token: localStorage.getItem("access-token") || null,
     msgError: null,
     searchedBooks: [],
     suggestedBooks: [],
@@ -29,6 +29,7 @@ const authSlice = createSlice({
         },
         logout: (state, action) => {
             localStorage.removeItem('access-token');
+            state.token= null;
         }
     },
     extraReducers: builder => {
@@ -41,7 +42,6 @@ const authSlice = createSlice({
             saveUserData(token)
             state.token = token
             state.isLoading = false;
-
         })
         builder.addCase(signin.rejected, (state, action) => {
             state.msgError = action.payload.error
@@ -61,7 +61,7 @@ const authSlice = createSlice({
             if (action.payload.error) {
                 state.msgError = action.payload.error
             } else {
-            // } else {
+                // } else {
                 state.msgError = action.payload.errors[0].message
             }
             state.isLoading = false;
