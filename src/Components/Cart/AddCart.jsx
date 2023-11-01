@@ -29,30 +29,25 @@ function AddCart({ id, book }) {
     totalAmountAfterDisc: book.price,
     discount: 0
   }
+  
   const addCartProduct = async () => {
+    let flag = false;
     if (token) {
-      // if (!localStorage.getItem("cartDetails")) {
-        await dispatch(addCartWithToken({ book: id }));
-      // }
-      // await dispatch(addCartWithToken({ book: id }));
+      await dispatch(addCartWithToken({ book: id }));
     } else {
       if (localStorage.getItem("cartDetails")) {
         cart2 = JSON.parse(localStorage.getItem("cartDetails") || "[]");
         if (cart2.books.length > 0) {
           cart2.books.map((el) => {
             if (el.book.id === id) {
-              cart2.books = cart2.books.filter((car) => car.book.id !== id)
               el.qty++
               el.totalPrice = el.qty * el.price
-              cart2.books.push(el)
-            } else {
-              console.log(cart.books[0]);
-              cart2.books.push(cart.books[0])
-              console.log("not equal");
+              flag = true;
             }
-            cart2.totalAmount += el.price
-            cart2.totalAmountAfterDisc += el.price
           })
+          if (!flag) {
+            cart2.books.push(cart.books[0])
+          }
         }
         localStorage.setItem("cartDetails", JSON.stringify(cart2))
       } else {
@@ -76,7 +71,7 @@ function AddCart({ id, book }) {
   return (
     <>
       <span className={` ${styles.pointer}  text-decoration-none`} >
-        <span className={styles.icon} onClick={() => addCartProduct()}>
+        <span className={`${styles.icon} `} onClick={() => addCartProduct()}>
           <i className="fa-solid fa-cart-shopping" ></i>
         </span>
         <ToastContainer position="bottom-left"

@@ -22,3 +22,11 @@
     border: 1px solid #f8f9fa;
   
 }
+
+.iconDisabled{
+    background-color: var(--mainColor);
+    color: #f8f9fa;
+    border: 1px solid #f8f9fa;
+    cursor: auto;
+    pointer-events: none;
+}

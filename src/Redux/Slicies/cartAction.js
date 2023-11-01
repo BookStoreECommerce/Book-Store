@@ -21,9 +21,11 @@ export const addCartWithToken = createAsyncThunk("cart/addWithToken", async (boo
     }
 });
 
-export const updateCart = createAsyncThunk("cart/patchData", async (bookId, { rejectWithValue }) => {
+export const updateCart = createAsyncThunk("cart/patchData", async ({book,qty}, { rejectWithValue }) => {
     try {
-        const { data } = await axiosInstance.patch('cart', bookId)
+        console.log(book);
+        console.log(qty);
+        const { data } = await axiosInstance.patch('cart', {book,qty})
         return data;
     } catch (error) {
         return rejectWithValue(error.response.data)

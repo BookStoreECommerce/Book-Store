@@ -52,8 +52,12 @@ function NavBar({ navRef }) {
 
   let { categoriesBooks } = useSelector((state) => state.book)
   let category = { categoriesBooks }.categoriesBooks.result
+  
   useEffect(() => {
     dispatch(getCart());
+  }, [token])
+
+  useEffect(() => {
     dispatch(getCatBooks())
   }, [])
 

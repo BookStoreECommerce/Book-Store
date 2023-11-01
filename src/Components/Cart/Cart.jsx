@@ -28,18 +28,29 @@ export default function Cart() {
         console.log(books);
     } else if (token == null) {
         cartArray = JSON.parse(localStorage.getItem('cartDetails'));
-        console.log(cartArray);
+        // console.log(cartArray);
     }
 
     const dispatch = useDispatch();
 
     function decrease(book, index) {
-        cartArray[index].qty = cartArray[index].qty - 1;
-        dispatch(setCartInLocalStorage(cartArray));
+        // console.log(index);
+        // console.log(cartArray[index]);
+        let qty = cartArray[index].qty - 1;
+        // console.log(cartArray[index].qty);
+        if (token) {
+            dispatch(updateCart({ book: cartArray[index].book.id, qty }));
+        }
+        // dispatch(setCartInLocalStorage(cartArray));
     }
     function increase(book, index) {
-        cartArray[index].qty = cartArray[index].qty + 1;
-        dispatch(setCartInLocalStorage(cartArray));
+        // console.log(cartArray[index]);
+        let qty = cartArray[index].qty + 1;
+        if (token) {
+            dispatch(updateCart({ book: cartArray[index].book.id, qty }));
+        }
+        // cartArray[index].qty = cartArray[index].qty + 1;
+        // dispatch(setCartInLocalStorage(cartArray));
     }
 
     useEffect(() => {
