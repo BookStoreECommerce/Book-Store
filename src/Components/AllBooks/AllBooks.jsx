@@ -62,11 +62,12 @@ function AllBook({ sectionName }) {
 
   // get filtered books
   function getFilteredBooks(filter) {
+    setSearchWord("")
     dispatch(booksFilter({pageNumber, filter}));
   }
 
   const show = Object.keys(filterObj).map((key) => filterObj[key].length !== 0);
-
+console.log(searchWord);
   useEffect(() => {
     if (searchWord === "" && !show.includes(true)) {
       getBooks();
@@ -75,7 +76,7 @@ function AllBook({ sectionName }) {
     } else {
       getBooksBySearch(searchWord);
     }
-  }, [pageNumber]);
+  }, [pageNumber,searchWord]);
 
   useEffect(() => {
     setNumOfPages(Math.ceil(totalCount / nBookPerPage));

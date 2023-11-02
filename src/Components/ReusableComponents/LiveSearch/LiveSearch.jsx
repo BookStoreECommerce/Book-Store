@@ -19,6 +19,7 @@ import classes from "./LiveSearch.module.css";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { setBooksPageNumber } from "../../../Redux/Slicies/bookSlice";
+import { clearFilterObj } from "../../../Redux/Slicies/filterSlice";
 
 const LiveSearch = ({
   navParam,
@@ -42,7 +43,10 @@ const LiveSearch = ({
     e.preventDefault();
     // if (val.length >= +minCharToSearch && pageNumber) pageNumber(1);
     // new
-    if (val.length >= +minCharToSearch && pageNumber) dispatch(setBooksPageNumber(1));
+    if (val.length >= +minCharToSearch && pageNumber) {
+      dispatch(clearFilterObj())
+      dispatch(setBooksPageNumber(1));
+    }
     onSubmit(val);
   };
 
