@@ -43,7 +43,7 @@ function AllBook({ sectionName }) {
       value = e.target.getAttribute("value");
     }
     if (name === 'language' || name === 'published') {
-      dispatch(handleFilterCheck({checkName: value, check: false}));
+      dispatch(handleFilterCheck(value));
     }
     handlePageChange(e, 1);
     dispatch(setFilterObj({ method: "delete", name, value }));

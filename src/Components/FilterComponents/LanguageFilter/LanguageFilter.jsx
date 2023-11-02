@@ -12,7 +12,8 @@ const LanguageFilter = () => {
 
     const handleChange = (e) => {
       let method;
-      dispatch(handleFilterCheck({checkName: e.target.value, check: !filterCheckBtns[e.target.value]}));
+      dispatch(handleFilterCheck(e.target.value));
+      console.log();
       if (e.target.checked === true) method = 'add'
       else method = 'delete'
           
@@ -23,8 +24,8 @@ const LanguageFilter = () => {
     <div>
       <h6>Language</h6>
       <FormGroup className={`${styles.wFitContent}`}>
-        <FormControlLabel control={<Checkbox name="language" checked={filterCheckBtns.English} value="English" onChange={handleChange}/>} label="English" />
-        <FormControlLabel control={<Checkbox name="language" checked={filterCheckBtns.Arabic} value="Arabic" onChange={handleChange}/>} label="Arabic" />
+        <FormControlLabel control={<Checkbox name="language" checked={filterCheckBtns["English"] || false} value="English" onChange={handleChange}/>} label="English" />
+        <FormControlLabel control={<Checkbox name="language" checked={filterCheckBtns["Arabic"] || false} value="Arabic" onChange={handleChange}/>} label="Arabic" />
       </FormGroup>
       <hr />
     </div>

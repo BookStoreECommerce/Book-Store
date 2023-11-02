@@ -12,7 +12,7 @@ const PublicationDateFilter = () => {
 
   const handleChange = (e) => {
     let method;
-    dispatch(handleFilterCheck({checkName: e.target.value, check: !filterCheckBtns[e.target.value]}));
+    dispatch(handleFilterCheck(e.target.value));
     if (e.target.checked === true) method = 'add'
     else method = 'delete'
         
@@ -28,10 +28,10 @@ const PublicationDateFilter = () => {
     <div>
       <h6>Publication Date</h6>
       <FormGroup className={`${styles.wFitContent}`}>
-        <FormControlLabel control={<Checkbox name="published" checked={filterCheckBtns[values[0]]} value={values[0]} onChange={handleChange}/>} label="Before 2000" />
-        <FormControlLabel control={<Checkbox name="published" checked={filterCheckBtns[values[1]]} value={values[1]} onChange={handleChange}/>} label="2000 - 2010" />
-        <FormControlLabel control={<Checkbox name="published" checked={filterCheckBtns[values[2]]} value={values[2]} onChange={handleChange}/>} label="2010 - 2020" />
-        <FormControlLabel control={<Checkbox name="published" checked={filterCheckBtns[values[3]]} value={values[3]} onChange={handleChange}/>} label="After 2020" />
+        <FormControlLabel control={<Checkbox name="published" checked={filterCheckBtns[values[0]] || false} value={values[0]} onChange={handleChange}/>} label="Before 2000" />
+        <FormControlLabel control={<Checkbox name="published" checked={filterCheckBtns[values[1]] || false} value={values[1]} onChange={handleChange}/>} label="2000 - 2010" />
+        <FormControlLabel control={<Checkbox name="published" checked={filterCheckBtns[values[2]] || false} value={values[2]} onChange={handleChange}/>} label="2010 - 2020" />
+        <FormControlLabel control={<Checkbox name="published" checked={filterCheckBtns[values[3]] || false} value={values[3]} onChange={handleChange}/>} label="After 2020" />
       </FormGroup>
       {/* <hr /> */}
     </div>

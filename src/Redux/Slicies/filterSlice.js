@@ -1,16 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { booksFilter, getAllAuthors } from "./filterActions";
 
-const date = new Date();
-const thisYear = date.getFullYear();
-const finalpubDateCheck = `2020-${thisYear}`;
-
 const initialState = {
     allAuthors: [],
     filterObj: {language: [], price: [], category: [], author: [], published: [], format: []},
     filter: '',
     filterLoading: false,
-    filterCheckBtns: {English: false, Arabic: false, "0-2000": false, "2000-2010": false, "2010-2020": false, finalpubDateCheck: false},
+    filterCheckBtns: {},
     msgError: null,
 }
 
@@ -19,7 +15,11 @@ const booksFilterSlice = createSlice({
     initialState,
     reducers: {
         handleFilterCheck: (state, {payload}) => {
-            state.filterCheckBtns[payload.checkName] = payload.check;
+            if(state.filterCheckBtns.hasOwnProperty(payload)){
+                state.filterCheckBtns[payload] = !state.filterCheckBtns[payload];
+            } else {
+                state.filterCheckBtns[payload] = true;
+            }
         },
         setFilter: (state, {payload}) => {
             state.filter = payload;
@@ -49,7 +49,7 @@ const booksFilterSlice = createSlice({
         },
         clearFilterObj: (state, {payload}) => {
             state.filter = '';
-            state.filterCheckBtns = {English: false, Arabic: false, "0-2000": false, "2000-2010": false, "2010-2020": false, finalpubDateCheck: false};
+            state.filterCheckBtns = {}
             state.filterObj = {language: [], price: [], category: [], author: [], published: [], format: []};
         },
     },
