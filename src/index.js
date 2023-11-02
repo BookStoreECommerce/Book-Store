@@ -48,6 +48,13 @@ const router = createBrowserRouter([
         },
       },
       {
+        path:'wishlist',
+        async lazy(){
+          const {default:Whishlist} = await import('./Components/Whishlist/Whishlist');
+          return {Component: Whishlist};
+        }
+      },
+      {
         path: "userInfo",
         async lazy() {
           const { default: UserInfo } = await import(

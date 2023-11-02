@@ -11,7 +11,7 @@ box-sizing: border-box;
   --navyBlue: rgb(43, 58, 85);
   --white: #ffffff;
   --mainColor: rgb(206, 119, 119);
-  --secondaryColor: #e8c4c4;
+  --secondaryColor: rgb(232, 196, 196);
   --beigeColor: rgb(242, 229, 229);
 }
 
@@ -116,6 +116,14 @@ color: var(--navyBlue)!important;
 }
 .offcanvas{
   background-image: linear-gradient(-26deg, var(--beigeColor), white)!important;
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--error {
+
+  background: var(--mainColor)!important;
+}
+.Toastify__toast-theme--colored.Toastify__toast--success {
+  background: var(--navyBlue)!important;
 }
 
 @media screen and (min-width:300px) and (max-width:768px){

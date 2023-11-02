@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 
 const Suggested = () => {
   const { suggestedBooks } = useSelector((state) => state.auth);
+  
   const Suggested = suggestedBooks.map((ele) => {
     return {
       id: ele._id,
@@ -17,6 +18,8 @@ const Suggested = () => {
       author: ele.author,
       price: ele.price,
       sale: ele.discount,
+      category:ele.category,
+      rating:ele.rating
     };
   });
 
@@ -84,18 +87,22 @@ const Suggested = () => {
               </h2>
               <div className={`col-lg-11 ${styles.marginBottom}`}>
                 <Slider {...settings}>
+              
                   {Suggested.map((Suggested, index) => (
                     <BookCard
-                      cardStyle={{ margin: "10px", padding: "0px" }}
+                      cardStyle={{margin: "10px", padding: "10px", minHeight:"300px", maxHeight:"300px", display:"flex", justifyContent:"center" ,alignItems:"center"}}
                       key={Suggested.id}
                       image={Suggested.image}
                       name={Suggested.name}
                       price={Suggested.price}
                       author={Suggested.author}
-                      rate={Suggested.rate}
+                      rate={Suggested.rating}
                       sale={Suggested.sale}
-                      section={"Suggested"}
+                      section="Suggested"
                       slug= {Suggested.slug}
+                      category = {Suggested.category}
+                      sectionName="whislist"
+                      id={Suggested.id}
                     />
                   ))}
                 </Slider>
