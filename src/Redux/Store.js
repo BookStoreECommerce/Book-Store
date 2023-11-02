@@ -23,7 +23,7 @@ const store = configureStore({
         books: booksReducer,
         whishlist:whishListReducer,
         whishListBooks:whishListReducer,
-        review:reviewReducer
+        review:reviewReducer,
         booksFilter: booksFilterReducer,
     }
 })
