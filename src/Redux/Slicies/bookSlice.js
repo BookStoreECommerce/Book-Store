@@ -5,14 +5,24 @@ const initialState = {
     isLoading: false,
     msgError: null,
     books: [],
-    totalCount: 0
+    totalCount: 0,
+    pageNumber: 1,
 }
 
 const bookSlice = createSlice({
     name: "allBooks",
     initialState,
+    reducers:{
+      setBooks: (state, action) => {
+        const {books, totalCount} = action.payload
+        state.books = books;
+        state.totalCount = totalCount
+      },
+      setBooksPageNumber: (state, {payload}) => {
+        state.pageNumber = payload;
+      }
+    },
     extraReducers: builder => {
-
         // getAllBooks
         builder.addCase(getAllBooks.pending, (state, action) => {
             state.isLoading = true;
@@ -71,6 +81,5 @@ const bookSlice = createSlice({
 
     }
 })
-
 export const booksReducer = bookSlice.reducer;
-export const { clearError, setUser, logout } = bookSlice.actions;
+export const { setBooks, setBooksPageNumber } = bookSlice.actions;

@@ -153,11 +153,11 @@ function NavBar({ navRef }) {
 
                   <ul className={`dropdown-menu ${styles.dropdownMenu}`}>
                     {category?.slice(0,8)?.map((cat,index)=>
-                           <li key={index}>
-                           <NavLink className={({ isActive }) => isActive ? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}` : linkStyle + ` dropdown-item ${styles.item}`} to={`categories/${cat.slug}`}>
-                             {cat.name}
-                           </NavLink>
-                         </li>
+                          <li key={index}>
+                          <NavLink className={({ isActive }) => isActive ? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}` : linkStyle + ` dropdown-item ${styles.item}`} to={`categories/${cat.slug}`}>
+                            {cat.name}
+                          </NavLink>
+                        </li>
                     )}
                     <li>
                       <NavLink className={({ isActive }) => isActive ? linkStyle + styles.dropItemActivetran + ` dropdown-item text-center ${styles.itemColor}` : linkStyle + ` dropdown-item text-center ${styles.itemColor}`} to="categories">
@@ -227,9 +227,8 @@ function NavBar({ navRef }) {
                       </Link>
                     </li>
                   </ul>
-                </>}
-
-
+                </>
+                }
             </div>
           </div>
         </nav>

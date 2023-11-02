@@ -138,3 +138,7 @@ color: var(--navyBlue)!important;
     padding-bottom: 10px;
   }
 }
+
+.css-6cwnna-MuiSlider-mark {
+  background-color: var(--mainColor) !important;
+}
