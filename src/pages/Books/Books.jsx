@@ -23,7 +23,7 @@ export default function Books() {
           minHeight: `calc(100vh - ${footerH + navH}px)`,
         }}>
         <div className="container-fluid justify-content-evenly row w-100 py-5">
-          <div className="col-lg-3 col-md-10 col-12">
+          <div className="col-lg-3 col-md-10 col-12 mb-lg-0 mb-4 d-flex justify-content-end">
             <FilterPanel />
           </div>
           <div className="col-lg-8 col-md-10 col-12">

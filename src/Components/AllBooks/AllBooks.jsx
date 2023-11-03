@@ -67,7 +67,7 @@ function AllBook({ sectionName }) {
   }
 
   const show = Object.keys(filterObj).map((key) => filterObj[key].length !== 0);
-console.log(searchWord);
+
   useEffect(() => {
     if (searchWord === "" && !show.includes(true)) {
       getBooks();
@@ -137,7 +137,7 @@ console.log(searchWord);
             books.map((book, index) => (
               <div
                 key={index}
-                className={` col-lg-3 col-sm-6 col-12 mb-5 ${styles.bookCard}`}
+                className={`col-md-3 col-sm-4 col-6 mb-5 ${styles.bookCard}`}
               >
                 <BookCard
                   key={book.id}
