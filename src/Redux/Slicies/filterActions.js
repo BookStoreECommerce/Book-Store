@@ -4,7 +4,7 @@ import { setBooks } from "./bookSlice";
 
 export const booksFilter = createAsyncThunk("booksFilter", async ({pageNumber, filter}, { rejectWithValue, dispatch }) => {
     try {
-        console.log('filter', filter);
+        // console.log('filter', filter);
         const { data } = await axiosInstance.get(`book?${filter}&page=${pageNumber}`);
         dispatch(setBooks({books: data.result, totalCount: data.totalCount}))
         return data

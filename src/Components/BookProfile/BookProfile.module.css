@@ -157,3 +157,27 @@
       font-size: 13px;
     }
 }
+
+.addToCartSection{
+    display: flex;
+    justify-content: end;
+}
+/* .addToCartBtn{
+    border: 1px solid var(--mainColor);
+    border-radius: 5px;
+}
+.addToCartBtn:hover{
+    border: 1px solid var(--mainColor);
+    border-radius: 5px;
+    background-color: var(--mainColor);
+    color: #fff;
+} */
+
+@media screen and (max-width:767px) {
+    .hide{
+        display: none!important;
+    }
+    .show{
+        display: block;
+    }
+}

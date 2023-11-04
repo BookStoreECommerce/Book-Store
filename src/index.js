@@ -110,6 +110,15 @@ const router = createBrowserRouter([
           return { Component: CategoriesBook };
         },
       },
+      {
+        path: "cart",
+        async lazy() {
+          const { default: Cart } = await import(
+            "./Components/Cart/Cart"
+          );
+          return { Component: Cart };
+        },
+      },
     ],
   },
   {

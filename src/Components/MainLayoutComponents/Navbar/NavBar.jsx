@@ -10,6 +10,7 @@ import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined
 import { logout } from "../../../Redux/Slicies/authSlice";
 import {signout } from "../../../Redux/Slicies/authActions";
 import { getCatBooks } from '../../../Redux/Slicies/CategoriesBookActions';
+import { getCart } from "../../../Redux/Slicies/cartAction";
 
 
 function NavBar({ navRef }) {
@@ -17,8 +18,10 @@ function NavBar({ navRef }) {
   const [navbar, setNavbar] = useState(false);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+  // const { user, token } = useSelector((state) => state.auth);
+  const token = localStorage.getItem("access-token");
+  const { books, localStorageCart } = useSelector((state) => state.cart);
 
-  const token = localStorage.getItem('access-token');
   let arr = JSON.parse(localStorage.getItem('whishList'))
 
 
@@ -29,15 +32,33 @@ function NavBar({ navRef }) {
       setNavbar(false);
     }
   };
+
+    // Read Cart Number
+    let cartNumber;
+    if (token) {
+      cartNumber = books.length;
+    }
+    else if (!token && localStorage.getItem('cartDetails')) {
+      cartNumber = JSON.parse(localStorage.getItem('cartDetails')).length;
+  
+    }
+    else if (!token && !localStorage.getItem('cartDetails')) {
+      cartNumber = 0;
+    }
+
   useEffect(() => {
 
     changeBackground();
     window.addEventListener("scroll", changeBackground);
   });
 
-
   let { categoriesBooks } = useSelector((state) => state.book)
   let category = { categoriesBooks }.categoriesBooks.result
+
+  useEffect(() => {
+    dispatch(getCart());
+  }, [token])
+
   useEffect(() => {
     dispatch(getCatBooks())
   }, [])
@@ -76,13 +97,13 @@ function NavBar({ navRef }) {
               </Link>
           }
           </li>
-          <li className="nav-item me-5 position-relative">
+          <li readOnly className="nav-item me-5 position-relative">
             <Link className={`nav-link ${styles.navLinkIcon}`} to="cart">
               <ShoppingCartOutlinedIcon
                 sx={{ fontSize: { xs: 24, sm: 24, md: 27, lg: 24 } }}
               />
               <div className={` ${styles.number}`}>
-                <span className={` ${styles.num}`}>0</span>
+                <span className={` ${styles.num}`}>{cartNumber}</span>
               </div>
             </Link>
           </li>

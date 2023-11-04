@@ -16,6 +16,7 @@ import WishListButton from "../ReusableComponents/WishListButton/WishListButton"
 import Review from "../Review/Review";
 import Rating from "../ReusableComponents/Rating/Rating";
 import profile from '../../assets/profile.png'
+import AddCart from "../Cart/AddCart";
 
 export default function BookProfile() {
   const [book, setBook] = useState(null)
@@ -80,8 +81,11 @@ export default function BookProfile() {
                     <p className={styles.textColorDetails}><span className={styles.textColor}>Language:</span> {specBook?.lang}</p>
                     <p className={styles.textColorDetails}><span className={styles.textColor}>Paperback:</span> {specBook?.pages}</p>
                     <p className={styles.textColorDetails}><span className={styles.textColor}>ISBN:</span> {specBook?.ISBN}</p>
-
-
+                  </div>
+                  <div className={styles.addToCartSection}>
+                    <div className={styles.addToCartBtn}>
+                      <AddCart id={specBook?._id} />
+                    </div>
                   </div>
                 </div>
 

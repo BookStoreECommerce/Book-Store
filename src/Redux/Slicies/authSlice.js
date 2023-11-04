@@ -30,7 +30,7 @@ const authSlice = createSlice({
         logout: (state, action) => {
             localStorage.removeItem('access-token');
             localStorage.removeItem('whishList');
-
+            state.token= null;
         }
     },
     extraReducers: builder => {
@@ -111,9 +111,7 @@ const authSlice = createSlice({
             const token = action.payload.token;
             state.isLoading = false;
             state.token = token
-            saveUserData(token)
-
-            
+            saveUserData(token)   
         })
         builder.addCase(signinWithToken.rejected, (state, action) => {
             state.isLoading = false

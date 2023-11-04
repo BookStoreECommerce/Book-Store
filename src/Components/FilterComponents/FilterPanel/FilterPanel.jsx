@@ -40,7 +40,6 @@ const FilterPanel = () => {
   };
 
   const clearFilter = () => {
-    console.log(filter);
     dispatch(clearFilterObj());
     dispatch(setBooksPageNumber(1));
     dispatch(booksFilter({ pageNumber, filter }));

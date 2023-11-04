@@ -14,7 +14,6 @@ const AuthorFilter = () => {
   }, [dispatch, allAuthors]);
 
   const searchAuthor = () => {
-    console.log(allAuthors);
     setMyOptions(allAuthors.map((ele) => ele));
   };
   

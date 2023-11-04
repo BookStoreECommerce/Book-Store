@@ -5,7 +5,7 @@ import bookImage from "../../../assets/book.jpg";
 
 import WishListButton from "../WishListButton/WishListButton";
 import Rating from "../Rating/Rating";
-
+import AddCart from "../../Cart/AddCart";
 
 const BookCard = ({ book, id, image, name, price, author, section, cardStyle, sale, category, slug, sectionName, rate }) => {
 
@@ -23,11 +23,12 @@ const BookCard = ({ book, id, image, name, price, author, section, cardStyle, sa
                   </span>
                 </Link>
 
-                <Link to="cart" className="text-decoration-none">
+                {/* <Link to="cart" className="text-decoration-none">
                   <span className={styles.icon}>
                     <i className="fa-solid fa-cart-shopping"></i>
                   </span>
-                </Link>
+                </Link> */}
+                <AddCart id={book?._id} book={book?book:''} />
               </>
             ) : (
               <>
@@ -38,7 +39,8 @@ const BookCard = ({ book, id, image, name, price, author, section, cardStyle, sa
               </>
             )}
           </div>
-          {section === "bestSeller" ? (
+          {section === "bestSeller" || section === "newBooks" ? (
+          // {section === "bestSeller" ? (
             <img src={book?.image?.secure_url ? book?.image?.secure_url : image ? image : bookImage} className={`w-100 ${styles.cardImgNew}`} alt="" />
           ) :
             sectionName === "whislist" ?

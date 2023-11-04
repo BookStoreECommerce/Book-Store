@@ -13,7 +13,6 @@ const LanguageFilter = () => {
     const handleChange = (e) => {
       let method;
       dispatch(handleFilterCheck(e.target.value));
-      console.log();
       if (e.target.checked === true) method = 'add'
       else method = 'delete'
           
