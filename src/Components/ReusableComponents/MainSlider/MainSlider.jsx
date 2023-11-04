@@ -2,7 +2,7 @@ import React from 'react'
 import Slider from 'react-slick';
 import BookCard from '../BookCard/BookCard.jsx';
 
-export default function ({arr, title,autoplay= true}) {
+export default function MainSlider({arr, title,autoplay= true}) {
     const settings = {
         className: "center",
         centerMode: true,
@@ -55,7 +55,6 @@ export default function ({arr, title,autoplay= true}) {
           },
         ],
       };
-
     return (
         <section className="px-lg-0 px-4 " data-testid="BestSeller">
           <div className="container-fluid" >
