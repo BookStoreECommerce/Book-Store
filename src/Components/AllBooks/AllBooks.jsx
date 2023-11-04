@@ -150,6 +150,7 @@ function AllBook({ sectionName }) {
                   author={book.author}
                   rate={book.rate}
                   section={sectionName}
+                  id={book._id}
                 />
               </div>
             ))
