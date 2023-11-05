@@ -42,18 +42,16 @@ const Favourites = () => {
     favCategory: Yup.string().required("This field is required"),
   });
 
-  let categoriesFilterArray = [];
+  let categoriesFavArray = [];
   const concatIdAndName = () => {
     for (let i = 0; i < chosenFavCategory.length; i++) {
-      categoriesFilterArray.push(
-        allCategories.find((category) => category.name === chosenFavCategory[i]).id
-      );
+      categoriesFavArray.push({id: allCategories.find((category) => category.name === chosenFavCategory[i]).id});
     }
   };
 
   const handleSubmit = async () => {
     concatIdAndName();
-    await dispatch(setFavCategories(categoriesFilterArray));
+    await dispatch(setFavCategories(categoriesFavArray));
   };
 
   const formik = useFormik({
