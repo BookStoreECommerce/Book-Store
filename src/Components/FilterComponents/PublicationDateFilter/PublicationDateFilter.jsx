@@ -28,10 +28,7 @@ const PublicationDateFilter = () => {
     <div>
       <h6>Publication Date</h6>
       <FormGroup className={`${styles.wFitContent}`}>
-        <FormControlLabel control={<Checkbox name="published" checked={filterCheckBtns[values[0]] || false} value={values[0]} onChange={handleChange}/>} label="Before 2000" />
-        <FormControlLabel control={<Checkbox name="published" checked={filterCheckBtns[values[1]] || false} value={values[1]} onChange={handleChange}/>} label="2000 - 2010" />
-        <FormControlLabel control={<Checkbox name="published" checked={filterCheckBtns[values[2]] || false} value={values[2]} onChange={handleChange}/>} label="2010 - 2020" />
-        <FormControlLabel control={<Checkbox name="published" checked={filterCheckBtns[values[3]] || false} value={values[3]} onChange={handleChange}/>} label="After 2020" />
+      {values.map((ele, index) => <FormControlLabel key={index} control={<Checkbox name="published" checked={filterCheckBtns[values[index]] || false} value={values[index]} onChange={handleChange}/>} label={(ele === "0-2000") ? "Before 2000" : (ele === `2020-${thisYear}`) ? "After 2020" : values[index]}  />)}
       </FormGroup>
       {/* <hr /> */}
     </div>
