@@ -5,6 +5,7 @@ import axiosInstance from "../../axios/axios-instance";
 export const getCart = createAsyncThunk("cart/getData", async (_, { rejectWithValue }) => {
     try {
         const { data } = await axiosInstance.get(`cart`);
+        console.log(data);
         return data;
     } catch (error) {
         return rejectWithValue(error.response.data)
@@ -22,6 +23,8 @@ export const addCartWithToken = createAsyncThunk("cart/addWithToken", async (boo
 
 export const updateCart = createAsyncThunk("cart/patchData", async ({book,qty}, { rejectWithValue }) => {
     try {
+        console.log(book);
+        console.log(qty);
         const { data } = await axiosInstance.patch('cart', {book,qty})
         return data;
     } catch (error) {

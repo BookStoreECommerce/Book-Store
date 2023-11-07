@@ -10,7 +10,8 @@ import { updateCart } from '../../Redux/Slicies/cartAction';
 import { Button } from "@mui/material";
 
 import styles from './Cart.module.css'
-import { getCartWithoutToken, setCartInLocalStorage } from '../../Redux/Slicies/cartSlice';
+import { addToCart, decreaseCartQty, getCartWithoutToken, increaseCartQty, setCartInLocalStorage } from '../../Redux/Slicies/cartSlice';
+import { array } from 'yup';
 
 
 export default function Cart() {
@@ -20,39 +21,25 @@ export default function Cart() {
 
     const { footerH, navH } = useSelector((state) => state.app);
     const { books, isLoading, localStorageCart } = useSelector((state) => state.cart);
-    // const { token } = useSelector((state) => state.auth);
-    const token = localStorage.getItem("access-token");
-
+    const { token } = useSelector((state) => state.auth);
     let cartArray = [];
+
 
     if (token) {
         cartArray = books;
+        console.log(books);
     } else if (token == null) {
-        cartArray = JSON.parse(localStorage.getItem('cartDetails'));
-        // console.log(cartArray);
+        // cartArray = JSON.parse(localStorage.getItem('cartDetails'));
+        cartArray = localStorageCart?.books;
+        console.log(cartArray);
     }
 
     const dispatch = useDispatch();
 
-    function decrease(book, index) {
-        // console.log(index);
-        // console.log(cartArray[index]);
-        let qty = cartArray[index].qty - 1;
-        // console.log(cartArray[index].qty);
-        if (token) {
-            dispatch(updateCart({ book: cartArray[index].book.id, qty }));
-        }
-        // dispatch(setCartInLocalStorage(cartArray));
-    }
-    function increase(book, index) {
-        // console.log(cartArray[index]);
-        let qty = cartArray[index].qty + 1;
-        if (token) {
-            dispatch(updateCart({ book: cartArray[index].book.id, qty }));
-        }
-        // cartArray[index].qty = cartArray[index].qty + 1;
-        // dispatch(setCartInLocalStorage(cartArray));
-    }
+
+
+
+
 
     useEffect(() => {
         dispatch(getCartWithoutToken());
@@ -76,9 +63,9 @@ export default function Cart() {
 
 
                         <div className="row justify-content-center align-items-center pb-2">
-                            {cartArray?.length >= 0 ?
+                            {localStorageCart?.books?.length >= 0 ?
                                 <>
-                                    {cartArray.length > 0 ? <div className={styles.checkoutBtn}>
+                                    {localStorageCart?.books?.length > 0 ? <div className={styles.checkoutBtn}>
                                         <Button
                                             variant="outlined"
                                             component={Link}
@@ -97,7 +84,7 @@ export default function Cart() {
                                         </Button>
                                     </div> : ''}
 
-                                    {cartArray?.map((book, index) => (
+                                    {localStorageCart?.books?.map((book, index) => (
                                         <div className={`${styles.orderCard} col-lg-7 col-md-8 col-sm-10 col-10`} key={index}>
                                             <div className={`row justify-content-between ${styles.cardParent}`}>
                                                 <div className='col-md-11'>
@@ -105,7 +92,7 @@ export default function Cart() {
                                                         <div className='col-sm-3 col-4'>
                                                             <Link to={`/book/${book.book.slug}`}>
                                                                 <div className={styles.bookCoverWrapper}>
-                                                                    <img src={book.book.image?.secure_url} alt="Book Cover" />
+                                                                    <img src={book.book.image?.secure_url || book.book.image} alt="Book Cover" />
                                                                 </div>
 
                                                             </Link>
@@ -125,16 +112,17 @@ export default function Cart() {
 
                                                             <div className={styles.quantityWrapper}>
                                                                 <div className={styles.quantityContent}>
-                                                                    <button disabled={book.qty === 1} onClick={() => decrease(book?.book._id, index)} className={`${styles.btn}  ${styles.decBtn}`}>-</button>
+                                                                    <button disabled={book.qty === 1} onClick={() => dispatch(decreaseCartQty(book?.book._id, index))} className={`${styles.btn}  ${styles.decBtn}`}>-</button>
                                                                     <input type='number' className={styles.quantityInput} value={book.qty} />
-                                                                    <button onClick={() => increase(book?.book._id, index)} className={`${styles.btn}  ${styles.incBtn}`}>+</button>
+                                                                    <button onClick={() => dispatch(increaseCartQty(book?.book._id, index))} className={`${styles.btn}  ${styles.incBtn}`}>+</button>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div className={` ${styles.deleteAndSubTotal}  `}>
-                                                    <DeleteCartItem id={book?.book.id} />
+                                                {console.log(book.book._id)}
+                                                    <DeleteCartItem id={book?.book._id} />
 
                                                 </div>
                                                 <div className={styles.bookSubTotal}>
