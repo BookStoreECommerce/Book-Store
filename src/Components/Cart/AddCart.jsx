@@ -30,46 +30,46 @@ console.log(book);
     discount: 0
   }
 
-  const addCartProduct = async () => {
-    let flag = false;
-    if (token) {
-      await dispatch(addCartWithToken({ book: id }));
-    } else {
-      if (localStorage.getItem("cartDetails")) {
-        cart2 = JSON.parse(localStorage.getItem("cartDetails") || "[]");
-        if (cart2.books.length > 0) {
-          cart2.books.map((el) => {
-            if (el.book.id === id) {
-              el.qty++
-              el.totalPrice = el.qty * el.price
-              flag = true;
-            }
-          })
-          if (!flag) {
-            cart2.books.push(cart.books[0])
-          }
-        }
-        // localStorage.setItem("cartDetails", JSON.stringify(cart2))
-        dispatch(setCartInLocalStorage(cart2));
-      } else {
-        // localStorage.setItem("cartDetails", JSON.stringify(cart))
-        dispatch(setCartInLocalStorage(cart));
+  // const addCartProduct = async () => {
+  //   let flag = false;
+  //   if (token) {
+  //     await dispatch(addCartWithToken({ book: id }));
+  //   } else {
+  //     if (localStorage.getItem("cartDetails")) {
+  //       cart2 = JSON.parse(localStorage.getItem("cartDetails") || "[]");
+  //       if (cart2.books.length > 0) {
+  //         cart2.books.map((el) => {
+  //           if (el.book.id === id) {
+  //             el.qty++
+  //             el.totalPrice = el.qty * el.price
+  //             flag = true;
+  //           }
+  //         })
+  //         if (!flag) {
+  //           cart2.books.push(cart.books[0])
+  //         }
+  //       }
+  //       // localStorage.setItem("cartDetails", JSON.stringify(cart2))
+  //       dispatch(setCartInLocalStorage(cart2));
+  //     } else {
+  //       // localStorage.setItem("cartDetails", JSON.stringify(cart))
+  //       dispatch(setCartInLocalStorage(cart));
 
-      }
-    }
+  //     }
+  //   }
 
-    toast.success(`Book added to cart!`, {
-      position: "bottom-left",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: false,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-      closeButton: false
-    });
-  }
+  //   toast.success(`Book added to cart!`, {
+  //     position: "bottom-left",
+  //     autoClose: 2000,
+  //     hideProgressBar: false,
+  //     closeOnClick: false,
+  //     pauseOnHover: false,
+  //     draggable: true,
+  //     progress: undefined,
+  //     theme: "colored",
+  //     closeButton: false
+  //   });
+  // }
 
   return (
     <>

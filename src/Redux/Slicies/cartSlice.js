@@ -9,6 +9,7 @@ const initialState = {
     isLoading: false,
     msgError: null,
     totalQty: 0,
+    coupon_code: "",
     totalbooks: 0,
     loading: {}
 };
@@ -67,7 +68,8 @@ const cartSlice = createSlice({
                         },
                         price: payload.price,
                         qty: 1,
-                        totalPrice: payload.price
+                        totalPrice: payload.price,
+                        coupon_code: ""
                     }]
                 }
             } else if (i === -1) {
@@ -80,10 +82,12 @@ const cartSlice = createSlice({
                     },
                     price: payload.price,
                     qty: 1,
-                    totalPrice: payload.price
+                    totalPrice: payload.price,
+                    coupon_code: ""
                 })
             } else {
                 state.localStorageCart.books[i].qty++
+                state.localStorageCart.books[i].coupon_code = "3agoooooz"
                 const { price, qty } = state.localStorageCart.books[i]
                 state.localStorageCart.books[i].totalPrice = calcBookPrice(price, qty)
                 console.log(i);
@@ -98,11 +102,17 @@ const cartSlice = createSlice({
             console.log(payload);
             const i = state.localStorageCart.books.findIndex(el => el.book._id === payload)
             state.localStorageCart.books[i].qty++
+            state.localStorageCart.books[i].coupon_code = "agooooz"
+            const { price, qty } = state.localStorageCart.books[i]
+            state.localStorageCart.books[i].totalPrice = calcBookPrice(price, qty)
             setCartFromLocalStorage(state.localStorageCart)
         },
         decreaseCartQty: (state, { payload }) => {
             const i = state.localStorageCart.books.findIndex(el => el.book._id === payload)
             state.localStorageCart.books[i].qty--
+            state.localStorageCart.books[i].coupon_code = "agooooz"
+            const { price, qty } = state.localStorageCart.books[i]
+            state.localStorageCart.books[i].totalPrice = calcBookPrice(price, qty)
             setCartFromLocalStorage(state.localStorageCart)
         },
 
@@ -113,9 +123,9 @@ const cartSlice = createSlice({
             if (state.localStorageCart.books.length === 0) {
                 localStorage.removeItem('cartDetails')
             }
-              
-           
-                
+
+
+
         },
 
     },

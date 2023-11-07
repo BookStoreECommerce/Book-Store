@@ -17,8 +17,8 @@ function NavBar({ navRef }) {
   const navigate = useNavigate();
   const [navbar, setNavbar] = useState(false);
   const dispatch = useDispatch();
-  const { user, token } = useSelector((state) => state.auth);
-  // const token = localStorage.getItem("access-token");
+  const { user } = useSelector((state) => state.auth);
+  const token = localStorage.getItem("access-token");
   const { books, localStorageCart } = useSelector((state) => state.cart);
 console.log(localStorageCart);
 
