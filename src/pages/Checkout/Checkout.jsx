@@ -18,7 +18,7 @@ const Checkout = () => {
   const cart = useSelector((state) => state.cart);
 
   console.log("cart: ", cart);
-  console.log("user: ", user);
+  // console.log("user: ", user);
 
   return !user ? (
     <CheckoutError majorText="401" minorText="Unauthorized" />
@@ -38,7 +38,7 @@ const Checkout = () => {
               <CartSummary cart={cart} />
               <Coupon
               // onCouponChange={getCartDetails}
-              // code={cart?.coupon_code}
+              code={cart.coupon_code}
                />
             </CardContent>
           </Card>

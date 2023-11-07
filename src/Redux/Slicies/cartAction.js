@@ -33,6 +33,23 @@ export const updateCart = createAsyncThunk("cart/patchData", async ({book,qty}, 
     }
 });
 
+export const addCoupon = createAsyncThunk("cart/coupon", async (code, { rejectWithValue }) => {
+    try {
+        const { data } = await axiosInstance.patch('cart/coupon', {code});
+        return data;
+    } catch (error) {
+        return rejectWithValue(error.response.data)
+    }
+});
+export const removeCoupon = createAsyncThunk("cart/coupon", async (code, { rejectWithValue }) => {
+    try {
+        const { data } = await axiosInstance.patch('cart/coupon', {code});
+        return data;
+    } catch (error) {
+        return rejectWithValue(error.response.data)
+    }
+});
+
 export const deleteCartItem = createAsyncThunk("cart/deleteCartItem", async (bookId, { rejectWithValue }) => {
     try {
         const { data } = await axiosInstance.delete(`cart/${bookId.book}`)

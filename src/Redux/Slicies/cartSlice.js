@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getCart, addCartWithToken, updateCart, clearCart, deleteCartItem } from './cartAction';
+import { getCart, addCartWithToken, updateCart, clearCart, deleteCartItem, addCoupon, removeCoupon } from './cartAction';
 const initialState = {
     books: [],
     localStorageCart: [],
@@ -186,6 +186,42 @@ const cartSlice = createSlice({
         builder.addCase(updateCart.rejected, (state, action) => {
             state.isLoading = false
             state.msgError = action.payload.error
+        })
+        builder.addCase(addCoupon.pending, (state, action) => {
+            // state.isLoading = true;
+            // state.loading["cart/patchData"] = true
+        })
+        builder.addCase(addCoupon.fulfilled, (state, action) => {
+            console.log(action);
+            state.coupon_code = action.payload.cart.coupon_code;
+            state.discount = action.payload.cart.discount;
+            state.totalAmount = action.payload.cart.totalAmount;
+            state.totalAmountAfterDisc = action.payload.cart.totalAmountAfterDisc;
+            // state.isLoading = false;
+            // state.msgError = action.payload.error
+        })
+        builder.addCase(addCoupon.rejected, (state, action) => {
+            console.log(action);
+            // state.isLoading = false
+            // state.msgError = action.payload.error
+        })
+        builder.addCase(removeCoupon.pending, (state, action) => {
+            // state.isLoading = true;
+            // state.loading["cart/patchData"] = true
+        })
+        builder.addCase(removeCoupon.fulfilled, (state, action) => {
+            console.log(action);
+            state.coupon_code = action.payload.cart.coupon_code;
+            state.discount = action.payload.cart.discount;
+            state.totalAmount = action.payload.cart.totalAmount;
+            state.totalAmountAfterDisc = action.payload.cart.totalAmountAfterDisc;
+            // state.isLoading = false;
+            // state.msgError = action.payload.error
+        })
+        builder.addCase(removeCoupon.rejected, (state, action) => {
+            console.log(action);
+            // state.isLoading = false
+            // state.msgError = action.payload.error
         })
 
 
