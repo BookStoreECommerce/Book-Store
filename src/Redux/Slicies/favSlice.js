@@ -29,6 +29,7 @@ const favSlice = createSlice({
                 let categoryObj = {};
                 categoryObj.id = result._id;
                 categoryObj.name = result.name;
+                categoryObj.slug = result.slug;
                 state.allCategories.push(categoryObj);
             }
         })

@@ -48,7 +48,7 @@ const UserInfo = () => {
         <div className={`row ${styles.row} w-100 flex-lg-row flex-column align-items-center align-items-lg-start`}>
           <div className="col-lg-3 col-md-10 col-12">
             <nav
-              className={`sidebar d-flex flex-column align-item-start p-3 h-100 align-items-center`}
+              className={`sidebar d-flex flex-column p-3 h-100 align-items-center`}
             >
               <h3 className="my-4">
                 <div className={`${styles.sidebarHeader} fw-bold`}>User Profile</div>

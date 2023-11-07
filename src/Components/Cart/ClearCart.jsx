@@ -3,12 +3,20 @@ import { clearCart } from '../../Redux/Slicies/cartAction';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from "./ClearCart.module.css";
 import { Button } from "@mui/material";
+import { clearLocalStorageCArt, setCartInLocalStorage } from '../../Redux/Slicies/cartSlice';
 
 function ClearCart() {
   const { isLoading } = useSelector((state) => state.cart);
+  const {token} = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const cart = JSON.parse(localStorage.getItem("cartDetails"))
 
   const removeCart = async () => {
+    if(token == null || cart ){
+      let cartArray = [];
+      dispatch(setCartInLocalStorage(cartArray));
+      dispatch(clearLocalStorageCArt('cartDetails'));
+    }
     await dispatch(clearCart());
   }
 
@@ -28,7 +36,7 @@ function ClearCart() {
           className={`mainBtn ${styles.fitContent}`}
           onClick={() => removeCart()}
         >
-        Clear Cart
+          Clear Cart
         </Button>
       </div>
     </>

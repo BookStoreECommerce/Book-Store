@@ -28,7 +28,6 @@ const CategoriesBook = () => {
     let totalCount = { catBySlug }.catBySlug.totalCount;
     let totalPages = Math.ceil((totalCount / 12));
 
-    console.log(category);
 
     async function getBooksBySearch(searchKeyword) {
         dispatch(getCatBooksBySlug({ slug: Params.slug, keyword: searchKeyword }))
@@ -42,15 +41,14 @@ const CategoriesBook = () => {
         return () => dispatch(setFooterMargin());
     }, [Params, dispatch]);
 
-    const url = `${baseUrl}book/category?slug=${Params.slug}&keyword=searchValue`;
+    const url = `${baseUrl}book?category=${Params.slug}&keyword=searchValue`;
 
     const handleChange = (e, p) => {
         setPage(p)
         dispatch(getCatBooksBySlug({ slug: Params.slug, page: p }))
     };
 
-    return (
-        <>
+    return (<>
         <ScrollToTop />
         <Box sx={{ marginTop: `${navH}px`, minHeight: `calc(100vh - ${footerH + navH}px)`, }} className={styles.flex} >
             <div className={styles.badge}>
@@ -71,9 +69,8 @@ const CategoriesBook = () => {
                     <div className="row justify-content-center align-items-center pb-2">
                     {category?.length != 0?
                     <>
-
                          {category?.map((book, index) => (
-                             <BookCard key={index} book={book} image={book.image?.secure_url} name={book.name} price={book.price} author={book.author} rate={book.rate} slug={book.slug} section="catBook" sectionName='without/' category={book.category?.name} />
+                            <BookCard key={index} book={book} image={book.image?.secure_url} name={book.name} price={book.price} author={book.author} rate={book.rating} slug={book.slug} id= {book._id} section="catBook" sectionName='without/' category={book.category} />
                         ))}
                     </>
                     :<div className={styles.notFoundContainer }>
@@ -91,9 +88,7 @@ const CategoriesBook = () => {
                 </>}
             </div>
         </Box>
-    </>
-    
-    );
+    </>);
 }
 
 export default CategoriesBook;

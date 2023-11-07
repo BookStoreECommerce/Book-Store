@@ -12,7 +12,7 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { useNavigate } from "react-router";
 import { userProfile } from "../../../Redux/Slicies/authActions";
-import { clearError, setUser } from "../../../Redux/Slicies/authSlice";
+import { clearError } from "../../../Redux/Slicies/authSlice";
 
 const UserProfile = () => {
   const navigate = useNavigate();
@@ -76,11 +76,7 @@ const UserProfile = () => {
           delete values[key];
         }
       });
-      const { payload } = await dispatch(userProfile(values));
-      if (payload.message === "success") {
-        dispatch(setUser(values))
-        // navigate("");
-      }
+      dispatch(userProfile(values))
     }
   };
 

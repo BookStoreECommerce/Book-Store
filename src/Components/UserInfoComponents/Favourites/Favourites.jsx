@@ -1,12 +1,9 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getAllCategories,
-  setFavCategories,
-} from "../../../Redux/Slicies/favActions";
+import { setFavCategories } from "../../../Redux/Slicies/favActions";
 import { useFormik } from "formik";
 import styles from "./Favourites.module.css";
 import * as Yup from "yup";
@@ -21,10 +18,6 @@ const Favourites = () => {
   const onlyNames = user.fav_cats.map((ele) => ele.name);
   const [myOptions, setMyOptions] = useState([]);
   const [chosenFavCategory, setChosenFavCategory] = useState(onlyNames || []);
-
-  useEffect(() => {
-    if (allCategories.length === 0) dispatch(getAllCategories());
-  }, [dispatch, allCategories]);
 
   const searchCategories = () => {
     setMyOptions(allCategories.map((ele) => ele.name));
@@ -49,18 +42,16 @@ const Favourites = () => {
     favCategory: Yup.string().required("This field is required"),
   });
 
-  let categoriesFilterArray = [];
+  let categoriesFavArray = [];
   const concatIdAndName = () => {
     for (let i = 0; i < chosenFavCategory.length; i++) {
-      categoriesFilterArray.push(
-        allCategories.find((category) => category.name === chosenFavCategory[i])
-      );
+      categoriesFavArray.push({id: allCategories.find((category) => category.name === chosenFavCategory[i]).id});
     }
   };
 
   const handleSubmit = async () => {
     concatIdAndName();
-    await dispatch(setFavCategories(categoriesFilterArray));
+    await dispatch(setFavCategories(categoriesFavArray));
   };
 
   const formik = useFormik({
@@ -75,7 +66,7 @@ const Favourites = () => {
     <>
       <div className={`favourites row ${styles.row} justify-content-center`}>
         <form
-          className="d-flex col-11 col-lg-10 text-center flex-column gap-md-4 gap-3"
+          className="d-flex col-11 col-lg-10 text-center flex-column gap-md-4 gap-3" 
           onSubmit={formik.handleSubmit}
           noValidate
         >
@@ -114,11 +105,11 @@ const Favourites = () => {
             )}
           />
 
+          {chosenFavCategory.length !== 0 && 
           <div
             className={`d-flex flex-wrap gap-2 w-100 px-3 py-4 ${styles.FavCategoryWrapper}`}
           >
-            {chosenFavCategory &&
-              chosenFavCategory.map((FavCategory, index) => (
+            {chosenFavCategory.map((FavCategory, index) => (
                 <div
                   key={index}
                   className={`p-2 rounded ${styles.FavCategory}`}
@@ -132,7 +123,7 @@ const Favourites = () => {
                   ></i>
                 </div>
               ))}
-          </div>
+          </div>}
 
           <Button
             variant="outlined"

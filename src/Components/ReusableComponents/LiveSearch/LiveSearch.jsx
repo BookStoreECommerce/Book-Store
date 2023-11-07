@@ -17,6 +17,9 @@ import axiosInstance from "../../../axios/axios-instance";
 import { useCallback, useState } from "react";
 import classes from "./LiveSearch.module.css";
 import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { setBooksPageNumber } from "../../../Redux/Slicies/bookSlice";
+import { clearFilterObj } from "../../../Redux/Slicies/filterSlice";
 
 const LiveSearch = ({
   navParam,
@@ -25,7 +28,7 @@ const LiveSearch = ({
   keyword,
   minCharToSearch = 1,
   onSubmit,
-  pageNumber,
+  // pageNumber,
   hasImage = "false",
 }) => {
   const [open, setOpen] = useState(false);
@@ -33,10 +36,17 @@ const LiveSearch = ({
   const [options, setOptions] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { pageNumber } = useSelector((state) => state.books);
 
   const handleSubmit = (e, val = searchValue) => {
     e.preventDefault();
-    if (val.length >= +minCharToSearch && pageNumber) pageNumber(1);
+    // if (val.length >= +minCharToSearch && pageNumber) pageNumber(1);
+    // new
+    if (val.length >= +minCharToSearch && pageNumber) {
+      dispatch(clearFilterObj())
+      dispatch(setBooksPageNumber(1));
+    }
     onSubmit(val);
   };
 
@@ -44,12 +54,13 @@ const LiveSearch = ({
     async (val) => {
       setSearchValue(val);
       if (val === "") {
-        pageNumber && pageNumber(1);
+        // pageNumber && pageNumber(1);
+        // new
+        pageNumber && dispatch(setBooksPageNumber(1));
         onSubmit(val); //show all if removed search word
       }
       if (val.length >= +minCharToSearch) {
         setLoading(true);
-        // if (pageNumber) pageNumber(1);
       } else {
         setOpen(false);
         return;
@@ -125,7 +136,7 @@ const LiveSearch = ({
         renderInput={(params) => (
           <TextField
             {...params}
-            label={label ? label : "Search"}
+            placeholder={label ? label : "Search"}
             InputProps={{
               ...params.InputProps,
               endAdornment: loading ? (

@@ -34,3 +34,16 @@
     font-size: 46px;
   }
 }
+
+.filterWrapper {
+  background-color: #F5F5F5;
+}
+
+.filter {
+  color: var(--mainColor);
+  border: 2px solid var(--mainColor) !important;
+}
+
+.xmarkPointer {
+  cursor: pointer;
+}

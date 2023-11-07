@@ -14,8 +14,6 @@
     color: var(--navyBlue);
     font-weight: bold;
     font-size: 20px;
-
-
 }
 
 .bookAuthor {
@@ -34,9 +32,19 @@
 
 .imgContainer {
     background-color: #f8f9fa;
-    padding: 40px;
+    padding: 10px;
     border-radius: 0 10px 10px 0;
     overflow: hidden;
+
+}
+
+.cardStyle {
+
+    max-width: 180px;
+    min-width: 180px;
+    max-height: 272px;
+    min-height: 272px;
+
 }
 
 .imgContainer img {
@@ -97,6 +105,27 @@
     border-radius: 5px;
 }
 
+.whishlisticon {
+    color: var(--mainColor);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+}
+
+.paddingParagraph {
+    padding: 0px 10px;
+}
+
+.btn,
+.btn:hover,
+.btn:focus,
+.btn:active {
+    border: none !important;
+    background-color: transparent !important;
+    padding: 0 !important;
+}
+
 .pLeft {
     padding-left: 40px;
 }
@@ -139,32 +168,6 @@
 .colorStar {
     color: #ffc107;
 }
-@media screen and (min-width:1701px) and (max-width:2000px){
-    .cardImg{
-        height: 340px;
-    }
-}
-@media screen and (min-width:1400px) and (max-width:1700px){
-    .cardImg{
-        max-height: 321px;
-   
-    }
-}
-@media screen and (min-width:1200px) and (max-width:1399px){
-    .cardImg{
-        max-height: 255px;
-    }
-}
-@media screen and (min-width:1000px) and (max-width:1199px){
-    .cardImg{
-        max-height: 307px;
-    }
-}
-@media screen and (min-width:750px) and (max-width:999px){
-    .cardImg{
-        max-height: 360px;
-    }
-}
 
 @media screen and (min-width:1701px) and (max-width:2000px) {
     .cardImg {
@@ -197,22 +200,278 @@
     }
 }
 
-@media screen and (min-width:577px) and (max-width:794px) {
+@media screen and (min-width:1701px) and (max-width:2000px) {
+    .cardImg {
+        height: 340px;
+    }
+}
+
+@media screen and (min-width:1400px) and (max-width:1700px) {
+    .cardImg {
+        max-height: 321px;
+
+    }
+    .cardStyle {
+        max-width: 209px;
+        min-width: 157px;
+        max-height: 300px;
+        min-height: 300px;
+
+
+    }
+    .height {
+
+        min-height: 330px !important;
+        max-height: 330px !important;
+        max-width: 250px!important;
+        min-width: 250px!important;
+    }
+}
+
+@media screen and (min-width:1200px) and (max-width:1399px) {
+    .cardImg {
+        max-height: 255px;
+    }
+    
+
+}
+
+@media screen and (min-width:1000px) and (max-width:1199px) {
+    .cardImg {
+        max-height: 307px;
+    }
+
+    .cardStyle {
+        max-width: 184px;
+        min-width: 157px;
+        max-height: 253px;
+        min-height: 239px;
+
+
+    }
+    .height {
+
+        min-height: 260px !important;
+        max-height: 226px !important;
+    }
+}
+
+@media screen and (min-width:700px) and (max-width:794px) {
+    .cardImg {
+        max-height: 360px;
+    }
+    .height {
+        max-width: 250px !important;
+        min-width: 250px !important;
+        min-height: 320px !important;
+        max-height: 320px !important;
+    }
+    .cardStyle {
+        max-width: 210px;
+        min-width: 210px;
+        max-height: 290px;
+        min-height: 290px;
+
+
+    }
+}
+
+@media screen and (min-width:577px) and (max-width:700px) {
     .cardImg {
         max-height: 366px;
 
     }
+
+    .cardStyle {
+        max-width: 210px;
+        min-width: 210px;
+        max-height: 290px;
+        min-height: 290px;
+
+
+    }
+    .height {
+        max-width: 210px !important;
+        min-width: 210px !important;
+        min-height: 320px !important;
+        max-height: 320px !important;
+    }
 }
 
-@media screen and (min-width:300px) and (max-width:700px) {
+@media screen and (min-width:300px) and (max-width:500px) {
     .headerFont {
         font-size: 19px;
     }
+
+    .cardStyle {
+        max-width: 147px;
+        min-width: 147px;
+        max-height: 208px;
+        min-height: 212px;
+
+
+    }
+
+    .height {
+        max-height: 230px !important;
+        min-height: 230px !important;
+    }
+
 }
-.textLength{
+
+@media screen and (min-width:500px) and (max-width:700px) {
+    .headerFont {
+        font-size: 19px;
+    }
+
+    .cardStyle {
+        max-width: 147px;
+        min-width: 191px;
+        max-height: 257px;
+        min-height: 221px;
+    }
+
+
+
+.height {
+    max-height: 250px !important;
+    min-height: 275px !important;
+}
+
+}
+.textLength {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     width: 80%;
 }
 
+
+/*
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Jost&family=PT+Serif:wght@700&display=swap');
+
+.bookName{
+    color: var(--navyBlue);
+    font-size: 32px;
+    font-family: 'Libre Baskerville', serif;
+    font-weight: bold;
+}
+.bookAuthor{
+    font-size: 20px;
+    color: #A2A1A1;
+    font-family: 'Jost', sans-serif;
+
+}
+.price{
+    margin-top: 18px;
+   font-size: 18px;
+   font-family: 'Jost', sans-serif;
+   
+
+}
+/* .price span{
+    color: ;
+} */
+.wishListBtn {
+    border: none !important;
+    margin-top: 20px;
+    background-color: var(--mainColor) !important;
+    color: white !important;
+
+}
+
+.removewishListBtn {
+    border: 1px solid var(--mainColor) !important;
+    margin-top: 20px;
+    background-color: white !important;
+    color: var(--mainColor) !important;
+
+}
+
+.category {
+    font-size: 17px;
+    background-color: var(--mainColor);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    width: fit-content;
+    margin-top: 15px;
+}
+
+.description {
+    margin-top: 35px;
+    color: gray;
+}
+
+.gap {
+    gap: 10px;
+}
+
+.gap span {
+    background-color: var(--navyBlue);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+.discount {
+    font-size: 12px;
+    background-color: var(--beigeColor);
+    color: var(--navyBlue);
+    padding: 20px 5px;
+    border-radius: 50%;
+}
+
+.btnSeeMore {
+    text-decoration: underline !important;
+    color: var(--mainColor) !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+.btnSeeMore:hover,
+.btnSeeMore:focus {
+    text-decoration: underline !important;
+    color: var(--navyBlue) !important;
+    background-color: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+.details {
+    font-size: 22px;
+    color: var(--navyBlue);
+    font-family: 'Jost', sans-serif;
+    margin-top: 30px
+}
+
+.textColor {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--navyBlue);
+    font-family: 'Jost', sans-serif;
+}
+
+.textColorDetails {
+    color: gray;
+    margin: 0 !important;
+}
+
+.show {
+    display: none;
+}
+
+.zoom {
+    margin-top: 10px;
+    color: var(--mainColor);
+}
+
+@media screen and (max-width:767px) {
+    .hide {
+        display: none !important;
+    }
+
+    .show {
+        display: block;
+    }
+}

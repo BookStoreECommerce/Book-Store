@@ -12,7 +12,6 @@ import ErrorBoundry from "./pages/ErrorBoundry/ErrorBoundry";
 // import ThemeContextProvider from "./Contexts/theme-context";
 import Loading from "./Components/ReusableComponents/Loading/Loading";
 import App from './App.js'
-// import Cart from "./Components/Cart/Cart";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +52,13 @@ const router = createBrowserRouter([
           const { default: BookProfile } = await import("./Components/BookProfile/BookProfile");
           return { Component: BookProfile };
         },
+      },
+      {
+        path:'wishlist',
+        async lazy(){
+          const {default:Whishlist} = await import('./Components/Whishlist/Whishlist');
+          return {Component: Whishlist};
+        }
       },
       {
         path: "userInfo",
