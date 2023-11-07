@@ -5,7 +5,7 @@ import axiosInstance from "../../axios/axios-instance";
 export const getCart = createAsyncThunk("cart/getData", async (_, { rejectWithValue }) => {
     try {
         const { data } = await axiosInstance.get(`cart`);
-        console.log(data);
+        // console.log(data);
         return data;
     } catch (error) {
         return rejectWithValue(error.response.data)
@@ -14,7 +14,7 @@ export const getCart = createAsyncThunk("cart/getData", async (_, { rejectWithVa
 
 export const addCartWithToken = createAsyncThunk("cart/addWithToken", async (bookId, { rejectWithValue }) => {
     try {
-        console.log(bookId);
+        // console.log(bookId);
         const { data } = await axiosInstance.post('cart', bookId)
         return data;
     } catch (error) {
@@ -24,8 +24,8 @@ export const addCartWithToken = createAsyncThunk("cart/addWithToken", async (boo
 
 export const updateCart = createAsyncThunk("cart/patchData", async ({book,qty}, { rejectWithValue }) => {
     try {
-        console.log(book);
-        console.log(qty);
+        // console.log(book);
+        // console.log(qty);
         const { data } = await axiosInstance.patch('cart', {book,qty})
         return data;
     } catch (error) {
@@ -33,7 +33,7 @@ export const updateCart = createAsyncThunk("cart/patchData", async ({book,qty}, 
     }
 });
 
-export const addCoupon = createAsyncThunk("cart/coupon", async (code, { rejectWithValue }) => {
+export const addCoupon = createAsyncThunk("cart/addCoupon", async (code, { rejectWithValue }) => {
     try {
         const { data } = await axiosInstance.patch('cart/coupon', {code});
         return data;
@@ -41,9 +41,9 @@ export const addCoupon = createAsyncThunk("cart/coupon", async (code, { rejectWi
         return rejectWithValue(error.response.data)
     }
 });
-export const removeCoupon = createAsyncThunk("cart/coupon", async (code, { rejectWithValue }) => {
+export const removeCoupon = createAsyncThunk("cart/removeCoupon", async (code, { rejectWithValue }) => {
     try {
-        const { data } = await axiosInstance.patch('cart/coupon', {code});
+        const { data } = await axiosInstance.delete(`cart/coupon/${code}`);
         return data;
     } catch (error) {
         return rejectWithValue(error.response.data)

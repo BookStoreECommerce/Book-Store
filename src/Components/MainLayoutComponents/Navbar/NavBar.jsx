@@ -20,7 +20,7 @@ function NavBar({ navRef }) {
   const { user } = useSelector((state) => state.auth);
   const token = localStorage.getItem("access-token");
   const { books, localStorageCart } = useSelector((state) => state.cart);
-console.log(localStorageCart);
+// console.log(localStorageCart);
 
   const changeBackground = () => {
     if (window.scrollY >= 60) {

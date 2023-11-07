@@ -36,10 +36,7 @@ const Checkout = () => {
           <Card>
             <CardContent className="d-grid gap-5">
               <CartSummary cart={cart} />
-              <Coupon
-              // onCouponChange={getCartDetails}
-              code={cart.coupon_code}
-               />
+              <Coupon code={cart.coupon_code} />
             </CardContent>
           </Card>
         </Container>

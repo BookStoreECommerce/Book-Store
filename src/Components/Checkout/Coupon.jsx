@@ -1,33 +1,16 @@
 import { useState } from "react";
 import { Typography, TextField, Button } from "@mui/material";
-import axiosInstance from "../../axios/axios-instance";
-import { baseUrl } from "../../util/util";
 import { useDispatch } from "react-redux";
-import { addCoupon } from "../../Redux/Slicies/cartAction";
+import { addCoupon, removeCoupon } from "../../Redux/Slicies/cartAction";
 
 export default function RedeemCoupon({code}) {
   const dispatch = useDispatch();
   const [couponCode, setCouponCode] = useState(code || "");
-
-  const removeCouponHandler = async () => {
-    try {
-      const { data } = await axiosInstance.delete(`${baseUrl}cart/coupon/${'code55'}`);
-      // data.result.length && setOptions(data.result);
-    } catch (error) {
-    }
-  };
-  // removeCouponHandler()
   
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!couponCode.length) return;
-    if (code) {
-      // removeCouponHandler();
-    } else {
-      dispatch(addCoupon(couponCode));
-    }
-    // console.log(cart);
-    // onCouponChange(cart);
+    code? dispatch(removeCoupon(couponCode)): dispatch(addCoupon(couponCode));
   };
 
   const handleInputChange = (event) => setCouponCode(event.target.value);

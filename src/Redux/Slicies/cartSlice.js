@@ -102,15 +102,13 @@ const cartSlice = createSlice({
             console.log(payload);
             const i = state.localStorageCart.books.findIndex(el => el.book._id === payload)
             state.localStorageCart.books[i].qty++
-            state.localStorageCart.books[i].coupon_code = "agooooz"
             const { price, qty } = state.localStorageCart.books[i]
             state.localStorageCart.books[i].totalPrice = calcBookPrice(price, qty)
             setCartFromLocalStorage(state.localStorageCart)
         },
         decreaseCartQty: (state, { payload }) => {
             const i = state.localStorageCart.books.findIndex(el => el.book._id === payload)
-            state.localStorageCart.books[i].qty--
-            state.localStorageCart.books[i].coupon_code = "agooooz"
+            state.localStorageCart.books[i].qty--;
             const { price, qty } = state.localStorageCart.books[i]
             state.localStorageCart.books[i].totalPrice = calcBookPrice(price, qty)
             setCartFromLocalStorage(state.localStorageCart)
@@ -137,10 +135,10 @@ const cartSlice = createSlice({
         })
         builder.addCase(getCart.fulfilled, (state, action) => {
             state.isLoading = false;
-
             if (action.payload.cart.books) {
                 state.books = action.payload.cart.books;
             }
+            state.coupon_code = action.payload.cart.coupon_code;
             state.discount = action.payload.cart.discount;
             state.totalAmount = action.payload.cart.totalAmount;
             state.totalAmountAfterDisc = action.payload.cart.totalAmountAfterDisc;
@@ -169,7 +167,7 @@ const cartSlice = createSlice({
             state.isLoading = false
             // state.msgError = action.payload.error
         })
-
+        
         // update Cart with token
         builder.addCase(updateCart.pending, (state, action) => {
             // state.isLoading = true;
@@ -192,7 +190,7 @@ const cartSlice = createSlice({
             // state.loading["cart/patchData"] = true
         })
         builder.addCase(addCoupon.fulfilled, (state, action) => {
-            console.log(action);
+            // console.log(state);
             state.coupon_code = action.payload.cart.coupon_code;
             state.discount = action.payload.cart.discount;
             state.totalAmount = action.payload.cart.totalAmount;
@@ -201,7 +199,7 @@ const cartSlice = createSlice({
             // state.msgError = action.payload.error
         })
         builder.addCase(addCoupon.rejected, (state, action) => {
-            console.log(action);
+            // console.log(action);
             // state.isLoading = false
             // state.msgError = action.payload.error
         })
@@ -210,21 +208,20 @@ const cartSlice = createSlice({
             // state.loading["cart/patchData"] = true
         })
         builder.addCase(removeCoupon.fulfilled, (state, action) => {
-            console.log(action);
-            state.coupon_code = action.payload.cart.coupon_code;
-            state.discount = action.payload.cart.discount;
-            state.totalAmount = action.payload.cart.totalAmount;
-            state.totalAmountAfterDisc = action.payload.cart.totalAmountAfterDisc;
+            // console.log(action);
+            state.coupon_code = "";
+            state.discount = 0;
+            state.totalAmountAfterDisc = action.payload.cart.totalAmount;
             // state.isLoading = false;
             // state.msgError = action.payload.error
         })
         builder.addCase(removeCoupon.rejected, (state, action) => {
-            console.log(action);
+            // console.log(action);
             // state.isLoading = false
             // state.msgError = action.payload.error
         })
-
-
+        
+        
         // delete CartItem with token
         builder.addCase(deleteCartItem.pending, (state, action) => {
             // state.isLoading = true;
@@ -241,8 +238,8 @@ const cartSlice = createSlice({
             state.isLoading = false
             // state.msgError = action.payload.error
         })
-
-
+        
+        
         // clear Cart with token
         builder.addCase(clearCart.pending, (state, action) => {
             // state.isLoading = true;
