@@ -37,7 +37,7 @@ function AllBook({ sectionName }) {
   const deleteFilter = (e) => {
     const name = e.target.getAttribute("name");
     let value;
-    if(name === 'category') {
+    if (name === 'category') {
       value = JSON.parse(e.target.getAttribute("value"));
     } else {
       value = e.target.getAttribute("value");
@@ -63,7 +63,7 @@ function AllBook({ sectionName }) {
   // get filtered books
   function getFilteredBooks(filter) {
     setSearchWord("")
-    dispatch(booksFilter({pageNumber, filter}));
+    dispatch(booksFilter({ pageNumber, filter }));
   }
 
   const show = Object.keys(filterObj).map((key) => filterObj[key].length !== 0);
@@ -76,7 +76,7 @@ function AllBook({ sectionName }) {
     } else {
       getBooksBySearch(searchWord);
     }
-  }, [pageNumber,searchWord]);
+  }, [pageNumber, searchWord]);
 
   useEffect(() => {
     setNumOfPages(Math.ceil(totalCount / nBookPerPage));
@@ -117,7 +117,7 @@ function AllBook({ sectionName }) {
                     deleteFilter(e);
                   }}
                 ></i>
-              </div> 
+              </div>
             ))
           ))}
         </div>
@@ -140,6 +140,7 @@ function AllBook({ sectionName }) {
                 className={`col-md-3 col-sm-4 col-6 mb-5 ${styles.bookCard}`}
               >
                 <BookCard
+                  book={book}
                   key={book.id}
                   slug={book.slug}
                   image={book.image.secure_url}
