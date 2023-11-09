@@ -1,7 +1,6 @@
 import React from "react";
 import styles from './Rating.module.css'
 const Rating = ({ rate,section }) => {
-
     let golden = []
     for (var i = 0; i < rate; i++) {
         golden.push(<i className={`fa-solid fa-star ${styles.colorStar}`} key={i}></i>)
@@ -13,12 +12,16 @@ const Rating = ({ rate,section }) => {
 
     return (
         <>
-{section==="profile"?<>
-<div data-testid='rate' className={styles.fontSize}> {golden}{white}</div>
-</>:
-<>
-<div data-testid='rate'> {golden}{white}</div>
-</>}
+            {
+            section==="profile"?
+                <>
+                    <div data-testid='rate' className={styles.fontSize}> {golden}{white}</div>
+                </>
+                :
+                <>
+                    <div data-testid='rate'> {golden}{white}</div>
+                </>
+            }
         </>
     );
 }
