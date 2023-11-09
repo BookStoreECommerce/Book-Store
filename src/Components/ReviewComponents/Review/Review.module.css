@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Jost&family=PT+Serif:wght@700&display=swap');
+
+/* .reviewContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: 'Jost', sans-serif;
+
+} */
+
+.imageStyle {
+    border-radius: 50%;
+    width: 100%;
+
+}
+
+.reviewImage {
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+}
+
+.fontParg {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.fontname {
+    font-size: 16px;
+    color: grey;
+
+}
+
+/* .reviewBg{
+    border: 2px solid var(--beigeColor);
+    box-shadow: 10px 10px 7px var(--beigeColor);
+    border-radius: 20px;
+} */
+.paddingInline{
+    padding-inline: 28px;
+}
+@media screen and (min-width:300px) and (max-width:666px) {
+    .fontParg {
+        font-size: 17px;
+    }
+
+    .fontname {
+        font-size: 14px;
+    }
+
+    .reviewContent {
+        padding: 0px 45px;
+    }
+
+}
+
+@media screen and (min-width:667px) and (max-width:1200px) {
+    .fontParg {
+        font-size: 18px;
+    }
+
+    .fontname {
+        font-size: 17px;
+    }
+}

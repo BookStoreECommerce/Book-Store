@@ -1,9 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../axios/axios-instance";
 
-export const getAllReviews = createAsyncThunk("book/review", async (whislist, { rejectWithValue }) => {
+export const addReview = createAsyncThunk("book/review", async (reviewData, { rejectWithValue }) => {
     try {
-        const { data } = await axiosInstance.get(`reviews`);
+        const { data } = await axiosInstance.post(`reviews`, reviewData);
         return data
     } catch (error) {
         return rejectWithValue(error.response.data)
