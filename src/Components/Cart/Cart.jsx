@@ -21,7 +21,9 @@ export default function Cart() {
 
     const { footerH, navH } = useSelector((state) => state.app);
     const { books, isLoading, localStorageCart } = useSelector((state) => state.cart);
-    const { token } = useSelector((state) => state.auth);
+    // const { token } = useSelector((state) => state.auth);
+    const token = localStorage.getItem("access-token");
+
     let cartArray = [];
 
 
@@ -121,7 +123,7 @@ export default function Cart() {
                                                     </div>
                                                 </div>
                                                 <div className={` ${styles.deleteAndSubTotal}  `}>
-                                                {console.log(book.book._id)}
+                                                    {console.log(book.book._id)}
                                                     <DeleteCartItem id={book?.book._id} />
 
                                                 </div>
