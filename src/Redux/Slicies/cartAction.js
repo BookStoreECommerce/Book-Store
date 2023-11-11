@@ -14,6 +14,7 @@ export const getCart = createAsyncThunk("cart/getData", async (_, { rejectWithVa
 
 export const addCartWithToken = createAsyncThunk("cart/addWithToken", async (bookId, { rejectWithValue }) => {
     try {
+        console.log(bookId);
         const { data } = await axiosInstance.post('cart', bookId)
         return data;
     } catch (error) {
@@ -49,3 +50,14 @@ export const clearCart = createAsyncThunk("cart/clearCart", async (_, { rejectWi
         return rejectWithValue(error.response.data)
     }
 });
+
+
+// export const addCartWithCoupon = createAsyncThunk("cart/addWithCoupon", async (bookId, { rejectWithValue }) => {
+//     try {
+//         console.log(bookId);
+//         const { data } = await axiosInstance.post('cart', bookId)
+//         return data;
+//     } catch (error) {
+//         return rejectWithValue(error.response.data)
+//     }
+// });
