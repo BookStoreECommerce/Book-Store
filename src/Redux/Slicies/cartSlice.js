@@ -53,7 +53,7 @@ const cartSlice = createSlice({
             state.msgError = action.payload.error
         },
         addToCart: (state, { payload }) => {
-            const i = state.localStorageCart.books.findIndex(el => el.book._id === payload._id)
+            const i = state.localStorageCart?.books?.findIndex(el => el.book._id === payload._id)
             if (i === undefined) {
                 state.localStorageCart = {
                     books: [{
@@ -70,7 +70,7 @@ const cartSlice = createSlice({
                     }]
                 }
             } else if (i === -1) {
-                state.localStorageCart.books.push({
+                state.localStorageCart?.books.push({
                     book: {
                         image: payload.image?.secure_url,
                         _id: payload._id,
@@ -85,7 +85,7 @@ const cartSlice = createSlice({
             } else {
                 state.localStorageCart.books[i].qty++
                 state.localStorageCart.books[i].coupon_code = "3agoooooz"
-                const { price, qty } = state.localStorageCart.books[i]
+                const { price, qty } = state.localStorageCart?.books[i]
                 state.localStorageCart.books[i].totalPrice = calcBookPrice(price, qty)
                 // setCartFromLocalStorage(state.localStorageCart)
 
@@ -95,18 +95,18 @@ const cartSlice = createSlice({
             setCartFromLocalStorage(state.localStorageCart)
         },
         increaseCartQty: (state, { payload }) => {
-            const i = state.localStorageCart.books.findIndex(el => el.book._id === payload)
+            const i = state.localStorageCart?.books?.findIndex(el => el.book._id === payload)
             state.localStorageCart.books[i].qty++
             state.localStorageCart.books[i].coupon_code = "agooooz"
-            const { price, qty } = state.localStorageCart.books[i]
+            const { price, qty } = state.localStorageCart?.books[i]
             state.localStorageCart.books[i].totalPrice = calcBookPrice(price, qty)
             setCartFromLocalStorage(state.localStorageCart)
         },
         decreaseCartQty: (state, { payload }) => {
-            const i = state.localStorageCart.books.findIndex(el => el.book._id === payload)
+            const i = state.localStorageCart?.books?.findIndex(el => el.book._id === payload)
             state.localStorageCart.books[i].qty--
             state.localStorageCart.books[i].coupon_code = "agooooz"
-            const { price, qty } = state.localStorageCart.books[i]
+            const { price, qty } = state.localStorageCart?.books[i]
             state.localStorageCart.books[i].totalPrice = calcBookPrice(price, qty)
             setCartFromLocalStorage(state.localStorageCart)
         },
