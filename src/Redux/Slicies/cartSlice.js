@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getCart, addCartWithToken, updateCart, clearCart, deleteCartItem } from './cartAction';
+import { getCart, addCartWithToken, updateCart, clearCart, deleteCartItem,createCart } from './cartAction';
 const initialState = {
     books: [],
     localStorageCart: [],
@@ -9,34 +9,125 @@ const initialState = {
     isLoading: false,
     msgError: null,
     totalQty: 0,
+    coupon_code: "",
     totalbooks: 0,
     loading: {}
 };
+
+
+
+function getCartFromLocalStorage() {
+    if (localStorage.getItem("cartDetails")) {
+        return JSON.parse(localStorage.getItem("cartDetails"))
+    }
+}
+function setCartFromLocalStorage(cart) {
+    localStorage.setItem("cartDetails", JSON.stringify(cart))
+}
+
+function calcBookPrice(price, qty) {
+    return price * qty
+}
 
 const cartSlice = createSlice({
     name: 'books',
     initialState,
     reducers: {
-        getCartWithoutToken: (state, action) => {
+        getCartWithoutToken: (state) => {
             state.isLoading = false;
-            if (action.payload) {
-                state.localStorageCart = action.payload;
-            }
+            state.localStorageCart = getCartFromLocalStorage()
         },
         setCartInLocalStorage: (state, action) => {
             if (action.payload) {
-                state.localStorageCart = action.payload;
+                console.log(action.payload);
+                // state.localStorageCart = action.payload;
             }
-            localStorage.setItem('cartDetails', JSON.stringify(state.localStorageCart))
+            // localStorage.setItem('cartDetails', JSON.stringify(state.localStorageCart))
             state.msgError = action.payload.message;
         },
         clearLocalStorageCArt: (state, action) => {
             if (action.payload) {
-                localStorage.removeItem(action.payload)
+                localStorage.removeItem(action.payload);
+                state.localStorageCart = [];
             }
             state.isLoading = false;
             state.msgError = action.payload.error
         },
+        addToCart: (state, { payload }) => {
+            console.log(payload);
+            const i = state.localStorageCart?.books?.findIndex(el => el.book._id === payload._id)
+            console.log(i);
+            if (i === undefined) {
+                state.localStorageCart = {
+                    books: [{
+                        book: {
+                            image: payload.image.secure_url,
+                            _id: payload._id,
+                            price: payload.price,
+                            name: payload.name
+                        },
+                        price: payload.price,
+                        qty: 1,
+                        totalPrice: payload.price,
+                        coupon_code: ""
+                    }]
+                }
+            } else if (i === -1) {
+                state.localStorageCart.books.push({
+                    book: {
+                        image: payload.image.secure_url,
+                        _id: payload._id,
+                        price: payload.price,
+                        name: payload.name
+                    },
+                    price: payload.price,
+                    qty: 1,
+                    totalPrice: payload.price,
+                    coupon_code: ""
+                })
+            } else {
+                state.localStorageCart.books[i].qty++
+                state.localStorageCart.books[i].coupon_code = "3agoooooz"
+                const { price, qty } = state.localStorageCart.books[i]
+                state.localStorageCart.books[i].totalPrice = calcBookPrice(price, qty)
+                console.log(i);
+                // setCartFromLocalStorage(state.localStorageCart)
+
+            }
+
+
+            setCartFromLocalStorage(state.localStorageCart)
+        },
+        increaseCartQty: (state, { payload }) => {
+            console.log(payload);
+            const i = state.localStorageCart.books.findIndex(el => el.book._id === payload)
+            state.localStorageCart.books[i].qty++
+            state.localStorageCart.books[i].coupon_code = "agooooz"
+            const { price, qty } = state.localStorageCart.books[i]
+            state.localStorageCart.books[i].totalPrice = calcBookPrice(price, qty)
+            setCartFromLocalStorage(state.localStorageCart)
+        },
+        decreaseCartQty: (state, { payload }) => {
+            const i = state.localStorageCart.books.findIndex(el => el.book._id === payload)
+            state.localStorageCart.books[i].qty--
+            state.localStorageCart.books[i].coupon_code = "agooooz"
+            const { price, qty } = state.localStorageCart.books[i]
+            state.localStorageCart.books[i].totalPrice = calcBookPrice(price, qty)
+            setCartFromLocalStorage(state.localStorageCart)
+        },
+
+        deletFromCart: (state, { payload }) => {
+            console.log(payload);
+            state.localStorageCart.books = state.localStorageCart?.books?.filter(el => el.book._id !== payload)
+            setCartFromLocalStorage(state.localStorageCart)
+            if (state.localStorageCart.books.length === 0) {
+                localStorage.removeItem('cartDetails')
+            }
+
+
+
+        },
+
     },
     extraReducers: (builder) => {
 
@@ -132,9 +223,30 @@ const cartSlice = createSlice({
             state.isLoading = false
             // state.msgError = action.payload.error
         })
+
+
+        // create cart with token
+        builder.addCase(createCart.pending, (state, action) => {
+            // state.isLoading = true;
+        })
+        builder.addCase(createCart.fulfilled, (state, action) => {
+            console.log(action);
+            if (action.payload.cart) {
+                state.books = action.payload.cart.books;
+                state.discount = action.payload.cart.discount;
+                state.totalAmount = action.payload.cart.totalAmount;
+                state.totalAmountAfterDisc = action.payload.cart.totalAmountAfterDisc;
+            }
+            state.isLoading = false;
+            state.msgError = action.payload.error
+        })
+        builder.addCase(createCart.rejected, (state, action) => {
+            state.isLoading = false
+            // state.msgError = action.payload.error
+        })
     }
 })
 
 export const cartReducer = cartSlice.reducer;
-export const { clearLocalStorageCArt ,setCartInLocalStorage,getCartWithoutToken} = cartSlice.actions;
+export const { clearLocalStorageCArt, setCartInLocalStorage, getCartWithoutToken, addToCart, increaseCartQty, decreaseCartQty, deletFromCart } = cartSlice.actions;
 // export const getCart = cartSlice.actions.getCart;

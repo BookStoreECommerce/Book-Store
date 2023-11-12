@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import styles from "./DeleteCartItem.module.css";
 import 'react-toastify/dist/ReactToastify.css';
-import { setCartInLocalStorage } from '../../Redux/Slicies/cartSlice';
+import { deletFromCart, setCartInLocalStorage } from '../../Redux/Slicies/cartSlice';
 
 function DeleteCartItem({ id }) {
   // const { token } = useSelector((state) => state.auth);
@@ -36,11 +36,10 @@ function DeleteCartItem({ id }) {
       closeButton: false
     });
   }
-
   return (
     <>
       <div>
-        <div className={styles.deleteBook} onClick={() => removeCartItem(id)}>
+        <div className={styles.deleteBook} onClick={() => dispatch(deletFromCart(id))}>
           <i className={` ${styles.trashIcon} fa-regular fa-trash-can`}></i>
         </div>
         <ToastContainer position="bottom-left"
