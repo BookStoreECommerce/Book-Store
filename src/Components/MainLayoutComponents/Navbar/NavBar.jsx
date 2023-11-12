@@ -19,7 +19,7 @@ function NavBar({ navRef }) {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const token = localStorage.getItem("access-token");
-  const { books, localStorageCart } = useSelector((state) => state.cart);
+  const { localStorageCart } = useSelector((state) => state.cart);
 
   let arr = JSON.parse(localStorage.getItem('whishList'))
 
@@ -34,7 +34,7 @@ function NavBar({ navRef }) {
   // Read Cart Number
   let cartNumber;
   if (token) {
-    cartNumber = books.length;
+    // cartNumber = books.length;
 
   }
   else if (!token && localStorage.getItem('cartDetails')) {
@@ -52,15 +52,6 @@ function NavBar({ navRef }) {
     window.addEventListener("scroll", changeBackground);
   });
 
-  const obj = {
-    books: [{
-      book: 0,
-      price: 0,
-      qty: 1,
-      totalPrice: 0,
-    }],
-    totalAmount: 0
-  }
   let { categoriesBooks } = useSelector((state) => state.book)
   let category = { categoriesBooks }.categoriesBooks.result
 
@@ -117,7 +108,7 @@ function NavBar({ navRef }) {
                 sx={{ fontSize: { xs: 24, sm: 24, md: 27, lg: 24 } }}
               />
               <div className={` ${styles.number}`}>
-                <span className={` ${styles.num}`}>{localStorageCart?.books?.length || books?.length || 0}</span>
+                <span className={` ${styles.num}`}>{localStorageCart?.books?.length || 0}</span>
               </div>
             </Link>
           </li>

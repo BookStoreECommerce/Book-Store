@@ -1,33 +1,38 @@
-import React from 'react'
-import { addCartWithToken } from '../../Redux/Slicies/cartAction';
-import { useDispatch, useSelector } from 'react-redux';
+import React from "react";
+import { addCartWithToken } from "../../Redux/Slicies/cartAction";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./AddCart.module.css";
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer, toast } from 'react-toastify';
-import { addToCart, setCartInLocalStorage } from '../../Redux/Slicies/cartSlice';
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
+import {
+  addToCart,
+  setCartInLocalStorage,
+} from "../../Redux/Slicies/cartSlice";
 
 function AddCart({ id, book }) {
   const token = localStorage.getItem("access-token");
   const dispatch = useDispatch();
-  const { localStorageCart } = useSelector(({ cart }) => cart)
+  const { localStorageCart } = useSelector(({ cart }) => cart);
   let cart2;
   const cart = {
-    books: [{
-      book: {
-        image: book?.image,
-        _id: id,
+    books: [
+      {
+        book: {
+          image: book?.image,
+          _id: id,
+          price: book?.price,
+          name: book?.name,
+          id: id,
+        },
         price: book?.price,
-        name: book?.name,
-        id: id
+        qty: 1,
+        totalPrice: book?.price,
       },
-      price: book?.price,
-      qty: 1,
-      totalPrice: book?.price,
-    }],
+    ],
     totalAmount: 0,
     totalAmountAfterDisc: 0,
-    discount: 0
-  }
+    discount: 0,
+  };
 
   // const addCartProduct = async () => {
   //   let flag = false;
@@ -70,23 +75,39 @@ function AddCart({ id, book }) {
   //   });
   // }
 
-  const addToCartFnc = ()=>{
-    if( token == null){
-      dispatch(addToCart(book))
+  const addAlert = () => {
+    console.log(111);
+    toast.success(`Book added to cart!`, {
+      position: "bottom-left",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      closeButton: false,
+    });
+  };
+
+  const addToCartFnc = async () => {
+    if (!token) {
+      await dispatch(addToCart(book));
+      addAlert();
+    } else {
+      await dispatch(addCartWithToken({ book: id }));
+      addAlert();
     }
-    else if ( token){
-      console.log("add with token");
-      dispatch(addCartWithToken({book:id}))
-    }
-  }
+  };
 
   return (
     <>
-      <span className={` ${styles.pointer}  text-decoration-none`} >
+      <span className={` ${styles.pointer}  text-decoration-none`}>
         <span className={`${styles.icon} `} onClick={() => addToCartFnc()}>
-          <i className="fa-solid fa-cart-shopping" ></i>
+          <i className="fa-solid fa-cart-shopping"></i>
         </span>
-        <ToastContainer position="bottom-left"
+        <ToastContainer
+          position="bottom-left"
           autoClose={2000}
           hideProgressBar={false}
           newestOnTop={false}
@@ -96,10 +117,11 @@ function AddCart({ id, book }) {
           closeButton={false}
           draggable
           pauseOnHover={false}
-          theme="light" />
+          theme="light"
+        />
       </span>
     </>
-  )
+  );
 }
 
-export default AddCart
+export default AddCart;

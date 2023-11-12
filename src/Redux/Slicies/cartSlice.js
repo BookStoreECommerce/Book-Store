@@ -131,6 +131,7 @@ const cartSlice = createSlice({
 
             if (action.payload.cart.books) {
                 state.books = action.payload.cart.books;
+                state.localStorageCart.books = action.payload.cart.books;
             }
             state.discount = action.payload.cart.discount;
             state.totalAmount = action.payload.cart.totalAmount;
@@ -149,6 +150,7 @@ const cartSlice = createSlice({
         builder.addCase(addCartWithToken.fulfilled, (state, action) => {
             if (action.payload.cart) {
                 state.books = action.payload.cart.books;
+                state.localStorageCart.books = action.payload.cart.books;
                 state.discount = action.payload.cart.discount;
                 state.totalAmount = action.payload.cart.totalAmount;
                 state.totalAmountAfterDisc = action.payload.cart.totalAmountAfterDisc;
@@ -168,6 +170,7 @@ const cartSlice = createSlice({
         })
         builder.addCase(updateCart.fulfilled, (state, action) => {
             state.books = action.payload.cart.books;
+            state.localStorageCart.books = action.payload.cart.books;
             state.discount = action.payload.cart.discount;
             state.totalAmount = action.payload.cart.totalAmount;
             state.totalAmountAfterDisc = action.payload.cart.totalAmountAfterDisc;
@@ -186,6 +189,7 @@ const cartSlice = createSlice({
         })
         builder.addCase(deleteCartItem.fulfilled, (state, action) => {
             state.books = action.payload.cart.books;
+            state.localStorageCart.books = action.payload.cart.books;
             state.discount = action.payload.cart.discount;
             state.totalAmount = action.payload.cart.totalAmount;
             state.totalAmountAfterDisc = action.payload.cart.totalAmountAfterDisc;
@@ -204,6 +208,7 @@ const cartSlice = createSlice({
         })
         builder.addCase(clearCart.fulfilled, (state, action) => {
             state.books = action.payload.cart.books;
+            state.localStorageCart.books = action.payload.cart.books;
             state.discount = action.payload.cart.discount;
             state.totalAmount = action.payload.cart.totalAmount;
             state.totalAmountAfterDisc = action.payload.cart.totalAmountAfterDisc;
@@ -223,6 +228,7 @@ const cartSlice = createSlice({
         builder.addCase(createCart.fulfilled, (state, action) => {
             if (action.payload.cart) {
                 state.books = action.payload.cart.books;
+                state.localStorageCart.books = action.payload.cart.books;
                 state.discount = action.payload.cart.discount;
                 state.totalAmount = action.payload.cart.totalAmount;
                 state.totalAmountAfterDisc = action.payload.cart.totalAmountAfterDisc;
