@@ -61,7 +61,7 @@ const cartSlice = createSlice({
                 state.localStorageCart = {
                     books: [{
                         book: {
-                            image: payload.image.secure_url,
+                            image: payload.image?.secure_url,
                             _id: payload._id,
                             price: payload.price,
                             name: payload.name
@@ -75,10 +75,10 @@ const cartSlice = createSlice({
             } else if (i === -1) {
                 state.localStorageCart.books.push({
                     book: {
-                        image: payload.image.secure_url,
+                        image: payload.image?.secure_url,
                         _id: payload._id,
-                        price: payload.price,
-                        name: payload.name
+                        price: payload?.price,
+                        name: payload?.name
                     },
                     price: payload.price,
                     qty: 1,

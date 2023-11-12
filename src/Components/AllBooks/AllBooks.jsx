@@ -152,7 +152,6 @@ function AllBook({ sectionName }) {
                   rate={book.rating}
                   section="AllBooks"
                   id={book._id || book.id}
-                  book={book}
                 />
               </div>
             ))

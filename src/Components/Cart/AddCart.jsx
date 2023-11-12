@@ -14,15 +14,15 @@ function AddCart({ id, book }) {
   const cart = {
     books: [{
       book: {
-        image: book.image,
+        image: book?.image,
         _id: id,
-        price: book.price,
-        name: book.name,
+        price: book?.price,
+        name: book?.name,
         id: id
       },
-      price: book.price,
+      price: book?.price,
       qty: 1,
-      totalPrice: book.price,
+      totalPrice: book?.price,
     }],
     totalAmount: 0,
     totalAmountAfterDisc: 0,

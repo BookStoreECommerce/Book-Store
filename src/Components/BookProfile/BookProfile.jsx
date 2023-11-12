@@ -82,7 +82,7 @@ export default function BookProfile() {
                   </div>
                   <div className={styles.addToCartSection}>
                     <div className={styles.addToCartBtn}>
-                      <AddCart id={specBook?._id} />
+                      <AddCart id={specBook?._id} book={specBook} />
                     </div>
                   </div>
                 </div>
