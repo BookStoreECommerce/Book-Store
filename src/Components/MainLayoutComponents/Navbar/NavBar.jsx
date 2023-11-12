@@ -10,7 +10,7 @@ import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined
 import { logout } from "../../../Redux/Slicies/authSlice";
 import { signout } from "../../../Redux/Slicies/authActions";
 import { getCatBooks } from '../../../Redux/Slicies/CategoriesBookActions';
-import { getCart } from "../../../Redux/Slicies/cartAction";
+import { createCart, getCart } from "../../../Redux/Slicies/cartAction";
 
 
 function NavBar({ navRef }) {
@@ -20,7 +20,6 @@ function NavBar({ navRef }) {
   const { user } = useSelector((state) => state.auth);
   const token = localStorage.getItem("access-token");
   const { books, localStorageCart } = useSelector((state) => state.cart);
-console.log(localStorageCart);
 
   const changeBackground = () => {
     if (window.scrollY >= 60) {
@@ -34,6 +33,7 @@ console.log(localStorageCart);
   let cartNumber;
   if (token) {
     cartNumber = books.length;
+
   }
   else if (!token && localStorage.getItem('cartDetails')) {
     // let cartArray =JSON.parse(localStorage.getItem('cartDetails'));
@@ -47,17 +47,29 @@ console.log(localStorageCart);
   }
 
   useEffect(() => {
-
     changeBackground();
     window.addEventListener("scroll", changeBackground);
   });
 
-
+  const obj = {
+    books: [{
+      book: 0,
+      price: 0,
+      qty: 1,
+      totalPrice: 0,
+    }],
+    totalAmount: 0
+  }
   let { categoriesBooks } = useSelector((state) => state.book)
   let category = { categoriesBooks }.categoriesBooks.result
 
   useEffect(() => {
     dispatch(getCart());
+    if (localStorage.getItem("cartDetails")) {
+      let cartDetails = localStorage.getItem("cartDetails");
+      cartDetails = JSON.parse(cartDetails)
+      dispatch(createCart(cartDetails));
+    }
   }, [token])
 
   useEffect(() => {

@@ -5,7 +5,6 @@ import axiosInstance from "../../axios/axios-instance";
 export const getCart = createAsyncThunk("cart/getData", async (_, { rejectWithValue }) => {
     try {
         const { data } = await axiosInstance.get(`cart`);
-        console.log(data);
         return data;
     } catch (error) {
         return rejectWithValue(error.response.data)
@@ -14,7 +13,6 @@ export const getCart = createAsyncThunk("cart/getData", async (_, { rejectWithVa
 
 export const addCartWithToken = createAsyncThunk("cart/addWithToken", async (bookId, { rejectWithValue }) => {
     try {
-        console.log(bookId);
         const { data } = await axiosInstance.post('cart', bookId)
         return data;
     } catch (error) {
@@ -22,11 +20,9 @@ export const addCartWithToken = createAsyncThunk("cart/addWithToken", async (boo
     }
 });
 
-export const updateCart = createAsyncThunk("cart/patchData", async ({book,qty}, { rejectWithValue }) => {
+export const updateCart = createAsyncThunk("cart/patchData", async ({ book, qty }, { rejectWithValue }) => {
     try {
-        console.log(book);
-        console.log(qty);
-        const { data } = await axiosInstance.patch('cart', {book,qty})
+        const { data } = await axiosInstance.patch('cart', { book, qty })
         return data;
     } catch (error) {
         return rejectWithValue(error.response.data)
@@ -54,10 +50,22 @@ export const clearCart = createAsyncThunk("cart/clearCart", async (_, { rejectWi
 
 // export const addCartWithCoupon = createAsyncThunk("cart/addWithCoupon", async (bookId, { rejectWithValue }) => {
 //     try {
-//         console.log(bookId);
 //         const { data } = await axiosInstance.post('cart', bookId)
 //         return data;
 //     } catch (error) {
 //         return rejectWithValue(error.response.data)
 //     }
 // });
+
+
+export const createCart = createAsyncThunk("cart/createCart", async (cartDetails, { rejectWithValue }) => {
+    try {
+        console.log("aaaaaaaaaaaaaaaaaa", cartDetails);
+        const { data } = await axiosInstance.post('cart/creatCart', cartDetails)
+        console.log("bbbbbbbbbbbbbbbbbbb", data);
+        return data;
+    } catch (error) {
+        console.log(error);
+        return rejectWithValue(error.response.data)
+    }
+});

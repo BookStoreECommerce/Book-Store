@@ -29,11 +29,10 @@ export default function Cart() {
 
     if (token) {
         cartArray = books;
-        console.log(books);
+
     } else if (token == null) {
         // cartArray = JSON.parse(localStorage.getItem('cartDetails'));
         cartArray = localStorageCart?.books;
-        console.log(cartArray);
     }
 
     const dispatch = useDispatch();
@@ -123,7 +122,6 @@ export default function Cart() {
                                                     </div>
                                                 </div>
                                                 <div className={` ${styles.deleteAndSubTotal}  `}>
-                                                    {console.log(book.book._id)}
                                                     <DeleteCartItem id={book?.book._id} />
 
                                                 </div>
