@@ -126,7 +126,7 @@ function AllBook({ sectionName }) {
       {(isLoading || filterLoading) ? (
         <Loading sectionName="AllBooks" />
       ) : (
-        <div className="row">
+        <div className="row justify-content-center align-items-center">
           {totalCount === 0 && !isLoading ? (
             <div className={styles.notFoundContainer}>
               <p>No Books Found</p>
@@ -137,7 +137,7 @@ function AllBook({ sectionName }) {
             books.map((book, index) => (
               <div
                 key={index}
-                className={`col-md-3 col-sm-4 col-6 mb-5 ${styles.bookCard}`}
+                className={`col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5 ${styles.bookCard}`}
               >
                 <BookCard
                   key={book.id}
@@ -148,8 +148,8 @@ function AllBook({ sectionName }) {
                   name={book.name}
                   price={book?.price}
                   author={book.author}
-                  rate={book.rate}
-                  section={sectionName}
+                  rate={book.rating}
+                  section="AllBooks"
                   id={book._id || book.id}
                   book={book}
                 />

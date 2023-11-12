@@ -17,7 +17,7 @@ const LastSearch = () => {
             <div className={`container-fluid px-0 ${styles.LastSearch} ${styles.fixContainerFluid}`}>
                 <div className="container">
                     <div className={`row justify-content-center align-items-center`}>
-                        <BookList NewBooks={cutLastSearch} sectionName={"newBooks"} />
+                        <BookList NewBooks={cutLastSearch} sectionName="lastSearch" />
                     </div>
                 </div>
             </div>

@@ -8,12 +8,11 @@ import Rating from "../Rating/Rating";
 import AddCart from "../../Cart/AddCart";
 
 const BookCard = ({ book, id, image, name, price, author, section, cardStyle, sale, category, slug, sectionName, rate }) => {
-
   return (
     <>
-      <div data-testid="BookCard" className={section === "newBooks" ? `col-lg-2 col-md-3 col-sm-4 col-6 mt-5 mb-3 ${styles.font}` : section === "catBook" ? `col-xl-3 col-lg-4 col-sm-6 col-12 mt-5 mb-3 ${styles.font}` : ""}>
+      <div data-testid="BookCard" className={section === "newBooks" || section === "lastSearch" ? `col-md-3 col-sm-4 col-6 mt-5 mb-3 ${styles.font}` : section === "catBook" ? `col-xl-3 col-lg-4 col-sm-6 col-12 mt-5 mb-3 ${styles.font}` : ""}>
       {/* <div data-testid="BookCard" className={section === "newBooks" ? `col-lg-3 col-sm-6 col-12 mt-5 mb-3 ${styles.font}` : section === "catBook" ? `col-xl-3 col-lg-4 col-sm-6 col-12 mt-5 mb-3 ${styles.font}` : ""}> */}
-        <div className={sectionName === "whislist" ? `mb-2 position-relative ${styles.imgContainer} ${styles.height}` : `mb-2 position-relative ${styles.imgContainer} `} style={cardStyle}>
+        <div className={sectionName === "whislist" ? `mb-2 position-relative ${styles.imgContainer} ${styles.height}`: section === "AllBooks" ? `mb-2 position-relative ${styles.imgContainerBooks}`: section === "lastSearch" ? `mb-2 position-relative ${styles.imgContainerLastSearch}`: `mb-2 position-relative ${styles.imgContainer} `} style={cardStyle}>
           <div className={styles.overLay}>
             {section !== "bestSeller" ? (
               <>
@@ -39,7 +38,7 @@ const BookCard = ({ book, id, image, name, price, author, section, cardStyle, sa
               </>
             )}
           </div>
-          {section === "bestSeller" || section === "newBooks" ? (
+          {section === "bestSeller" ? (
           // {section === "bestSeller" ? (
             <img src={book?.image?.secure_url ? book?.image?.secure_url : image ? image : bookImage} className={`w-100 ${styles.cardImgNew}`} alt="" />
           ) :
