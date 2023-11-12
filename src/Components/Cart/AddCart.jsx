@@ -70,10 +70,20 @@ function AddCart({ id, book }) {
   //   });
   // }
 
+  const addToCartFnc = ()=>{
+    if( token == null){
+      dispatch(addToCart(book))
+    }
+    else if ( token){
+      console.log("add with token");
+      dispatch(addCartWithToken({book:id}))
+    }
+  }
+
   return (
     <>
       <span className={` ${styles.pointer}  text-decoration-none`} >
-        <span className={`${styles.icon} `} onClick={() => dispatch(addToCart(book))}>
+        <span className={`${styles.icon} `} onClick={() => addToCartFnc()}>
           <i className="fa-solid fa-cart-shopping" ></i>
         </span>
         <ToastContainer position="bottom-left"

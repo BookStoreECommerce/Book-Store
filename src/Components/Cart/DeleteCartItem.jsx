@@ -21,6 +21,7 @@ function DeleteCartItem({ id }) {
       if (cart) {
         cartArray = cartArray.filter((item) => item.book.id !== id)
         await dispatch(setCartInLocalStorage(cartArray));
+
       }
       await dispatch(deleteCartItem({ book: id }));
     }

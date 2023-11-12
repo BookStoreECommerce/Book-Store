@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import Loading from '../ReusableComponents/Loading/Loading';
 import ClearCart from './ClearCart';
 import DeleteCartItem from './DeleteCartItem';
-import { updateCart } from '../../Redux/Slicies/cartAction';
+import { getCart, updateCart } from '../../Redux/Slicies/cartAction';
 import { Button } from "@mui/material";
 
 import styles from './Cart.module.css'
@@ -26,14 +26,16 @@ export default function Cart() {
     const token = localStorage.getItem("access-token");
 
     let cartArray = [];
-
-
+    
     if (token) {
         cartArray = books;
+        console.log(cartArray);
 
     } else if (token == null) {
         // cartArray = JSON.parse(localStorage.getItem('cartDetails'));
         cartArray = localStorageCart?.books;
+        console.log(cartArray);
+
     }
 
     const dispatch = useDispatch();
