@@ -142,3 +142,8 @@ color: var(--navyBlue)!important;
 .css-6cwnna-MuiSlider-mark {
   background-color: var(--mainColor) !important;
 }
+@media screen and (max-width:990px) {
+  .bookSize{
+    justify-content: center;
+  }
+}

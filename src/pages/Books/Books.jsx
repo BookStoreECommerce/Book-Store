@@ -18,6 +18,7 @@ export default function Books() {
     <>
       <ScrollToTop />
       <Box
+      className="d-flex bookSize"
         sx={{
           marginTop: `${navH}px`,
           minHeight: `calc(100vh - ${footerH + navH}px)`,
@@ -26,7 +27,7 @@ export default function Books() {
           <div className="col-lg-3 col-md-10 col-12 mb-lg-0 mb-4 d-flex justify-content-end">
             <FilterPanel />
           </div>
-          <div className="col-lg-8 col-md-10 col-12">
+          <div className="col-lg-8 col-md-10 col-12 ">
             <AllBook />
           </div>
         </div>
