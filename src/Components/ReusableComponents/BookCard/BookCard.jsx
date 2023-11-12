@@ -40,15 +40,15 @@ const BookCard = ({ book, id, image, name, price, author, section, cardStyle, sa
           </div>
           {section === "bestSeller" ? (
           // {section === "bestSeller" ? (
-            <img src={book?.image?.secure_url ? book?.image?.secure_url : image ? image : bookImage} className={`w-100 ${styles.cardImgNew}`} alt="" />
+            <img src={image?.secure_url ? image?.secure_url : bookImage} className={`w-100 ${styles.cardImgNew}`} alt="" />
           ) :
             sectionName === "whislist" ?
               (
-                <img src={book?.image?.secure_url ? book?.image?.secure_url : image ? image : bookImage} className={`w-100 ${styles.cardStyle}`} alt="" />
+                <img src={image?.secure_url ? image?.secure_url : bookImage} className={`w-100 ${styles.cardStyle}`} alt="" />
               )
               :
               (
-                <img src={book?.image?.secure_url ? book?.image?.secure_url : image ? image : bookImage} className={`w-100 ${styles.cardImg}`} alt="" />
+                <img src={image?.secure_url ? image?.secure_url : bookImage} className={`w-100 ${styles.cardImg}`} alt="" />
               )
           }
 

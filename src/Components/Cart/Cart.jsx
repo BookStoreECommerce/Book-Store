@@ -32,7 +32,7 @@ export default function Cart() {
 
     } else if (token == null) {
         // cartArray = JSON.parse(localStorage.getItem('cartDetails'));
-        cartArray = localStorageCart?.books;
+        cartArray = localStorageCart.books;
     }
 
     const dispatch = useDispatch();
@@ -64,9 +64,9 @@ export default function Cart() {
 
 
                         <div className="row justify-content-center align-items-center pb-2">
-                            {localStorageCart?.books?.length >= 0 ?
+                            {localStorageCart.books.length >= 0 ?
                                 <>
-                                    {localStorageCart?.books?.length > 0 ? <div className={styles.checkoutBtn}>
+                                    {localStorageCart.books.length > 0 ? <div className={styles.checkoutBtn}>
                                         <Button
                                             variant="outlined"
                                             component={Link}
@@ -85,7 +85,7 @@ export default function Cart() {
                                         </Button>
                                     </div> : ''}
 
-                                    {localStorageCart?.books?.map((book, index) => (
+                                    {localStorageCart.books.map((book, index) => (
                                         <div className={`${styles.orderCard} col-lg-7 col-md-8 col-sm-10 col-10`} key={index}>
                                             <div className={`row justify-content-between ${styles.cardParent}`}>
                                                 <div className='col-md-11'>

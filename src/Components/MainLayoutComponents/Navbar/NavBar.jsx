@@ -21,6 +21,8 @@ function NavBar({ navRef }) {
   const token = localStorage.getItem("access-token");
   const { books, localStorageCart } = useSelector((state) => state.cart);
 
+  let arr = JSON.parse(localStorage.getItem('whishList'))
+
   const changeBackground = () => {
     if (window.scrollY >= 60) {
       setNavbar(true);
@@ -38,7 +40,6 @@ function NavBar({ navRef }) {
   else if (!token && localStorage.getItem('cartDetails')) {
     // let cartArray =JSON.parse(localStorage.getItem('cartDetails'));
     // let cartArray = localStorageCart?.books;
-    // console.log(cartArray);
     cartNumber = localStorageCart?.books?.length;
 
   }
@@ -88,14 +89,27 @@ function NavBar({ navRef }) {
       <div data-testid="NavBar" className="fixed-top" ref={navRef}>
         <div className={styles.navTop}>
           <li className="nav-item me-5 position-relative">
-            <Link className={`nav-link  ${styles.navLinkIcon}`} to="favourites">
+          {user !== null && token !== null ? <>
+            <Link className={`nav-link  ${styles.navLinkIcon}`} to="wishlist">
               <FavoriteBorderOutlinedIcon
                 sx={{ fontSize: { xs: 24, sm: 24, md: 27, lg: 24 } }}
               />
               <div className={` ${styles.number}`}>
-                <span className={`${styles.num}`}>0</span>
+                <span className={`${styles.num}`}>{arr?.length === undefined || arr?.length === null ? 0 : arr.length}</span>
               </div>
             </Link>
+          </>:
+                <Link className={`nav-link  ${styles.navLinkIcon}`} onClick={() => {
+                  dispatch(handleClickOpen({ name: "login" }));
+                }}>
+                <FavoriteBorderOutlinedIcon
+                  sx={{ fontSize: { xs: 24, sm: 24, md: 27, lg: 24 } }}
+                />
+                <div className={` ${styles.number}`}>
+                  <span className={`${styles.num}`}>{arr?.length === undefined || arr?.length === null ? 0 : arr.length}</span>
+                </div>
+              </Link>
+          }
           </li>
           <li readOnly className="nav-item me-5 position-relative">
             <Link className={`nav-link ${styles.navLinkIcon}`} to="cart">

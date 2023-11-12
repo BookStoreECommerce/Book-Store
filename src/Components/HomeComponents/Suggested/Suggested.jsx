@@ -8,11 +8,10 @@ import { useSelector } from "react-redux";
 
 const Suggested = () => {
   const { suggestedBooks } = useSelector((state) => state.auth);
-  
   const Suggested = suggestedBooks.map((ele) => {
     return {
-      id: ele._id,
-      image: ele.image.secure_url,
+      _id: ele._id,
+      image: ele.image,
       name: ele.name,
       slug: ele.slug,
       author: ele.author,
@@ -88,23 +87,26 @@ const Suggested = () => {
               <div className={`col-lg-11 ${styles.marginBottom}`}>
                 <Slider {...settings}>
               
-                  {Suggested.map((Suggested, index) => (
-                    <BookCard
-                      cardStyle={{margin: "10px", padding: "10px", minHeight:"300px", maxHeight:"300px", display:"flex", justifyContent:"center" ,alignItems:"center"}}
-                      key={Suggested.id}
-                      image={Suggested.image}
-                      name={Suggested.name}
-                      price={Suggested.price}
-                      author={Suggested.author}
-                      rate={Suggested.rating}
-                      sale={Suggested.sale}
-                      section="Suggested"
-                      slug= {Suggested.slug}
-                      category = {Suggested.category}
-                      sectionName="whislist"
-                      id={Suggested.id}
-                    />
-                  ))}
+                  {Suggested.map((Suggested, index) => {
+                    return (
+                      <BookCard
+                        cardStyle={{margin: "10px", padding: "10px", minHeight:"300px", maxHeight:"300px", display:"flex", justifyContent:"center" ,alignItems:"center"}}
+                        key={Suggested._id}
+                        image={Suggested.image}
+                        name={Suggested.name}
+                        price={Suggested.price}
+                        author={Suggested.author}
+                        rate={Suggested.rating}
+                        sale={Suggested.sale}
+                        section="Suggested"
+                        slug= {Suggested.slug}
+                        category = {Suggested.category}
+                        sectionName="whislist"
+                        id={Suggested._id}
+                        book={Suggested}
+                      />
+                    )
+                  })}
                 </Slider>
               </div>
             </div>

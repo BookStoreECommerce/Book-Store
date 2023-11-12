@@ -7,7 +7,7 @@ const BookList = ({ NewBooks, sectionName }) => {
       {NewBooks?.map((book) => (
         <BookCard
           key={book._id || book?.id}
-          image={book.image?.secure_url}
+          image={book.image}
           name={book.name}
           price={book.price}
           author={book.author}

@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getCart, addCartWithToken, updateCart, clearCart, deleteCartItem,createCart } from './cartAction';
 const initialState = {
     books: [],
-    localStorageCart: [],
+    localStorageCart: {books: []},
     discount: 0,
     totalAmount: 0,
     totalAmountAfterDisc: 0,
@@ -39,7 +39,6 @@ const cartSlice = createSlice({
         },
         setCartInLocalStorage: (state, action) => {
             if (action.payload) {
-                console.log(action.payload);
                 // state.localStorageCart = action.payload;
             }
             // localStorage.setItem('cartDetails', JSON.stringify(state.localStorageCart))
@@ -54,14 +53,12 @@ const cartSlice = createSlice({
             state.msgError = action.payload.error
         },
         addToCart: (state, { payload }) => {
-            console.log(payload);
-            const i = state.localStorageCart?.books?.findIndex(el => el.book._id === payload._id)
-            console.log(i);
+            const i = state.localStorageCart.books.findIndex(el => el.book._id === payload._id)
             if (i === undefined) {
                 state.localStorageCart = {
                     books: [{
                         book: {
-                            image: payload.image?.secure_url,
+                            image: payload.image.secure_url,
                             _id: payload._id,
                             price: payload.price,
                             name: payload.name
@@ -90,7 +87,6 @@ const cartSlice = createSlice({
                 state.localStorageCart.books[i].coupon_code = "3agoooooz"
                 const { price, qty } = state.localStorageCart.books[i]
                 state.localStorageCart.books[i].totalPrice = calcBookPrice(price, qty)
-                console.log(i);
                 // setCartFromLocalStorage(state.localStorageCart)
 
             }
@@ -99,7 +95,6 @@ const cartSlice = createSlice({
             setCartFromLocalStorage(state.localStorageCart)
         },
         increaseCartQty: (state, { payload }) => {
-            console.log(payload);
             const i = state.localStorageCart.books.findIndex(el => el.book._id === payload)
             state.localStorageCart.books[i].qty++
             state.localStorageCart.books[i].coupon_code = "agooooz"
@@ -117,15 +112,11 @@ const cartSlice = createSlice({
         },
 
         deletFromCart: (state, { payload }) => {
-            console.log(payload);
             state.localStorageCart.books = state.localStorageCart?.books?.filter(el => el.book._id !== payload)
             setCartFromLocalStorage(state.localStorageCart)
             if (state.localStorageCart.books.length === 0) {
                 localStorage.removeItem('cartDetails')
             }
-
-
-
         },
 
     },
@@ -230,7 +221,6 @@ const cartSlice = createSlice({
             // state.isLoading = true;
         })
         builder.addCase(createCart.fulfilled, (state, action) => {
-            console.log(action);
             if (action.payload.cart) {
                 state.books = action.payload.cart.books;
                 state.discount = action.payload.cart.discount;

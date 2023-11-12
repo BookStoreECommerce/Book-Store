@@ -60,12 +60,9 @@ export const clearCart = createAsyncThunk("cart/clearCart", async (_, { rejectWi
 
 export const createCart = createAsyncThunk("cart/createCart", async (cartDetails, { rejectWithValue }) => {
     try {
-        console.log("aaaaaaaaaaaaaaaaaa", cartDetails);
         const { data } = await axiosInstance.post('cart/creatCart', cartDetails)
-        console.log("bbbbbbbbbbbbbbbbbbb", data);
         return data;
     } catch (error) {
-        console.log(error);
         return rejectWithValue(error.response.data)
     }
 });

@@ -66,7 +66,7 @@ export default function MainSlider({arr, title,autoplay= true}) {
                     <BookCard
                       cardStyle={{ margin: "10px", padding: "14px", minHeight:"300px", maxHeight:"300px", display:"flex", justifyContent:"center" ,alignItems:"center"}}
                       key={book._id}
-                      image={book.image.secure_url }
+                      image={book.image }
                       id={book._id}
                       name={book.name}
                       price={book.price}

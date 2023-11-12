@@ -143,7 +143,7 @@ function AllBook({ sectionName }) {
                   book={book}
                   key={book.id}
                   slug={book.slug}
-                  image={book.image.secure_url}
+                  image={book.image}
                   category={book.category}
                   desc={book.desc}
                   name={book.name}
