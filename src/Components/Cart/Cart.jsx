@@ -21,30 +21,14 @@ import { array } from "yup";
 
 export default function Cart() {
     const dispatch = useDispatch();
-  // <div className={styles.bookAuthor}>
-  //    By {book.book.author}
-  // </div>
 
   const { footerH, navH } = useSelector((state) => state.app);
-  const { books, isLoading, localStorageCart } = useSelector(
+  const token = localStorage.getItem("access-token");
+  const { isLoading, localStorageCart } = useSelector(
     (state) => state.cart
   );
-
+console.log(localStorageCart);
   // const { token } = useSelector((state) => state.auth);
-  const token = localStorage.getItem("access-token");
-
-  let cartArray = [];
-
-//   if (token) {
-//     cartArray = books;
-//     console.log(cartArray);
-//   } else if (token == null) {
-//     cartArray = JSON.parse(localStorage.getItem('cartDetails'));
-//     cartArray = localStorageCart?.books;
-//     console.log(cartArray);
-//   }
-
-  
 
   const getCartDetails = () => {
     token ? dispatch(getCart()) : dispatch(getCartWithoutToken());

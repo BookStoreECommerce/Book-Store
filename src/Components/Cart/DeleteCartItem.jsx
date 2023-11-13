@@ -17,7 +17,7 @@ function DeleteCartItem({ id }) {
   const removeAlert = () => {
     toast.error(`Book removed from cart!`, {
       position: "bottom-left",
-      autoClose: 2000,
+      autoClose: 500,
       hideProgressBar: false,
       closeOnClick: false,
       pauseOnHover: false,
@@ -28,11 +28,26 @@ function DeleteCartItem({ id }) {
     });
   };
   const removeCartItem = async () => {
+    toast.loading(`Deleting Book .........`, {
+      position: "bottom-left",
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: true,
+      progress: 0,
+      theme: "colored",
+      closeButton: false,
+      toastId: id,
+    });
     if (token) {
       await dispatch(deleteCartItem({ book: id }));
+      toast.dismiss(id);
+
       removeAlert();
     } else {
       await dispatch(deletFromCart(id));
+      toast.dismiss(id);
+
       removeAlert();
     }
   };
