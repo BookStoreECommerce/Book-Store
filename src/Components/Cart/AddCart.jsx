@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { addToCart } from "../../Redux/Slicies/cartSlice";
 
-function AddCart({ id, book }) {
+function AddCart({ id, book, component, children }) {
   const token = localStorage.getItem("access-token");
   const dispatch = useDispatch();
 
@@ -56,8 +56,11 @@ function AddCart({ id, book }) {
   return (
     <>
       <span className={` ${styles.pointer}  text-decoration-none`}>
-        <span className={`${styles.icon} `} onClick={() => addToCartFnc()}>
-          <i className="fa-solid fa-cart-shopping"></i>
+        <span 
+        className={component === "wishList" ? ` ${styles.longIcon}`: `${styles.icon}`}
+        onClick={() => addToCartFnc()}>
+          <i className="fa-solid fa-cart-shopping"></i>&nbsp;
+          {children}
         </span>
         <ToastContainer
           position="bottom-left"
