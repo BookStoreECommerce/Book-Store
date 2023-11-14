@@ -27,7 +27,6 @@ export default function Cart() {
   const { isLoading, localStorageCart } = useSelector(
     (state) => state.cart
   );
-console.log(localStorageCart);
   // const { token } = useSelector((state) => state.auth);
 
   const getCartDetails = () => {
