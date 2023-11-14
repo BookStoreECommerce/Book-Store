@@ -104,7 +104,7 @@ const FilterPanel = () => {
     // format
     if (format.length !== 0) {
       format.forEach((ele) => {
-        formatFilter += `&format=${ele}`;
+        formatFilter = `&format=${ele}`;
       });
     }
     // rating

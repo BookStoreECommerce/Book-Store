@@ -10,7 +10,7 @@ import { baseUrl } from "../../util/util";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Loading from "../ReusableComponents/Loading/Loading";
-import { handleFilterCheck, setFilterObj } from "../../Redux/Slicies/filterSlice";
+import { handleFilterCheck, handleFilterRadio, setFilterObj } from "../../Redux/Slicies/filterSlice";
 import { booksFilter } from "../../Redux/Slicies/filterActions";
 import { setBooksPageNumber } from "../../Redux/Slicies/bookSlice";
 function AllBook({ sectionName }) {
@@ -44,6 +44,9 @@ function AllBook({ sectionName }) {
     }
     if (name === 'language' || name === 'published') {
       dispatch(handleFilterCheck(value));
+    }
+    if (name === 'format') {
+      dispatch(handleFilterRadio(value));
     }
     handlePageChange(e, 1);
     dispatch(setFilterObj({ method: "delete", name, value }));

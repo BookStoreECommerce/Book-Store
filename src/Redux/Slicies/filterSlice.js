@@ -7,6 +7,7 @@ const initialState = {
     filter: '',
     filterLoading: false,
     filterCheckBtns: {},
+    filterRadioBtns: {},
     msgError: null,
 }
 
@@ -21,17 +22,25 @@ const booksFilterSlice = createSlice({
                 state.filterCheckBtns[payload] = true;
             }
         },
+        handleFilterRadio: (state, {payload}) => {
+            if(state.filterRadioBtns.hasOwnProperty(payload)){
+                state.filterRadioBtns[payload] = false;
+            } else {
+                state.filterRadioBtns = {};
+                state.filterRadioBtns[payload] = true;
+            }
+        },
         setFilter: (state, {payload}) => {
             state.filter = payload;
         },
         setFilterObj: (state, {payload}) => {
             if (payload.method === 'add') {
-                if(payload.name === 'price') {
-                    state.filterObj.price = [payload.value];
+                if(payload.name === 'price' || payload.name === 'format') {
+                    state.filterObj[payload.name] = [payload.value];
                 } 
                 else if(payload.name === 'category'){
-                    if (state.filterObj.category.filter((ele) => ele.name === payload.value.name).length === 0) {
-                        state.filterObj.category.push(payload.value);
+                    if (state.filterObj[payload.name].filter((ele) => ele.name === payload.value.name).length === 0) {
+                        state.filterObj[payload.name].push(payload.value);
                     }
                 }
                 else {
@@ -50,6 +59,7 @@ const booksFilterSlice = createSlice({
         clearFilterObj: (state, {payload}) => {
             state.filter = '';
             state.filterCheckBtns = {}
+            state.filterRadioBtns = {}
             state.filterObj = {language: [], price: [], category: [], author: [], published: [], format: [], rating: [], stock: []};
         },
     },
@@ -81,4 +91,4 @@ const booksFilterSlice = createSlice({
 })
 
 export const booksFilterReducer = booksFilterSlice.reducer;
-export const { setFilterObj, setFilter, handleFilterCheck, clearFilterObj } = booksFilterSlice.actions;
+export const { setFilterObj, setFilter, handleFilterCheck, handleFilterRadio, clearFilterObj } = booksFilterSlice.actions;
