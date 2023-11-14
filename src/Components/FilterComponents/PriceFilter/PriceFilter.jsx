@@ -1,5 +1,4 @@
 import React, { forwardRef, useState } from "react";
-import styles from "./PriceFilter.module.css";
 import { setFilterObj } from "../../../Redux/Slicies/filterSlice";
 import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
@@ -90,7 +89,7 @@ const PriceFilter = () => {
           }}
           onClick={(e) => go(e)}
           name="price"
-          className={`mainBtn align-self-end my-3 ${styles.wFitContent}`}
+          className={`mainBtn align-self-end my-3 wFitContent`}
         >
           Go
         </Button>

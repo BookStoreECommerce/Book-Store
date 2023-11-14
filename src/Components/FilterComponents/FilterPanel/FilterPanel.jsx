@@ -110,13 +110,13 @@ const FilterPanel = () => {
     // rating
     if (rating.length !== 0) {
       rating.forEach((ele) => {
-        ratingFilter += `&rating=${ele}`;
+        ratingFilter = `&rating=${ele}`;
       });
     }
     // stock
     if (stock.length !== 0) {
       stock.forEach((ele) => {
-        stockFilter += `&stock=${ele}`;
+        stockFilter = `&stock=${ele}`;
       });
     }
 
@@ -140,8 +140,8 @@ const FilterPanel = () => {
             <PriceFilter />
             <LanguageFilter />
             <PublicationDateFilter />
-            <FormatFilter/>
             <RatingFilter/>
+            <FormatFilter/>
             <StockFilter/>
           </div>
         </nav>
@@ -185,8 +185,8 @@ const FilterPanel = () => {
               <PriceFilter />
               <LanguageFilter />
               <PublicationDateFilter />
-              <FormatFilter/>
               <RatingFilter/>
+              <FormatFilter/>
               <StockFilter/>
             </DialogContent>
 

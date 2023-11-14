@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from "./PublicationDateFilter.module.css";
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -27,7 +26,7 @@ const PublicationDateFilter = () => {
   return (
     <div>
       <h6>Publication Date</h6>
-      <FormGroup className={`${styles.wFitContent}`}>
+      <FormGroup className="wFitContent">
       {values.map((ele, index) => <FormControlLabel key={index} control={<Checkbox name="published" checked={filterCheckBtns[values[index]] || false} value={values[index]} onChange={handleChange}/>} label={(ele === "0-2000") ? "Before 2000" : (ele === `2020-${thisYear}`) ? "After 2020" : values[index]}  />)}
       </FormGroup>
       <hr />

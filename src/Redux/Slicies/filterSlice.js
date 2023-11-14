@@ -35,7 +35,7 @@ const booksFilterSlice = createSlice({
         },
         setFilterObj: (state, {payload}) => {
             if (payload.method === 'add') {
-                if(payload.name === 'price' || payload.name === 'format') {
+                if(payload.name === 'price' || payload.name === 'format' || payload.name === 'rating') {
                     state.filterObj[payload.name] = [payload.value];
                 } 
                 else if(payload.name === 'category'){
