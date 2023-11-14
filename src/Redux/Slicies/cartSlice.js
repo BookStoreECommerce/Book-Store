@@ -40,6 +40,8 @@ function getBook(payload) {
 function getCartFromLocalStorage() {
   if (localStorage.getItem("cartDetails")) {
     return JSON.parse(localStorage.getItem("cartDetails"));
+  }else {
+    return false
   }
 }
 function setCartFromLocalStorage(cart) {
@@ -56,7 +58,10 @@ const cartSlice = createSlice({
   reducers: {
     getCartWithoutToken: (state) => {
       state.isLoading = false;
-      state.localStorageCart = getCartFromLocalStorage();
+      console.log(getCartFromLocalStorage());
+      if (localStorage.getItem("cartDetails")){
+        state.localStorageCart.books = getCartFromLocalStorage().books;
+      }
     },
     setCartInLocalStorage: (state, action) => {
       if (action.payload) {
@@ -126,7 +131,6 @@ const cartSlice = createSlice({
     });
     builder.addCase(getCart.fulfilled, (state, action) => {
       state.isLoading = false;
-
       if (action.payload.cart.books) {
         state.books = action.payload.cart.books;
         state.localStorageCart.books = action.payload.cart.books;

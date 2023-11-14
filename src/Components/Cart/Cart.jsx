@@ -6,18 +6,14 @@ import { Link } from "react-router-dom";
 import Loading from "../ReusableComponents/Loading/Loading";
 import ClearCart from "./ClearCart";
 import DeleteCartItem from "./DeleteCartItem";
-import { getCart, updateCart } from "../../Redux/Slicies/cartAction";
+import { getCart } from "../../Redux/Slicies/cartAction";
 import { Button } from "@mui/material";
-
 import styles from "./Cart.module.css";
 import {
-  addToCart,
   decreaseCartQty,
   getCartWithoutToken,
   increaseCartQty,
-  setCartInLocalStorage,
 } from "../../Redux/Slicies/cartSlice";
-import { array } from "yup";
 
 export default function Cart() {
     const dispatch = useDispatch();
