@@ -11,7 +11,6 @@ function AddCart({ id, book, component, children }) {
   const dispatch = useDispatch();
 
   const addAlert = () => {
-    console.log(111);
     toast.success(
       `${book.name.split(" ").slice(0, 3).join(" ")} added to cart!`,
       {
