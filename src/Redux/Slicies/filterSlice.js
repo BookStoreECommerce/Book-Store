@@ -3,7 +3,7 @@ import { booksFilter, getAllAuthors } from "./filterActions";
 
 const initialState = {
     allAuthors: [],
-    filterObj: {language: [], price: [], category: [], author: [], published: [], format: []},
+    filterObj: {language: [], price: [], category: [], author: [], published: [], format: [], rating: [], stock: []},
     filter: '',
     filterLoading: false,
     filterCheckBtns: {},
@@ -50,7 +50,7 @@ const booksFilterSlice = createSlice({
         clearFilterObj: (state, {payload}) => {
             state.filter = '';
             state.filterCheckBtns = {}
-            state.filterObj = {language: [], price: [], category: [], author: [], published: [], format: []};
+            state.filterObj = {language: [], price: [], category: [], author: [], published: [], format: [], rating: [], stock: []};
         },
     },
     extraReducers: builder => {

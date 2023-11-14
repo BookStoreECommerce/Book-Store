@@ -30,7 +30,7 @@ const PublicationDateFilter = () => {
       <FormGroup className={`${styles.wFitContent}`}>
       {values.map((ele, index) => <FormControlLabel key={index} control={<Checkbox name="published" checked={filterCheckBtns[values[index]] || false} value={values[index]} onChange={handleChange}/>} label={(ele === "0-2000") ? "Before 2000" : (ele === `2020-${thisYear}`) ? "After 2020" : values[index]}  />)}
       </FormGroup>
-      {/* <hr /> */}
+      <hr />
     </div>
   )
 }
