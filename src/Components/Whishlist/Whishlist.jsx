@@ -111,7 +111,7 @@ export default function Whishlist() {
                                                 <ShoppingCartOutlinedIcon sx={{ fontSize: { xs: 20, sm: 20, md: 23, lg: 20 } }} />
                                                 <span className='ms-2'>Add To Cart</span>
                                             </button></Link> */}
-                                            <AddCart book={book} component="wishList">Add Cart</AddCart>
+                                            <AddCart book={book} id={book._id} component="wishList">Add Cart</AddCart>
                                         </div>
                                         <Link to={`/book/${book?.slug}`} className='text-decoration-none'> 
                                         <div className="cart-content d-flex flex-column justify-content-center align-items-center">
