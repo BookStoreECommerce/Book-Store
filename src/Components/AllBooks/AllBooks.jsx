@@ -111,7 +111,7 @@ function AllBook({ sectionName }) {
             filterObj[key].map((ele, index) => (
               <div key={index} className={`p-2 rounded ${styles.filter}`}>
                 {key}:&nbsp;
-                {(key === 'category') ? ele.name : ((ele === "0-2000") ? 'Before 2000' : ((ele === "true") ? 'Available' : ele))}
+                {(key === 'category') ? ele.name : ((ele === "0-2000") ? 'Before 2000' : ((ele === "true") ? 'Hardcover Available' : ele))}
                 <i
                   className={`fa-regular fa-circle-xmark ms-2 ${styles.xmarkPointer}`}
                   value={(key === 'category') ? JSON.stringify(ele) : ele}
