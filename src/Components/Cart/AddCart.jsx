@@ -11,7 +11,6 @@ function AddCart({ id, book }) {
   const dispatch = useDispatch();
   const { localStorageCart } = useSelector(({ cart }) => cart)
   let cart2;
-console.log(book);
   const cart = {
     books: [{
       book: {

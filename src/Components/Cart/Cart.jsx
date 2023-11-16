@@ -21,17 +21,18 @@ export default function Cart() {
 
     const { footerH, navH } = useSelector((state) => state.app);
     const { books, isLoading, localStorageCart } = useSelector((state) => state.cart);
-    const { token } = useSelector((state) => state.auth);
+    // const { token } = useSelector((state) => state.auth);
+    const token = localStorage.getItem("access-token");
+
     let cartArray = [];
 
 
     if (token) {
         cartArray = books;
-        console.log(books);
+
     } else if (token == null) {
         // cartArray = JSON.parse(localStorage.getItem('cartDetails'));
         cartArray = localStorageCart?.books;
-        console.log(cartArray);
     }
 
     const dispatch = useDispatch();
@@ -121,7 +122,6 @@ export default function Cart() {
                                                     </div>
                                                 </div>
                                                 <div className={` ${styles.deleteAndSubTotal}  `}>
-                                                {console.log(book.book._id)}
                                                     <DeleteCartItem id={book?.book._id} />
 
                                                 </div>

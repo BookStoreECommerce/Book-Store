@@ -36,16 +36,30 @@ const CartSummary = ({ cart }) => {
           <TableFooter>
             <TableRow>
               <TableCell align="center">
-                <Typography variant="h6" component="h6">
+                {/* <Typography variant="h6" component="h6"> */}
                   Total (USD)
-                </Typography>
+                {/* </Typography> */}
               </TableCell>
               <TableCell align="center" colSpan="2">
-                <Typography variant="h6" component="h6">
-                  {cart.totalAmount}, {cart.totalAmountAfterDisc}
-                </Typography>
+                {/* <Typography variant="h6" component="h6"> */}
+                  {cart.totalAmount}
+                {/* </Typography> */}
               </TableCell>
             </TableRow>
+            {cart.coupon_code && (
+              <TableRow>
+                <TableCell align="center">
+                  {/* <Typography variant="h6" component="h6"> */}
+                    Total after discount (USD)
+                  {/* </Typography> */}
+                </TableCell>
+                <TableCell align="center" colSpan="2">
+                  {/* <Typography variant="h6" component="h6"> */}
+                    {cart.totalAmountAfterDisc}
+                  {/* </Typography> */}
+                </TableCell>
+              </TableRow>
+            )}
           </TableFooter>
         </Table>
       </TableContainer>

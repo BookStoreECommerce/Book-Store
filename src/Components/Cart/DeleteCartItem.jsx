@@ -36,7 +36,6 @@ function DeleteCartItem({ id }) {
       closeButton: false
     });
   }
-console.log({id});
   return (
     <>
       <div>

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getCart, addCartWithToken, updateCart, clearCart, deleteCartItem, addCoupon, removeCoupon } from './cartAction';
+import { getCart, addCartWithToken, updateCart, clearCart, deleteCartItem, addCoupon, removeCoupon,createCart } from './cartAction';
 const initialState = {
     books: [],
     localStorageCart: [],
@@ -253,6 +253,27 @@ const cartSlice = createSlice({
             state.msgError = action.payload.error
         })
         builder.addCase(clearCart.rejected, (state, action) => {
+            state.isLoading = false
+            // state.msgError = action.payload.error
+        })
+
+
+        // create cart with token
+        builder.addCase(createCart.pending, (state, action) => {
+            // state.isLoading = true;
+        })
+        builder.addCase(createCart.fulfilled, (state, action) => {
+            console.log(action);
+            if (action.payload.cart) {
+                state.books = action.payload.cart.books;
+                state.discount = action.payload.cart.discount;
+                state.totalAmount = action.payload.cart.totalAmount;
+                state.totalAmountAfterDisc = action.payload.cart.totalAmountAfterDisc;
+            }
+            state.isLoading = false;
+            state.msgError = action.payload.error
+        })
+        builder.addCase(createCart.rejected, (state, action) => {
             state.isLoading = false
             // state.msgError = action.payload.error
         })

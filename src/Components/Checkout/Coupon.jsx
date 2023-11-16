@@ -3,14 +3,18 @@ import { Typography, TextField, Button } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { addCoupon, removeCoupon } from "../../Redux/Slicies/cartAction";
 
-export default function RedeemCoupon({code}) {
+export default function RedeemCoupon({ code }) {
   const dispatch = useDispatch();
   const [couponCode, setCouponCode] = useState(code || "");
-  
-  const handleSubmit = (event) => {
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (!couponCode.length) return;
-    code? dispatch(removeCoupon(couponCode)): dispatch(addCoupon(couponCode));
+    if (code) {
+      await dispatch(removeCoupon(couponCode)) && setCouponCode("");
+    } else {
+      dispatch(addCoupon(couponCode));
+    }
   };
 
   const handleInputChange = (event) => setCouponCode(event.target.value);
@@ -30,8 +34,12 @@ export default function RedeemCoupon({code}) {
           value={couponCode}
           onChange={handleInputChange}
         />
-        <Button type="submit" variant="contained" color="primary">
-          {code? "Remove" : "Redeem"}
+        <Button
+          type="submit"
+          variant="contained"
+          color={code ? "error" : "primary"}
+        >
+          {code ? "Remove" : "Redeem"}
         </Button>
       </form>
     </div>
