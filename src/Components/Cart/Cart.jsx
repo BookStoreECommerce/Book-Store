@@ -16,14 +16,12 @@ import {
 } from "../../Redux/Slicies/cartSlice";
 
 export default function Cart() {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const { footerH, navH } = useSelector((state) => state.app);
   const token = localStorage.getItem("access-token");
-  const { isLoading, localStorageCart } = useSelector(
-    (state) => state.cart
-  );
-console.log(localStorageCart);
+  const { isLoading, localStorageCart } = useSelector((state) => state.cart);
+  console.log(localStorageCart);
   // const { token } = useSelector((state) => state.auth);
 
   const getCartDetails = () => {
@@ -118,46 +116,65 @@ console.log(localStorageCart);
                                     {book.book.name}
                                   </div>
                                 </div>
+                                <div className={styles.titleAndPrice}>
+                                  <div className={styles.bookTitle}>
+                                    {book.type || book.variation_name}
+                                  </div>
+                                </div>
 
                                 <div className={styles.bookPrice}>
                                   {book.price} EGP
                                 </div>
-
-                                <div className={styles.quantityWrapper}>
-                                  <div className={styles.quantityContent}>
-                                    <button
-                                      disabled={book.qty === 1}
-                                      onClick={() =>
-                                        dispatch(
-                                          decreaseCartQty(book?.book._id, index)
-                                        )
-                                      }
-                                      className={`${styles.btn}  ${styles.decBtn}`}
-                                    >
-                                      -
-                                    </button>
-                                    <input
-                                      type="number"
-                                      className={styles.quantityInput}
-                                      value={book.qty}
-                                    />
-                                    <button
-                                      onClick={() =>
-                                        dispatch(
-                                          increaseCartQty(book?.book._id, index)
-                                        )
-                                      }
-                                      className={`${styles.btn}  ${styles.incBtn}`}
-                                    >
-                                      +
-                                    </button>
+                                {(book.type === "hardcover" || book.variation_name === 'hardcover') && (
+                                  <div className={styles.quantityWrapper}>
+                                    <div className={styles.quantityContent}>
+                                      <button
+                                        disabled={
+                                          book.qty === 1 ||
+                                          (book.type !== "hardcover" || book.variation_name !== "hardcover")
+                                        }
+                                        onClick={() =>
+                                          dispatch(
+                                            decreaseCartQty(
+                                              book?.book._id,
+                                              index
+                                            )
+                                          )
+                                        }
+                                        className={`${styles.btn}  ${styles.decBtn}`}
+                                      >
+                                        -
+                                      </button>
+                                      <input
+                                        type="number"
+                                        className={styles.quantityInput}
+                                        value={book.qty}
+                                      />
+                                      <button
+                                        disabled={(book.type !== "hardcover" || book.variation_name !== "hardcover")}
+                                        onClick={() =>
+                                          dispatch(
+                                            increaseCartQty(
+                                              book?.book._id,
+                                              index
+                                            )
+                                          )
+                                        }
+                                        className={`${styles.btn}  ${styles.incBtn}`}
+                                      >
+                                        +
+                                      </button>
+                                    </div>
                                   </div>
-                                </div>
+                                )}
                               </div>
                             </div>
                           </div>
                           <div className={` ${styles.deleteAndSubTotal}  `}>
-                            <DeleteCartItem id={book?.book._id} />
+                            <DeleteCartItem
+                              id={book?.book._id}
+                              type={book?.type}
+                            />
                           </div>
                           <div className={styles.bookSubTotal}>
                             {book.price * book.qty} EGP

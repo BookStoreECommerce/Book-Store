@@ -19,6 +19,7 @@ export const addCartWithToken = createAsyncThunk(
   async (bookId, { rejectWithValue }) => {
     try {
       const { data } = await axiosInstance.post("cart", bookId);
+      console.log(data);
       return data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -76,6 +77,7 @@ export const createCart = createAsyncThunk(
   async (books, { rejectWithValue }) => {
     try {
       const { data } = await axiosInstance.post("cart/createCart", books);
+      console.log(data);
       return data;
     } catch (error) {
       return rejectWithValue(error.response.data);

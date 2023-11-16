@@ -19,29 +19,31 @@ const initialState = {
   coupon_code: "",
   totalbooks: 0,
   loading: {},
+  buyBook: null,
 };
 
 function getBook(payload) {
   return {
     book: {
-      image: payload.image.secure_url,
+      image: payload?.image?.secure_url,
       _id: payload._id,
       price: payload.price,
       name: payload.name,
-      slug: payload.slug
+      slug: payload.slug,
     },
     price: payload.price,
     qty: 1,
     totalPrice: payload.price,
     coupon_code: "",
+    type: payload.type,
   };
 }
 
 function getCartFromLocalStorage() {
   if (localStorage.getItem("cartDetails")) {
     return JSON.parse(localStorage.getItem("cartDetails"));
-  }else {
-    return false
+  } else {
+    return false;
   }
 }
 function setCartFromLocalStorage(cart) {
@@ -58,8 +60,7 @@ const cartSlice = createSlice({
   reducers: {
     getCartWithoutToken: (state) => {
       state.isLoading = false;
-      console.log(getCartFromLocalStorage());
-      if (localStorage.getItem("cartDetails")){
+      if (localStorage.getItem("cartDetails")) {
         state.localStorageCart.books = getCartFromLocalStorage().books;
       }
     },
@@ -72,56 +73,71 @@ const cartSlice = createSlice({
     },
     clearLocalStorageCArt: (state, action) => {
       if (action.payload) {
-        localStorage.removeItem(action.payload);
+        // localStorage.removeItem(action.payload);
         state.localStorageCart.books = [];
       }
       state.isLoading = false;
       state.msgError = action.payload.error;
     },
     addToCart: (state, { payload }) => {
+      console.log(payload);
       const i = state.localStorageCart?.books?.findIndex(
-        (el) => el.book._id === payload._id
+        (el) => el.book._id === payload._id && el.type === payload.type
       );
-      if (i === undefined)state.localStorageCart = {books: [{...getBook(payload)}]}
-      else if (i === -1) state.localStorageCart?.books.push({...getBook(payload)});
+      if (i === undefined)
+        state.localStorageCart = { books: [{ ...getBook(payload) }] };
+      else if (i === -1)
+        state.localStorageCart?.books.push({ ...getBook(payload) });
       else {
-        state.localStorageCart.books[i].qty++;
-        state.localStorageCart.books[i].coupon_code = "3agoooooz";
-        const { price, qty } = state.localStorageCart?.books[i];
-        state.localStorageCart.books[i].totalPrice = calcBookPrice(price, qty);
+        if (state.localStorageCart.books[i].type === "hardcover") {
+          state.localStorageCart.books[i].qty++;
+          state.localStorageCart.books[i].coupon_code = "3agoooooz";
+          const { price, qty } = state.localStorageCart?.books[i];
+          state.localStorageCart.books[i].totalPrice = calcBookPrice(
+            price,
+            qty
+          );
+        }
       }
 
       setCartFromLocalStorage(state.localStorageCart);
     },
     increaseCartQty: (state, { payload }) => {
       const i = state.localStorageCart?.books?.findIndex(
-        (el) => el.book._id === payload
+        (el) => el.book._id === payload && el.type === "hardcover"
       );
-      state.localStorageCart.books[i].qty++;
-      state.localStorageCart.books[i].coupon_code = "agooooz";
-      const { price, qty } = state.localStorageCart?.books[i];
-      state.localStorageCart.books[i].totalPrice = calcBookPrice(price, qty);
-      setCartFromLocalStorage(state.localStorageCart);
+      if (state.localStorageCart.books[i].type == "hardcover") {
+        state.localStorageCart.books[i].qty++;
+        state.localStorageCart.books[i].coupon_code = "agooooz";
+        const { price, qty } = state.localStorageCart?.books[i];
+        state.localStorageCart.books[i].totalPrice = calcBookPrice(price, qty);
+        setCartFromLocalStorage(state.localStorageCart);
+      }
     },
     decreaseCartQty: (state, { payload }) => {
       const i = state.localStorageCart?.books?.findIndex(
-        (el) => el.book._id === payload
+        (el) => el.book._id === payload && el.type === "hardcover"
       );
-      state.localStorageCart.books[i].qty--;
-      state.localStorageCart.books[i].coupon_code = "agooooz";
-      const { price, qty } = state.localStorageCart?.books[i];
-      state.localStorageCart.books[i].totalPrice = calcBookPrice(price, qty);
-      setCartFromLocalStorage(state.localStorageCart);
+      if (state.localStorageCart.books[i].type == "hardcover") {
+        state.localStorageCart.books[i].qty--;
+        state.localStorageCart.books[i].coupon_code = "agooooz";
+        const { price, qty } = state.localStorageCart?.books[i];
+        state.localStorageCart.books[i].totalPrice = calcBookPrice(price, qty);
+        setCartFromLocalStorage(state.localStorageCart);
+      }
     },
-
     deletFromCart: (state, { payload }) => {
+      console.log(payload);
       state.localStorageCart.books = state.localStorageCart?.books?.filter(
-        (el) => el.book._id !== payload
+        (el) => el.book._id !== payload.id || el.type !== payload.type
       );
       setCartFromLocalStorage(state.localStorageCart);
       if (state.localStorageCart.books.length === 0) {
         localStorage.removeItem("cartDetails");
       }
+    },
+    addBookForBuy: (state, { payload }) => {
+      state.buyBook = payload;
     },
   },
   extraReducers: (builder) => {
@@ -231,11 +247,10 @@ const cartSlice = createSlice({
         state.discount = action.payload.cart.discount;
         state.totalAmount = action.payload.cart.totalAmount;
         state.totalAmountAfterDisc = action.payload.cart.totalAmountAfterDisc;
-        localStorage.removeItem("cartDetails");
+        // localStorage.removeItem("cartDetails");
       }
       state.isLoading = false;
       state.msgError = action.payload.error;
-
     });
     builder.addCase(createCart.rejected, (state, action) => {
       state.isLoading = false;
@@ -253,5 +268,6 @@ export const {
   increaseCartQty,
   decreaseCartQty,
   deletFromCart,
+  addBookForBuy,
 } = cartSlice.actions;
 // export const getCart = cartSlice.actions.getCart;

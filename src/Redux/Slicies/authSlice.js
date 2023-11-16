@@ -31,7 +31,7 @@ const authSlice = createSlice({
             localStorage.removeItem('access-token');
             localStorage.removeItem('whishList');
             state.token= null;
-        }
+        },
     },
     extraReducers: builder => {
         //login

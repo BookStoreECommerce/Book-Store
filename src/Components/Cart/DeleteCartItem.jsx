@@ -9,7 +9,7 @@ import {
   setCartInLocalStorage,
 } from "../../Redux/Slicies/cartSlice";
 
-function DeleteCartItem({ id }) {
+function DeleteCartItem({ id, type }) {
   // const { token } = useSelector((state) => state.auth);
   const token = localStorage.getItem("access-token");
   const dispatch = useDispatch();
@@ -39,17 +39,17 @@ function DeleteCartItem({ id }) {
       closeButton: false,
       toastId: id,
     });
-    if (token) {
-      await dispatch(deleteCartItem({ book: id }));
+    // if (token) {
+      // await dispatch(deleteCartItem({ book: id }));
+      // toast.dismiss(id);
+
+    //   removeAlert();
+    // } else {
+      await dispatch(deletFromCart({id, type}));
       toast.dismiss(id);
 
       removeAlert();
-    } else {
-      await dispatch(deletFromCart(id));
-      toast.dismiss(id);
-
-      removeAlert();
-    }
+    // }
   };
 
   return (

@@ -4,7 +4,8 @@ import { useDispatch } from "react-redux";
 import styles from "./AddCart.module.css";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-import { addToCart } from "../../Redux/Slicies/cartSlice";
+import { addBookForBuy, addToCart } from "../../Redux/Slicies/cartSlice";
+import { handleClickOpen } from "../../Redux/Slicies/dialogSlice.js";
 
 function AddCart({ id, book, component, children }) {
   const token = localStorage.getItem("access-token");
@@ -28,28 +29,30 @@ function AddCart({ id, book, component, children }) {
   };
 
   const addToCartFnc = async () => {
+    addAlert()
     toast.loading(`Adding ${book.name.split(" ").slice(0, 3).join(" ")}.....`, {
       position: "bottom-left",
       autoClose: 3000,
-
       hideProgressBar: false,
       closeOnClick: false,
       pauseOnHover: false,
       draggable: true,
-      progress: 0,
+      // progress: 0,
       theme: "colored",
       closeButton: false,
       toastId: id,
     });
-    if (!token) {
-      await dispatch(addToCart(book));
-      toast.dismiss(id);
-      addAlert();
-    } else {
-      await dispatch(addCartWithToken({ book: id }));
-      toast.dismiss(id);
-      addAlert();
-    }
+    dispatch(addBookForBuy(book))
+    dispatch(handleClickOpen({ name: "add-to-cart" }));
+    // if (!token) {
+    //   await dispatch(addToCart(book));
+    //   toast.dismiss(id);
+    //   addAlert();
+    // } else {
+    //   await dispatch(addCartWithToken({ book: id }));
+    //   toast.dismiss(id);
+    //   addAlert();
+    // }
   };
 
   return (
