@@ -58,7 +58,7 @@ const cartSlice = createSlice({
   reducers: {
     getCartWithoutToken: (state) => {
       state.isLoading = false;
-      console.log(getCartFromLocalStorage());
+
       if (localStorage.getItem("cartDetails")){
         state.localStorageCart.books = getCartFromLocalStorage().books;
       }

@@ -4,12 +4,13 @@ import style from './Review.module.css'
 import Rating from "../../ReusableComponents/Rating/Rating";
 
 
-const Review = ({id}) => {
+const Review = () => {
    const { bookReviews } = useSelector((state) => state.books);
-console.log(bookReviews);
-
+   const { user } = useSelector((state) => state.auth);
+console.log(user.userName);
     return (
         <>
+       
            {bookReviews.length === 0?"":
            <>
             <div className="container my-5">
@@ -18,7 +19,7 @@ console.log(bookReviews);
                     <div className={`col-10 pt-4 ${style.reviewBg}`}>
    
                             {bookReviews?.map((review, index) =>
-            
+       
                                      <div className={`${style.reviewContent} position-relative mb-4`} key={review?._id}>
                                       <div className="d-flex align-items-center justify-content-between">
                                         <div className={`${style.quotes} position-absolute`}>
@@ -33,7 +34,7 @@ console.log(bookReviews);
                                         <Rating rate={review.rating} />
                                       </div>
                                         <p className={`mt-3 ${style.fontParg} `}>❝ {review.content} ❞</p>
-                              
+                              {review.user.userName === user.userName? "delete Review":""}
                                     </div>
                                
                         )}

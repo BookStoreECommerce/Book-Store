@@ -16,6 +16,7 @@ import Review from "../ReviewComponents/Review/Review";
 import Rating from "../ReusableComponents/Rating/Rating";
 import AddCart from "../Cart/AddCart";
 import AddReview from "../ReviewComponents/AddReview/AddReview";
+import ReviewDialog from "../Dialogs/ReviewDialog/ReviewDialog.jsx";
 
 export default function BookProfile() {
   const [showMore, setShowMore] = useState(false)
@@ -23,6 +24,8 @@ export default function BookProfile() {
   const dispatch = useDispatch()
   const { isLoading, bookCategory, specBook } = useSelector(({ books }) => books)
   const { footerH, navH } = useSelector((state) => state.app);
+  const { loading,addReviews } = useSelector((state) => state.review);
+
   const { user } = useSelector((state) => state.auth);
   const getBookData = async () => {
     if (slug) {
@@ -92,7 +95,10 @@ export default function BookProfile() {
 
             <MainSlider autoplay={false} arr={bookCategory} title="Suggested for you" />
             <AddReview />
-            <Review id={specBook?._id} />
+            {loading ?<i className={`fa-solid fa-spinner ${styles.spinnerColor}`}></i>:  <Review />}
+          
+            <ReviewDialog id={specBook?._id}/>
+
           </>
         }
       </Box>

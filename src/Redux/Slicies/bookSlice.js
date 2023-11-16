@@ -21,6 +21,9 @@ const bookSlice = createSlice({
       },
       setBooksPageNumber: (state, {payload}) => {
         state.pageNumber = payload;
+      },
+      addTobookReviews: (state, {payload}) => {
+        state.bookReviews.push(payload);
       }
     },
     extraReducers: builder => {
@@ -84,4 +87,4 @@ const bookSlice = createSlice({
     }
 })
 export const booksReducer = bookSlice.reducer;
-export const { setBooks, setBooksPageNumber } = bookSlice.actions;
+export const { setBooks, setBooksPageNumber, addTobookReviews } = bookSlice.actions;

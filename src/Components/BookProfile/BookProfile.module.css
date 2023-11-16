@@ -36,6 +36,14 @@
     color: var(--mainColor)!important;
 
 }
+.spinnerColor{
+    font-size: 40px;
+    color: var(--mainColor);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px 0px;
+}
 
 .category{
     font-size: 17px;
