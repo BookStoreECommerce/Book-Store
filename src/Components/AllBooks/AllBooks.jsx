@@ -22,7 +22,7 @@ function AllBook({ sectionName }) {
   const [searchWord, setSearchWord] = useState("");
   const [numOfPages, setNumOfPages] = useState(0);
   const { isLoading, books, totalCount, pageNumber } = useSelector((state) => state.books);
-  const { filterObj, filter, filterLoading } = useSelector(
+  const { filterCheckBtns, filterObj, filter, filterLoading } = useSelector(
     (state) => state.booksFilter
   );
   const nBookPerPage = 12;
@@ -47,6 +47,10 @@ function AllBook({ sectionName }) {
     }
     if (name === 'format') {
       dispatch(handleFilterRadio(value));
+      if(value === "hardcover" && filterCheckBtns["stock"] === true) {
+        dispatch(handleFilterCheck("stock"));
+        dispatch(setFilterObj({ method: "delete", name:"stock", value:"stock" }));
+      }
     }
     handlePageChange(e, 1);
     dispatch(setFilterObj({ method: "delete", name, value }));
@@ -111,7 +115,7 @@ function AllBook({ sectionName }) {
             filterObj[key].map((ele, index) => (
               <div key={index} className={`p-2 rounded ${styles.filter}`}>
                 {key}:&nbsp;
-                {(key === 'category') ? ele.name : ((ele === "0-2000") ? 'Before 2000' : ((ele === "true") ? 'Hardcover Available' : ele))}
+                {(key === 'category') ? ele.name : ((ele === "0-2000") ? 'Before 2000' : ((ele === "stock") ? 'Hardcover Available' : ele))}
                 <i
                   className={`fa-regular fa-circle-xmark ms-2 ${styles.xmarkPointer}`}
                   value={(key === 'category') ? JSON.stringify(ele) : ele}

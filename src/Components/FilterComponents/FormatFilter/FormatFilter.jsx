@@ -1,19 +1,23 @@
 import React from 'react';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import { handleFilterRadio, setFilterObj } from '../../../Redux/Slicies/filterSlice';
+import { handleFilterRadio, handleFilterCheck, setFilterObj } from '../../../Redux/Slicies/filterSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormControl, Radio, RadioGroup } from '@mui/material';
 
 const FormatFilter = () => {
   const dispatch = useDispatch();
-  const { filterRadioBtns } = useSelector((state) => state.booksFilter);
-
+  const { filterCheckBtns, filterRadioBtns } = useSelector((state) => state.booksFilter);
 
   const handleChange = (e) => {
     let method;
     dispatch(handleFilterRadio(e.target.value));
     if (e.target.checked === true) method = 'add'
     else method = 'delete'
+
+    if(e.target.value !== "hardcover" && filterCheckBtns["stock"] === true) {
+      dispatch(handleFilterCheck("stock"));
+      dispatch(setFilterObj({method: 'delete', name: "stock", value: "stock"}));
+    }
 
     dispatch(setFilterObj({method, name: e.target.name, value: e.target.value}));
   };

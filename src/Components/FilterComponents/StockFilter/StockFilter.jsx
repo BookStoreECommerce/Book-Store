@@ -28,7 +28,7 @@ const StockFilter = () => {
   }, [filterRadioBtns])
   
 
-  let values = ["true"];
+  let values = ["stock"];
 
   return (
     <div>
