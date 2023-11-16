@@ -1,4 +1,3 @@
-import logo from "./Book1.png";
 import React, { useEffect, useState } from "react";
 import styles from "./BookProfile.module.css"
 import { useParams } from "react-router-dom";
@@ -13,13 +12,12 @@ import Slider from "../HomeComponents/Slider/Slider.jsx";
 import MainSlider from "../ReusableComponents/MainSlider/MainSlider.jsx";
 import { removeFooterMargin, setFooterMargin } from "../../Redux/Slicies/appSlice";
 import WishListButton from "../ReusableComponents/WishListButton/WishListButton";
-import Review from "../Review/Review";
+import Review from "../ReviewComponents/Review/Review";
 import Rating from "../ReusableComponents/Rating/Rating";
-import profile from '../../assets/profile.png'
 import AddCart from "../Cart/AddCart";
+import AddReview from "../ReviewComponents/AddReview/AddReview";
 
 export default function BookProfile() {
-  const [book, setBook] = useState(null)
   const [showMore, setShowMore] = useState(false)
   const { slug } = useParams()
   const dispatch = useDispatch()
@@ -84,7 +82,7 @@ export default function BookProfile() {
                   </div>
                   <div className={styles.addToCartSection}>
                     <div className={styles.addToCartBtn}>
-                      <AddCart id={specBook?._id} />
+                      <AddCart id={specBook?._id} book={specBook} />
                     </div>
                   </div>
                 </div>
@@ -93,14 +91,7 @@ export default function BookProfile() {
             </div>
 
             <MainSlider autoplay={false} arr={bookCategory} title="Suggested for you" />
-            <div className={`${styles.review} mt-5 position-relative d-flex justify-content-center `}>
-              <img src={profile} alt="" className={styles.reviewBg}/>
-              <div className={`${styles.overlay}`}>
-                <h4 className={styles.reviewTitle}>Review this product</h4>
-                <p className={styles.lead}>Share your thoughts with other customers</p>
-                <button className={`${styles.btn} btn`} >Write a customer review</button>
-              </div>
-            </div>
+            <AddReview />
             <Review id={specBook?._id} />
           </>
         }

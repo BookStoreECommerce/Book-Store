@@ -9,17 +9,21 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import { logout } from "../../../Redux/Slicies/authSlice";
 import { signout } from "../../../Redux/Slicies/authActions";
-import { getCatBooks } from '../../../Redux/Slicies/CategoriesBookActions';
+import { getCatBooks } from "../../../Redux/Slicies/CategoriesBookActions";
 import { createCart, getCart } from "../../../Redux/Slicies/cartAction";
-
+import { getCartWithoutToken } from "../../../Redux/Slicies/cartSlice.js";
 
 function NavBar({ navRef }) {
   const navigate = useNavigate();
   const [navbar, setNavbar] = useState(false);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+  let { categoriesBooks } = useSelector((state) => state.book);
+  let category = { categoriesBooks }.categoriesBooks.result;
   const token = localStorage.getItem("access-token");
-  const { books, localStorageCart } = useSelector((state) => state.cart);
+  const { localStorageCart } = useSelector((state) => state.cart);
+
+  let arr = JSON.parse(localStorage.getItem("whishList"));
 
   const changeBackground = () => {
     if (window.scrollY >= 60) {
@@ -29,58 +33,32 @@ function NavBar({ navRef }) {
     }
   };
 
-  // Read Cart Number
-  let cartNumber;
-  if (token) {
-    cartNumber = books.length;
-
-  }
-  else if (!token && localStorage.getItem('cartDetails')) {
-    // let cartArray =JSON.parse(localStorage.getItem('cartDetails'));
-    // let cartArray = localStorageCart?.books;
-    // console.log(cartArray);
-    cartNumber = localStorageCart?.books?.length;
-
-  }
-  else if (!token && !localStorage.getItem('cartDetails')) {
-    cartNumber = 0;
-  }
-
   useEffect(() => {
     changeBackground();
     window.addEventListener("scroll", changeBackground);
   });
 
-  const obj = {
-    books: [{
-      book: 0,
-      price: 0,
-      qty: 1,
-      totalPrice: 0,
-    }],
-    totalAmount: 0
-  }
-  let { categoriesBooks } = useSelector((state) => state.book)
-  let category = { categoriesBooks }.categoriesBooks.result
-
   useEffect(() => {
-    dispatch(getCart());
-    if (localStorage.getItem("cartDetails")) {
+    if (token && localStorage.getItem("cartDetails")) {
       let cartDetails = localStorage.getItem("cartDetails");
-      cartDetails = JSON.parse(cartDetails)
+      cartDetails = JSON.parse(cartDetails);
       dispatch(createCart(cartDetails));
+    } else if (token && !localStorage.getItem("cartDetails")) {
+      dispatch(getCart());
+    } else {
+      dispatch(getCartWithoutToken());
     }
-  }, [token])
+  }, [token]);
 
   useEffect(() => {
-    dispatch(getCatBooks())
-  }, [])
+    dispatch(getCatBooks());
+  }, []);
 
   const handleLogout = () => {
     dispatch(logout());
     dispatch(signout());
-    navigate('/');
-  }
+    navigate("/");
+  };
   const linkStyle = `nav-link ${styles.navLink} ${styles.navLinkBorder} `;
   const dropStyle = `nav-link dropdown-toggle ${styles.navLink} ${styles.navLinkBorder} `;
   return (
@@ -88,14 +66,43 @@ function NavBar({ navRef }) {
       <div data-testid="NavBar" className="fixed-top" ref={navRef}>
         <div className={styles.navTop}>
           <li className="nav-item me-5 position-relative">
-            <Link className={`nav-link  ${styles.navLinkIcon}`} to="favourites">
-              <FavoriteBorderOutlinedIcon
-                sx={{ fontSize: { xs: 24, sm: 24, md: 27, lg: 24 } }}
-              />
-              <div className={` ${styles.number}`}>
-                <span className={`${styles.num}`}>0</span>
-              </div>
-            </Link>
+            {user !== null && token !== null ? (
+              <>
+                <Link
+                  className={`nav-link  ${styles.navLinkIcon}`}
+                  to="wishlist"
+                >
+                  <FavoriteBorderOutlinedIcon
+                    sx={{ fontSize: { xs: 24, sm: 24, md: 27, lg: 24 } }}
+                  />
+                  <div className={` ${styles.number}`}>
+                    <span className={`${styles.num}`}>
+                      {arr?.length === undefined || arr?.length === null
+                        ? 0
+                        : arr.length}
+                    </span>
+                  </div>
+                </Link>
+              </>
+            ) : (
+              <Link
+                className={`nav-link  ${styles.navLinkIcon}`}
+                onClick={() => {
+                  dispatch(handleClickOpen({ name: "login" }));
+                }}
+              >
+                <FavoriteBorderOutlinedIcon
+                  sx={{ fontSize: { xs: 24, sm: 24, md: 27, lg: 24 } }}
+                />
+                <div className={` ${styles.number}`}>
+                  <span className={`${styles.num}`}>
+                    {arr?.length === undefined || arr?.length === null
+                      ? 0
+                      : arr.length}
+                  </span>
+                </div>
+              </Link>
+            )}
           </li>
           <li readOnly className="nav-item me-5 position-relative">
             <Link className={`nav-link ${styles.navLinkIcon}`} to="cart">
@@ -103,21 +110,25 @@ function NavBar({ navRef }) {
                 sx={{ fontSize: { xs: 24, sm: 24, md: 27, lg: 24 } }}
               />
               <div className={` ${styles.number}`}>
-                <span className={` ${styles.num}`}>{localStorageCart?.books?.length || books?.length || 0}</span>
+                <span className={` ${styles.num}`}>
+                  {localStorageCart?.books?.length || 0}
+                </span>
               </div>
             </Link>
           </li>
           {user !== null && token !== null && (
             <>
               <li className="nav-item">
-                <Link className={`nav-link ${styles.navLinkIcon}`} to="userInfo">
+                <Link
+                  className={`nav-link ${styles.navLinkIcon}`}
+                  to="userInfo"
+                >
                   <PersonOutlineOutlinedIcon
                     sx={{ fontSize: { xs: 24, sm: 24, md: 27, lg: 26 } }}
                   />
                   <span className={styles.colorUser}>{user.userName}</span>
                 </Link>
               </li>
-
             </>
           )}
         </div>
@@ -150,8 +161,9 @@ function NavBar({ navRef }) {
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className={`nav-item me-2 ${styles.navItem}`}>
                   <NavLink
-
-                    className={({ isActive }) => isActive ? linkStyle + styles.itemActive : linkStyle}
+                    className={({ isActive }) =>
+                      isActive ? linkStyle + styles.itemActive : linkStyle
+                    }
                     to="/"
                     end
                   >
@@ -159,10 +171,11 @@ function NavBar({ navRef }) {
                   </NavLink>
                 </li>
 
-
                 <li className={`nav-item dropdown me-2 ${styles.navItem}`}>
                   <NavLink
-                    className={({ isActive }) => isActive ? dropStyle + styles.itemActive : dropStyle}
+                    className={({ isActive }) =>
+                      isActive ? dropStyle + styles.itemActive : dropStyle
+                    }
                     to="categories"
                     role="button"
                     data-bs-toggle="dropdown"
@@ -173,15 +186,34 @@ function NavBar({ navRef }) {
                   </NavLink>
 
                   <ul className={`dropdown-menu ${styles.dropdownMenu}`}>
-                    {category?.slice(0, 8)?.map((cat, index) =>
+                    {category?.slice(0, 8)?.map((cat, index) => (
                       <li key={index}>
-                        <NavLink className={({ isActive }) => isActive ? linkStyle + styles.dropItemActive + ` dropdown-item ${styles.item}` : linkStyle + ` dropdown-item ${styles.item}`} to={`categories/${cat.slug}`}>
+                        <NavLink
+                          className={({ isActive }) =>
+                            isActive
+                              ? linkStyle +
+                                styles.dropItemActive +
+                                ` dropdown-item ${styles.item}`
+                              : linkStyle + ` dropdown-item ${styles.item}`
+                          }
+                          to={`categories/${cat.slug}`}
+                        >
                           {cat.name}
                         </NavLink>
                       </li>
-                    )}
+                    ))}
                     <li>
-                      <NavLink className={({ isActive }) => isActive ? linkStyle + styles.dropItemActivetran + ` dropdown-item text-center ${styles.itemColor}` : linkStyle + ` dropdown-item text-center ${styles.itemColor}`} to="categories">
+                      <NavLink
+                        className={({ isActive }) =>
+                          isActive
+                            ? linkStyle +
+                              styles.dropItemActivetran +
+                              ` dropdown-item text-center ${styles.itemColor}`
+                            : linkStyle +
+                              ` dropdown-item text-center ${styles.itemColor}`
+                        }
+                        to="categories"
+                      >
                         see more
                       </NavLink>
                     </li>
@@ -190,7 +222,9 @@ function NavBar({ navRef }) {
 
                 <li className={`nav-item me-2 ${styles.navItem}`}>
                   <NavLink
-                    className={({ isActive }) => isActive ? linkStyle + styles.itemActive : linkStyle}
+                    className={({ isActive }) =>
+                      isActive ? linkStyle + styles.itemActive : linkStyle
+                    }
                     to="book"
                   >
                     Books
@@ -199,7 +233,9 @@ function NavBar({ navRef }) {
 
                 <li className={`nav-item me-2 ${styles.navItem}`}>
                   <NavLink
-                    className={({ isActive }) => isActive ? linkStyle + styles.itemActive : linkStyle}
+                    className={({ isActive }) =>
+                      isActive ? linkStyle + styles.itemActive : linkStyle
+                    }
                     to="contact"
                   >
                     Contact
@@ -207,10 +243,9 @@ function NavBar({ navRef }) {
                 </li>
               </ul>
 
-              {user !== null && token !== null ?
+              {user !== null && token !== null ? (
                 <>
                   <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-
                     <li className={`nav-item me-2 ${styles.navItem}`}>
                       <Link
                         className={`nav-link ${styles.navLink}`}
@@ -221,10 +256,9 @@ function NavBar({ navRef }) {
                     </li>
                   </ul>
                 </>
-
-                : <>
+              ) : (
+                <>
                   <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-
                     <li className="nav-item">
                       <Link
                         to=""
@@ -248,9 +282,8 @@ function NavBar({ navRef }) {
                       </Link>
                     </li>
                   </ul>
-                </>}
-
-
+                </>
+              )}
             </div>
           </div>
         </nav>

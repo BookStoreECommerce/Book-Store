@@ -1,13 +1,11 @@
 import {
     createSlice
 } from "@reduxjs/toolkit";
-import { getAllReviews } from "./reviewAction";
+import { addReview } from "./reviewAction";
 
 const initialState = {
-    allReviews: [],
     isLoading: false,
     msgError: null,
-
 }
 
 const reviewSlice = createSlice({
@@ -16,16 +14,14 @@ const reviewSlice = createSlice({
     reducers: {
     },
     extraReducers: builder => {
-
-
-        builder.addCase(getAllReviews.pending, (state, action) => {
+        // addReview
+        builder.addCase(addReview.pending, (state, action) => {
             state.isLoading = true
         })
-        builder.addCase(getAllReviews.fulfilled, (state, action) => {
-            state.allReviews = action.payload.result;
+        builder.addCase(addReview.fulfilled, (state, action) => {
             state.isLoading = false;
         })
-        builder.addCase(getAllReviews.rejected, (state, action) => {
+        builder.addCase(addReview.rejected, (state, action) => {
             state.isLoading = false;
         })
     }

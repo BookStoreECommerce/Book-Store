@@ -1,48 +1,65 @@
-import React from 'react'
-import { deleteCartItem } from '../../Redux/Slicies/cartAction';
-import { useDispatch, useSelector } from 'react-redux';
-import { ToastContainer, toast } from 'react-toastify';
+import React from "react";
+import { deleteCartItem } from "../../Redux/Slicies/cartAction";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./DeleteCartItem.module.css";
-import 'react-toastify/dist/ReactToastify.css';
-import { deletFromCart, setCartInLocalStorage } from '../../Redux/Slicies/cartSlice';
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
+import {
+  deletFromCart,
+  setCartInLocalStorage,
+} from "../../Redux/Slicies/cartSlice";
 
-function DeleteCartItem({ id }) {
+function DeleteCartItem({ id, type }) {
   // const { token } = useSelector((state) => state.auth);
   const token = localStorage.getItem("access-token");
   const dispatch = useDispatch();
-  let cartArray = JSON.parse(localStorage.getItem('cartDetails'));
-  const cart = JSON.parse(localStorage.getItem("cartDetails"))
-  const removeCartItem = async (id) => {
-    if (token == null) {
-      cartArray = cartArray.filter((item) => item.book.id !== id)
-      await dispatch(setCartInLocalStorage(cartArray));
-    }
-    else if (token) {
-      if (cart) {
-        cartArray = cartArray.filter((item) => item.book.id !== id)
-        await dispatch(setCartInLocalStorage(cartArray));
-      }
-      await dispatch(deleteCartItem({ book: id }));
-    }
+  const cart = JSON.parse(localStorage.getItem("cartDetails"));
+  const removeAlert = () => {
     toast.error(`Book removed from cart!`, {
       position: "bottom-left",
-      autoClose: 2000,
+      autoClose: 500,
       hideProgressBar: false,
       closeOnClick: false,
       pauseOnHover: false,
       draggable: true,
       progress: undefined,
       theme: "colored",
-      closeButton: false
+      closeButton: false,
     });
-  }
+  };
+  const removeCartItem = async () => {
+    toast.loading(`Deleting Book .........`, {
+      position: "bottom-left",
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: true,
+      progress: 0,
+      theme: "colored",
+      closeButton: false,
+      toastId: id,
+    });
+    // if (token) {
+      // await dispatch(deleteCartItem({ book: id }));
+      // toast.dismiss(id);
+
+    //   removeAlert();
+    // } else {
+      await dispatch(deletFromCart({id, type}));
+      toast.dismiss(id);
+
+      removeAlert();
+    // }
+  };
+
   return (
     <>
       <div>
-        <div className={styles.deleteBook} onClick={() => dispatch(deletFromCart(id))}>
+        <div className={styles.deleteBook} onClick={removeCartItem}>
           <i className={` ${styles.trashIcon} fa-regular fa-trash-can`}></i>
         </div>
-        <ToastContainer position="bottom-left"
+        <ToastContainer
+          position="bottom-left"
           autoClose={2000}
           hideProgressBar={false}
           newestOnTop={false}
@@ -52,11 +69,11 @@ function DeleteCartItem({ id }) {
           closeButton={false}
           draggable
           pauseOnHover={false}
-          theme="light" />
+          theme="light"
+        />
       </div>
-
     </>
-  )
+  );
 }
 
-export default DeleteCartItem
+export default DeleteCartItem;

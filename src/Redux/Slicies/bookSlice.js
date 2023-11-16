@@ -7,6 +7,7 @@ const initialState = {
     books: [],
     totalCount: 0,
     pageNumber: 1,
+    bookReviews: [],
 }
 
 const bookSlice = createSlice({
@@ -58,6 +59,7 @@ const bookSlice = createSlice({
       .addCase(getBookBySlug.fulfilled, (state, {payload}) => {
         state.isLoading = false;
         state.specBook = payload.result
+        state.bookReviews = payload.result.reviews;
         state.bookCategory = payload.bookCategory.length < 7 ? payload.books : payload.bookCategory;
       })
       .addCase(getBookBySlug.rejected, (state, {payload}) => {

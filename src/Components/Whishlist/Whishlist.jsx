@@ -10,6 +10,7 @@ import Loading from '../ReusableComponents/Loading/Loading';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import styles from './Whishlist.module.css'
+import AddCart from '../Cart/AddCart.jsx';
 export default function Whishlist() {
     const { footerH, navH } = useSelector((state) => state.app);
     const [loading, setLoading] = useState(false)
@@ -106,10 +107,11 @@ export default function Whishlist() {
                                                 theme="light" />
                                         </div>
                                         <div className="cart-button">
-                                            <Link to='cart' className='text-decoration-none'> <button className={`${styles.cartButton} w-100 btn`}>
+                                            {/* <Link to='cart' className='text-decoration-none'> <button className={`${styles.cartButton} w-100 btn`}>
                                                 <ShoppingCartOutlinedIcon sx={{ fontSize: { xs: 20, sm: 20, md: 23, lg: 20 } }} />
                                                 <span className='ms-2'>Add To Cart</span>
-                                            </button></Link>
+                                            </button></Link> */}
+                                            <AddCart book={book} id={book._id} component="wishList">Add Cart</AddCart>
                                         </div>
                                         <Link to={`/book/${book?.slug}`} className='text-decoration-none'> 
                                         <div className="cart-content d-flex flex-column justify-content-center align-items-center">

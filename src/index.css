@@ -122,8 +122,15 @@ color: var(--navyBlue)!important;
 
   background: var(--mainColor)!important;
 }
+
 .Toastify__toast-theme--colored.Toastify__toast--success {
   background: var(--navyBlue)!important;
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--default {
+  background: #188351 !important;
+  /* background: #8dcd8d !important; */
+  color :#fff !important;
 }
 
 @media screen and (min-width:300px) and (max-width:768px){
@@ -141,4 +148,9 @@ color: var(--navyBlue)!important;
 
 .css-6cwnna-MuiSlider-mark {
   background-color: var(--mainColor) !important;
+}
+@media screen and (max-width:990px) {
+  .bookSize{
+    justify-content: center;
+  }
 }
