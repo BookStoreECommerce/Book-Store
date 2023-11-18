@@ -11,14 +11,12 @@ import { getCart } from "../../Redux/Slicies/cartAction";
 import { baseUrl } from "../../util/util";
 import axiosInstance from "../../axios/axios-instance";
 import CheckoutError from "../../Components/Checkout/CheckoutError";
+import UserCheckoutDetails from "../../Components/Checkout/UserCheckoutDetails";
 
 const Checkout = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const cart = useSelector((state) => state.cart);
-
-  console.log("cart: ", cart);
-  // console.log("user: ", user);
 
   return !user ? (
     <CheckoutError majorText="401" minorText="Unauthorized" />
@@ -40,7 +38,11 @@ const Checkout = () => {
             </CardContent>
           </Card>
         </Container>
-        <Container className={styles["checkout-content"]}>checkout</Container>
+        <Container className={styles["checkout-content"]}>
+          <Card>
+            <UserCheckoutDetails />
+          </Card>
+        </Container>
       </div>
     </div>
   );

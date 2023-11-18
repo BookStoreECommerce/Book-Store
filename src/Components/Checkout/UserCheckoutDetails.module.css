@@ -1,0 +1,39 @@
+.checkout-form {
+    display: grid;
+    row-gap: 35px;
+    padding: 20px;
+    /* grid-template-areas: "name" "phone" "country" "city" "address"; */
+}
+
+@media screen and (width > 991px) {
+    .checkout-form {
+        grid-template-areas: "name phone" "country city" "address address";
+        column-gap: 62px;
+    }
+
+    .input-name {
+        grid-area: name;
+    }
+
+    .input-phone {
+        grid-area: phone;
+    }
+
+    .input-country {
+        grid-area: country;
+    }
+
+    .input-city {
+        grid-area: city;
+    }
+
+    .input-address {
+        grid-area: address;
+    }
+}
+
+
+.checkout-form [id="outlined-error-helper-text"] {
+    position: absolute;
+    bottom: -23px;
+}

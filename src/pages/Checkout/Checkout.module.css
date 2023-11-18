@@ -17,6 +17,7 @@
 @media screen and (width <= 991px) {
     .checkout-container {
         grid-template-columns: 1fr;
+        gap: 50px;
     }
     
     .checkout-content {

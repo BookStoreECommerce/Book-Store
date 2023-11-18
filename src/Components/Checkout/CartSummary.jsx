@@ -20,6 +20,7 @@ const CartSummary = ({ cart }) => {
           <TableHead>
             <TableRow>
               <TableCell>BookName</TableCell>
+              <TableCell align="center">Type</TableCell>
               <TableCell align="center">Qty</TableCell>
               <TableCell align="center">price</TableCell>
             </TableRow>
@@ -28,6 +29,7 @@ const CartSummary = ({ cart }) => {
             {cart.books.map((item) => (
               <TableRow key={item._id}>
                 <TableCell>{item.book.name}</TableCell>
+                <TableCell align="center">{item.variation_name}</TableCell>
                 <TableCell align="center">{item.qty}</TableCell>
                 <TableCell align="center">{item.price}</TableCell>
               </TableRow>
