@@ -21,10 +21,10 @@ export default function RedeemCoupon({ code }) {
 
   return (
     <div>
-      <Typography variant="h6" component="h6">
+      {/* <Typography variant="h6" component="h6">
         Redeem Coupon
-      </Typography>
-      <form onSubmit={handleSubmit} className="input-group d-flex p-3">
+      </Typography> */}
+      <form onSubmit={handleSubmit} className="input-group d-flex">
         <TextField
           id="coupon-code"
           label="Coupon Code"
