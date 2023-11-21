@@ -12,17 +12,16 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { signin } from "../../../Redux/Slicies/authActions";
 import { clearError } from "../../../Redux/Slicies/authSlice";
 import { getWhishList } from "../../../Redux/Slicies/whishlistActions";
+import { createCart } from "../../../Redux/Slicies/cartAction.js";
 
 const Login = () => {
-  // const [messageError, setMessageError] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // dispatch(clearError());
-  // const { loginShow } = useSelector(({ dialog }) => dialog);
   const { isLoading, msgError } = useSelector((state) => {
     return state.auth;
   });
+  const { localStorageCart } = useSelector((state) => state.cart);
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -36,7 +35,6 @@ const Login = () => {
     await dispatch(signin(values));
     if (localStorage.getItem("access-token")) {
       dispatch(handleClose());
-      // dispatch(getWhishList())
       navigate('/');
     }
   };
