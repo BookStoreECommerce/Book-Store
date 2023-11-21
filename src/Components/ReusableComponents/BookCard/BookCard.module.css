@@ -395,3 +395,7 @@
     }
     
 }
+
+.outOfStock {
+    background-color: gray;
+}
