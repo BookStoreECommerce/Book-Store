@@ -23,7 +23,15 @@ const bookSlice = createSlice({
         state.pageNumber = payload;
       },
       addTobookReviews: (state, {payload}) => {
+        console.log(state.bookReviews);
         state.bookReviews.push(payload);
+      },
+      removeFromBookReviews:(state,{payload})=>{
+
+        state.bookReviews = state.bookReviews.filter(
+          (el) => el._id != payload._id
+        );
+       
       }
     },
     extraReducers: builder => {
@@ -87,4 +95,4 @@ const bookSlice = createSlice({
     }
 })
 export const booksReducer = bookSlice.reducer;
-export const { setBooks, setBooksPageNumber, addTobookReviews } = bookSlice.actions;
+export const { setBooks, setBooksPageNumber, addTobookReviews ,removeFromBookReviews} = bookSlice.actions;

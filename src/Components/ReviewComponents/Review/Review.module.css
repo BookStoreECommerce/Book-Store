@@ -34,7 +34,7 @@
 }
 .reviewContent{
     border: 1px solid var(--mainColor);
-    padding: 27px;
+    padding: 12px 27px 0px 27px;
     border-radius: 22px;
 }
 /* .reviewBg{
@@ -51,6 +51,19 @@
 .quotes i{
     font-size: 47px;
     color: var(--mainColor);
+}
+
+.updateBtn,.deleteBtn{
+    color: gray!important;
+    background-color: white!important;
+}
+.updateBtn:hover,.updateBtn:focus,.deleteBtn:hover,.deleteBtn:focus{
+    color: var(--mainColor)!important;
+    transition: all 0.5s ease-in-out;
+
+}
+.paddingSlash{
+    padding: .375rem;
 }
 @media screen and (min-width:300px) and (max-width:666px) {
     .fontParg {
