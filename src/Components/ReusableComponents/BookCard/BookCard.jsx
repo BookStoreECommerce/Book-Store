@@ -7,7 +7,8 @@ import WishListButton from "../WishListButton/WishListButton";
 import Rating from "../Rating/Rating";
 import AddCart from "../../Cart/AddCart";
 
-const BookCard = ({ book, id, image, name, price, author, section, cardStyle, sale, category, slug, sectionName, rate }) => {
+
+const BookCard = ({ book, id, image, name, price, author, section, cardStyle, sale, category, slug, sectionName, rate,reviews }) => {
   return (
     <>
       <div data-testid="BookCard" className={section === "newBooks" || section === "lastSearch" ? `col-md-3 col-sm-4 col-6 mt-5 mb-3 ${styles.font}` : section === "catBook" ? `col-xl-3 col-lg-4 col-sm-6 col-12 mt-5 mb-3 ${styles.font}` : ""}>
@@ -21,6 +22,7 @@ const BookCard = ({ book, id, image, name, price, author, section, cardStyle, sa
                     <i className="fa-regular fa-eye"></i>
                   </span>
                 </Link>
+          
 
                 {/* <Link to="cart" className="text-decoration-none">
                   <span className={styles.icon}>

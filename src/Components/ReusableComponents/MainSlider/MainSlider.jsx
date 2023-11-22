@@ -77,6 +77,7 @@ export default function MainSlider({arr, title,autoplay= true}) {
                       book={book}
                       slug={book.slug}
                       category={book.category}
+                      reviews={book.reviews}
                       sectionName="whislist"
                     />
                   ))}

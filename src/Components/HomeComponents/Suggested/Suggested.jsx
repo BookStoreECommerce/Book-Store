@@ -100,6 +100,8 @@ const Suggested = () => {
                         sale={Suggested.sale}
                         section="Suggested"
                         slug= {Suggested.slug}
+                      reviews={Suggested.reviews}
+
                         category = {Suggested.category}
                         sectionName="whislist"
                         id={Suggested._id}
