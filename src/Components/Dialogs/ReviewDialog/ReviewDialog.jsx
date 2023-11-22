@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { handleReviewClose } from '../../../Redux/Slicies/dialogSlice';
 import starIcon from '../../../assets/starIcon.png'
 import styles from './ReviewDialog.module.css';
-import { addReview } from '../../../Redux/Slicies/reviewAction';
+import { addReview,UpdateReview } from '../../../Redux/Slicies/reviewAction';
 
 
 
@@ -25,18 +25,23 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
         padding: theme.spacing(1),
     },
 }));
-const ReviewDialog = ({ id }) => {
+const ReviewDialog = ({ id ,review}) => {
+   const { user } = useSelector((state) => state.auth);
+   var userName = user?.userName
+let userReview = review?.filter((ele)=>ele.user.userName === userName)[0]
+console.log(userReview);
 
-    const [value, setValue] = useState(null);
-    const [message, setMessage] = useState('');
-    console.log(value);
+    const [value, setValue] = useState(userReview?.rating?userReview?.rating:null);
+    const [message, setMessage] = useState(userReview?.content?userReview?.content:'');
+    // console.log(value);
     const { addReviews } = useSelector((state) => state.review);
-    console.log(addReviews);
+    const { updateReviews } = useSelector((state) => state.review);
+    // console.log(addReviews);
 
 
     const handleMessageChange = event => {
         setMessage(event.target.value);
-        console.log(event.target.value);
+        // console.log(event.target.value);
     };
 
     const dispatch = useDispatch();
@@ -49,7 +54,13 @@ const ReviewDialog = ({ id }) => {
         handleClose()
 
         console.log(message, value, id);
+    if(userReview?.content){
+        console.log("dispatchUpdateReview");
+    }else{
+        console.log("dispatchNewReview");
         await dispatch(addReview({ content: message, rating: value, book: id }))
+    }
+    
     }
 
     const descriptionElementRef = useRef(null);

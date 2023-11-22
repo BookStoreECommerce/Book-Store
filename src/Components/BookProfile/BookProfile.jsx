@@ -27,6 +27,7 @@ export default function BookProfile() {
   const { loading,addReviews } = useSelector((state) => state.review);
 
   const { user } = useSelector((state) => state.auth);
+  const userName = user.userName
   const getBookData = async () => {
     if (slug) {
       dispatch(getBookBySlug(slug))
@@ -43,7 +44,6 @@ export default function BookProfile() {
     dispatch(removeFooterMargin());
     return () => dispatch(setFooterMargin());
   }, [dispatch]);
-
 
   return (
     <>
@@ -95,10 +95,9 @@ export default function BookProfile() {
 
             <MainSlider autoplay={false} arr={bookCategory} title="Suggested for you" />
             <AddReview />
-            {loading ?<i className={`fas fa-spinner fa-spin ${styles.spinnerColor}`}></i>:<Review id={specBook?._id} />
-}
+            {loading ?<i className={`fas fa-spinner fa-spin ${styles.spinnerColor}`}></i>:<Review id={specBook?._id} />}
           
-            <ReviewDialog id={specBook?._id}/>
+            <ReviewDialog id={specBook?._id} review={specBook?.reviews} />
 
           </>
         }

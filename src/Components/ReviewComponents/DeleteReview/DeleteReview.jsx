@@ -6,7 +6,7 @@ import { allReview, deleteReview } from "../../../Redux/Slicies/reviewAction";
 
 const DeleteReview = ({ id }) => {
     const { deleteReviews } = useSelector((state) => state.review);
-    console.log(deleteReviews);
+    // console.log(deleteReviews);
     const dispatch = useDispatch();
 
     const getReviewId = async (ReviewId) => {

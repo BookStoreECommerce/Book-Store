@@ -23,7 +23,7 @@ const bookSlice = createSlice({
         state.pageNumber = payload;
       },
       addTobookReviews: (state, {payload}) => {
-        console.log(state.bookReviews);
+        // console.log(state.bookReviews);
         state.bookReviews.push(payload);
       },
       removeFromBookReviews:(state,{payload})=>{
