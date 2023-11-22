@@ -50,30 +50,73 @@ const ReviewDialog = ({ id ,review}) => {
 
     if(userReview?.content){
         await dispatch(updateReview({ id: userReview._id , content: message, rating: value}))
-        toast.info("Review updated!", {
-            position: "bottom-left",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: false,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-            closeButton: false
-        });
+   
+            toast.info("Review updated!", {
+                position: "bottom-left",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                closeButton: false
+            });
+        
+  
     }else{
         await dispatch(addReview({ content: message, rating: value, book: id }))
-        toast.success("Review Updated!", {
-            position: "bottom-left",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: false,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-            closeButton: false
-        });
+        console.log(message,value);
+        if(message != "" && value != null){
+            toast.success("Review added!", {
+                position: "bottom-left",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                closeButton: false
+            });
+        }else if (message != "" && value == null){
+            toast.error("Please add rate!", {
+                position: "bottom-left",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                closeButton: false
+            });
+        }else if(message == "" && value != null){
+            toast.error("Please add your opinion!", {
+                position: "bottom-left",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                closeButton: false
+            });
+        }else{
+            toast.error("Please add your opinion!", {
+                position: "bottom-left",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                closeButton: false
+            });
+        }
+   
     }
     }
     const descriptionElementRef = useRef(null);
