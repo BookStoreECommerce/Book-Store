@@ -5,8 +5,9 @@ import { handleReviewOpen } from "../../../Redux/Slicies/dialogSlice";
 import { useDispatch } from "react-redux";
 
 
-const AddReview = () => {
+const AddReview = ({review}) => {
     const dispatch = useDispatch();
+
     return (
         <>
         <div className={`${styles.review} mt-5 position-relative d-flex justify-content-center `}>

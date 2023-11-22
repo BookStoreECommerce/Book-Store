@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { handleReviewClose } from '../../../Redux/Slicies/dialogSlice';
 import starIcon from '../../../assets/starIcon.png'
 import styles from './ReviewDialog.module.css';
-import { addReview,UpdateReview } from '../../../Redux/Slicies/reviewAction';
+import { addReview,updateReview } from '../../../Redux/Slicies/reviewAction';
 
 
 
@@ -26,6 +26,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     },
 }));
 const ReviewDialog = ({ id ,review}) => {
+
    const { user } = useSelector((state) => state.auth);
    var userName = user?.userName
 let userReview = review?.filter((ele)=>ele.user.userName === userName)[0]
@@ -56,6 +57,8 @@ console.log(userReview);
         console.log(message, value, id);
     if(userReview?.content){
         console.log("dispatchUpdateReview");
+        await dispatch(updateReview({ id: userReview._id , content: message, rating: value}))
+
     }else{
         console.log("dispatchNewReview");
         await dispatch(addReview({ content: message, rating: value, book: id }))

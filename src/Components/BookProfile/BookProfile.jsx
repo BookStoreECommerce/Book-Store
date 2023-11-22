@@ -94,7 +94,7 @@ export default function BookProfile() {
             </div>
 
             <MainSlider autoplay={false} arr={bookCategory} title="Suggested for you" />
-            <AddReview />
+            <AddReview review={specBook?.reviews}/>
             {loading ?<i className={`fas fa-spinner fa-spin ${styles.spinnerColor}`}></i>:<Review id={specBook?._id} />}
           
             <ReviewDialog id={specBook?._id} review={specBook?.reviews} />
