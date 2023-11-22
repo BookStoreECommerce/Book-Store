@@ -10,12 +10,7 @@ import UpdateReview from '../UpdateReview/UpdateReview';
 const Review = () => {
    const { bookReviews } = useSelector((state) => state.books);
    const { allReviews } = useSelector((state) => state.review);
-  //  console.log(allReviews);
    const { user } = useSelector((state) => state.auth);
-// console.log(user?.userName);
-// console.log(bookReviews);
-
-
 
     return (
         <>

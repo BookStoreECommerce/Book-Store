@@ -126,7 +126,10 @@ color: var(--navyBlue)!important;
 .Toastify__toast-theme--colored.Toastify__toast--success {
   background: var(--navyBlue)!important;
 }
+.Toastify__toast-theme--colored.Toastify__toast--info {
+  background: #dea4a4!important;
 
+}
 .Toastify__toast-theme--colored.Toastify__toast--default {
   background: #188351 !important;
   /* background: #8dcd8d !important; */

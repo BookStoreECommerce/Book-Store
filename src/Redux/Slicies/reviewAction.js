@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../axios/axios-instance";
-import { addTobookReviews, removeFromBookReviews, setBooks, updateReviews} from "./bookSlice";
+import { addTobookReviews, removeFromBookReviews, updateReviews} from "./bookSlice";
 
 //Add Review
 export const addReview = createAsyncThunk("book/review", async ({content,rating,book}, { rejectWithValue, dispatch }) => {
@@ -8,10 +8,12 @@ export const addReview = createAsyncThunk("book/review", async ({content,rating,
     try {
         const { data } = await axiosInstance.post(`reviews`, { content: content, rating: rating, book: book });
         const review = data.newReview
+
         dispatch(addTobookReviews(review))
         return data
     } catch (error) {
         return rejectWithValue(error.response.data)
+        
     }
 })
 

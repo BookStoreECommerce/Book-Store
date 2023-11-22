@@ -13,7 +13,8 @@ import { handleReviewClose } from '../../../Redux/Slicies/dialogSlice';
 import starIcon from '../../../assets/starIcon.png'
 import styles from './ReviewDialog.module.css';
 import { addReview,updateReview } from '../../../Redux/Slicies/reviewAction';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -27,40 +28,54 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 const ReviewDialog = ({ id ,review}) => {
 
-   const { user } = useSelector((state) => state.auth);
-   var userName = user?.userName
-let userReview = review?.filter((ele)=>ele.user.userName === userName)[0]
-
-
+    const { user } = useSelector((state) => state.auth);
+    const { reviewOpen } = useSelector((state) => state.dialog)
+    const dispatch = useDispatch();
+    var userName = user?.userName
+    let userReview = review?.filter((ele)=>ele?.user?.userName === userName)[0]
     const [value, setValue] = useState(userReview?.rating?userReview?.rating:null);
     const [message, setMessage] = useState(userReview?.content?userReview?.content:'');
 
-
-
     const handleMessageChange = event => {
         setMessage(event.target.value);
-
     };
 
-    const dispatch = useDispatch();
-    const { reviewOpen } = useSelector((state) => state.dialog)
 
     const handleClose = () => {
         dispatch(handleReviewClose());
     };
+
     const handleSend = async () => {
         handleClose()
+
     if(userReview?.content){
-
         await dispatch(updateReview({ id: userReview._id , content: message, rating: value}))
-
+        toast.info("Review updated!", {
+            position: "bottom-left",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            closeButton: false
+        });
     }else{
-
         await dispatch(addReview({ content: message, rating: value, book: id }))
+        toast.success("Review Updated!", {
+            position: "bottom-left",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            closeButton: false
+        });
     }
-    
     }
-
     const descriptionElementRef = useRef(null);
     useEffect(() => {
         if (reviewOpen) {
@@ -109,18 +124,25 @@ let userReview = review?.filter((ele)=>ele.user.userName === userName)[0]
                     <CloseIcon />
                 </IconButton>
                 <DialogContent dividers className={styles.modalBody}>
-
                     <p className={`${styles.reviewParg} `}>Please share your opinion about the product</p>
                     <textarea className="form-control" placeholder="please write your review ........" id="floatingTextarea" rows={6} cols={6} value={message} onChange={handleMessageChange}></textarea>
-
-
-
-
                 </DialogContent>
                 <DialogActions className={styles.btn}>
+                <ToastContainer position="bottom-left"
+                                                autoClose={2000}
+                                                hideProgressBar={false}
+                                                newestOnTop={false}
+                                                closeOnClick={false}
+                                                rtl={false}
+                                                pauseOnFocusLoss
+                                                closeButton={false}
+                                                draggable
+                                                pauseOnHover={false}
+                                                theme="light" />
                     <Button data-testid='review' className={`${styles.sendBtn} px-4`} onClick={handleSend}>
                         SEND REVIEW
                     </Button>
+
                     <Button data-testid='review' className={`${styles.thanksBtn} px-4 mt-2 mb-4`} onClick={handleClose}>
                         No Thanks!
                     </Button>

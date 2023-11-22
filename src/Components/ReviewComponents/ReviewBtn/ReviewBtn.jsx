@@ -10,8 +10,7 @@ const ReviewBtn = ({review}) => {
      const dispatch = useDispatch();
     return ( 
         <>
-                <button disabled={arr?.length != 0 ? true:false} className={`${styles.btn} btn`} onClick={()=>dispatch(handleReviewOpen())}>Write a customer review</button>
-        
+            <button disabled={arr?.length != 0 ? true:false} className={`${styles.btn} btn`} onClick={()=>dispatch(handleReviewOpen())}>Write a customer review</button>
         </>
      );
 }
