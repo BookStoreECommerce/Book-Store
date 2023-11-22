@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../axios/axios-instance";
-import { addTobookReviews, removeFromBookReviews } from "./bookSlice";
+import { addTobookReviews, removeFromBookReviews, setBooks, updateReviews} from "./bookSlice";
 
 //Add Review
 export const addReview = createAsyncThunk("book/review", async ({content,rating,book}, { rejectWithValue, dispatch }) => {
@@ -29,10 +29,14 @@ export const deleteReview = createAsyncThunk("delete/review", async (id, { rejec
 })
 
 //Update Review
-export const updateReview = createAsyncThunk("update/review", async ({id,content,rating},{rejectWithValue}) => {
+export const updateReview = createAsyncThunk("update/review", async ({id,content,rating},{rejectWithValue,dispatch}) => {
 
     try {
         const { data } = await axiosInstance.put(`reviews/${id}`,{ content: content, rating: rating });
+        const review = data.review;
+   
+        dispatch(updateReviews(review))
+
         return data
     } catch (error) {
         return rejectWithValue(error.response.data)

@@ -30,19 +30,16 @@ const ReviewDialog = ({ id ,review}) => {
    const { user } = useSelector((state) => state.auth);
    var userName = user?.userName
 let userReview = review?.filter((ele)=>ele.user.userName === userName)[0]
-console.log(userReview);
+
 
     const [value, setValue] = useState(userReview?.rating?userReview?.rating:null);
     const [message, setMessage] = useState(userReview?.content?userReview?.content:'');
-    // console.log(value);
-    const { addReviews } = useSelector((state) => state.review);
-    const { updateReviews } = useSelector((state) => state.review);
-    // console.log(addReviews);
+
 
 
     const handleMessageChange = event => {
         setMessage(event.target.value);
-        // console.log(event.target.value);
+
     };
 
     const dispatch = useDispatch();
@@ -53,14 +50,12 @@ console.log(userReview);
     };
     const handleSend = async () => {
         handleClose()
-
-        console.log(message, value, id);
     if(userReview?.content){
-        console.log("dispatchUpdateReview");
+
         await dispatch(updateReview({ id: userReview._id , content: message, rating: value}))
 
     }else{
-        console.log("dispatchNewReview");
+
         await dispatch(addReview({ content: message, rating: value, book: id }))
     }
     

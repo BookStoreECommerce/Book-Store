@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {open: false, name: "", privacyOpen: false, reviewOpen: false};
+const initialState = {open: false, name: "", privacyOpen: false, reviewOpen: false,disabledBtn: false};
 
 const dialogSlice = createSlice({
     name: 'dialog',
@@ -22,6 +22,7 @@ const dialogSlice = createSlice({
         },
         handleReviewOpen: (state, action) => {
             state.reviewOpen = true;
+            state.disabledBtn = true;
         },
         handleReviewClose: (state, action) => {
             state.reviewOpen = false;

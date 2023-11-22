@@ -8,7 +8,7 @@ const UpdateReview = ({id,content,rating}) => {
   const dispatch = useDispatch()
 
   const getReviewContent = async (id,content,rating) => {
-    console.log(id,rating,content);
+
     dispatch(handleReviewOpen())
 }
     return ( 
