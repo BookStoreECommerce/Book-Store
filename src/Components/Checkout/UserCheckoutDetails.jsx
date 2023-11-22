@@ -1,10 +1,10 @@
 import { Form } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Formik, useFormik } from "formik";
+import { Formik } from "formik";
 import * as Yup from "yup";
 
-import { TextField, Button, FormControlLabel } from "@mui/material";
+import { TextField, Button } from "@mui/material";
 import classes from "./UserCheckoutDetails.module.css";
 
 const UserCheckoutDetails = () => {

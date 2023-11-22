@@ -1,19 +1,27 @@
+
+
 import { useState } from "react";
-import { Typography, TextField, Button } from "@mui/material";
+import { TextField, Button } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { addCoupon, removeCoupon } from "../../Redux/Slicies/cartAction";
+import styles from "./Coupon.module.css"
 
 export default function RedeemCoupon({ code }) {
   const dispatch = useDispatch();
   const [couponCode, setCouponCode] = useState(code || "");
+  const [couponError, setCouponError] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!couponCode.length) return;
+    setCouponError(null);
     if (code) {
       await dispatch(removeCoupon(couponCode)) && setCouponCode("");
     } else {
-      dispatch(addCoupon(couponCode));
+      const response = await dispatch(addCoupon(couponCode));
+      if (response.payload.message.toLowerCase() === "error") {
+        setCouponError(response.payload.error);
+      }
     }
   };
 
@@ -24,10 +32,11 @@ export default function RedeemCoupon({ code }) {
       {/* <Typography variant="h6" component="h6">
         Redeem Coupon
       </Typography> */}
-      <form onSubmit={handleSubmit} className="input-group d-flex">
+      <form onSubmit={handleSubmit} className={`${styles['coupon-form']} input-group d-flex`}>
         <TextField
           id="coupon-code"
           label="Coupon Code"
+          helperText={couponError && couponError}
           variant="outlined"
           className="form-control"
           disabled={code !== ""}
