@@ -86,7 +86,6 @@ const cartSlice = createSlice({
       // state.msgError = action.payload.error;
     },
     addToCart: (state, { payload }) => {
-      console.log(payload);
       const i = state.localStorageCart?.books?.findIndex(
         (el) =>
           el.book._id === payload._id &&
@@ -135,7 +134,6 @@ const cartSlice = createSlice({
       }
     },
     deletFromCart: (state, { payload }) => {
-      console.log(payload);
       state.localStorageCart.books = state.localStorageCart?.books?.filter(
         (el) =>
           el.book._id !== payload.id ||
@@ -256,7 +254,6 @@ const cartSlice = createSlice({
       // state.isLoading = true;
     });
     builder.addCase(createCart.fulfilled, (state, action) => {
-      console.log(action.payload);
       if (action.payload.cart) {
         state.books = action.payload.cart.books;
         state.localStorageCart.books = action.payload.cart.books;
@@ -269,7 +266,6 @@ const cartSlice = createSlice({
       state.msgError = action.payload.error;
     });
     builder.addCase(createCart.rejected, (state, action) => {
-      console.log(action);
       state.isLoading = false;
       // state.msgError = action.payload.error
     });

@@ -18,10 +18,10 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../../Redux/Slicies/cartSlice.js";
 import { addCartWithToken } from "../../../Redux/Slicies/cartAction.js";
+import { handleClose } from "../../../Redux/Slicies/dialogSlice.js";
 
 export default function CartDialog() {
   const { buyBook, isLoading } = useSelector(({ cart }) => cart);
-  console.log(buyBook);
   // const { token } = useSelector(({ auth }) => auth);
   const token = localStorage.getItem("access-token");
   const [type, setType] = useState(null);
@@ -63,7 +63,6 @@ export default function CartDialog() {
   const fontSize = 44;
 
   const handleChange = (variation) => {
-    console.log(variation);
     setType(variation.variation_name);
     setBook((prev) => {
       return {
@@ -101,13 +100,14 @@ export default function CartDialog() {
           variation_name: book.variation_name,
         })
       );
+
       toast.dismiss(buyBook._id);
+      dispatch(handleClose());
       addAlert();
     }
   };
 
   useEffect(() => {
-    console.log(buyBook);
     setBook(buyBook);
   }, []);
   return (

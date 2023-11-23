@@ -4,15 +4,12 @@ import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./Login.module.css";
 import { Button, FormControl, FormHelperText, IconButton, InputLabel, OutlinedInput, TextField } from "@mui/material";
-// import CustomizedDialogs from "../Dialog/Dialog";
 import { Link, useNavigate } from "react-router-dom";
 import { handleClickOpen, handleClose } from "../../../Redux/Slicies/dialogSlice";
 import SocialMediaBtns from "../../ReusableComponents/SocialMediaBtns/SocialMediaBtns";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { signin } from "../../../Redux/Slicies/authActions";
 import { clearError } from "../../../Redux/Slicies/authSlice";
-import { getWhishList } from "../../../Redux/Slicies/whishlistActions";
-import { createCart } from "../../../Redux/Slicies/cartAction.js";
 
 const Login = () => {
 
@@ -21,7 +18,6 @@ const Login = () => {
   const { isLoading, msgError } = useSelector((state) => {
     return state.auth;
   });
-  const { localStorageCart } = useSelector((state) => state.cart);
 
   const [showPassword, setShowPassword] = useState(false);
 

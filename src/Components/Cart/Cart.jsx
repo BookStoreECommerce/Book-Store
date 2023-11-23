@@ -22,7 +22,6 @@ export default function Cart() {
   const token = localStorage.getItem("access-token");
   const { isLoading, localStorageCart, totalAmountAfterDisc, totalAmount, discount } = useSelector((state) => state.cart);
   // const { token } = useSelector((state) => state.auth);
-console.log(localStorageCart);
   const getCartDetails = () => {
     token ? dispatch(getCart()) : dispatch(getCartWithoutToken());
   };
