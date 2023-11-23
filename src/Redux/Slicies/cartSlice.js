@@ -64,6 +64,12 @@ const cartSlice = createSlice({
         0
       );
     },
+    calcDiscount: (state) => {
+      if (state.discount)
+        return (state.totalAmountAfterDisc = //.15
+          state.totalAmount - state.totalAmount * state.discount);
+      else return (state.totalAmountAfterDisc = state.totalAmount);
+    },
     getCartWithoutToken: (state) => {
       state.isLoading = false;
       if (localStorage.getItem("cartDetails")) {
@@ -106,7 +112,6 @@ const cartSlice = createSlice({
           );
         }
       }
-
       setCartFromLocalStorage(state.localStorageCart);
     },
     increaseCartQty: (state, { payload }) => {
@@ -154,6 +159,7 @@ const cartSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(getCart.fulfilled, (state, action) => {
+      console.log(action.payload);
       state.isLoading = false;
       if (action.payload.cart.books) {
         state.books = action.payload.cart.books;

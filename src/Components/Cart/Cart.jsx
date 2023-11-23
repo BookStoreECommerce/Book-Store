@@ -20,7 +20,13 @@ export default function Cart() {
 
   const { footerH, navH } = useSelector((state) => state.app);
   const token = localStorage.getItem("access-token");
-  const { isLoading, localStorageCart, totalAmountAfterDisc, totalAmount, discount } = useSelector((state) => state.cart);
+  const {
+    isLoading,
+    localStorageCart,
+    totalAmountAfterDisc,
+    totalAmount,
+    discount,
+  } = useSelector((state) => state.cart);
   // const { token } = useSelector((state) => state.auth);
   const getCartDetails = () => {
     token ? dispatch(getCart()) : dispatch(getCartWithoutToken());
@@ -30,7 +36,6 @@ export default function Cart() {
     setTimeout(() => {
       dispatch(createCart(localStorageCart));
     }, 3000);
-    
   };
 
   useEffect(() => {
@@ -89,8 +94,18 @@ export default function Cart() {
                     ) : (
                       ""
                     )}
-                    <h1>Total cart Amount: {totalAmount}</h1>
-                    <h1>Discount: {discount}</h1>
+                    {discount ? (
+                      <div>
+                        <h1>Total cart Amount: {totalAmount}</h1>
+                        <h1>Discount: {discount}</h1>
+                        <h1>
+                          Total Amount After Discount: {totalAmountAfterDisc}
+                        </h1>
+                      </div>
+                    ) : (
+                      <h1>Total cart Amount: {totalAmount}</h1>
+                    )}
+
                     {localStorageCart?.books.map((book, index) => (
                       <div
                         className={`${styles.orderCard} col-lg-7 col-md-8 col-sm-10 col-10`}
