@@ -119,6 +119,15 @@ const router = createBrowserRouter([
           return { Component: Cart };
         },
       },
+      {
+        path: "orders",
+        async lazy() {
+          const { default: PrevOrders } = await import(
+            "./Components/PrevOrders/PrevOrders.jsx"
+          );
+          return { Component: PrevOrders };
+        },
+      },
     ],
   },
   {
