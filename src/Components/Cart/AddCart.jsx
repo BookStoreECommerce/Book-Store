@@ -1,58 +1,25 @@
 import React from "react";
-import { addCartWithToken } from "../../Redux/Slicies/cartAction";
 import { useDispatch } from "react-redux";
 import styles from "./AddCart.module.css";
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer, toast } from "react-toastify";
-import { addBookForBuy, addToCart } from "../../Redux/Slicies/cartSlice";
+import { ToastContainer } from "react-toastify";
+import { addBookForBuy } from "../../Redux/Slicies/cartSlice";
 import { handleClickOpen } from "../../Redux/Slicies/dialogSlice.js";
 
 function AddCart({ id, book, component, children }) {
   const token = localStorage.getItem("access-token");
   const dispatch = useDispatch();
 
-  const addAlert = () => {
-    toast.success(
-      `${book.name.split(" ").slice(0, 3).join(" ")} added to cart!`,
-      {
-        position: "bottom-left",
-        autoClose: 500,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-        closeButton: false,
-      }
-    );
-  };
 
   const addToCartFnc = async () => {
-    addAlert()
-    toast.loading(`Adding ${book.name.split(" ").slice(0, 3).join(" ")}.....`, {
-      position: "bottom-left",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: false,
-      pauseOnHover: false,
-      draggable: true,
-      // progress: 0,
-      theme: "colored",
-      closeButton: false,
-      toastId: id,
-    });
     dispatch(addBookForBuy(book))
     dispatch(handleClickOpen({ name: "add-to-cart" }));
-    // if (!token) {
-    //   await dispatch(addToCart(book));
-    //   toast.dismiss(id);
-    //   addAlert();
-    // } else {
-    //   await dispatch(addCartWithToken({ book: id }));
-    //   toast.dismiss(id);
-    //   addAlert();
-    // }
+    if (!token) {
+      // toast.dismiss(id);
+    } else {
+      // await dispatch(addCartWithToken({ book: id }));
+      // toast.dismiss(id);
+    }
   };
 
   return (
@@ -64,19 +31,7 @@ function AddCart({ id, book, component, children }) {
           <i className="fa-solid fa-cart-shopping"></i>&nbsp;
           {children}
         </span>
-        <ToastContainer
-          position="bottom-left"
-          autoClose={2000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick={false}
-          rtl={false}
-          pauseOnFocusLoss
-          closeButton={false}
-          draggable
-          pauseOnHover={false}
-          theme="light"
-        />
+        
       </span>
     </>
   );

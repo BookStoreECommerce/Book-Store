@@ -19,7 +19,6 @@ export const addCartWithToken = createAsyncThunk(
   async (bookId, { rejectWithValue }) => {
     try {
       const { data } = await axiosInstance.post("cart", bookId);
-      console.log(data);
       return data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -42,12 +41,10 @@ export const updateCart = createAsyncThunk(
 export const deleteCartItem = createAsyncThunk(
   "cart/deleteCartItem",
   async (bookId, { rejectWithValue }) => {
-    try {
-      const { data } = await axiosInstance.delete(`cart/${bookId.book}`);
-      return data;
-    } catch (error) {
-      return rejectWithValue(error.response.data);
-    }
+    return await axiosInstance
+      .delete(`cart/${bookId.book}/${bookId.variation_name}`)
+      .then(({ data }) => data)
+      .catch(({ response }) => rejectWithValue(response.data));
   }
 );
 
@@ -75,13 +72,10 @@ export const clearCart = createAsyncThunk(
 export const createCart = createAsyncThunk(
   "cart/createCart",
   async (books, { rejectWithValue }) => {
-    try {
-      const { data } = await axiosInstance.post("cart/creatCart", books);
-      console.log(data);
-      return data;
-    } catch (error) {
-      return rejectWithValue(error.response.data);
-    }
+    return await axiosInstance
+      .post("cart/createCart", books)
+      .then(({ data }) => data)
+      .catch(({ response }) => rejectWithValue(response.data));
   }
 );
 

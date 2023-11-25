@@ -30,6 +30,7 @@ const authSlice = createSlice({
         logout: (state, action) => {
             localStorage.removeItem('access-token');
             localStorage.removeItem('whishList');
+            localStorage.removeItem('cartDetails');
             state.token= null;
         },
     },

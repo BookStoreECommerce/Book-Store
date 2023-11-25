@@ -1,32 +1,18 @@
 import React from "react";
 import { deleteCartItem } from "../../Redux/Slicies/cartAction";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import styles from "./DeleteCartItem.module.css";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import {
   deletFromCart,
-  setCartInLocalStorage,
 } from "../../Redux/Slicies/cartSlice";
 
-function DeleteCartItem({ id, type }) {
+function DeleteCartItem({ id, variation_name }) {
   // const { token } = useSelector((state) => state.auth);
   const token = localStorage.getItem("access-token");
   const dispatch = useDispatch();
-  const cart = JSON.parse(localStorage.getItem("cartDetails"));
-  const removeAlert = () => {
-    toast.error(`Book removed from cart!`, {
-      position: "bottom-left",
-      autoClose: 500,
-      hideProgressBar: false,
-      closeOnClick: false,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-      closeButton: false,
-    });
-  };
+
   const removeCartItem = async () => {
     toast.loading(`Deleting Book .........`, {
       position: "bottom-left",
@@ -39,17 +25,15 @@ function DeleteCartItem({ id, type }) {
       closeButton: false,
       toastId: id,
     });
-    // if (token) {
-      // await dispatch(deleteCartItem({ book: id }));
-      // toast.dismiss(id);
+    if (token) {
+    await dispatch(deleteCartItem({ book: id, variation_name }));
+    toast.dismiss(id);
+    } else {
+    await dispatch(deletFromCart({ id, variation_name }));
+    toast.dismiss(id);
 
-    //   removeAlert();
-    // } else {
-      await dispatch(deletFromCart({id, type}));
-      toast.dismiss(id);
+    }
 
-      removeAlert();
-    // }
   };
 
   return (

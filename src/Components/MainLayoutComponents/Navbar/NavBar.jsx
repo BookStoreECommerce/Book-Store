@@ -10,8 +10,11 @@ import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined
 import { logout } from "../../../Redux/Slicies/authSlice";
 import { signout } from "../../../Redux/Slicies/authActions";
 import { getCatBooks } from "../../../Redux/Slicies/CategoriesBookActions";
-import { createCart, getCart } from "../../../Redux/Slicies/cartAction";
-import { getCartWithoutToken } from "../../../Redux/Slicies/cartSlice.js";
+import { createCart } from "../../../Redux/Slicies/cartAction";
+import {
+  calcPrice,
+  clearLocalStorageCArt,
+} from "../../../Redux/Slicies/cartSlice.js";
 
 function NavBar({ navRef }) {
   const navigate = useNavigate();
@@ -39,24 +42,17 @@ function NavBar({ navRef }) {
   });
 
   useEffect(() => {
-    if (token && localStorage.getItem("cartDetails")) {
-      let cartDetails = localStorage.getItem("cartDetails");
-      cartDetails = JSON.parse(cartDetails);
-      dispatch(createCart(cartDetails));
-    } else if (token && !localStorage.getItem("cartDetails")) {
-      dispatch(getCart());
-    } else {
-      dispatch(getCartWithoutToken());
-    }
-  }, [token]);
-
-  useEffect(() => {
     dispatch(getCatBooks());
   }, []);
+  useEffect(() => {
+    dispatch(calcPrice());
+  }, [localStorageCart]);
 
   const handleLogout = () => {
-    dispatch(logout());
+    dispatch(createCart(localStorageCart));
     dispatch(signout());
+    dispatch(logout());
+    dispatch(clearLocalStorageCArt("cartDetails"));
     navigate("/");
   };
   const linkStyle = `nav-link ${styles.navLink} ${styles.navLinkBorder} `;

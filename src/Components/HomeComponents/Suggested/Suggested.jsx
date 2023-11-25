@@ -17,8 +17,9 @@ const Suggested = () => {
       author: ele.author,
       price: ele.price,
       sale: ele.discount,
-      category:ele.category,
-      rating:ele.rating
+      category: ele.category,
+      rating: ele.rating,
+      variations: ele.variations,
     };
   });
 
@@ -86,11 +87,18 @@ const Suggested = () => {
               </h2>
               <div className={`col-lg-11 ${styles.marginBottom}`}>
                 <Slider {...settings}>
-              
                   {Suggested.map((Suggested, index) => {
                     return (
                       <BookCard
-                        cardStyle={{margin: "10px", padding: "10px", minHeight:"300px", maxHeight:"300px", display:"flex", justifyContent:"center" ,alignItems:"center"}}
+                        cardStyle={{
+                          margin: "10px",
+                          padding: "10px",
+                          minHeight: "300px",
+                          maxHeight: "300px",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
                         key={Suggested._id}
                         image={Suggested.image}
                         name={Suggested.name}
@@ -99,13 +107,13 @@ const Suggested = () => {
                         rate={Suggested.rating}
                         sale={Suggested.sale}
                         section="Suggested"
-                        slug= {Suggested.slug}
-                        category = {Suggested.category}
+                        slug={Suggested.slug}
+                        category={Suggested.category}
                         sectionName="whislist"
                         id={Suggested._id}
                         book={Suggested}
                       />
-                    )
+                    );
                   })}
                 </Slider>
               </div>

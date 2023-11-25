@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ScrollToTop from "../ReusableComponents/ScrollToTop/ScrollToTop";
-import { Box } from "@mui/material";
+import { Box, Input } from "@mui/material";
 import { Link } from "react-router-dom";
 import Loading from "../ReusableComponents/Loading/Loading";
 import ClearCart from "./ClearCart";
 import DeleteCartItem from "./DeleteCartItem";
-import { getCart } from "../../Redux/Slicies/cartAction";
+import { createCart, getCart } from "../../Redux/Slicies/cartAction";
 import { Button } from "@mui/material";
 import styles from "./Cart.module.css";
 import {
@@ -20,12 +20,22 @@ export default function Cart() {
 
   const { footerH, navH } = useSelector((state) => state.app);
   const token = localStorage.getItem("access-token");
-  const { isLoading, localStorageCart } = useSelector((state) => state.cart);
-  console.log(localStorageCart);
+  const {
+    isLoading,
+    localStorageCart,
+    totalAmountAfterDisc,
+    totalAmount,
+    discount,
+  } = useSelector((state) => state.cart);
   // const { token } = useSelector((state) => state.auth);
-
   const getCartDetails = () => {
     token ? dispatch(getCart()) : dispatch(getCartWithoutToken());
+  };
+
+  const updateCart = () => {
+    setTimeout(() => {
+      dispatch(createCart(localStorageCart));
+    }, 3000);
   };
 
   useEffect(() => {
@@ -78,11 +88,22 @@ export default function Cart() {
                           }
                           className={`mainBtn ${styles.fitContent}`}
                         >
-                          Checkout
+                          Checkout <br /> {totalAmountAfterDisc}
                         </Button>
                       </div>
                     ) : (
                       ""
+                    )}
+                    {discount ? (
+                      <div>
+                        <h1>Total cart Amount: {totalAmount}</h1>
+                        <h1>Discount: {discount}</h1>
+                        <h1>
+                          Total Amount After Discount: {totalAmountAfterDisc}
+                        </h1>
+                      </div>
+                    ) : (
+                      <h1>Total cart Amount: {totalAmount}</h1>
                     )}
 
                     {localStorageCart?.books.map((book, index) => (
@@ -118,21 +139,18 @@ export default function Cart() {
                                 </div>
                                 <div className={styles.titleAndPrice}>
                                   <div className={styles.bookTitle}>
-                                    {book.type || book.variation_name}
+                                    {book.variation_name}
                                   </div>
                                 </div>
 
                                 <div className={styles.bookPrice}>
                                   {book.price} EGP
                                 </div>
-                                {(book.type === "hardcover" || book.variation_name === 'hardcover') && (
+                                {book.variation_name === "hardcover" && (
                                   <div className={styles.quantityWrapper}>
                                     <div className={styles.quantityContent}>
                                       <button
-                                        disabled={
-                                          book.qty === 1 ||
-                                          (book.type !== "hardcover" || book.variation_name !== "hardcover")
-                                        }
+                                        disabled={book.qty === 1}
                                         onClick={() =>
                                           dispatch(
                                             decreaseCartQty(
@@ -145,13 +163,12 @@ export default function Cart() {
                                       >
                                         -
                                       </button>
-                                      <input
+                                      <Input
                                         type="number"
                                         className={styles.quantityInput}
                                         value={book.qty}
                                       />
                                       <button
-                                        disabled={(book.type !== "hardcover" || book.variation_name !== "hardcover")}
                                         onClick={() =>
                                           dispatch(
                                             increaseCartQty(
@@ -173,7 +190,7 @@ export default function Cart() {
                           <div className={` ${styles.deleteAndSubTotal}  `}>
                             <DeleteCartItem
                               id={book?.book._id}
-                              type={book?.type}
+                              variation_name={book?.variation_name}
                             />
                           </div>
                           <div className={styles.bookSubTotal}>

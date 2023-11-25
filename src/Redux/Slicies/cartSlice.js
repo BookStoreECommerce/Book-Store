@@ -30,15 +30,15 @@ function getBook(payload) {
     book: {
       image: payload?.image?.secure_url,
       _id: payload._id,
-      price: payload.price,
+      price: payload.variation_price,
       name: payload.name,
       slug: payload.slug,
     },
-    price: payload.price,
+    price: payload.variation_price,
     qty: 1,
-    totalPrice: payload.price,
+    totalPrice: payload.variation_price,
     coupon_code: "",
-    type: payload.type,
+    variation_name: payload.variation_name,
   };
 }
 
@@ -61,6 +61,18 @@ const cartSlice = createSlice({
   name: "books",
   initialState,
   reducers: {
+    calcPrice: (state) => {
+      state.totalAmount = state.localStorageCart.books.reduce(
+        (partialSum, book) => partialSum + book.totalPrice,
+        0
+      );
+    },
+    calcDiscount: (state) => {
+      if (state.discount)
+        return (state.totalAmountAfterDisc = //.15
+          state.totalAmount - state.totalAmount * state.discount);
+      else return (state.totalAmountAfterDisc = state.totalAmount);
+    },
     getCartWithoutToken: (state) => {
       state.isLoading = false;
       if (localStorage.getItem("cartDetails")) {
@@ -79,20 +91,21 @@ const cartSlice = createSlice({
         // localStorage.removeItem(action.payload);
         state.localStorageCart.books = [];
       }
-      state.isLoading = false;
-      state.msgError = action.payload.error;
+      // state.isLoading = false;
+      // state.msgError = action.payload.error;
     },
     addToCart: (state, { payload }) => {
-      console.log(payload);
       const i = state.localStorageCart?.books?.findIndex(
-        (el) => el.book._id === payload._id && el.type === payload.type
+        (el) =>
+          el.book._id === payload._id &&
+          el.variation_name === payload.variation_name
       );
       if (i === undefined)
         state.localStorageCart = { books: [{ ...getBook(payload) }] };
       else if (i === -1)
         state.localStorageCart?.books.push({ ...getBook(payload) });
       else {
-        if (state.localStorageCart.books[i].type === "hardcover") {
+        if (state.localStorageCart.books[i].variation_name === "hardcover") {
           state.localStorageCart.books[i].qty++;
           state.localStorageCart.books[i].coupon_code = "3agoooooz";
           const { price, qty } = state.localStorageCart?.books[i];
@@ -102,14 +115,13 @@ const cartSlice = createSlice({
           );
         }
       }
-
       setCartFromLocalStorage(state.localStorageCart);
     },
     increaseCartQty: (state, { payload }) => {
       const i = state.localStorageCart?.books?.findIndex(
-        (el) => el.book._id === payload && el.type === "hardcover"
+        (el) => el.book._id === payload && el.variation_name === "hardcover"
       );
-      if (state.localStorageCart.books[i].type == "hardcover") {
+      if (state.localStorageCart.books[i].variation_name == "hardcover") {
         state.localStorageCart.books[i].qty++;
         state.localStorageCart.books[i].coupon_code = "agooooz";
         const { price, qty } = state.localStorageCart?.books[i];
@@ -119,9 +131,9 @@ const cartSlice = createSlice({
     },
     decreaseCartQty: (state, { payload }) => {
       const i = state.localStorageCart?.books?.findIndex(
-        (el) => el.book._id === payload && el.type === "hardcover"
+        (el) => el.book._id === payload && el.variation_name === "hardcover"
       );
-      if (state.localStorageCart.books[i].type == "hardcover") {
+      if (state.localStorageCart.books[i].variation_name == "hardcover") {
         state.localStorageCart.books[i].qty--;
         state.localStorageCart.books[i].coupon_code = "agooooz";
         const { price, qty } = state.localStorageCart?.books[i];
@@ -130,9 +142,10 @@ const cartSlice = createSlice({
       }
     },
     deletFromCart: (state, { payload }) => {
-      console.log(payload);
       state.localStorageCart.books = state.localStorageCart?.books?.filter(
-        (el) => el.book._id !== payload.id || el.type !== payload.type
+        (el) =>
+          el.book._id !== payload.id ||
+          el.variation_name !== payload.variation_name
       );
       setCartFromLocalStorage(state.localStorageCart);
       if (state.localStorageCart.books.length === 0) {
@@ -149,6 +162,7 @@ const cartSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(getCart.fulfilled, (state, action) => {
+      console.log(action.payload);
       state.isLoading = false;
       if (action.payload.cart.books) {
         state.books = action.payload.cart.books;
@@ -158,6 +172,7 @@ const cartSlice = createSlice({
       state.totalAmount = action.payload.cart.totalAmount;
       state.totalAmountAfterDisc = action.payload.cart.totalAmountAfterDisc;
       state.msgError = action.payload.message;
+      setCartFromLocalStorage(state.localStorageCart);
     });
     builder.addCase(getCart.rejected, (state, action) => {
       state.isLoading = false;
@@ -166,7 +181,7 @@ const cartSlice = createSlice({
 
     // add cart with token
     builder.addCase(addCartWithToken.pending, (state, action) => {
-      // state.isLoading = true;
+      state.isLoading = true;
     });
     builder.addCase(addCartWithToken.fulfilled, (state, action) => {
       if (action.payload.cart) {
@@ -178,6 +193,7 @@ const cartSlice = createSlice({
       }
       state.isLoading = false;
       state.msgError = action.payload.error;
+      setCartFromLocalStorage(state.localStorageCart);
     });
     builder.addCase(addCartWithToken.rejected, (state, action) => {
       state.isLoading = false;
@@ -197,6 +213,7 @@ const cartSlice = createSlice({
       state.totalAmountAfterDisc = action.payload.cart.totalAmountAfterDisc;
       state.isLoading = false;
       state.msgError = action.payload.error;
+      setCartFromLocalStorage(state.localStorageCart);
     });
     builder.addCase(updateCart.rejected, (state, action) => {
       state.isLoading = false;
@@ -251,6 +268,7 @@ const cartSlice = createSlice({
       state.totalAmountAfterDisc = action.payload.cart.totalAmountAfterDisc;
       state.isLoading = false;
       state.msgError = action.payload.error;
+      setCartFromLocalStorage(state.localStorageCart);
     });
     builder.addCase(deleteCartItem.rejected, (state, action) => {
       state.isLoading = false;
@@ -269,6 +287,7 @@ const cartSlice = createSlice({
       state.totalAmountAfterDisc = action.payload.cart.totalAmountAfterDisc;
       state.isLoading = false;
       state.msgError = action.payload.error;
+      setCartFromLocalStorage(state.localStorageCart);
     });
     builder.addCase(clearCart.rejected, (state, action) => {
       state.isLoading = false;
@@ -286,7 +305,7 @@ const cartSlice = createSlice({
         state.discount = action.payload.cart.discount;
         state.totalAmount = action.payload.cart.totalAmount;
         state.totalAmountAfterDisc = action.payload.cart.totalAmountAfterDisc;
-        // localStorage.removeItem("cartDetails");
+        localStorage.removeItem("cartDetails");
       }
       state.isLoading = false;
       state.msgError = action.payload.error;
@@ -308,5 +327,6 @@ export const {
   decreaseCartQty,
   deletFromCart,
   addBookForBuy,
+  calcPrice,
 } = cartSlice.actions;
 // export const getCart = cartSlice.actions.getCart;

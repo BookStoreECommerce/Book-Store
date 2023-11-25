@@ -3,6 +3,8 @@ import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 import AudioFileIcon from "@mui/icons-material/AudioFile";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
+import { ToastContainer, toast } from "react-toastify";
+
 import {
   Box,
   Button,
@@ -16,9 +18,10 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../../Redux/Slicies/cartSlice.js";
 import { addCartWithToken } from "../../../Redux/Slicies/cartAction.js";
+import { handleClose } from "../../../Redux/Slicies/dialogSlice.js";
 
 export default function CartDialog() {
-  const { buyBook } = useSelector(({ cart }) => cart);
+  const { buyBook, isLoading } = useSelector(({ cart }) => cart);
   // const { token } = useSelector(({ auth }) => auth);
   const token = localStorage.getItem("access-token");
   const [type, setType] = useState(null);
@@ -27,35 +30,84 @@ export default function CartDialog() {
     variations: buyBook.variations,
   });
 
+  const addAlert = () => {
+    toast.success(
+      `${book.name.split(" ").slice(0, 3).join(" ")} added to cart!`,
+      {
+        position: "bottom-left",
+        autoClose: 500,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        closeButton: false,
+      }
+    );
+  };
+
+  const labels = (str) =>
+    str === "hardcover" ? (
+      <MenuBookIcon sx={{ fontSize }} />
+    ) : str === "pdf" ? (
+      <PictureAsPdfIcon sx={{ fontSize }} />
+    ) : str === "e-book" ? (
+      <AutoStoriesIcon sx={{ fontSize }} />
+    ) : str === "audio" ? (
+      <AudioFileIcon sx={{ fontSize }} />
+    ) : null;
+
   const dispatch = useDispatch();
 
   const fontSize = 44;
 
-  const handleChange = ({ target }) => {
-    console.log(target.value);
-    setType(target.value);
+  const handleChange = (variation) => {
+    setType(variation.variation_name);
     setBook((prev) => {
       return {
         ...prev,
-        type: target.value,
+        variation_name: variation.variation_name,
+        variation_price: variation.variation_price,
       };
     });
   };
-  //${book.name.split(" ").slice(0, 3).join(" ")}
+
   const addToCartFN = async (e) => {
-    console.log(token);
     if (!token) {
       await dispatch(addToCart(book));
-      console.log(token);
+      // toast.dismiss(buyBook._id);
+      addAlert();
     } else {
-      console.log(token);
+      toast.loading(
+        `Adding ${book.name.split(" ").slice(0, 3).join(" ")}.....`,
+        {
+          position: "bottom-left",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: false,
+          draggable: true,
+          // progress: 0,
+          theme: "colored",
+          closeButton: false,
+          toastId: buyBook._id,
+        }
+      );
+      await dispatch(
+        addCartWithToken({
+          book: book._id,
+          variation_name: book.variation_name,
+        })
+      );
 
-      await dispatch(addCartWithToken({ book: book._id, type: book.type }));;
+      toast.dismiss(buyBook._id);
+      dispatch(handleClose());
+      addAlert();
     }
   };
 
   useEffect(() => {
-    console.log(buyBook);
     setBook(buyBook);
   }, []);
   return (
@@ -65,7 +117,7 @@ export default function CartDialog() {
         sx={{ minHeight: "200px", justifyContent: "center" }}
       >
         <Typography component="h2" sx={{ textAlign: "center" }}>
-          BUY: {book?.name.split(" ").slice(0, 5).join(" ")}......
+          BUY: {book?.name?.split(" ").slice(0, 5).join(" ")} ......
         </Typography>
         <RadioGroup
           defaultValue="female"
@@ -86,20 +138,8 @@ export default function CartDialog() {
                   disabled={!el.variation_is_available}
                   value={el.variation_name}
                   control={<Radio />}
-                  onChange={handleChange}
-                  label={
-                    el.variation_name == "hardcover" ? (
-                      <MenuBookIcon sx={{ fontSize }} />
-                    ) : el.variation_name == "pdf" ? (
-                      <PictureAsPdfIcon sx={{ fontSize }} />
-                    ) : el.variation_name == "e-book" ? (
-                      <AutoStoriesIcon sx={{ fontSize }} />
-                    ) : el.variation_name == "audio" ? (
-                      <AudioFileIcon sx={{ fontSize }} />
-                    ) : (
-                      ""
-                    )
-                  }
+                  onChange={()=>handleChange(el)}
+                  label={labels(el?.variation_name)}
                   sx={{ display: "flex", flexDirection: "column-reverse" }}
                   title="Hard Cover"
                 />
@@ -109,14 +149,32 @@ export default function CartDialog() {
           })}
         </RadioGroup>
         <Button
-          disabled={!type}
           type="submit"
           sx={{ border: "solid 2px" }}
           onClick={addToCartFN}
-        >
-          Add To Cart{" "}
-        </Button>
+          endIcon={
+            isLoading ? (
+              <i className="fas fa-spinner fa-spin"></i>
+            ) : (
+              "add to cart"
+            )
+          }
+          disabled={isLoading || !type}
+        ></Button>
       </FormControl>
+      <ToastContainer
+        position="bottom-left"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        closeButton={false}
+        draggable
+        pauseOnHover={false}
+        theme="light"
+      />
     </Box>
   );
 }
