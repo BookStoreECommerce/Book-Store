@@ -2,12 +2,14 @@
 
 import { useState } from "react";
 import { TextField, Button } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addCoupon, removeCoupon } from "../../Redux/Slicies/cartAction";
 import styles from "./Coupon.module.css"
 
 export default function RedeemCoupon({ code }) {
   const dispatch = useDispatch();
+  const cart = useSelector(({cart}) => cart);
+  console.log(cart);
   const [couponCode, setCouponCode] = useState(code || "");
   const [couponError, setCouponError] = useState(null);
 
@@ -29,9 +31,6 @@ export default function RedeemCoupon({ code }) {
 
   return (
     <div>
-      {/* <Typography variant="h6" component="h6">
-        Redeem Coupon
-      </Typography> */}
       <form onSubmit={handleSubmit} className={`${styles['coupon-form']} input-group d-flex`}>
         <TextField
           id="coupon-code"

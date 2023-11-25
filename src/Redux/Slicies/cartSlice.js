@@ -9,7 +9,6 @@ import {
   removeCoupon,
   createCart,
 } from "./cartAction";
-import { json } from "react-router-dom";
 const initialState = {
   books: [],
   localStorageCart: { books: [] },
@@ -220,40 +219,33 @@ const cartSlice = createSlice({
       state.msgError = action.payload.error;
     });
     builder.addCase(addCoupon.pending, (state, action) => {
-      // state.isLoading = true;
-      // state.loading["cart/patchData"] = true
+      state.isLoading = true;
+      state.msgError = "";
     });
     builder.addCase(addCoupon.fulfilled, (state, action) => {
-      // console.log(state);
       state.coupon_code = action.payload.cart.coupon_code;
       state.discount = action.payload.cart.discount;
       state.totalAmount = action.payload.cart.totalAmount;
       state.totalAmountAfterDisc = action.payload.cart.totalAmountAfterDisc;
-      // state.isLoading = false;
-      // state.msgError = action.payload.error
+      state.isLoading = false;
     });
     builder.addCase(addCoupon.rejected, (state, action) => {
-      // console.log(action.payload.error);
-      // throw json()
       state.isLoading = false
       state.msgError = action.payload.error
     });
     builder.addCase(removeCoupon.pending, (state, action) => {
-      // state.isLoading = true;
-      // state.loading["cart/patchData"] = true
+      state.isLoading = true;
+      state.msgError = "";
     });
     builder.addCase(removeCoupon.fulfilled, (state, action) => {
-      // console.log(action);
       state.coupon_code = "";
       state.discount = 0;
       state.totalAmountAfterDisc = action.payload.cart.totalAmount;
-      // state.isLoading = false;
-      // state.msgError = action.payload.error
+      state.isLoading = false;
     });
     builder.addCase(removeCoupon.rejected, (state, action) => {
-      // console.log(action);
-      // state.isLoading = false
-      // state.msgError = action.payload.error
+      state.isLoading = false
+      state.msgError = action.payload.error
     });
 
     // delete CartItem with token
