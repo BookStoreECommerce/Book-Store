@@ -6,6 +6,7 @@ import * as Yup from "yup";
 
 import { TextField, Button } from "@mui/material";
 import classes from "./UserCheckoutDetails.module.css";
+import { addOrder } from "../../Redux/Slicies/checkoutActions";
 
 const UserCheckoutDetails = () => {
   const { isLoading, msgError, user } = useSelector(({ auth }) => auth);
@@ -19,9 +20,9 @@ const UserCheckoutDetails = () => {
         /^[a-zA-Z]{3,8}([_ -]?[a-zA-Z0-9]{3,8})*$/,
         "Each name must contain at least 3 letters (a-z)"
       ),
-    phone: Yup.string().required("Phone is required").matches(
-        /^[0-9]*$/, "Phone number is valid."
-      ),
+    phone: Yup.string()
+      .required("Phone is required")
+      .matches(/^[0-9]*$/, "Phone number is valid."),
     country: Yup.string().required("Country is required"),
     city: Yup.string().required("City is required"),
     address: Yup.string().required("Address is required"),
@@ -36,12 +37,11 @@ const UserCheckoutDetails = () => {
         const { address, city, country, phone, userName, paymentMethod } =
           values;
         const checkoutDetails = {
-          shippingaddress: { address, city, country, phone },
+          shippingAdress: { address, city, country, phone },
           name: userName,
           paymentMethod,
         };
-        console.log(checkoutDetails);
-        //   dispatch(userProfile(values))
+        dispatch(addOrder(checkoutDetails));
       }}
     >
       {({

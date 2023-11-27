@@ -166,6 +166,7 @@ const cartSlice = createSlice({
     builder.addCase(getCart.fulfilled, (state, action) => {
       state.isLoading = false;
       if (action.payload.cart.books) {
+        state.coupon_code = action.payload.cart.coupon_code;
         state.books = action.payload.cart.books;
         state.localStorageCart.books = action.payload.cart.books;
       }

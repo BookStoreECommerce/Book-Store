@@ -1,14 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../axios/axios-instance";
 import { updateFromCheckout } from "./cartSlice";
-import { updateCheckout } from "./checkoutSlice";
 
 export const addCoupon = createAsyncThunk(
   "cart/addCoupon",
   async (code, { rejectWithValue, dispatch }) => {
     try {
-      // dispatch(updateCheckout({nm: 'nm'}))
-
       const { data } = await axiosInstance.patch("cart/coupon", { code });
       dispatch(
         updateFromCheckout({
@@ -41,3 +38,15 @@ export const removeCoupon = createAsyncThunk(
     }
   }
 );
+
+export const addOrder = createAsyncThunk(
+    "checkout/addOrder",
+    async (orderDetails, { rejectWithValue }) => {
+      try {
+          const { data } = await axiosInstance.post("order", { ...orderDetails });
+        return data;
+      } catch (error) {
+        return rejectWithValue(error.response.data);
+      }
+    }
+  );
