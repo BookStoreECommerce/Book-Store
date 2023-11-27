@@ -241,16 +241,7 @@ function NavBar({ navRef }) {
                     Contact
                   </NavLink>
                 </li>
-                <li className={`nav-item me-2 ${styles.navItem}`}>
-                <NavLink
-                  className={({ isActive }) =>
-                    isActive ? linkStyle + styles.itemActive : linkStyle
-                  }
-                  to="orders"
-                >
-                  Orders
-                </NavLink>
-              </li>
+              
               </ul>
 
               {user !== null && token !== null ? (

@@ -40,7 +40,7 @@ export default function PrevOrders() {
         className={styles.flex}
       >
         <div className={styles.badge}>
-          <span className={styles.slug}>Shopping Cart</span>
+          <span className={styles.slug}>Orders</span>
           <div className={styles.content}>
             <Link to="/">
               {" "}
@@ -82,10 +82,10 @@ export default function PrevOrders() {
                         {ordersArray?.map((order, index) =>
 
 
-                          <div className={` col-lg-11 col-md-8 col-sm-10 col-10`} key={index} >
+                          <div className={` col-lg-12 col-md-12 col-sm-12 col-12`} key={index} >
                             <div className={`${styles.orderCard} mb-3`}>
                               <div className={`${styles.cardHeader}`}>
-                                <p className={`${styles.orderNum} `}>Order #</p>
+                                <p className={`${styles.orderNum} `}>Order # {order._id}</p>
                                 <p className={`${styles.orderDate} `}>26-11-2023</p>
                               </div>
                               <div className={`${styles.cardBody}`}>
@@ -93,7 +93,9 @@ export default function PrevOrders() {
                                 <>
                                 <div className={`${styles.orderBook} mb-0`} key={id}>
                                  <div className={`${styles.bookRow}`}>
-                                 
+                                  <div className={`col-4`}>
+                                  
+                                  
                                   <div className={`${styles.bookInfo}`}>
                                   <div className={`${styles.bookImgContainer}`}>
                                   <img src={orderBook.book.image.secure_url} alt="book img" />
@@ -104,7 +106,7 @@ export default function PrevOrders() {
                                   </div>
                                   
                                   </div>
-
+                                  </div>
                                  </div>
                                 </div>
     
@@ -114,7 +116,7 @@ export default function PrevOrders() {
                               </div>
                               <div className={`${styles.cardFooter}`}>
                               <p className={`${styles.orderStatus} `}>Status</p>
-                              <p className={`${styles.orderTotal} `}>Total</p>
+                              <p className={`${styles.orderTotal} `}>Total: {order.totalAmountAfterDisc}</p>
                               </div>
                               
 

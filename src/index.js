@@ -90,6 +90,15 @@ const router = createBrowserRouter([
               return { Component: Settings };
             },
           },
+          {
+            path: "orders",
+            async lazy() {
+              const { default: Orders } = await import(
+                "./Components/UserInfoComponents/Orders/Orders.jsx"
+              );
+              return { Component: Orders };
+            },
+          },
         ],
       },
       {
