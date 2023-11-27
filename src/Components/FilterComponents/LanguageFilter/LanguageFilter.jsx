@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from "./LanguageFilter.module.css";
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -24,7 +23,7 @@ const LanguageFilter = () => {
   return (
     <div>
       <h6>Language</h6>
-      <FormGroup className={`${styles.wFitContent}`}>
+      <FormGroup className="wFitContent">
         {values.map((ele, index) => <FormControlLabel key={index} control={<Checkbox name="language" checked={filterCheckBtns[values[index]] || false} value={values[index]} onChange={handleChange}/>} label={values[index]} />)}
       </FormGroup>
       <hr />

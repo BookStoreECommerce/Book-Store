@@ -72,7 +72,7 @@ const cartSlice = createSlice({
     },
     getCartWithoutToken: (state) => {
       state.isLoading = false;
-      if (localStorage.getItem("cartDetails")) {
+      if (localStorage.getItem("cartDetails")){
         state.localStorageCart.books = getCartFromLocalStorage().books;
       }
     },

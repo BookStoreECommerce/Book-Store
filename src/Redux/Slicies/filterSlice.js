@@ -3,10 +3,12 @@ import { booksFilter, getAllAuthors } from "./filterActions";
 
 const initialState = {
     allAuthors: [],
-    filterObj: {language: [], price: [], category: [], author: [], published: [], format: []},
+    sort: '',
+    filterObj: {language: [], price: [], category: [], author: [], published: [], format: [], rate: [], stock: []},
     filter: '',
     filterLoading: false,
     filterCheckBtns: {},
+    filterRadioBtns: {},
     msgError: null,
 }
 
@@ -14,6 +16,9 @@ const booksFilterSlice = createSlice({
     name: "booksFilter",
     initialState,
     reducers: {
+        setSort: (state, {payload}) => {
+            state.sort = payload;
+        },
         handleFilterCheck: (state, {payload}) => {
             if(state.filterCheckBtns.hasOwnProperty(payload)){
                 state.filterCheckBtns[payload] = !state.filterCheckBtns[payload];
@@ -21,17 +26,25 @@ const booksFilterSlice = createSlice({
                 state.filterCheckBtns[payload] = true;
             }
         },
+        handleFilterRadio: (state, {payload}) => {
+            if(state.filterRadioBtns.hasOwnProperty(payload)){
+                state.filterRadioBtns[payload] = !state.filterRadioBtns[payload];
+            } else {
+                state.filterRadioBtns = {};
+                state.filterRadioBtns[payload] = true;
+            }
+        },
         setFilter: (state, {payload}) => {
             state.filter = payload;
         },
         setFilterObj: (state, {payload}) => {
             if (payload.method === 'add') {
-                if(payload.name === 'price') {
-                    state.filterObj.price = [payload.value];
+                if(payload.name === 'price' || payload.name === 'format' || payload.name === 'rate') {
+                    state.filterObj[payload.name] = [payload.value];
                 } 
                 else if(payload.name === 'category'){
-                    if (state.filterObj.category.filter((ele) => ele.name === payload.value.name).length === 0) {
-                        state.filterObj.category.push(payload.value);
+                    if (state.filterObj[payload.name].filter((ele) => ele.name === payload.value.name).length === 0) {
+                        state.filterObj[payload.name].push(payload.value);
                     }
                 }
                 else {
@@ -50,7 +63,8 @@ const booksFilterSlice = createSlice({
         clearFilterObj: (state, {payload}) => {
             state.filter = '';
             state.filterCheckBtns = {}
-            state.filterObj = {language: [], price: [], category: [], author: [], published: [], format: []};
+            state.filterRadioBtns = {}
+            state.filterObj = {language: [], price: [], category: [], author: [], published: [], format: [], rate: [], stock: []};
         },
     },
     extraReducers: builder => {
@@ -81,4 +95,4 @@ const booksFilterSlice = createSlice({
 })
 
 export const booksFilterReducer = booksFilterSlice.reducer;
-export const { setFilterObj, setFilter, handleFilterCheck, clearFilterObj } = booksFilterSlice.actions;
+export const { setFilterObj, setFilter, handleFilterCheck, handleFilterRadio, clearFilterObj, setSort } = booksFilterSlice.actions;

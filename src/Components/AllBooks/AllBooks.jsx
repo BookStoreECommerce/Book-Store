@@ -10,9 +10,14 @@ import { baseUrl } from "../../util/util";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Loading from "../ReusableComponents/Loading/Loading";
-import { handleFilterCheck, setFilterObj } from "../../Redux/Slicies/filterSlice";
+import {
+  handleFilterCheck,
+  handleFilterRadio,
+  setFilterObj,
+} from "../../Redux/Slicies/filterSlice";
 import { booksFilter } from "../../Redux/Slicies/filterActions";
 import { setBooksPageNumber } from "../../Redux/Slicies/bookSlice";
+import Sort from "../SortComponents/Sort";
 function AllBook({ sectionName }) {
   useEffect(() => {
     AOS.init();
@@ -21,14 +26,15 @@ function AllBook({ sectionName }) {
 
   const [searchWord, setSearchWord] = useState("");
   const [numOfPages, setNumOfPages] = useState(0);
-  const { isLoading, books, totalCount, pageNumber } = useSelector((state) => state.books);
-  const { filterObj, filter, filterLoading } = useSelector(
+  const { isLoading, books, totalCount, pageNumber } = useSelector(
+    (state) => state.books
+  );
+  const { filterCheckBtns, filterObj, filter, filterLoading } = useSelector(
     (state) => state.booksFilter
   );
   const nBookPerPage = 12;
   const dispatch = useDispatch();
   // const [pageNumber, setPageNumber] = useState(1);
-
   const handlePageChange = (e, pageNumber) => {
     // setPageNumber(pageNumber);
     dispatch(setBooksPageNumber(pageNumber));
@@ -37,13 +43,22 @@ function AllBook({ sectionName }) {
   const deleteFilter = (e) => {
     const name = e.target.getAttribute("name");
     let value;
-    if (name === 'category') {
+    if (name === "category") {
       value = JSON.parse(e.target.getAttribute("value"));
     } else {
       value = e.target.getAttribute("value");
     }
-    if (name === 'language' || name === 'published') {
+    if (name === "language" || name === "published" || name === "stock") {
       dispatch(handleFilterCheck(value));
+    }
+    if (name === "format") {
+      dispatch(handleFilterRadio(value));
+      if (value === "hardcover" && filterCheckBtns["stock"] === true) {
+        dispatch(handleFilterCheck("stock"));
+        dispatch(
+          setFilterObj({ method: "delete", name: "stock", value: "stock" })
+        );
+      }
     }
     handlePageChange(e, 1);
     dispatch(setFilterObj({ method: "delete", name, value }));
@@ -62,7 +77,7 @@ function AllBook({ sectionName }) {
 
   // get filtered books
   function getFilteredBooks(filter) {
-    setSearchWord("")
+    setSearchWord("");
     dispatch(booksFilter({ pageNumber, filter }));
   }
 
@@ -72,7 +87,7 @@ function AllBook({ sectionName }) {
     if (searchWord === "" && !show.includes(true)) {
       getBooks();
     } else if (show.includes(true)) {
-      getFilteredBooks(filter)
+      getFilteredBooks(filter);
     } else {
       getBooksBySearch(searchWord);
     }
@@ -83,7 +98,6 @@ function AllBook({ sectionName }) {
   }, [totalCount]);
 
   const url = `${baseUrl}book/?keyword=searchValue`;
-
 
   return (
     <>
@@ -100,18 +114,29 @@ function AllBook({ sectionName }) {
         />
       </div>
 
+      <div className="d-flex align-items-center justify-content-end gap-2 mt-3">
+        <span>Sort By:</span>
+        <Sort />
+      </div>
+
       {show.includes(true) && (
         <div
-          className={`d-flex flex-wrap gap-2 w-100 px-3 py-4 mt-4 ${styles.filterWrapper}`}
+          className={`d-flex flex-wrap gap-2 w-100 px-3 py-3 mt-4 ${styles.filterWrapper}`}
         >
-          {Object.keys(filterObj).map((key, index) => (
+          {Object.keys(filterObj).map((key, index) =>
             filterObj[key].map((ele, index) => (
               <div key={index} className={`p-2 rounded ${styles.filter}`}>
                 {key}:&nbsp;
-                {(key === 'category') ? ele.name : ((ele === "0-2000") ? 'Before 2000' : ele)}
+                {key === "category"
+                  ? ele.name
+                  : ele === "0-2000"
+                  ? "Before 2000"
+                  : ele === "stock"
+                  ? "Hardcover Available"
+                  : ele}
                 <i
                   className={`fa-regular fa-circle-xmark ms-2 ${styles.xmarkPointer}`}
-                  value={(key === 'category') ? JSON.stringify(ele) : ele}
+                  value={key === "category" ? JSON.stringify(ele) : ele}
                   name={key}
                   onClick={(e) => {
                     deleteFilter(e);
@@ -119,11 +144,11 @@ function AllBook({ sectionName }) {
                 ></i>
               </div>
             ))
-          ))}
+          )}
         </div>
       )}
 
-      {(isLoading || filterLoading) ? (
+      {isLoading || filterLoading ? (
         <Loading sectionName="AllBooks" />
       ) : (
         <div className="row justify-content-center align-items-center">

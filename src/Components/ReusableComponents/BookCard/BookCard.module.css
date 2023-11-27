@@ -395,3 +395,13 @@
     }
     
 }
+
+.outOfStock {
+    background-color: gray;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 7px;
+    border-top-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+}

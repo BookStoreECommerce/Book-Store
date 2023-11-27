@@ -7,7 +7,9 @@ import CategoriesFilter from "../CategoriesFilter/CategoriesFilter";
 import PriceFilter from "../PriceFilter/PriceFilter";
 import AuthorFilter from "../AuthorFilter/AuthorFilter";
 import PublicationDateFilter from "../PublicationDateFilter/PublicationDateFilter";
-// import FormatFilter from "../FormatFilter/FormatFilter";
+import FormatFilter from "../FormatFilter/FormatFilter";
+import RateFilter from "../RateFilter/RateFilter";
+import StockFilter from "../StockFilter/StockFilter";
 import { clearFilterObj, setFilter } from "../../../Redux/Slicies/filterSlice";
 import { setBooksPageNumber } from "../../../Redux/Slicies/bookSlice";
 import CloseIcon from "@mui/icons-material/Close";
@@ -20,7 +22,7 @@ const Transition = forwardRef(function Transition(props, ref) {
 const FilterPanel = () => {
   const dispatch = useDispatch();
   const { pageNumber } = useSelector((state) => state.books);
-  const { language, price, category, author, published, format } = useSelector(
+  const { language, price, category, author, published, format, rate, stock } = useSelector(
     (state) => state.booksFilter.filterObj
   );
   const { filter } = useSelector(
@@ -53,7 +55,9 @@ const FilterPanel = () => {
       categoriesFilter = "",
       authorsFilter = "",
       publicationFilter = "",
-      formatFilter = "";
+      formatFilter = "",
+      rateFilter = "",
+      stockFilter = "";
 
     // language
     if (language.length !== 0) {
@@ -100,15 +104,26 @@ const FilterPanel = () => {
     // format
     if (format.length !== 0) {
       format.forEach((ele) => {
-        formatFilter += `&format=${ele}`;
+        formatFilter = `&format=${ele}`;
       });
     }
+    // rate
+    if (rate.length !== 0) {
+      rate.forEach((ele) => {
+        rateFilter = `&rate=${ele}`;
+      });
+    }
+    // stock
+    if (stock.length !== 0) {
+      stockFilter = `&stock=true`;
+    }
 
-    let filter = `${languagesFilter}${pricesFilter}${categoriesFilter}${authorsFilter}${publicationFilter}${formatFilter}`;
+
+    let filter = `${languagesFilter}${pricesFilter}${categoriesFilter}${authorsFilter}${publicationFilter}${formatFilter}${rateFilter}${stockFilter}`;
     dispatch(setFilter(filter));
     dispatch(setBooksPageNumber(1));
     dispatch(booksFilter({ pageNumber, filter }));
-  }, [language, price, category, author, published, format, dispatch]);
+  }, [language, price, category, author, published, format, rate, stock, dispatch]);
 
   return (
     <>
@@ -123,7 +138,9 @@ const FilterPanel = () => {
             <PriceFilter />
             <LanguageFilter />
             <PublicationDateFilter />
-            {/* <FormatFilter/> */}
+            <RateFilter/>
+            <FormatFilter/>
+            <StockFilter/>
           </div>
         </nav>
       ) : (
@@ -166,6 +183,9 @@ const FilterPanel = () => {
               <PriceFilter />
               <LanguageFilter />
               <PublicationDateFilter />
+              <RateFilter/>
+              <FormatFilter/>
+              <StockFilter/>
             </DialogContent>
 
             <DialogActions>
