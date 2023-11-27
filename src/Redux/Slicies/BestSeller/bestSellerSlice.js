@@ -7,7 +7,7 @@ const initialState = { bestSeller: [] };
 export const getBestSellerData = createAsyncThunk(
   "get/bestSeller",
   async (_, { rejectWithValue }) => {
-    return axiosInstance("book?sort=sold&page=1")
+    return axiosInstance("book?sort=-sold&page=1")
       .then(({ data }) => data.result)
       .catch(({ response }) => rejectWithValue(response));
   }
