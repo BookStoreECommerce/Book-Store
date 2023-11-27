@@ -128,7 +128,7 @@ color: var(--navyBlue)!important;
 }
 
 .Toastify__toast-theme--colored.Toastify__toast--default {
-  background: #188351 !important;
+  background: rgb(163, 125, 125) !important;
   /* background: #8dcd8d !important; */
   color :#fff !important;
 }

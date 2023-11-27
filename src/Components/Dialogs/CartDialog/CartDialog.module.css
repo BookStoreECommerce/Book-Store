@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Jost&family=PT+Serif:wght@700&display=swap');
+
+.contentPadding{
+    padding-top: 40px!important;
+}
+.buy{
+   
+    font-size: 21px!important;
+    font-weight: 700!important;
+    color: var(--mainColor);  
+    font-family: 'Libre Baskerville', serif;
+    font-family: 'Jost', sans-serif;
+
+
+}
+.title{
+    padding-bottom: 30px;
+    font-size: 21px!important;
+    font-weight: 700!important;
+    color: var(--navyBlue);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Libre Baskerville', serif;
+    font-family: 'Jost', sans-serif;
+
+
+
+}
+.formControl{
+    margin: 0!important;
+    
+    color: var(--navyBlue);
+}
+.btn{
+    margin-top: 40px!important;
+    width: fit-content!important;
+    margin-left: auto!important;
+    display: flex!important;
+
+}
+.btn span{
+    margin: 0!important;
+}
+.color{
+    color: var(--mainColor)!important;
+    font-weight: bold!important;
+}
+
+.color3{
+    color: var(--navyBlue);
+}
+.color2{
+    padding-bottom: 20px!important;
+    color: var(--navyBlue)!important;
+    font-weight: bold!important;
+}
+@media screen and (max-width:700px) {
+    
+.title{
+    font-size: 18px!important;
+}
+.buy{
+    font-size: 18px!important;
+}
+}
