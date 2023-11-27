@@ -100,7 +100,7 @@ export default function AddToCartFromProfile({ book }) {
             sx={{
               borderRadius: 5,
               backgroundColor:
-                el?.variation_name === buyBook?.variation_name ? "red" : "",
+                el?.variation_name === buyBook?.variation_name ? "#2b3a55" : "",
               opacity: 1,
             }}
           >
