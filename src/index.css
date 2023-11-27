@@ -8,7 +8,7 @@ box-sizing: border-box;
 }
 
 :root {
-  --navyBlue: rgb(43, 58, 85);
+  --navyBlue: #2b3a55;
   --white: #ffffff;
   --mainColor: rgb(206, 119, 119);
   --secondaryColor: rgb(232, 196, 196);
@@ -128,7 +128,7 @@ color: var(--navyBlue)!important;
 }
 
 .Toastify__toast-theme--colored.Toastify__toast--default {
-  background: #188351 !important;
+  background: rgb(163, 125, 125) !important;
   /* background: #8dcd8d !important; */
   color :#fff !important;
 }

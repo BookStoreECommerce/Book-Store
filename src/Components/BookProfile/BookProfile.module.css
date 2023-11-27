@@ -126,6 +126,9 @@
     display: flex;
     justify-content: flex-start;
 }
+.addToCartBtn{
+    margin-top: 20px;
+}
 /* .addToCartBtn{
     border: 1px solid var(--mainColor);
     border-radius: 5px;
