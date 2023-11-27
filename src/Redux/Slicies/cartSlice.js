@@ -159,7 +159,6 @@ const cartSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(getCart.fulfilled, (state, action) => {
-      console.log(action.payload);
       state.isLoading = false;
       if (action.payload.cart.books) {
         state.books = action.payload.cart.books;
