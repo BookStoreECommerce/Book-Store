@@ -10,6 +10,7 @@ import {whishListReducer } from "./Slicies/whishlistSlice";
 import { reviewReducer } from "./Slicies/reviewsSlice";
 import { booksFilterReducer } from "./Slicies/filterSlice";
 import { cartReducer } from "./Slicies/cartSlice";
+import { checkoutReducer } from "./Slicies/checkoutSlice.js";
 
 const store = configureStore({
     reducer: {
@@ -27,6 +28,7 @@ const store = configureStore({
         review:reviewReducer,
         booksFilter: booksFilterReducer,
         cart: cartReducer,
+        checkout: checkoutReducer,
     }
 })
 

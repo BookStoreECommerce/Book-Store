@@ -1,58 +1,42 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addCoupon, removeCoupon } from "./checkoutAction";
+import { addCoupon, removeCoupon } from "./checkoutActions";
 
 const initialState = {
-  isLoading: false,
-  msgError: null,
+  isCouponLoading: false,
+  couponErrorMsg: null,
 };
 
-
 const checkoutSlice = createSlice({
-  name: "books",
+  name: "checkout",
   initialState,
   extraReducers: (builder) => {
-    builder.addCase(addCoupon.pending, (state, action) => {
-      state.isLoading = true;
-      state.msgError = "";
-    });
-    builder.addCase(addCoupon.fulfilled, (state, action) => {
-      state.coupon_code = action.payload.cart.coupon_code;
-      state.discount = action.payload.cart.discount;
-      state.totalAmount = action.payload.cart.totalAmount;
-      state.totalAmountAfterDisc = action.payload.cart.totalAmountAfterDisc;
-      state.isLoading = false;
-    });
-    builder.addCase(addCoupon.rejected, (state, action) => {
-      state.isLoading = false
-      state.msgError = action.payload.error
-    });
-    builder.addCase(removeCoupon.pending, (state, action) => {
-      state.isLoading = true;
-      state.msgError = "";
-    });
-    builder.addCase(removeCoupon.fulfilled, (state, action) => {
-      state.coupon_code = "";
-      state.discount = 0;
-      state.totalAmountAfterDisc = action.payload.cart.totalAmount;
-      state.isLoading = false;
-    });
-    builder.addCase(removeCoupon.rejected, (state, action) => {
-      state.isLoading = false
-      state.msgError = action.payload.error
-    });
+    builder
+      .addCase(addCoupon.pending, (state, action) => {
+        state.isCouponLoading = true;
+        state.couponErrorMsg = "";
+      })
+      .addCase(addCoupon.fulfilled, (state, action) => {
+        state.isCouponLoading = false;
+      })
+      .addCase(addCoupon.rejected, (state, action) => {
+        state.isCouponLoading = false;
+        state.couponErrorMsg = action.payload.error;
+      });
+
+
+    builder
+      .addCase(removeCoupon.pending, (state, action) => {
+        state.isCouponLoading = true;
+        state.couponErrorMsg = "";
+      })
+      .addCase(removeCoupon.fulfilled, (state, action) => {
+        state.isCouponLoading = false;
+      })
+      .addCase(removeCoupon.rejected, (state, action) => {
+        state.isCouponLoading = false;
+        state.couponErrorMsg = action.payload.error;
+      });
   },
 });
 
 export const checkoutReducer = checkoutSlice.reducer;
-export const {
-  clearLocalStorageCArt,
-  setCartInLocalStorage,
-  getCartWithoutToken,
-  addToCart,
-  increaseCartQty,
-  decreaseCartQty,
-  deletFromCart,
-  addBookForBuy,
-  calcPrice,
-} = checkoutSlice.actions;
-// export const getCart = checkoutSlice.actions.getCart;

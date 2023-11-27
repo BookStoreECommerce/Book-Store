@@ -78,23 +78,3 @@ export const createCart = createAsyncThunk(
       .catch(({ response }) => rejectWithValue(response.data));
   }
 );
-
-
-
-//ElAgouz
-export const addCoupon = createAsyncThunk("cart/addCoupon", async (code, { rejectWithValue }) => {
-    try {
-        const { data } = await axiosInstance.patch('cart/coupon', {code});
-        return data;
-    } catch (error) {
-        return rejectWithValue(error.response.data)
-    }
-});
-export const removeCoupon = createAsyncThunk("cart/removeCoupon", async (code, { rejectWithValue }) => {
-    try {
-        const { data } = await axiosInstance.delete(`cart/coupon/${code}`);
-        return data;
-    } catch (error) {
-        return rejectWithValue(error.response.data)
-    }
-});

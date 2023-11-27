@@ -1,56 +1,3 @@
-// import { Card, CardContent, Container } from "@mui/material";
-// import { useCallback, useEffect, useState } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-
-// import styles from "./Checkout.module.css";
-
-// import CartSummary from "../../Components/Checkout/CartSummary";
-// import Coupon from "../../Components/Checkout/Coupon";
-// import Loading from "./../../Components/ReusableComponents/Loading/Loading";
-// import { getCart } from "../../Redux/Slicies/cartAction";
-// import { baseUrl } from "../../util/util";
-// import axiosInstance from "../../axios/axios-instance";
-// import CheckoutError from "../../Components/Checkout/CheckoutError";
-// import UserCheckoutDetails from "../../Components/Checkout/UserCheckoutDetails";
-
-// const Checkout = () => {
-//   const dispatch = useDispatch();
-//   const { user } = useSelector((state) => state.auth);
-//   const cart = useSelector((state) => state.cart);
-
-//   console.log("cart: ", cart);
-//   // console.log("user: ", user);
-
-//   return !user ? (
-//     <CheckoutError majorText="401" minorText="Unauthorized" />
-//   ) : cart.isLoading ? (
-//     <Loading />
-//   ) : !cart ? (
-//     <CheckoutError
-//       majorText="Empty Cart"
-//       minorText="Add some books to your cart first"
-//     />
-//   ) : (
-//     <div className={styles["checkout-main-container"]}>
-//       <div className={styles["checkout-container"]}>
-//         <Container className={styles["sidebar"]}>
-//           <Card>
-//             <CardContent className="d-grid gap-5">
-//               <CartSummary cart={cart} />
-//               <Coupon code={cart.coupon_code} />
-//             </CardContent>
-//           </Card>
-//         </Container>
-//         <Container className={styles["checkout-content"]}>
-//           <UserCheckoutDetails />
-//         </Container>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Checkout;
-
 import {
   Container,
   Accordion,
@@ -58,18 +5,14 @@ import {
   AccordionSummary,
   Typography,
 } from "@mui/material";
-// import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import styles from "./Checkout.module.css";
 
 import CartSummary from "../../Components/Checkout/CartSummary";
 import Coupon from "../../Components/Checkout/Coupon";
 import Loading from "./../../Components/ReusableComponents/Loading/Loading";
-import { getCart } from "../../Redux/Slicies/cartAction";
-import { baseUrl } from "../../util/util";
-import axiosInstance from "../../axios/axios-instance";
 import CheckoutError from "../../Components/Checkout/CheckoutError";
 import UserCheckoutDetails from "../../Components/Checkout/UserCheckoutDetails";
 import {
@@ -78,7 +21,6 @@ import {
 } from "@mui/icons-material";
 
 const Checkout = () => {
-  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const cart = useSelector((state) => state.cart);
   const hasDiscount = cart.totalAmount !== cart.totalAmountAfterDisc;
@@ -116,29 +58,28 @@ const Checkout = () => {
           className={styles["accordion-summary"]}
         >
           <Typography
-            sx={{ display: "flex", alignItems: "center", gap: "10px" }}
+            sx={{ display: "flex", alignItems: "center", gap: "10px", fontSize: '1.25rem' }}
           >
             <ShoppingCartOutlinedIcon />
-            <Typography variant={"h6"} sx={{ display: "inline-block" }}>
-              Cart
-            </Typography>
+            Cart
           </Typography>
           <div
             className={styles["total-container"]}
           >
-            <Typography variant={"h6"} sx={{ paddingInlineEnd: "10px", display: "inline-block" }}>
+            <Typography sx={{ paddingInlineEnd: "10px", fontSize: '1.25rem' }}>
               Total:{" "}
             </Typography>
-            <Typography variant={hasDiscount ? "" : "h6"}
+            <Typography
               sx={{
                 paddingInlineEnd: "10px",
                 color: hasDiscount ? "text.secondary" : "",
                 textDecoration: hasDiscount ? "line-through" : "",
+                fontSize: hasDiscount? "1rem": '1.25rem',
               }}
             >
               ${cart.totalAmount}
             </Typography>
-            {hasDiscount && <Typography variant={"h6"}>${cart.totalAmountAfterDisc}</Typography>}
+            {hasDiscount && <Typography sx={{ fontSize: '1.25rem' }}>${cart.totalAmountAfterDisc}</Typography>}
           </div>
         </AccordionSummary>
         <AccordionDetails>

@@ -1,53 +1,53 @@
-
-
 import { useState } from "react";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, CircularProgress } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { addCoupon, removeCoupon } from "../../Redux/Slicies/cartAction";
-import styles from "./Coupon.module.css"
+import { addCoupon, removeCoupon } from "../../Redux/Slicies/checkoutActions";
+import styles from "./Coupon.module.css";
 
 export default function RedeemCoupon({ code }) {
   const dispatch = useDispatch();
-  const cart = useSelector(({cart}) => cart);
-  console.log(cart);
+  const checkout = useSelector(({ checkout }) => checkout);
   const [couponCode, setCouponCode] = useState(code || "");
-  const [couponError, setCouponError] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!couponCode.length) return;
-    setCouponError(null);
-    if (code) {
-      await dispatch(removeCoupon(couponCode)) && setCouponCode("");
-    } else {
-      const response = await dispatch(addCoupon(couponCode));
-      if (response.payload.message.toLowerCase() === "error") {
-        setCouponError(response.payload.error);
-      }
-    }
+    !code
+      ? dispatch(addCoupon(couponCode))
+      : (await dispatch(removeCoupon(couponCode))) && setCouponCode("");
   };
 
-  const handleInputChange = (event) => setCouponCode(event.target.value);
+  const handleInputChange = (e) => setCouponCode(e.target.value);
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className={`${styles['coupon-form']} input-group d-flex`}>
+      <form
+        onSubmit={handleSubmit}
+        className={`${styles["coupon-form"]} input-group d-flex`}
+      >
         <TextField
           id="coupon-code"
           label="Coupon Code"
-          helperText={couponError && couponError}
+          helperText={checkout.couponErrorMsg && checkout.couponErrorMsg}
           variant="outlined"
           className="form-control"
-          disabled={code !== ""}
+          disabled={code !== "" || checkout.isCouponLoading}
           value={couponCode}
           onChange={handleInputChange}
         />
         <Button
           type="submit"
           variant="contained"
-          color={code ? "error" : "primary"}
+          disabled={!couponCode || checkout.isCouponLoading}
+          sx={{color: code ? "error" : "primary", width: "6rem"}}
+          
         >
-          {code ? "Remove" : "Redeem"}
+          {checkout.isCouponLoading ? (
+            <CircularProgress color="inherit" size={20} />
+          ) : code ? (
+            "Remove"
+          ) : (
+            "Redeem"
+          )}
         </Button>
       </form>
     </div>

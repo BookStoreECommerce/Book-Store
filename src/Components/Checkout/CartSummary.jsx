@@ -12,9 +12,6 @@ import {
 const CartSummary = ({ cart }) => {
   return (
     <div>
-      {/* <Typography variant="h6" component="h6">
-        Cart summary
-      </Typography> */}
       <TableContainer>
         <Table>
           <TableHead>
@@ -27,7 +24,7 @@ const CartSummary = ({ cart }) => {
           </TableHead>
           <TableBody>
             {cart.books.map((item) => (
-              <TableRow key={item._id}>
+              <TableRow key={crypto.randomUUID()}>
                 <TableCell>{item.book.name}</TableCell>
                 <TableCell align="center">{item.variation_name}</TableCell>
                 <TableCell align="center">{item.qty}</TableCell>

@@ -5,8 +5,6 @@ import {
   updateCart,
   clearCart,
   deleteCartItem,
-  addCoupon,
-  removeCoupon,
   createCart,
 } from "./cartAction";
 const initialState = {
@@ -154,6 +152,11 @@ const cartSlice = createSlice({
     addBookForBuy: (state, { payload }) => {
       state.buyBook = payload;
     },
+    updateFromCheckout: (state, { payload }) => {
+      state.coupon_code = payload.coupon_code;
+      state.discount = payload.discount;
+      state.totalAmountAfterDisc = payload.totalAmountAfterDisc;
+    },
   },
   extraReducers: (builder) => {
     // get cart with token
@@ -161,7 +164,6 @@ const cartSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(getCart.fulfilled, (state, action) => {
-      console.log(action.payload);
       state.isLoading = false;
       if (action.payload.cart.books) {
         state.books = action.payload.cart.books;
@@ -217,35 +219,6 @@ const cartSlice = createSlice({
     builder.addCase(updateCart.rejected, (state, action) => {
       state.isLoading = false;
       state.msgError = action.payload.error;
-    });
-    builder.addCase(addCoupon.pending, (state, action) => {
-      state.isLoading = true;
-      state.msgError = "";
-    });
-    builder.addCase(addCoupon.fulfilled, (state, action) => {
-      state.coupon_code = action.payload.cart.coupon_code;
-      state.discount = action.payload.cart.discount;
-      state.totalAmount = action.payload.cart.totalAmount;
-      state.totalAmountAfterDisc = action.payload.cart.totalAmountAfterDisc;
-      state.isLoading = false;
-    });
-    builder.addCase(addCoupon.rejected, (state, action) => {
-      state.isLoading = false
-      state.msgError = action.payload.error
-    });
-    builder.addCase(removeCoupon.pending, (state, action) => {
-      state.isLoading = true;
-      state.msgError = "";
-    });
-    builder.addCase(removeCoupon.fulfilled, (state, action) => {
-      state.coupon_code = "";
-      state.discount = 0;
-      state.totalAmountAfterDisc = action.payload.cart.totalAmount;
-      state.isLoading = false;
-    });
-    builder.addCase(removeCoupon.rejected, (state, action) => {
-      state.isLoading = false
-      state.msgError = action.payload.error
     });
 
     // delete CartItem with token
@@ -320,5 +293,6 @@ export const {
   deletFromCart,
   addBookForBuy,
   calcPrice,
+  updateFromCheckout,
 } = cartSlice.actions;
 // export const getCart = cartSlice.actions.getCart;
