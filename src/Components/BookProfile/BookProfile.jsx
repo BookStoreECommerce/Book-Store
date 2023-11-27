@@ -16,6 +16,7 @@ import Review from "../ReviewComponents/Review/Review";
 import Rating from "../ReusableComponents/Rating/Rating";
 import AddCart from "../Cart/AddCart";
 import AddReview from "../ReviewComponents/AddReview/AddReview";
+import AddToCartFromProfile from "./AddToCartFromProfile.jsx";
 
 export default function BookProfile() {
   const [showMore, setShowMore] = useState(false)
@@ -82,7 +83,8 @@ export default function BookProfile() {
                   </div>
                   <div className={styles.addToCartSection}>
                     <div className={styles.addToCartBtn}>
-                      <AddCart id={specBook?._id} book={specBook} />
+                      <AddToCartFromProfile book={specBook}/>
+                      {/* <AddCart id={specBook?._id} book={specBook} /> */}
                     </div>
                   </div>
                 </div>

@@ -14,6 +14,7 @@ import {
   getCartWithoutToken,
   increaseCartQty,
 } from "../../Redux/Slicies/cartSlice";
+import UpdataCart from "./UpdataCart.jsx";
 
 export default function Cart() {
   const dispatch = useDispatch();
@@ -147,42 +148,7 @@ export default function Cart() {
                                   {book.price} EGP
                                 </div>
                                 {book.variation_name === "hardcover" && (
-                                  <div className={styles.quantityWrapper}>
-                                    <div className={styles.quantityContent}>
-                                      <button
-                                        disabled={book.qty === 1}
-                                        onClick={() =>
-                                          dispatch(
-                                            decreaseCartQty(
-                                              book?.book._id,
-                                              index
-                                            )
-                                          )
-                                        }
-                                        className={`${styles.btn}  ${styles.decBtn}`}
-                                      >
-                                        -
-                                      </button>
-                                      <Input
-                                        type="number"
-                                        className={styles.quantityInput}
-                                        value={book.qty}
-                                      />
-                                      <button
-                                        onClick={() =>
-                                          dispatch(
-                                            increaseCartQty(
-                                              book?.book._id,
-                                              index
-                                            )
-                                          )
-                                        }
-                                        className={`${styles.btn}  ${styles.incBtn}`}
-                                      >
-                                        +
-                                      </button>
-                                    </div>
-                                  </div>
+                                  <UpdataCart book={book} index={index} />
                                 )}
                               </div>
                             </div>

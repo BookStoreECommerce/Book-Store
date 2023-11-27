@@ -207,17 +207,17 @@ const cartSlice = createSlice({
       state.loading["cart/patchData"] = true;
     });
     builder.addCase(updateCart.fulfilled, (state, action) => {
+      state.loading["cart/patchData"] = false;
       state.books = action.payload.cart.books;
       state.localStorageCart.books = action.payload.cart.books;
       state.discount = action.payload.cart.discount;
       state.totalAmount = action.payload.cart.totalAmount;
       state.totalAmountAfterDisc = action.payload.cart.totalAmountAfterDisc;
-      state.isLoading = false;
       state.msgError = action.payload.error;
       setCartFromLocalStorage(state.localStorageCart);
     });
     builder.addCase(updateCart.rejected, (state, action) => {
-      state.isLoading = false;
+      state.loading["cart/patchData"] = false;
       state.msgError = action.payload.error;
     });
 
