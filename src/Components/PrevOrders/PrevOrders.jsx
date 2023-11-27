@@ -22,7 +22,7 @@ export default function PrevOrders() {
   // console.log(booksArray);
 
   const getAllOrders = () => {
-   dispatch(getOrders(token));
+    dispatch(getOrders(token));
   };
   useEffect(() => {
     // console.log(token);
@@ -58,91 +58,112 @@ export default function PrevOrders() {
           ) : (
             <>
 
-            <div className="row justify-content-center align-items-center pb-2">
-            {ordersArray?.length >= 0 || pdfBooksArray?.length >=0 ? (
-              <>
-                
-              <ul className="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
-              <li className="nav-item" role="presentation">
-                <button className="nav-link active" id="pills-all-tab" data-bs-toggle="pill" data-bs-target="#pills-all"
-                  type="button" role="tab" aria-controls="pills-all" aria-selected="true">Books</button>
-              </li>
-              <li className="nav-item" role="presentation">
-                <button className="nav-link" id="pills-brand-tab" data-bs-toggle="pill" data-bs-target="#pills-brand"
-                  type="button" role="tab" aria-controls="pills-brand" aria-selected="false">PDF</button>
-              </li>
-        
+              <div className="row justify-content-center align-items-center pb-2">
+                {ordersArray?.length >= 0 || pdfBooksArray?.length >= 0 ? (
+                  <>
+
+                    <ul className={`nav nav-pills mb-3 ${styles.navTabs}`} id="pills-tab" role="tablist">
+                      <li className="nav-item" role="presentation">
+                        <button className={`nav-link active ${styles.links}`} id="pills-all-tab" data-bs-toggle="pill" data-bs-target="#pills-all"
+                          type="button" role="tab" aria-controls="pills-all" aria-selected="true">Books</button>
+                      </li>
+                      <li className="nav-item" role="presentation">
+                        <button className={`nav-link ${styles.links}`} id="pills-brand-tab" data-bs-toggle="pill" data-bs-target="#pills-brand"
+                          type="button" role="tab" aria-controls="pills-brand" aria-selected="false">PDF</button>
+                      </li>
+
+
+                    </ul>
+
+                    <div className="tab-content" id="pills-tabContent">
+                      <div className="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab"
+                        tabIndex="0">
+
+                        {ordersArray?.map((order, index) =>
+
+
+                          <div className={` col-lg-11 col-md-8 col-sm-10 col-10`} key={index} >
+                            <div className={`${styles.orderCard} mb-3`}>
+                              <div className={`${styles.cardHeader}`}>
+                                <p className={`${styles.orderNum} `}>Order #</p>
+                                <p className={`${styles.orderDate} `}>26-11-2023</p>
+                              </div>
+                              <div className={`${styles.cardBody}`}>
+                              {order.books?.map((orderBook, id) =>
+                                <>
+                                <div className={`${styles.orderBook} mb-0`} key={id}>
+                                 <div className={`${styles.bookRow}`}>
+                                 
+                                  <div className={`${styles.bookInfo}`}>
+                                  <div className={`${styles.bookImgContainer}`}>
+                                  <img src={orderBook.book.image.secure_url} alt="book img" />
+                                  </div>
+                                  <div className={`${styles.bookImgTitle}`}>
+                                <p key={id} className={`mb-0`}> {orderBook.book.name}</p>
+
+                                  </div>
+                                  
+                                  </div>
+
+                                 </div>
+                                </div>
     
-            </ul>
+                                </>
+    
+                              )}
+                              </div>
+                              <div className={`${styles.cardFooter}`}>
+                              <p className={`${styles.orderStatus} `}>Status</p>
+                              <p className={`${styles.orderTotal} `}>Total</p>
+                              </div>
+                              
 
-            <div className="tab-content" id="pills-tabContent">
-              <div className="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab"
-                tabIndex="0">
-               
-                {ordersArray?.map((order, index) => 
-                  
-                  <div className={` col-lg-7 col-md-8 col-sm-10 col-10`}
-                  key={index} >
-                  <div
-                    className={`row justify-content-between`}
-                  >
-                  {order.books?.map((orderBook,id)=>
-                    <>
-                    <p key={id}> {orderBook.book.name}</p>
-                    
-                    </>
-                 
-               
-                  //  console.log(orderBook.book.name);
-                   
-                  )}
-                   
+                            </div>
+                          </div>
+                          
+
+                        )}
+
+                      </div>
+
+
+                      <div className="tab-pane fade" id="pills-brand" role="tabpanel" aria-labelledby="pills-brand-tab" tabIndex="0">
+
+                      </div>
+
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  </>
+                ) : (
+                  <div className={styles.notFoundContainer}>
+                    <div className={styles.notFoundContainer}>
+                      <p>No Items Found In Cart</p>
+                    </div>
                   </div>
-                </div>
-                
-          
-              )}
-
+                )}
               </div>
-
-
-              <div className="tab-pane fade" id="pills-brand" role="tabpanel" aria-labelledby="pills-brand-tab" tabIndex="0">
-             
-              </div>
-         
-            </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-             
-      
-              </>
-            ) : (
-              <div className={styles.notFoundContainer}>
-                <div className={styles.notFoundContainer}>
-                  <p>No Items Found In Cart</p>
-                </div>
-              </div>
-            )}
-          </div>
 
             </>
           )}
