@@ -3,6 +3,7 @@ import { booksFilter, getAllAuthors } from "./filterActions";
 
 const initialState = {
     allAuthors: [],
+    sort: '',
     filterObj: {language: [], price: [], category: [], author: [], published: [], format: [], rate: [], stock: []},
     filter: '',
     filterLoading: false,
@@ -15,6 +16,9 @@ const booksFilterSlice = createSlice({
     name: "booksFilter",
     initialState,
     reducers: {
+        setSort: (state, {payload}) => {
+            state.sort = payload;
+        },
         handleFilterCheck: (state, {payload}) => {
             if(state.filterCheckBtns.hasOwnProperty(payload)){
                 state.filterCheckBtns[payload] = !state.filterCheckBtns[payload];
@@ -91,4 +95,4 @@ const booksFilterSlice = createSlice({
 })
 
 export const booksFilterReducer = booksFilterSlice.reducer;
-export const { setFilterObj, setFilter, handleFilterCheck, handleFilterRadio, clearFilterObj } = booksFilterSlice.actions;
+export const { setFilterObj, setFilter, handleFilterCheck, handleFilterRadio, clearFilterObj, setSort } = booksFilterSlice.actions;

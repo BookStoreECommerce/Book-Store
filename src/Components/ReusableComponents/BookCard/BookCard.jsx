@@ -19,10 +19,10 @@ const BookCard = ({ book, id, image, name, price, author, section, cardStyle, sa
         bookPrice = ele.variation_price;
       } 
 
-      if (ele.variation_name === "hardcover" && ele.variation_is_available === false && (Object.keys(filterRadioBtns)[0] === undefined || Object.keys(filterRadioBtns)[0] === "hardcover" || !filterRadioBtns[Object.keys(filterRadioBtns)[0]])) {
+      if (ele.variation_name === "hardcover" && ele.variation_is_available === false && (Object.keys(filterRadioBtns)[0] === "hardcover" || filterRadioBtns[Object.keys(filterRadioBtns)[0]])) {
         outOfStock = true;
       } 
-      if (Object.keys(filterRadioBtns)[0] !== "hardcover" && Object.keys(filterRadioBtns)[0] !== undefined && filterRadioBtns[Object.keys(filterRadioBtns)[0]]) {
+      if (Object.keys(filterRadioBtns)[0] !== "hardcover" || !filterRadioBtns[Object.keys(filterRadioBtns)[0]]) {
         outOfStock = false;
       } 
     });
@@ -53,7 +53,6 @@ const BookCard = ({ book, id, image, name, price, author, section, cardStyle, sa
             )}
           </div>
           {section === "bestSeller" ? (
-            // {section === "bestSeller" ? (
             <img src={image?.secure_url ? image?.secure_url : bookImage} className={`w-100 ${styles.cardImgNew}`} alt="" />
           ) :
             sectionName === "whislist" ?
@@ -85,7 +84,7 @@ const BookCard = ({ book, id, image, name, price, author, section, cardStyle, sa
               <span className={styles.bookAuthor}>By {author}</span>
 
               <span className={styles.price}>{(bookPrice || price) + ` EGP`}</span>
-              {outOfStock ? <span className={`${styles.outOfStock} text-white text-center`}>out of stock</span> : <span className={`${styles.outOfStock} text-white text-center invisible`}>out of stock</span>}
+              {/* {outOfStock && <span className={`${styles.outOfStock} text-white text-center`}>out of stock</span>} */}
               {sectionName === "whislist" || section === "catBook" || sectionName === "Books" ? <><span className={styles.badge}>{category?.name}</span></> : ""}
 
               <div className="d-flex justifiy-content-center align-items-center">
@@ -97,6 +96,7 @@ const BookCard = ({ book, id, image, name, price, author, section, cardStyle, sa
           }
 
         </div>
+        {outOfStock && <span className={`${styles.outOfStock} text-white text-center`}>out of stock</span>}
       </div>
     </>
   );
