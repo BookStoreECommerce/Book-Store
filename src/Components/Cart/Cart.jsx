@@ -42,7 +42,6 @@ export default function Cart() {
   useEffect(() => {
     getCartDetails();
   }, [dispatch]);
-  console.log(discount);
   return (
     <>
       <ScrollToTop />
