@@ -42,7 +42,7 @@ export default function Cart() {
   useEffect(() => {
     getCartDetails();
   }, [dispatch]);
-
+  console.log(discount);
   return (
     <>
       <ScrollToTop />
@@ -66,19 +66,34 @@ export default function Cart() {
             </span>
           </div>
         </div>
-        <div className="container  ">
+        <div className="container  pt-5 mt-5">
           {isLoading ? (
             <Loading />
           ) : (
             <>
-              <div className="row justify-content-center align-items-center pb-2">
+              <div className="row justify-content-center pb-2">
                 {localStorageCart?.books?.length >= 0 ? (
                   <>
-                    {localStorageCart?.books?.length > 0 ? (
+            {localStorageCart?.books?.length > 0 ?         <div className="col-lg-4 col-md-12 col-12">
+         {discount ? (
+                      <div className={styles.checkoutStyles}>
+                        <h1 className={styles.totalAmount}>Total cart Amount: <span className={styles.totalAmountSpan}>{totalAmount}</span></h1>
+                        <h1 className={styles.totalAmount}>Discount: <span className={styles.totalAmountSpan}>{discount}</span></h1>
+                        <h1 className={styles.totalAmount}>
+                          Total Amount After Discount: <span className={styles.totalAmountSpan}>{totalAmountAfterDisc}</span>
+                        </h1>
+                      </div>
+                    ) : (
+                      <div className={styles.checkoutStyles}>
+                      <h1 className={styles.totalAmount}>Total cart Amount: <span className={styles.totalAmountSpan}>{totalAmount}</span></h1>
+                      </div>
+                    )}
+                            {localStorageCart?.books?.length > 0 ? (
                       <div className={styles.checkoutBtn}>
                         <Button
                           variant="outlined"
                           component={Link}
+                   
                           to="/checkout"
                           endIcon={
                             isLoading ? (
@@ -89,27 +104,19 @@ export default function Cart() {
                           }
                           className={`mainBtn ${styles.fitContent}`}
                         >
-                          Checkout <br /> {totalAmountAfterDisc}
+                          Checkout {totalAmountAfterDisc}
                         </Button>
                       </div>
                     ) : (
                       ""
                     )}
-                    {discount ? (
-                      <div>
-                        <h1>Total cart Amount: {totalAmount}</h1>
-                        <h1>Discount: {discount}</h1>
-                        <h1>
-                          Total Amount After Discount: {totalAmountAfterDisc}
-                        </h1>
-                      </div>
-                    ) : (
-                      <h1>Total cart Amount: {totalAmount}</h1>
-                    )}
+         </div>:""}
 
-                    {localStorageCart?.books.map((book, index) => (
+
+                <div className="col-lg-8 col-md-12 col-12">
+                {localStorageCart?.books.map((book, index) => (
                       <div
-                        className={`${styles.orderCard} col-lg-7 col-md-8 col-sm-10 col-10`}
+                        className={`${styles.orderCard} col-lg-12 col-md-12 col-sm-12 col-12`}
                         key={index}
                       >
                         <div
@@ -165,6 +172,7 @@ export default function Cart() {
                         </div>
                       </div>
                     ))}
+                </div>
                     {localStorageCart?.books?.length > 0 ? (
                       <ClearCart />
                     ) : (
