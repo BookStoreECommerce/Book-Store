@@ -36,7 +36,7 @@ export default function Sort() {
           <MenuItem value="-price">Price - High to Low</MenuItem>
           <MenuItem value="-sold">Best Seller</MenuItem>
           <MenuItem value="-published">New Arrivals</MenuItem>
-          <MenuItem value="-rate">Most Rate</MenuItem>
+          <MenuItem value="-rating">Most Rated</MenuItem>
         </Select>
       </FormControl>
     </Box>

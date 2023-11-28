@@ -29,7 +29,7 @@ function AllBook({ sectionName }) {
   const { isLoading, books, totalCount, pageNumber } = useSelector(
     (state) => state.books
   );
-  const { filterCheckBtns, filterObj, filter, filterLoading } = useSelector(
+  const { filterCheckBtns, filterObj, filter, filterLoading, sort } = useSelector(
     (state) => state.booksFilter
   );
   const nBookPerPage = 12;
@@ -84,9 +84,9 @@ function AllBook({ sectionName }) {
   const show = Object.keys(filterObj).map((key) => filterObj[key].length !== 0);
 
   useEffect(() => {
-    if (searchWord === "" && !show.includes(true)) {
+    if (searchWord === "" && !show.includes(true) && sort === '') {
       getBooks();
-    } else if (show.includes(true)) {
+    } else if (show.includes(true) || sort !== '') {
       getFilteredBooks(filter);
     } else {
       getBooksBySearch(searchWord);
@@ -151,7 +151,7 @@ function AllBook({ sectionName }) {
       {isLoading || filterLoading ? (
         <Loading sectionName="AllBooks" />
       ) : (
-        <div className="row justify-content-center align-items-center">
+        <div className="row justify-content-center">
           {totalCount === 0 && !isLoading ? (
             <div className={styles.notFoundContainer}>
               <p>No Books Found</p>

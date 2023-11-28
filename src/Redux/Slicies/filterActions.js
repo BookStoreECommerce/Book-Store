@@ -11,6 +11,7 @@ export const booksFilter = createAsyncThunk("booksFilter", async ({ pageNumber, 
         } else if (filter !== '' && booksFilter.sort !== '') {
             filter += `&sort=${booksFilter.sort}`
         }
+        console.log(`book?${filter}&page=${pageNumber}`);
         const { data } = await axiosInstance.get(`book?${filter}&page=${pageNumber}`);
         dispatch(setBooks({ books: data.result, totalCount: data.totalCount }))
         return data
