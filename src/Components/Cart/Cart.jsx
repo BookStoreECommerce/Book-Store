@@ -75,7 +75,7 @@ export default function Cart() {
                 {localStorageCart?.books?.length >= 0 ? (
                   <>
             {localStorageCart?.books?.length > 0 ?         <div className="col-lg-4 col-md-12 col-12">
-         {!discount ? (
+         {discount ? (
                       <div className={styles.checkoutStyles}>
                         <h1 className={styles.totalAmount}>Total cart Amount: <span className={styles.totalAmountSpan}>{totalAmount}</span></h1>
                         <h1 className={styles.totalAmount}>Discount: <span className={styles.totalAmountSpan}>{discount}</span></h1>
@@ -84,7 +84,9 @@ export default function Cart() {
                         </h1>
                       </div>
                     ) : (
-                      <h1>Total cart Amount: {totalAmount}</h1>
+                      <div className={styles.checkoutStyles}>
+                      <h1 className={styles.totalAmount}>Total cart Amount: <span className={styles.totalAmountSpan}>{totalAmount}</span></h1>
+                      </div>
                     )}
                             {localStorageCart?.books?.length > 0 ? (
                       <div className={styles.checkoutBtn}>
