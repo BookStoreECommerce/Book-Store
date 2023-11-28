@@ -10,7 +10,6 @@ import { getBestSellerData } from "../../../Redux/Slicies/BestSeller/bestSellerS
 const BestSeller = () => {
   const dispatch = useDispatch();
   const { bestSeller } = useSelector(({ bestSeller }) => bestSeller);
-  console.log(bestSeller);
   const settings = {
     className: "center",
     centerMode: true,
@@ -82,7 +81,8 @@ const BestSeller = () => {
                   name={bestSeller.name}
                   price={bestSeller.price}
                   author={bestSeller.author}
-                  rate={bestSeller.rate}
+                  category={bestSeller.category}
+                  rate={bestSeller.rating}
                   sale={bestSeller.sale}
                   section={"bestSeller"}
                   id={bestSeller.id}
