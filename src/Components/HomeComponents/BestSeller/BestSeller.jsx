@@ -75,7 +75,7 @@ const BestSeller = () => {
             <Slider {...settings}>
               {bestSeller?.map((bestSeller, index) => (
                 <BookCard
-                  cardStyle={{ margin: "10px", padding: "0px" }}
+                cardStyle={{ margin: "10px", padding: "14px", minHeight:"300px", maxHeight:"300px", display:"flex", justifyContent:"center" ,alignItems:"center"}}
                   key={bestSeller.id}
                   image={bestSeller.image}
                   name={bestSeller.name}
@@ -84,7 +84,9 @@ const BestSeller = () => {
                   category={bestSeller.category}
                   rate={bestSeller.rating}
                   sale={bestSeller.sale}
+                  slug={bestSeller.slug}
                   section={"bestSeller"}
+                  sectionName="whislist"
                   id={bestSeller.id}
                   book={bestSeller}
                 />

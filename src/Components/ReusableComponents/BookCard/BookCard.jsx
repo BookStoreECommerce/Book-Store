@@ -57,7 +57,7 @@ const BookCard = ({ book, id, image, name, price, author, section, cardStyle, sa
         <div
           className={`d-flex flex-column justify-content-start ${styles.paddingParagraph}`}
         >
-          {section === "bestSeller" || sectionName === "whislist" || section === "catBook" || sectionName === "Books" ?
+          {sectionName === "whislist" || section === "catBook" || sectionName === "Books" ?
             "" : <span className={styles.badge}>{category?.name}</span>
           }
           <>
@@ -65,7 +65,7 @@ const BookCard = ({ book, id, image, name, price, author, section, cardStyle, sa
             <span className={styles.bookAuthor}>By {author}</span>
 
             <span className={styles.price}>{(bookPrice || price) + ` EGP`}</span>
-            {section === "bestSeller" || sectionName === "whislist" || section === "catBook" || sectionName === "Books" ? <><span className={styles.badge}>{category?.name}</span></> : ""}
+            {sectionName === "whislist" || section === "catBook" || sectionName === "Books" ? <><span className={styles.badge}>{category?.name}</span></> : ""}
 
             <div className="d-flex justifiy-content-center align-items-center">
               <span className={styles.rate}> <Rating rate={rate} /> </span>
