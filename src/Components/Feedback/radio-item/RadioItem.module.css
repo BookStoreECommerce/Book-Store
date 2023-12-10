@@ -1,0 +1,10 @@
+@media screen and (max-width:400px){
+    .radio_container{
+        width: 100% !important;
+    }
+}
+@media screen and (max-width:900px){
+    .radio_container{
+        width: 100% !important;
+    }
+}

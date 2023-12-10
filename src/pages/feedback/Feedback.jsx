@@ -4,17 +4,10 @@ import {
   removeFooterMargin,
   setFooterMargin,
 } from "../../Redux/Slicies/appSlice";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import styles from "./Feedback.module.css";
 import { Link } from "react-router-dom";
 import RatingQuestion from "../../Components/Feedback/rating-question/RatingQuestion";
-
-const questions = [
-  {
-    q: "How satisfied were you with the speed of shipping?",
-    type: "rate",
-  },
-];
 
 const Feedback = () => {
   const { footerH, navH } = useSelector((state) => state.app);
@@ -49,12 +42,10 @@ const Feedback = () => {
 
         <Box
           sx={{
-            flexFlow: "column",
+            flexFlow: "row",
           }}
         >
-            {questions.map(question => (
-                <RatingQuestion question={question.q}/>
-            ))}
+          <RatingQuestion />
         </Box>
       </Box>
     </>

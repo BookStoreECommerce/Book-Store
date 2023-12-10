@@ -19,7 +19,6 @@ const router = createBrowserRouter([
     path: "/",
     async lazy() {
       const { default: Layout } = await import("./Layouts/Layout");
-      // const { default: Layout } = await import("./Layouts/Layout");
       const { indexLoader } = await import("./util/loaders");
       return { Component: Layout, loader: indexLoader };
     },
