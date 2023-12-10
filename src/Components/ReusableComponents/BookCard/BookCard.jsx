@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./BookCard.module.css";
-import bookImage from "../../../assets/book.jpg";
 
 import WishListButton from "../WishListButton/WishListButton";
 import Rating from "../Rating/Rating";
@@ -46,11 +45,11 @@ const BookCard = ({ book, id, image, name, price, author, section, cardStyle, sa
           {
             sectionName === "whislist" ?
               (
-                <img src={image?.secure_url ? image?.secure_url : bookImage} className={`w-100 ${styles.cardStyle}`} alt="" />
+                <img src={image?.secure_url} className={`w-100 ${styles.cardStyle}`} alt="" />
               )
               :
               (
-                <img src={image?.secure_url ? image?.secure_url : bookImage} className={`w-100 ${styles.cardImg}`} alt="" />
+                <img src={image?.secure_url} className={`w-100 ${styles.cardImg}`} alt="" />
               )
           }
         </div>
