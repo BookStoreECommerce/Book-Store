@@ -63,18 +63,19 @@ export default function Orders() {
 
                 </ul>
 
-                <div className="tab-content" id="pills-tabContent">
+                <di v className="tab-content" id="pills-tabContent">
                   <div className="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab"
                     tabIndex="0">
 
                     {ordersArray?.map((order, index) =>
 
 
-                      <div className={` col-lg-10 col-md-10 col-sm-10 col-10`} key={index} >
+                      <div className={`col-lg-10 col-md-10 col-sm-10 col-10 mb-5`} key={index} >
                         <div className={`${styles.orderCard} mb-3`}>
                           <div className={`${styles.cardHeader}`}>
-                            <p className={`${styles.orderNum} `}>Order # {order._id}</p>
-                            <p className={`${styles.orderDate} `}>26-11-2023</p>
+                            <p className={`${styles.orderNum} `}>Order # {order.serial_number}</p>
+
+                            <p className={`${styles.orderDate} `}>Date goes here</p>
                           </div>
                           <div className={`${styles.cardBody}`}>
                             {order.books?.map((orderBook, id) =>
@@ -87,7 +88,7 @@ export default function Orders() {
                                           <img src={orderBook.book.image.secure_url} alt="book img" />
                                         </div>
                                         <div className={`${styles.bookImgTitle}`}>
-                                          <p key={id} className={`mb-0`}> {orderBook.book.name}</p>
+                                          <p key={id} className={`mb-0 ${styles.bookName}`}> {orderBook.book.name}</p>
 
                                         </div>
 
@@ -118,7 +119,10 @@ export default function Orders() {
                             )}
                           </div>
                           <div className={`${styles.cardFooter}`}>
-                            <p className={`${styles.orderStatus} `}>Status</p>
+
+                            <p className={`${styles.orderStatus} `}>
+                              Status: {order.isDelivered === 'true' ? <b>Delivered</b> : <b>Pending</b>}
+                            </p>
                             <p className={`${styles.orderTotal} `}>Total: {order.totalAmountAfterDisc}</p>
                           </div>
 
@@ -133,10 +137,56 @@ export default function Orders() {
 
 
                   <div className="tab-pane fade" id="pills-brand" role="tabpanel" aria-labelledby="pills-brand-tab" tabIndex="0">
+                    {pdfBooksArray?.map((order, index) =>
 
+
+                      <div className={`col-lg-10 col-md-10 col-sm-10 col-10`} key={index} >
+                        <div className={`${styles.orderCard} mb-3`}>
+                          <div className={`${styles.cardHeader}`}>
+                            <p className={`${styles.orderNum} `}>Order # {order.serial_number}</p>
+
+                            <p className={`${styles.orderDate} `}>Date goes here</p>
+                          </div>
+                          <div className={`${styles.cardBody}`}>
+
+                            <>
+                              <div className={`${styles.orderBook} mb-0`} >
+                                <div className={`${styles.bookRow}`}>
+                                  <div className={`col-7`}>
+                                    <div className={`${styles.pdfInfo}`}>
+                                      <div className={`${styles.bookImgContainer}`}>
+                                        <img src={order.image.secure_url} alt="book img" />
+                                      </div>
+                                      <div className={`${styles.bookImgTitle}`}>
+                                        
+                                        <a href={order.variations[0].variation_url.secure_url}
+                                            className={`${styles.pdfLink}`}
+                                            target="_blank" >{order.name}</a>
+                                      </div>
+
+                                    </div>
+                                  </div>
+
+
+
+                                </div>
+                              </div>
+
+                            </>
+
+
+                          </div>
+
+
+
+                        </div>
+                      </div>
+
+
+                    )}
                   </div>
 
-                </div>
+                </di>
 
 
 
