@@ -50,6 +50,7 @@ const Checkout = () => {
       <Accordion
         expanded={expanded === "cartSummaryPanel"}
         onChange={handleChange("cartSummaryPanel")}
+        className={styles["accordion"]}
       >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -82,7 +83,7 @@ const Checkout = () => {
             {hasDiscount && <Typography sx={{ fontSize: '1.25rem' }}>${cart.totalAmountAfterDisc}</Typography>}
           </div>
         </AccordionSummary>
-        <AccordionDetails>
+        <AccordionDetails className={styles['accordion-details']}>
           <CartSummary cart={cart} />
         </AccordionDetails>
       </Accordion>

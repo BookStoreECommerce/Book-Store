@@ -3,15 +3,12 @@ import {
   TableBody,
   TableCell,
   TableContainer,
-  TableFooter,
   TableHead,
   TableRow,
-  Typography,
 } from "@mui/material";
 
 const CartSummary = ({ cart }) => {
   return (
-    <div>
       <TableContainer>
         <Table>
           <TableHead>
@@ -32,29 +29,8 @@ const CartSummary = ({ cart }) => {
               </TableRow>
             ))}
           </TableBody>
-          {/* <TableFooter>
-            <TableRow>
-              <TableCell align="center">
-                  Total (USD)
-              </TableCell>
-              <TableCell align="center" colSpan="2">
-                  {cart.totalAmount}
-              </TableCell>
-            </TableRow>
-            {cart.coupon_code && (
-              <TableRow>
-                <TableCell align="center">
-                    Total after discount (USD)
-                </TableCell>
-                <TableCell align="center" colSpan="2">
-                    {cart.totalAmountAfterDisc}
-                </TableCell>
-              </TableRow>
-            )}
-          </TableFooter> */}
         </Table>
       </TableContainer>
-    </div>
   );
 };
 

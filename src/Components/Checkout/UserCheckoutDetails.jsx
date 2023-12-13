@@ -10,7 +10,6 @@ import { addOrder } from "../../Redux/Slicies/checkoutActions";
 
 const UserCheckoutDetails = () => {
   const { isLoading, msgError, user } = useSelector(({ auth }) => auth);
-
   const dispatch = useDispatch();
 
   const validationSchema = Yup.object({
@@ -30,7 +29,7 @@ const UserCheckoutDetails = () => {
 
   return (
     <Formik
-      initialValues={{ userName: user.userName, phone: "" }}
+      initialValues={{ userName: user.userName, phone: user.phone, city: user.city, address: user.address, country: user.country }}
       validationSchema={validationSchema}
       initialErrors={false}
       onSubmit={(values) => {
@@ -85,6 +84,7 @@ const UserCheckoutDetails = () => {
             name="phone"
             type="text"
             onChange={(e) => handleChange(e)}
+            defaultValue={user.phone}
             margin="dense"
           />
 
@@ -98,6 +98,7 @@ const UserCheckoutDetails = () => {
             name="country"
             type="text"
             onChange={(e) => handleChange(e)}
+            defaultValue={user.country}
             margin="dense"
           />
 
@@ -111,6 +112,7 @@ const UserCheckoutDetails = () => {
             name="city"
             type="text"
             onChange={(e) => handleChange(e)}
+            defaultValue={user.city}
             margin="dense"
           />
 
@@ -124,10 +126,11 @@ const UserCheckoutDetails = () => {
             name="address"
             type="text"
             onChange={(e) => handleChange(e)}
+            defaultValue={user.address}
             margin="dense"
           />
 
-          <div className="d-flex justify-content-center gap-3 my-3">
+          <div className="d-flex justify-content-start gap-3 mb-3">
             <Button
               variant="outlined"
               type="submit"
@@ -136,7 +139,7 @@ const UserCheckoutDetails = () => {
               }
               disabled={!isValid || !Object.keys(touched).length}
             >
-              Send
+              Order Now
             </Button>
           </div>
         </Form>
