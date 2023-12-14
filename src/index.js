@@ -90,6 +90,15 @@ const router = createBrowserRouter([
               return { Component: Settings };
             },
           },
+          {
+            path: "orders",
+            async lazy() {
+              const { default: Orders } = await import(
+                "./Components/UserInfoComponents/Orders/Orders.jsx"
+              );
+              return { Component: Orders };
+            },
+          },
         ],
       },
       {
@@ -117,6 +126,15 @@ const router = createBrowserRouter([
             "./Components/Cart/Cart"
           );
           return { Component: Cart };
+        },
+      },
+      {
+        path: "orders",
+        async lazy() {
+          const { default: PrevOrders } = await import(
+            "./Components/PrevOrders/PrevOrders.jsx"
+          );
+          return { Component: PrevOrders };
         },
       },
     ],

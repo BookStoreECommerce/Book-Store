@@ -242,6 +242,7 @@ function NavBar({ navRef }) {
                     Contact
                   </NavLink>
                 </li>
+              
               </ul>
 
               {user !== null && token !== null ? (
