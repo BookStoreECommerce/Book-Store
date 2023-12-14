@@ -4,11 +4,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
-import { TextField, Button } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Radio,
+  RadioGroup,
+  FormControl,
+  FormLabel,
+  FormControlLabel,
+} from "@mui/material";
 import classes from "./UserCheckoutDetails.module.css";
 import { addOrder } from "../../Redux/Slicies/checkoutActions";
 
 const UserCheckoutDetails = () => {
+
   const { isLoading, msgError, user } = useSelector(({ auth }) => auth);
   const dispatch = useDispatch();
 
@@ -29,18 +38,25 @@ const UserCheckoutDetails = () => {
 
   return (
     <Formik
-      initialValues={{ userName: user.userName, phone: user.phone, city: user.city, address: user.address, country: user.country }}
+      initialValues={{
+        userName: user.userName,
+        phone: user.phone,
+        city: user.city,
+        address: user.address,
+        country: user.country,
+        paymentMethod: "cash",
+      }}
       validationSchema={validationSchema}
-      initialErrors={false}
+      validateOnMount={true}
       onSubmit={(values) => {
-        const { address, city, country, phone, userName, paymentMethod } =
-          values;
+        const { address, city, country, phone, userName: name, paymentMethod } =
+        values;
         const checkoutDetails = {
-          shippingAdress: { address, city, country, phone },
-          name: userName,
-          paymentMethod,
+          name, paymentMethod,
+          shippingAdress: { address, city, country, phone }
         };
-        dispatch(addOrder(checkoutDetails));
+        console.log(checkoutDetails);
+        // dispatch(addOrder(checkoutDetails));
       }}
     >
       {({
@@ -50,6 +66,7 @@ const UserCheckoutDetails = () => {
         handleBlur,
         handleSubmit,
         isValid,
+        values
       }) => (
         <Form
           method="post"
@@ -130,6 +147,21 @@ const UserCheckoutDetails = () => {
             margin="dense"
           />
 
+          <FormControl>
+            <FormLabel id="demo-controlled-radio-buttons-group">
+              Payment Method
+            </FormLabel>
+            <RadioGroup
+              aria-labelledby="demo-controlled-radio-buttons-group"
+              name="paymentMethod"
+              value={values.paymentMethod}
+              onChange={(e) => handleChange(e)}
+            >
+              <FormControlLabel value="cash" control={<Radio />} label="Cash" />
+              <FormControlLabel value="online" control={<Radio />} label="Online" />
+            </RadioGroup>
+          </FormControl>
+          {values.paymentMethod === "cash"?<span>cash</span>: <span>online</span>}
           <div className="d-flex justify-content-start gap-3 mb-3">
             <Button
               variant="outlined"
@@ -137,7 +169,7 @@ const UserCheckoutDetails = () => {
               endIcon={
                 isLoading ? <i className="fas fa-spinner fa-spin"></i> : ""
               }
-              disabled={!isValid || !Object.keys(touched).length}
+              disabled={!isValid}
             >
               Order Now
             </Button>
