@@ -21,7 +21,7 @@ const ordersSlice = createSlice({
             state.isLoading = true;
         })
         builder.addCase(getOrders.fulfilled, (state, action) => {
-            console.log(action.payload);
+            // console.log(action.payload);
             state.isLoading = false;
             state.orders = action.payload;
             // state.pdfBooks = action.payload.pdfBooks;

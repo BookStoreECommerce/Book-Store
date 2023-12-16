@@ -27,7 +27,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     },
 }));
 const ReviewDialog = ({ id ,review}) => {
-console.log(id);
+// console.log(id);
     const { user } = useSelector((state) => state.auth);
     const { reviewOpen } = useSelector((state) => state.dialog)
     const dispatch = useDispatch();
@@ -47,7 +47,7 @@ console.log(id);
 
     const handleSend = async () => {
         handleClose()
-console.log("send");
+// console.log("send");
     if(userReview?.content){
         await dispatch(updateReview({ id: userReview._id , content: message, rating: value}))
    

@@ -34,7 +34,7 @@ export default function BookProfile() {
 
     }
   }
-console.log(specBook);
+// console.log(specBook);
   useEffect(() => {
     getBookData()
   }, [slug])

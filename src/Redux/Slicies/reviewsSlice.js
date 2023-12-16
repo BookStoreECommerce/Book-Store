@@ -42,7 +42,7 @@ const reviewSlice = createSlice({
         builder.addCase(deleteReview.fulfilled, (state, action) => {
             state.loading = false;
             state.deleteReviews = action.payload.result;
-            console.log(state.deleteReviews);
+            // console.log(state.deleteReviews);
 
         })
         builder.addCase(deleteReview.rejected, (state, action) => {
@@ -56,7 +56,7 @@ const reviewSlice = createSlice({
         builder.addCase(updateReview.fulfilled, (state, action) => {
             state.loading = false;
             state.updateReviews = action.payload;
-            console.log(state.updateReviews);
+            // console.log(state.updateReviews);
 
         })
         builder.addCase(updateReview.rejected, (state, action) => {
@@ -70,7 +70,7 @@ const reviewSlice = createSlice({
         builder.addCase(allReview.fulfilled, (state, action) => {
             state.loading = false;
             state.allReviews = action.payload;
-            console.log(state.addReviews);
+            // console.log(state.addReviews);
         })
         builder.addCase(allReview.rejected, (state, action) => {
             state.loading = false;

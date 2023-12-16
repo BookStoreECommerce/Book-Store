@@ -27,8 +27,8 @@ export default function Orders() {
   const ordersArray = orders.orders;
   // const booksArray = orders.orders.books;
   const pdfBooksArray = orders.pdfBooks;
-  console.log(ordersArray);
-  console.log(pdfBooksArray);
+  // console.log(ordersArray);
+  // console.log(pdfBooksArray);
   // console.log(booksArray);
 
   const getAllOrders = () => {
@@ -39,7 +39,7 @@ export default function Orders() {
     getAllOrders();
   }, [dispatch]);
   function getId(id, reviews) {
-    console.log(id);
+    // console.log(id);
     setId(id)
     setReviewBook(reviews)
     dispatch(handleReviewOpen())
@@ -77,7 +77,7 @@ export default function Orders() {
 
                 </ul>
 
-                <di v className="tab-content" id="pills-tabContent">
+                <div className="tab-content" id="pills-tabContent">
                   <div className="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab"
                     tabIndex="0">
 
@@ -92,9 +92,9 @@ export default function Orders() {
                             <p className={`${styles.orderDate} `}>Date goes here</p>
                           </div>
                           <div className={`${styles.cardBody}`}>
-                            {order.books?.map((orderBook, id) =>
-                              <>
-                                <div className={`${styles.orderBook} mb-0`} key={id}>
+                            {order.books?.map((orderBook, index) =>
+                        
+                                <div className={`${styles.orderBook} mb-0`} key={index}>
                                   <div className={`${styles.bookRow}`}>
                                     <div className={`col-4`}>
                                       <div className={`${styles.bookInfo}`}>
@@ -102,12 +102,8 @@ export default function Orders() {
                                           <img src={orderBook.book.image.secure_url} alt="book img" />
                                         </div>
                                         <div className={`${styles.bookImgTitle}`}>
-                                          <p key={id} className={`mb-0 ${styles.bookName}`}> {orderBook.book.name}</p>
-                                       
-
-
+                                          <p className={`mb-0 ${styles.bookName}`}> {orderBook.book.name}</p>                               
                                         </div>
-
                                       </div>
                                     </div>
                                     <div className={`col-2 d-flex justify-content-center align-items-center`}>
@@ -127,14 +123,12 @@ export default function Orders() {
                                     </div>
                                     <div className={`col-2 d-flex justify-content-center align-items-center`}>
                                       <button onClick={() => getId(orderBook?.book.id, orderBook?.book.reviews)} className={styles.btn}><img src={rate} alt="" className={styles.rate}/></button>
-                    
                                     </div>
 
                                   </div>
                                 </div>
 
-                              </>
-
+                           
                             )}
                           </div>
                           <div className={`${styles.cardFooter}`}>
@@ -205,7 +199,7 @@ export default function Orders() {
                     )}
                   </div>
 
-                </di>
+                </div>
 
 
 
