@@ -19,7 +19,13 @@
     color: var(--navyBlue) !important;
 
 }
-
+.rate{
+    width: 60px;
+    height: 60px;
+}
+.btn,.btn:focus,.btn:hover,.btn:active{
+    border: none!important;
+}
 .content {
     display: flex;
     justify-content: center;

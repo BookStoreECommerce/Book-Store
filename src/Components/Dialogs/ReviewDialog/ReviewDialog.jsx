@@ -27,7 +27,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     },
 }));
 const ReviewDialog = ({ id ,review}) => {
-
+console.log(id);
     const { user } = useSelector((state) => state.auth);
     const { reviewOpen } = useSelector((state) => state.dialog)
     const dispatch = useDispatch();
@@ -47,7 +47,7 @@ const ReviewDialog = ({ id ,review}) => {
 
     const handleSend = async () => {
         handleClose()
-
+console.log("send");
     if(userReview?.content){
         await dispatch(updateReview({ id: userReview._id , content: message, rating: value}))
    
@@ -67,6 +67,7 @@ const ReviewDialog = ({ id ,review}) => {
     }else{
         await dispatch(addReview({ content: message, rating: value, book: id }))
         console.log(message,value);
+        
         if(message != "" && value != null){
             toast.success("Review added!", {
                 position: "bottom-left",

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import ScrollToTop from "../ReusableComponents/ScrollToTop/ScrollToTop";
 import { Box } from "@mui/material";
@@ -8,7 +8,11 @@ import styles from "./Orders.module.css";
 import { getOrders } from "../../../Redux/Slicies/orderAction";
 import Loading from "../../ReusableComponents/Loading/Loading";
 import ScrollToTop from "../../ReusableComponents/ScrollToTop/ScrollToTop";
+import AddReview from "../../ReviewComponents/AddReview/AddReview";
+import ReviewDialog from "../../Dialogs/ReviewDialog/ReviewDialog";
+import { handleReviewOpen } from "../../../Redux/Slicies/dialogSlice";
 // import { getOrders } from "../../Redux/Slicies/orderAction";
+import rate from '../../../assets/rate.svg';
 
 
 export default function Orders() {
@@ -17,6 +21,9 @@ export default function Orders() {
   const { footerH, navH } = useSelector((state) => state.app);
   const { orders, isLoading } = useSelector((state) => state.orders);
   const token = localStorage.getItem('access-token');
+  const [idBook, setId] = useState("")
+  const [reviewBook, setReviewBook] = useState(null)
+  const [disabled, setDisabled] = useState(false)
   const ordersArray = orders.orders;
   // const booksArray = orders.orders.books;
   const pdfBooksArray = orders.pdfBooks;
@@ -31,10 +38,17 @@ export default function Orders() {
     // console.log(token);
     getAllOrders();
   }, [dispatch]);
+  function getId(id, reviews) {
+    console.log(id);
+    setId(id)
+    setReviewBook(reviews)
+    dispatch(handleReviewOpen())
 
+  }
   return (
     <>
       <ScrollToTop />
+      <ReviewDialog id={idBook} review={reviewBook} />
       <Box
         sx={{
           marginTop: `${navH}px`,
@@ -89,6 +103,8 @@ export default function Orders() {
                                         </div>
                                         <div className={`${styles.bookImgTitle}`}>
                                           <p key={id} className={`mb-0 ${styles.bookName}`}> {orderBook.book.name}</p>
+                                       
+
 
                                         </div>
 
@@ -109,7 +125,10 @@ export default function Orders() {
                                         {orderBook.totalPrice} EGP
                                       </div>
                                     </div>
-
+                                    <div className={`col-2 d-flex justify-content-center align-items-center`}>
+                                      <button onClick={() => getId(orderBook?.book.id, orderBook?.book.reviews)} className={styles.btn}><img src={rate} alt="" className={styles.rate}/></button>
+                    
+                                    </div>
 
                                   </div>
                                 </div>
@@ -158,10 +177,10 @@ export default function Orders() {
                                         <img src={order.image.secure_url} alt="book img" />
                                       </div>
                                       <div className={`${styles.bookImgTitle}`}>
-                                        
+
                                         <a href={order.variations[0].variation_url.secure_url}
-                                            className={`${styles.pdfLink}`}
-                                            target="_blank" >{order.name}</a>
+                                          className={`${styles.pdfLink}`}
+                                          target="_blank" >{order.name}</a>
                                       </div>
 
                                     </div>
