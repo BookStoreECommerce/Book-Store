@@ -57,7 +57,7 @@ export default function Orders() {
         className={styles.flex}
       >
 
-        <div className="container  ">
+        <div className="container">
 
 
           <div className="row justify-content-center align-items-center pb-2">
@@ -84,7 +84,7 @@ export default function Orders() {
                     {ordersArray?.map((order, index) =>
 
 
-                      <div className={`col-lg-10 col-md-10 col-sm-10 col-10 mb-5`} key={index} >
+                      <div className={`col-xl-10 col-lg-12 col-12 mb-5`} key={index} >
                         <div className={`${styles.orderCard} mb-3`}>
                           <div className={`${styles.cardHeader}`}>
                             <p className={`${styles.orderNum} `}>Order # {order.serial_number}</p>
@@ -96,32 +96,32 @@ export default function Orders() {
                         
                                 <div className={`${styles.orderBook} mb-0`} key={index}>
                                   <div className={`${styles.bookRow}`}>
-                                    <div className={`col-4`}>
+                                    <div className={`col-lg-4 col-10`}>
                                       <div className={`${styles.bookInfo}`}>
                                         <div className={`${styles.bookImgContainer}`}>
                                           <img src={orderBook.book.image.secure_url} alt="book img" />
                                         </div>
                                         <div className={`${styles.bookImgTitle}`}>
-                                          <p className={`mb-0 ${styles.bookName}`}> {orderBook.book.name}</p>                               
+                                          <p className={`mb-0 ${styles.bookName}`}> {orderBook.book.name.slice(0,30)}...</p>                               
                                         </div>
                                       </div>
                                     </div>
-                                    <div className={`col-2 d-flex justify-content-center align-items-center`}>
+                                    <div className={`col-lg-2 col-12 d-flex justify-content-center align-items-center ${styles.flexStart}`}>
                                       <div className={`${styles.bookVariation}`}>
                                         {orderBook.variation_name}
                                       </div>
                                     </div>
-                                    <div className={`col-2 d-flex justify-content-center align-items-center`}>
+                                    <div className={`col-lg-2 col-12 d-flex justify-content-center align-items-center ${styles.flexStart}`}>
                                       <div className={`${styles.bookPriceAndQty}`}>
                                         {orderBook.price} EGP X {orderBook.qty}
                                       </div>
                                     </div>
-                                    <div className={`col-2 d-flex justify-content-center align-items-center`}>
+                                    <div className={`col-lg-2  col-12 d-flex justify-content-center align-items-center ${styles.flexStart}`}>
                                       <div className={`${styles.bookSubTotal}`}>
                                         {orderBook.totalPrice} EGP
                                       </div>
                                     </div>
-                                    <div className={`col-2 d-flex justify-content-center align-items-center`}>
+                                    <div className={`col-lg-2 col-12 d-flex justify-content-center align-items-center ${styles.flexStart}`}>
                                       <button onClick={() => getId(orderBook?.book.id, orderBook?.book.reviews)} className={styles.btn}><img src={rate} alt="" className={styles.rate}/></button>
                                     </div>
 
@@ -153,7 +153,7 @@ export default function Orders() {
                     {pdfBooksArray?.map((order, index) =>
 
 
-                      <div className={`col-lg-10 col-md-10 col-sm-10 col-10`} key={index} >
+                      <div className={`col-lg-12  col-12`} key={index} >
                         <div className={`${styles.orderCard} mb-3`}>
                           <div className={`${styles.cardHeader}`}>
                             <p className={`${styles.orderNum} `}>Order # {order.serial_number}</p>
@@ -165,7 +165,7 @@ export default function Orders() {
                             <>
                               <div className={`${styles.orderBook} mb-0`} >
                                 <div className={`${styles.bookRow}`}>
-                                  <div className={`col-7`}>
+                                  <div className={`col-lg-7 col-12`}>
                                     <div className={`${styles.pdfInfo}`}>
                                       <div className={`${styles.bookImgContainer}`}>
                                         <img src={order.image.secure_url} alt="book img" />
