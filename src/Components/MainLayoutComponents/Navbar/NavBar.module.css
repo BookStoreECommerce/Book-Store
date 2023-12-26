@@ -10,12 +10,14 @@
     margin-right: 60px;
 }
 
-.navLink {
+.navLink, navLink:hover {
     font-family: 'Jost', sans-serif !important;
     font-size: 19px !important;
     font-weight: bold !important;
     color: #2b3069 !important;
     position: relative;
+    text-transform: none !important;
+    background-color: transparent !important;
 }
 
 .navLinkIcon {

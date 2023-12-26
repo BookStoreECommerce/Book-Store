@@ -15,6 +15,7 @@ import {
   calcPrice,
   clearLocalStorageCArt,
 } from "../../../Redux/Slicies/cartSlice.js";
+import { Button } from "@mui/material";
 
 function NavBar({ navRef }) {
   const navigate = useNavigate();
@@ -237,6 +238,7 @@ function NavBar({ navRef }) {
                     Contact
                   </NavLink>
                 </li>
+              
               </ul>
 
               {user !== null && token !== null ? (
@@ -256,26 +258,27 @@ function NavBar({ navRef }) {
                 <>
                   <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li className="nav-item">
-                      <Link
-                        to=""
+                      <Button
+                      disableRipple
                         className={`nav-link ${styles.navLink}`}
                         onClick={() => {
                           dispatch(handleClickOpen({ name: "login" }));
                         }}
                       >
                         Login
-                      </Link>
+                      </Button>
                     </li>
                     <li className="nav-item">
-                      <Link
-                        to=""
+                      <Button
+                      disableRipple
+                    
                         className={`nav-link ${styles.navLink}`}
                         onClick={() => {
                           dispatch(handleClickOpen({ name: "register" }));
                         }}
                       >
                         Register
-                      </Link>
+                      </Button>
                     </li>
                   </ul>
                 </>

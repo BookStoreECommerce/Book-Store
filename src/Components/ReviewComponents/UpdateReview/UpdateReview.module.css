@@ -1,0 +1,9 @@
+.updateBtn{
+    color: gray!important;
+    background-color: white!important;
+}
+.updateBtn:hover,.updateBtn:focus{
+    color: var(--mainColor)!important;
+    transition: all 0.5s ease-in-out;
+
+}

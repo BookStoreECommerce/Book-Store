@@ -16,6 +16,7 @@ import Review from "../ReviewComponents/Review/Review";
 import Rating from "../ReusableComponents/Rating/Rating";
 import AddCart from "../Cart/AddCart";
 import AddReview from "../ReviewComponents/AddReview/AddReview";
+import ReviewDialog from "../Dialogs/ReviewDialog/ReviewDialog.jsx";
 import AddToCartFromProfile from "./AddToCartFromProfile.jsx";
 
 export default function BookProfile() {
@@ -24,14 +25,17 @@ export default function BookProfile() {
   const dispatch = useDispatch()
   const { isLoading, bookCategory, specBook } = useSelector(({ books }) => books)
   const { footerH, navH } = useSelector((state) => state.app);
+  const { loading,addReviews } = useSelector((state) => state.review);
+
   const { user } = useSelector((state) => state.auth);
+  const userName = user.userName
   const getBookData = async () => {
     if (slug) {
       dispatch(getBookBySlug(slug))
 
     }
   }
-
+// console.log(specBook);
   useEffect(() => {
     getBookData()
   }, [slug])
@@ -41,7 +45,6 @@ export default function BookProfile() {
     dispatch(removeFooterMargin());
     return () => dispatch(setFooterMargin());
   }, [dispatch]);
-
 
   return (
     <>
@@ -93,8 +96,11 @@ export default function BookProfile() {
             </div>
 
             <MainSlider autoplay={false} arr={bookCategory} title="Suggested for you" />
-            <AddReview />
-            <Review id={specBook?._id} />
+            {/* <AddReview review={specBook?.reviews}/> */}
+            {loading ?<i className={`fas fa-spinner fa-spin ${styles.spinnerColor}`}></i>:<Review id={specBook?._id} />}
+          
+            <ReviewDialog id={specBook?._id} review={specBook?.reviews} />
+
           </>
         }
       </Box>

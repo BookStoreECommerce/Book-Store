@@ -12,7 +12,7 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { useMediaQuery } from "@mui/material";
 
-const paths = [undefined, 'favourites', 'settings'];
+const paths = [undefined, 'favourites', 'settings', 'orders'];
 
 const UserInfo = () => {
   const { footerH, navH } = useSelector((state) => state.app);
@@ -69,6 +69,8 @@ const UserInfo = () => {
                     onClick={() => navigate("favourites")} icon={<i className="fa-solid fa-heart"></i>} iconPosition="start" label="Favourites" />
                   <Tab
                     onClick={() => navigate("settings")} icon={<i className="fa-solid fa-gear"></i>} iconPosition="start" label="Settings" />
+                  <Tab
+                    onClick={() => navigate("orders")} icon={<i className="fa-solid fa-rectangle-list"></i>} iconPosition="start" label="Orders" />
                 </Tabs>
               </Box>
             </nav>

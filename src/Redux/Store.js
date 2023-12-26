@@ -10,6 +10,7 @@ import { whishListReducer } from "./Slicies/whishlistSlice";
 import { reviewReducer } from "./Slicies/reviewsSlice";
 import { booksFilterReducer } from "./Slicies/filterSlice";
 import { cartReducer } from "./Slicies/cartSlice";
+import { ordersReducer } from "./Slicies/orderSlice.js";
 import { bestReducer } from "./Slicies/BestSeller/bestSellerSlice.js";
 
 const store = configureStore({
@@ -28,6 +29,7 @@ const store = configureStore({
     review: reviewReducer,
     booksFilter: booksFilterReducer,
     cart: cartReducer,
+        orders: ordersReducer,
     bestSeller: bestReducer,
   },
 });

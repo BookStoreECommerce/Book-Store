@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Jost&family=PT+Serif:wght@700&display=swap');
+.badge {
+    background-image: linear-gradient(45deg, var(--secondaryColor), var(--beigeColor));
+    padding: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.slug{
+    font-family: 'Jost', sans-serif;
+    font-size: 28px;
+    font-weight: 500;
+    padding-left: 30px;
+    color: var(--navyBlue);
+}
+.content i {
+    margin-right: 10px;
+    font-size: 15px;
+    color: var(--navyBlue) !important;
+
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 30px;
+}
+
+.slash {
+    font-size: 19px;
+    font-family: 'Jost', sans-serif;
+    color: var(--navyBlue) !important;
+}
+
+.slash a {
+    color: var(--navyBlue) !important;
+    text-decoration: none;
+}
+
+
+.navTabs{
+    border-bottom: 1px solid var(--secondaryColor);
+}
+
+.links{
+    color: var(--navyBlue) !important;
+    font-size: 20px !important;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background-color: aquamarine !important;
+}
+
+.orderCard{
+
+}
+
+.cardHeader,
+.cardFooter{
+    background-color: var(--beigeColor);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: 20px;
+}
+.cardFooter{
+    border-radius: 0 0 15px 15px;
+    /* border-top: 1px solid white; */
+}
+.cardHeader p,
+.cardFooter p{
+    margin-block: 10px;
+    color: #817E7E;
+    font-size: 20px;
+}
+
+.cardBody{
+   
+   
+}
+
+.orderBook{
+    background-image: linear-gradient(#F5F5F5, #F3EAEA);
+}
+
+.bookRow{
+    display: flex;
+    margin-bottom: 0;
+    padding: 20px;
+}
+
+.bookInfo{
+
+}
+
+.bookImgContainer{
+    width: 40%;
+    margin-bottom: 20px;
+}
+.bookImgContainer img{
+    width: 100%;
+}
+
+.bookImgTitle{
+    font-size: 18px;
+    font-style: italic;
+    color: #4d4d4d;
+}
