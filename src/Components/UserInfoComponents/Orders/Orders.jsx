@@ -23,23 +23,17 @@ export default function Orders() {
   const token = localStorage.getItem('access-token');
   const [idBook, setId] = useState("")
   const [reviewBook, setReviewBook] = useState(null)
-  const [disabled, setDisabled] = useState(false)
   const ordersArray = orders.orders;
-  // const booksArray = orders.orders.books;
+  console.log(ordersArray);
   const pdfBooksArray = orders.pdfBooks;
-  // console.log(ordersArray);
-  // console.log(pdfBooksArray);
-  // console.log(booksArray);
 
   const getAllOrders = () => {
     dispatch(getOrders(token));
   };
   useEffect(() => {
-    // console.log(token);
     getAllOrders();
   }, [dispatch]);
   function getId(id, reviews) {
-    // console.log(id);
     setId(id)
     setReviewBook(reviews)
     dispatch(handleReviewOpen())
@@ -200,28 +194,6 @@ export default function Orders() {
                   </div>
 
                 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
               </>
             ) : (
