@@ -53,7 +53,7 @@ const UserCheckoutDetails = () => {
         values;
         const checkoutDetails = {
           name, paymentMethod,
-          shippingAdress: { address, city, country, phone },
+          shippingAddress: { address, city, country, phone },
           // successCallbackURL: window.location.origin
         };
         dispatch(addOrder(checkoutDetails));
