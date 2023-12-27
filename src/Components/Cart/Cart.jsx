@@ -1,18 +1,16 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ScrollToTop from "../ReusableComponents/ScrollToTop/ScrollToTop";
-import { Box, Input } from "@mui/material";
+import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import Loading from "../ReusableComponents/Loading/Loading";
 import ClearCart from "./ClearCart";
 import DeleteCartItem from "./DeleteCartItem";
-import { createCart, getCart } from "../../Redux/Slicies/cartAction";
+import { getCart } from "../../Redux/Slicies/cartAction";
 import { Button } from "@mui/material";
 import styles from "./Cart.module.css";
 import {
-  decreaseCartQty,
   getCartWithoutToken,
-  increaseCartQty,
 } from "../../Redux/Slicies/cartSlice";
 import UpdataCart from "./UpdataCart.jsx";
 
@@ -33,11 +31,6 @@ export default function Cart() {
     token ? dispatch(getCart()) : dispatch(getCartWithoutToken());
   };
 
-  const updateCart = () => {
-    setTimeout(() => {
-      dispatch(createCart(localStorageCart));
-    }, 3000);
-  };
 
   useEffect(() => {
     getCartDetails();

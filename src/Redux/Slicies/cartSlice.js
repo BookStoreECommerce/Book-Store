@@ -46,6 +46,7 @@ function getCartFromLocalStorage() {
     return false;
   }
 }
+
 function setCartFromLocalStorage(cart) {
   localStorage.setItem("cartDetails", JSON.stringify(cart));
 }
