@@ -11,6 +11,7 @@ import { reviewReducer } from "./Slicies/reviewsSlice";
 import { booksFilterReducer } from "./Slicies/filterSlice";
 import { cartReducer } from "./Slicies/cartSlice";
 import { bestReducer } from "./Slicies/BestSeller/bestSellerSlice.js";
+import { feedbackReducer } from "./Slicies/FeedBack/feedbackSlice.js";
 
 const store = configureStore({
   reducer: {
@@ -29,6 +30,7 @@ const store = configureStore({
     booksFilter: booksFilterReducer,
     cart: cartReducer,
     bestSeller: bestReducer,
+    feedback: feedbackReducer,
   },
 });
 

@@ -24,6 +24,7 @@ const Radios = ({ options, handleChange, name }) => {
           name={name}
           //   value={value}
           onChange={handleChange}
+          aria-required
         >
           {/* <FormControlLabel value="female" control={<Radio />} label="Female" /> */}
           {options.map((option, index) => (

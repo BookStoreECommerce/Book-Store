@@ -1,6 +1,14 @@
-@media screen and (max-width:400px){
+@media screen and (min-width:300px) and (max-width:700px){
     .question_container{
-        margin-left: 30px;
-        margin-right: 30px;
+        padding-left: 29px;
+        padding-right: 29px;
     }
+
+}
+@media screen and (min-width:700px){
+    .question_container{
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
 }

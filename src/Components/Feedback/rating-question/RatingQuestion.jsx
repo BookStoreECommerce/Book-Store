@@ -3,6 +3,10 @@ import Stars from "../stars/Stars";
 import Radios from "../radios/Radios";
 import Styles from "./RatingQuestion.module.css";
 import { Form, Formik } from "formik";
+import { useDispatch, useSelector } from "react-redux";
+import { createFeedback } from "../../../Redux/Slicies/FeedBack/feedbackActions.js";
+import { useNavigate, useParams } from "react-router-dom";
+import { useMemo } from "react";
 
 const questions = [
   {
@@ -65,6 +69,10 @@ const questions = [
   },
 ];
 const RatingQuestion = () => {
+  const dispatch = useDispatch();
+  const { success, loading } = useSelector(({ feedback }) => feedback);
+  const navigate = useNavigate();
+  const { token } = useParams();
   const initialValues = {
     delivery_rating: 0,
     website_rating: 0,
@@ -72,9 +80,14 @@ const RatingQuestion = () => {
     product_rating: "",
     notes: "",
   };
-  const handleSubmit = (e) => {
-    console.log(e);
+  const handleSubmit = (values) => {
+    dispatch(createFeedback({ values, token }));
   };
+  const navigateToHome = useMemo(() => {
+    if (!loading["feedback/create"] && success) {
+      navigate("/");
+    }
+  }, [success]);
   return (
     <>
       <Box
@@ -87,8 +100,6 @@ const RatingQuestion = () => {
           className={Styles.question_container}
           sx={{
             mt: 10,
-            ml: 5,
-            mr: 5,
             color: "#2B3A55",
             display: "flex",
             flexDirection: "column",
@@ -149,6 +160,14 @@ const RatingQuestion = () => {
                   sx={{ my: 3, fontSize: "1.5rem", fontFamily: "inherit" }}
                   variant="contained"
                   type="submit"
+                  endIcon={
+                    loading["feedback/create"] ? (
+                      <i className="fas fa-spinner fa-spin"></i>
+                    ) : (
+                      <i className="fa-solid fa-sign-in"></i>
+                    )
+                  }
+                  disabled={loading["feedback/create"]}
                 >
                   Submit
                 </Button>
