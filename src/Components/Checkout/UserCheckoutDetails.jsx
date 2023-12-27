@@ -53,10 +53,10 @@ const UserCheckoutDetails = () => {
         values;
         const checkoutDetails = {
           name, paymentMethod,
-          shippingAdress: { address, city, country, phone }
+          shippingAdress: { address, city, country, phone },
+          // successCallbackURL: window.location.origin
         };
-        console.log(checkoutDetails);
-        // dispatch(addOrder(checkoutDetails));
+        dispatch(addOrder(checkoutDetails));
       }}
     >
       {({
@@ -161,7 +161,8 @@ const UserCheckoutDetails = () => {
               <FormControlLabel value="online" control={<Radio />} label="Online" />
             </RadioGroup>
           </FormControl>
-          {values.paymentMethod === "cash"?<span>cash</span>: <span>online</span>}
+          <span></span>
+          {/* {values.paymentMethod === "cash"?<span>cash</span>: <span>online</span>} */}
           <div className="d-flex justify-content-start gap-3 mb-3">
             <Button
               variant="outlined"

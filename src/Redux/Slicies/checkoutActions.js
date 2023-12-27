@@ -40,13 +40,16 @@ export const removeCoupon = createAsyncThunk(
 );
 
 export const addOrder = createAsyncThunk(
-    "checkout/addOrder",
-    async (orderDetails, { rejectWithValue }) => {
-      try {
-          const { data } = await axiosInstance.post("order", { ...orderDetails });
-        return data;
-      } catch (error) {
-        return rejectWithValue(error.response.data);
+  "checkout/addOrder",
+  async (orderDetails, { rejectWithValue }) => {
+    try {
+      const { data } = await axiosInstance.post("order", { ...orderDetails });
+      if (data.session) {
+        window.location.href = data.session.url;
       }
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
     }
-  );
+  }
+);
