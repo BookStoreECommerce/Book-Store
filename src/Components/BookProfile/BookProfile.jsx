@@ -82,7 +82,7 @@ export default function BookProfile() {
                     <p className={styles.textColorDetails}><span className={styles.textColor}>ISBN:</span> {specBook?.ISBN}</p>
                   </div>
                   <div className={styles.addToCartSection}>
-                    <div className={styles.addToCartBtn}>
+                    <div className={`${styles.addToCartBtn} w-100`}>
                       <AddToCartFromProfile book={specBook}/>
                       {/* <AddCart id={specBook?._id} book={specBook} /> */}
                     </div>

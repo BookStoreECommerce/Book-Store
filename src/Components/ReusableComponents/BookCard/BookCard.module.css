@@ -6,6 +6,7 @@
 
 .cardImg,
 .cardImgNew {
+    height: 255px !important;
     border-radius: 15px;
     height: 18rem;
 }

@@ -13,7 +13,14 @@
   border-radius: 50%;
   cursor: pointer;
 }
-
+.fitContent{
+  background-color: var(--mainColor)!important;
+  color: white!important;
+  font-size: 17px!important;
+  font-weight: 700!important;
+  border-radius: 10px!important;
+  padding: 10px 20px!important;
+}
 .trashIcon:hover {
   color: var(--mainColor);
 }

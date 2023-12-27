@@ -86,34 +86,36 @@ export default function AddToCartFromProfile({ book }) {
       });
   };
   return (
-    <Box>
-      <Box sx={{ display: "flex", gap: 2, marginBottom: 4 }}>
-        {book?.variations?.map((el) => (
-          <Button
-            disabled={!el.variation_is_available || isLoading}
-            onClick={() => {
-              selectType(el?.variation_name);
-            }}
-            variant="contained"
-            endIcon={labels(el?.variation_name)}
-            key={el?.variation_name}
-            sx={{
-              borderRadius: 5,
-              backgroundColor:
-                el?.variation_name === buyBook?.variation_name ? "#2b3a55" : "",
-              opacity: 1,
-            }}
-          >
-            {el.variation_name}: {el.variation_price} EGP
-          </Button>
-        ))}
-      <Button
-        type="submit"
-        sx={{ borderRadius: 4, border: "solid 2px", marginInlineStart: "auto", display:'flex' }}
-        onClick={addToCartFn}
-        endIcon={!isLoading ?  <AddShoppingCartIcon />  :  <AutorenewIcon /> }
-        disabled={isLoading || !buyBook?.variation_name}
-      >Add To Cart</Button>
+    <Box sx={{ width: '100%' }}>
+      <Box sx={{ display: "flex", width: '100%', justifyContent: "space-between" }}>
+        <Box sx={{ display: "flex", gap: 2 }}>
+            {book?.variations?.map((el) => (
+              <Button
+                disabled={!el.variation_is_available || isLoading}
+                onClick={() => {
+                  selectType(el?.variation_name);
+                }}
+                variant="contained"
+                endIcon={labels(el?.variation_name)}
+                key={el?.variation_name}
+                sx={{
+                  borderRadius: 5,
+                  backgroundColor:
+                    el?.variation_name === buyBook?.variation_name ? "#2b3a55" : "",
+                  opacity: 1,
+                }}
+              >
+                {el.variation_name}: {el.variation_price} EGP
+              </Button>
+            ))}
+        </Box>
+        <Button
+          type="submit"
+          sx={{ borderRadius: 4, border: "solid 2px", height: "fit-content" }}
+          onClick={addToCartFn}
+          endIcon={!isLoading ?  <AddShoppingCartIcon />  :  <AutorenewIcon /> }
+          disabled={isLoading || !buyBook?.variation_name}
+        >Add To Cart</Button>
       </Box>
     </Box>
   );

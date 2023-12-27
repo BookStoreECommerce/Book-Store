@@ -10,7 +10,6 @@ import { getBestSellerData } from "../../../Redux/Slicies/BestSeller/bestSellerS
 const BestSeller = () => {
   const dispatch = useDispatch();
   const { bestSeller } = useSelector(({ bestSeller }) => bestSeller);
-
   const settings = {
     className: "center",
     centerMode: true,
@@ -76,15 +75,18 @@ const BestSeller = () => {
             <Slider {...settings}>
               {bestSeller?.map((bestSeller, index) => (
                 <BookCard
-                  cardStyle={{ margin: "10px", padding: "0px" }}
+                cardStyle={{ margin: "10px", padding: "14px", minHeight:"300px", maxHeight:"300px", display:"flex", justifyContent:"center" ,alignItems:"center"}}
                   key={bestSeller.id}
                   image={bestSeller.image}
                   name={bestSeller.name}
                   price={bestSeller.price}
                   author={bestSeller.author}
-                  rate={bestSeller.rate}
+                  category={bestSeller.category}
+                  rate={bestSeller.rating}
                   sale={bestSeller.sale}
+                  slug={bestSeller.slug}
                   section={"bestSeller"}
+                  sectionName="whislist"
                   id={bestSeller.id}
                   book={bestSeller}
                 />
