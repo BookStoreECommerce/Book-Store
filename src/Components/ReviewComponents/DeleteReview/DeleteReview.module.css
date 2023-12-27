@@ -1,0 +1,9 @@
+.deleteBtn{
+    color: gray!important;
+    background-color: white!important;
+}
+.deleteBtn:hover,.deleteBtn:focus{
+    color: var(--mainColor)!important;
+    transition: all 0.5s ease-in-out;
+
+}

@@ -153,6 +153,11 @@ const cartSlice = createSlice({
     addBookForBuy: (state, { payload }) => {
       state.buyBook = payload;
     },
+    updateFromCheckout: (state, { payload }) => {
+      state.coupon_code = payload.coupon_code;
+      state.discount = payload.discount;
+      state.totalAmountAfterDisc = payload.totalAmountAfterDisc;
+    },
   },
   extraReducers: (builder) => {
     // get cart with token
@@ -162,6 +167,7 @@ const cartSlice = createSlice({
     builder.addCase(getCart.fulfilled, (state, action) => {
       state.isLoading = false;
       if (action.payload.cart.books) {
+        state.coupon_code = action.payload.cart.coupon_code;
         state.books = action.payload.cart.books;
         state.localStorageCart.books = action.payload.cart.books;
       }
@@ -289,5 +295,6 @@ export const {
   deletFromCart,
   addBookForBuy,
   calcPrice,
+  updateFromCheckout,
 } = cartSlice.actions;
 // export const getCart = cartSlice.actions.getCart;

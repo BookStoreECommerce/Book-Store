@@ -10,7 +10,6 @@ import store from "./Redux/Store.js";
 import ThemeContextProvider from "./Contexts/theme-context";
 import ErrorBoundry from "./pages/ErrorBoundry/ErrorBoundry";
 // import ThemeContextProvider from "./Contexts/theme-context";
-// import ErrorBoundry from "./pages/ErrorBoundry/ErrorBoundry";
 import Loading from "./Components/ReusableComponents/Loading/Loading";
 import App from "./App.js";
 
@@ -30,6 +29,16 @@ const router = createBrowserRouter([
           const { default: Home } = await import("./pages/Home/Home");
           // const { default: Home } = await import("./pages/Home/Home");
           return { Component: Home };
+        },
+      },
+
+      {
+        path: "checkout",
+        async lazy() {
+          const { default: Checkout } = await import(
+            "./pages/Checkout/Checkout"
+          );
+          return { Component: Checkout };
         },
       },
       {
@@ -93,6 +102,15 @@ const router = createBrowserRouter([
               return { Component: Settings };
             },
           },
+          {
+            path: "orders",
+            async lazy() {
+              const { default: Orders } = await import(
+                "./Components/UserInfoComponents/Orders/Orders.jsx"
+              );
+              return { Component: Orders };
+            },
+          },
         ],
       },
       {
@@ -118,6 +136,15 @@ const router = createBrowserRouter([
         async lazy() {
           const { default: Cart } = await import("./Components/Cart/Cart");
           return { Component: Cart };
+        },
+      },
+      {
+        path: "orders",
+        async lazy() {
+          const { default: PrevOrders } = await import(
+            "./Components/PrevOrders/PrevOrders.jsx"
+          );
+          return { Component: PrevOrders };
         },
       },
       {

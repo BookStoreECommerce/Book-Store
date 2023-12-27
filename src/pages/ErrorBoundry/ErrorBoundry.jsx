@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeFooterMargin, setFooterMargin, setHeight } from "../../Redux/Slicies/appSlice";
 import { useNavigate } from "react-router-dom";
 
-const ErrorBoundry = () => {
+const ErrorBoundry = ({majorText, minorText}) => {
     const navRef = useRef(null);
     const footerRef = useRef(null);
     const { footerH, navH } = useSelector((state) => state.app);
@@ -34,10 +34,10 @@ const ErrorBoundry = () => {
                 }}
             >
                 <Typography variant="h1" sx={{ color: 'white', fontWeight: "bold", mt: 1, mb: 1 }}>
-                    404
+                    {majorText? majorText: '404'}
                 </Typography>
                 <Typography variant="h6" sx={{ color: 'white', mt: 1, mb: 1 }}>
-                    The page you’re looking for doesn’t exist.
+                    {minorText? minorText: "The page you’re looking for doesn’t exist."}
                 </Typography>
                 <Button variant="contained" sx={{ mt: 1, mb: 1 }} onClick={navigateToHome}>Back Home</Button>
             </Box>

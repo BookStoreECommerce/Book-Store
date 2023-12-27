@@ -28,18 +28,42 @@
 }
 
 .fontname {
-    font-size: 16px;
+    font-size: 20px;
     color: grey;
 
 }
-
+.reviewContent{
+    border: 1px solid var(--mainColor);
+    padding: 12px 27px 0px 27px;
+    border-radius: 22px;
+}
 /* .reviewBg{
     border: 2px solid var(--beigeColor);
     box-shadow: 10px 10px 7px var(--beigeColor);
     border-radius: 20px;
 } */
-.paddingInline{
-    padding-inline: 28px;
+
+.quotes{
+
+    top: 80%;
+    left: 96%;
+}
+.quotes i{
+    font-size: 47px;
+    color: var(--mainColor);
+}
+
+.updateBtn,.deleteBtn{
+    color: gray!important;
+    background-color: white!important;
+}
+.updateBtn:hover,.updateBtn:focus,.deleteBtn:hover,.deleteBtn:focus{
+    color: var(--mainColor)!important;
+    transition: all 0.5s ease-in-out;
+
+}
+.paddingSlash{
+    padding: .375rem;
 }
 @media screen and (min-width:300px) and (max-width:666px) {
     .fontParg {
@@ -50,8 +74,12 @@
         font-size: 14px;
     }
 
-    .reviewContent {
-        padding: 0px 45px;
+    .quotes{
+        top: 83%;
+        left: 94%;
+    }
+    .quotes i{
+        font-size: 37px
     }
 
 }
@@ -63,5 +91,18 @@
 
     .fontname {
         font-size: 17px;
+    }
+    .quotes{
+        top: 83%;
+        left: 94%;
+    }
+    .quotes i{
+        font-size: 37px
+    }
+
+}
+@media screen and (min-width:1000px) and (max-width:2000px) {
+    .paddingInline{
+        padding-inline: 152px;
     }
 }

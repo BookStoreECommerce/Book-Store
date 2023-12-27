@@ -6,7 +6,6 @@ import WishListButton from "../WishListButton/WishListButton";
 import Rating from "../Rating/Rating";
 import AddCart from "../../Cart/AddCart";
 import { useSelector } from "react-redux";
-import { Box } from "@mui/material";
 
 const BookCard = ({
   book,
@@ -22,6 +21,7 @@ const BookCard = ({
   slug,
   sectionName,
   rate,
+  reviews,
 }) => {
   const { filterRadioBtns } = useSelector((state) => state.booksFilter);
   let bookPrice;
@@ -78,27 +78,31 @@ const BookCard = ({
           style={cardStyle}
         >
           <div className={styles.overLay}>
-            <div className={styles.bestSellerCard}>
-              {section === "bestSeller" && (
-                <>
-                  <p className={styles.headerFont}>
-                    {book?.name.slice(0, 12)}...
-                  </p>
-                  <p>{author}</p>
-                </>
-              )}
-              <Box sx={{ display: "flex", justifyContent: "center" }}>
-                <Link
-                  to={`/book/${slug}`}
-                  className="text-decoration-none me-2"
-                >
+            {section !== "bestSeller" ? (
+              <>
+                <Link to={`/book/${slug}`} className="text-decoration-none">
                   <span className={styles.icon}>
                     <i className="fa-regular fa-eye"></i>
                   </span>
                 </Link>
+
+                {/* <Link to="cart" className="text-decoration-none">
+                  <span className={styles.icon}>
+                    <i className="fa-solid fa-cart-shopping"></i>
+                  </span>
+                </Link> */}
                 <AddCart id={book?._id} book={book ? book : ""} />
-              </Box>
-            </div>
+              </>
+            ) : (
+              <>
+                <div className={styles.bestSellerCard}>
+                  <p className={styles.headerFont}>
+                    {book?.name.slice(0, 12)}...
+                  </p>
+                  <p>{author}</p>
+                </div>
+              </>
+            )}
           </div>
           {sectionName === "whislist" ? (
             <img

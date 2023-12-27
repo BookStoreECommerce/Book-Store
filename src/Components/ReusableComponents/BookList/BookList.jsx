@@ -3,6 +3,7 @@ import BookCard from "../BookCard/BookCard.jsx";
 const BookList = ({ NewBooks, sectionName }) => {
 
   return (
+
     <>
       {NewBooks?.map((book) => (
         <BookCard
@@ -15,6 +16,7 @@ const BookList = ({ NewBooks, sectionName }) => {
           slug={book?.slug}
          id={book?.id}
          rate={book?.rating}
+
         />
       ))}
     </>

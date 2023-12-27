@@ -70,7 +70,9 @@ const questions = [
 ];
 const RatingQuestion = () => {
   const dispatch = useDispatch();
-  const { success, loading } = useSelector(({ feedback }) => feedback);
+  const { success, loading, error, errors } = useSelector(
+    ({ feedback }) => feedback
+  );
   const navigate = useNavigate();
   const { token } = useParams();
   const initialValues = {
@@ -157,7 +159,12 @@ const RatingQuestion = () => {
                   onChange={handleChange}
                 />
                 <Button
-                  sx={{ my: 3, fontSize: "1.5rem", fontFamily: "inherit" }}
+                  sx={{
+                    my: 3,
+                    fontSize: "1.5rem",
+                    fontFamily: "inherit",
+                    display: "flex",
+                  }}
                   variant="contained"
                   type="submit"
                   endIcon={
@@ -175,6 +182,24 @@ const RatingQuestion = () => {
             )}
           </Formik>
         </Box>
+        {errors?.length > 0 ? (
+          errors.map((er, i) => (
+            <Typography
+              key={i}
+              variant="h4"
+              sx={{ fontFamily: "inherit", my: 3, color: "#ce7777", ml: 4 }}
+            >
+              {er?.message}
+            </Typography>
+          ))
+        ) : error ? (
+          <Typography
+            variant="h4"
+            sx={{ fontFamily: "inherit", my: 3, color: "#ce7777", ml: 4 }}
+          >
+            {error}
+          </Typography>
+        ) : null}
       </Box>
     </>
   );

@@ -128,7 +128,10 @@ color: var(--navyBlue)!important;
 .Toastify__toast-theme--colored.Toastify__toast--success {
   background: var(--navyBlue)!important;
 }
+.Toastify__toast-theme--colored.Toastify__toast--info {
+  background: #dea4a4!important;
 
+}
 .Toastify__toast-theme--colored.Toastify__toast--default {
   background: rgb(163, 125, 125) !important;
   /* background: #8dcd8d !important; */
@@ -155,6 +158,23 @@ color: var(--navyBlue)!important;
   .bookSize{
     justify-content: center;
   }
+}
+
+.nav-link {
+  color: var(--bs-nav-pills-link-active-color);
+  background-color:transparent !important;
+  border-top: 1px solid transparent !important;
+  border-left: 1px solid transparent !important;
+  border-right: 1px solid transparent !important;
+  border-radius: 7px 7px 0 0  !important;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  color: var(--bs-nav-pills-link-active-color);
+  background-color:transparent !important;
+  border-top: 1px solid var(--secondaryColor) !important;
+  border-left: 1px solid var(--secondaryColor) !important;
+  border-right: 1px solid var(--secondaryColor) !important;
+  border-radius: 7px 7px 0 0  !important;
 }
 
 .wFitContent{

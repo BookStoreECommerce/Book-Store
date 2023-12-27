@@ -42,7 +42,7 @@ const authSlice = createSlice({
         builder.addCase(signin.fulfilled, (state, action) => {
             const token = action.payload.token
             saveUserData(token)
-            state.token = token
+            state.token = token;
             state.isLoading = false;
 
         })

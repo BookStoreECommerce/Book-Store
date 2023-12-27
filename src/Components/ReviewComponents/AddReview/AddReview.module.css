@@ -30,8 +30,3 @@
     align-items: center;
 }
 
-.btn,.btn:hover,.btn:focus{
-    background-color: var(--mainColor)!important;
-    color: white!important;
-    margin-top: 10px;
-}

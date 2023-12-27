@@ -4,7 +4,7 @@ import {
   removeFooterMargin,
   setFooterMargin,
 } from "../../Redux/Slicies/appSlice";
-import { Box, Button } from "@mui/material";
+import { Box } from "@mui/material";
 import styles from "./Feedback.module.css";
 import { Link } from "react-router-dom";
 import RatingQuestion from "../../Components/Feedback/rating-question/RatingQuestion";
