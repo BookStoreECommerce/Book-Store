@@ -2,8 +2,7 @@ import { FormControl, RadioGroup } from "@mui/material";
 import RadioItem from "../radio-item/RadioItem";
 import Styles from "./Radios.module.css";
 
-const Radios = ({ options }) => {
-  console.log(options);
+const Radios = ({ options, handleChange, name }) => {
   return (
     <>
       {/* <RadioItem /> */}
@@ -22,9 +21,9 @@ const Radios = ({ options }) => {
         {/* <FormLabel id="demo-controlled-radio-buttons-group">Gender</FormLabel> */}
         <RadioGroup
           aria-labelledby="demo-controlled-radio-buttons-group"
-          name="controlled-radio-buttons-group"
+          name={name}
           //   value={value}
-          //   onChange={handleChange}
+          onChange={handleChange}
         >
           {/* <FormControlLabel value="female" control={<Radio />} label="Female" /> */}
           {options.map((option, index) => (

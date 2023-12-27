@@ -2,11 +2,13 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import Stars from "../stars/Stars";
 import Radios from "../radios/Radios";
 import Styles from "./RatingQuestion.module.css";
+import { Form, Formik } from "formik";
 
 const questions = [
   {
     q: "How satisfied were you with the speed of shipping?",
     type: "option",
+    name: "delivery_rating",
     options: [
       {
         value: 5,
@@ -29,11 +31,13 @@ const questions = [
   {
     q: "How would you rate the product overall?",
     type: "rate",
+    name: "delivery_packing_rating",
     options: null,
   },
   {
     q: "How long have you had the product?",
     type: "option",
+    name: "product_rating",
     options: [
       {
         value: 5,
@@ -57,10 +61,20 @@ const questions = [
     q: "How satisfied or dissatisfied are you with our service?",
     type: "rate",
     options: null,
+    name: "website_rating",
   },
 ];
 const RatingQuestion = () => {
-  // const { question, type, options, value, setValue } = props;
+  const initialValues = {
+    delivery_rating: 0,
+    website_rating: 0,
+    delivery_packing_rating: 0,
+    product_rating: "",
+    notes: "",
+  };
+  const handleSubmit = (e) => {
+    console.log(e);
+  };
   return (
     <>
       <Box
@@ -81,46 +95,66 @@ const RatingQuestion = () => {
             alignItems: "start",
           }}
         >
-          {questions.map((question) => {
-            const { options, q, type } = question;
-            return (
-              <>
-                <Typography variant="h5" sx={{ fontFamily: "inherit", mb: 3 }}>
-                  {q}
+          <Formik onSubmit={handleSubmit} initialValues={initialValues}>
+            {({ values, handleChange, isValid, handleBlur }) => (
+              <Form>
+                {questions.map((question, i) => {
+                  const { options, q, type, name } = question;
+                  return (
+                    <Box key={i}>
+                      <Typography
+                        variant="h5"
+                        sx={{ fontFamily: "inherit", mb: 3 }}
+                      >
+                        {q}
+                      </Typography>
+                      {type === "rate" ? (
+                        <Stars onChange={handleChange} name={name} />
+                      ) : (
+                        <Radios
+                          options={options}
+                          handleChange={handleChange}
+                          name={name}
+                        />
+                      )}
+                    </Box>
+                  );
+                })}
+                <Typography
+                  variant="h4"
+                  sx={{ fontFamily: "inherit", mb: 3, color: "#ce7777" }}
+                >
+                  Testimonials
                 </Typography>
-                {type === "rate" ? <Stars /> : <Radios options={options} />}
-              </>
-            );
-          })}
-          <Typography
-            variant="h4"
-            sx={{ fontFamily: "inherit", mb: 3, color: "#ce7777" }}
-          >
-            Testimonials
-          </Typography>
-          <TextField
-            sx={(theme) => ({
-              [theme.breakpoints.up("sm")]: {
-                width: "600px",
-              },
-              [theme.breakpoints.down("sm")]: {
-                width: "100%",
-              },
-            })}
-            placeholder="Please write ...."
-            id="standard-multiline-flexible"
-            // label=""
-            multiline
-            rows={10}
-            maxRows={10}
-            variant="outlined"
-          />
-          <Button
-            sx={{ my: 3, fontSize: "1.5rem", fontFamily: "inherit" }}
-            variant="contained"
-          >
-            Submit
-          </Button>
+                <TextField
+                  sx={(theme) => ({
+                    [theme.breakpoints.up("sm")]: {
+                      width: "600px",
+                    },
+                    [theme.breakpoints.down("sm")]: {
+                      width: "100%",
+                    },
+                  })}
+                  placeholder="Please write ...."
+                  id="standard-multiline-flexible"
+                  // label=""
+                  multiline
+                  rows={10}
+                  maxRows={10}
+                  variant="outlined"
+                  name="notes"
+                  onChange={handleChange}
+                />
+                <Button
+                  sx={{ my: 3, fontSize: "1.5rem", fontFamily: "inherit" }}
+                  variant="contained"
+                  type="submit"
+                >
+                  Submit
+                </Button>
+              </Form>
+            )}
+          </Formik>
         </Box>
       </Box>
     </>
