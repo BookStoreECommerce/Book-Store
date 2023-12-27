@@ -71,10 +71,10 @@ const RatingQuestion = () => {
         <Box
           component={"div"}
           className={Styles.question_container}
+        
           sx={{
             mt: 10,
-            ml: 5,
-            mr: 5,
+         
             color: "#2B3A55",
             display: "flex",
             flexDirection: "column",
@@ -118,6 +118,7 @@ const RatingQuestion = () => {
           <Button
             sx={{ my: 3, fontSize: "1.5rem", fontFamily: "inherit" }}
             variant="contained"
+        
           >
             Submit
           </Button>

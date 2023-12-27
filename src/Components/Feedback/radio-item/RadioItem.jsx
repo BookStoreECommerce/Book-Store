@@ -18,6 +18,7 @@ const RadioItem = ({ value, lable }) => {
         <FormControlLabel
           value={value}
           control={<Radio />}
+   
           label={lable}
           componentsProps={{
             typography: {
@@ -27,6 +28,7 @@ const RadioItem = ({ value, lable }) => {
               fontSize: "1.5rem",
             },
           }}
+          className={`${Styles.fontSize}`}
         />
       </Box>
     </>

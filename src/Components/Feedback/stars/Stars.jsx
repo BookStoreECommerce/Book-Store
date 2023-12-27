@@ -1,4 +1,5 @@
 import { Box, Rating, Typography } from "@mui/material";
+import Styles from './Stars.module.css'
 
 const Stars = () => {
   return (
@@ -9,6 +10,7 @@ const Stars = () => {
         alignItems: "center",
         gap: '3rem'
       }}
+      className={`${Styles.gap}`}
     >
       <Rating
         name="half-rating"
@@ -18,6 +20,7 @@ const Stars = () => {
         sx={{
           fontSize: "50px",
         }}
+        className={Styles.rate}
       />
       <Typography variant="h5" color='#ce7777'>Your Rate</Typography>
     </Box>
