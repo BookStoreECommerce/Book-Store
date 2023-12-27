@@ -78,9 +78,9 @@ const Checkout = () => {
                 fontSize: hasDiscount? "1rem": '1.25rem',
               }}
             >
-              ${cart.totalAmount}
+              {cart.totalAmount} EGP
             </Typography>
-            {hasDiscount && <Typography sx={{ fontSize: '1.25rem' }}>${cart.totalAmountAfterDisc}</Typography>}
+            {hasDiscount && <Typography sx={{ fontSize: '1.25rem' }}>{cart.totalAmountAfterDisc}</Typography>} EGP
           </div>
         </AccordionSummary>
         <AccordionDetails className={styles['accordion-details']}>
