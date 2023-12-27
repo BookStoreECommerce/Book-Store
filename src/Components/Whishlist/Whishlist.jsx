@@ -64,7 +64,7 @@ export default function Whishlist() {
     return (
         <Box sx={{ marginTop: `${navH}px`, minHeight: `calc(100vh - ${footerH + navH}px)`, }}>
             <div className={styles.badge}>
-                <span className={styles.slug}>my wishlist</span>
+                <span className={styles.slug}>My Wishlist</span>
                 <div className={styles.content}>
                     <Link to='/'> <i className="fa-solid fa-home"></i> </Link>
                     <span className={styles.slash}> / <Link to='/whishlist'>wishlist</Link></span>

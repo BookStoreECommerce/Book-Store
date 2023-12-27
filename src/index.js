@@ -4,7 +4,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./index.css";
-import { RouterProvider, createBrowserRouter, } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./Redux/Store.js";
 import ThemeContextProvider from "./Contexts/theme-context";
@@ -12,14 +12,13 @@ import ErrorBoundry from "./pages/ErrorBoundry/ErrorBoundry";
 // import ThemeContextProvider from "./Contexts/theme-context";
 // import ErrorBoundry from "./pages/ErrorBoundry/ErrorBoundry";
 import Loading from "./Components/ReusableComponents/Loading/Loading";
-import App from './App.js'
+import App from "./App.js";
 
 const router = createBrowserRouter([
   {
     path: "/",
     async lazy() {
       const { default: Layout } = await import("./Layouts/Layout");
-      // const { default: Layout } = await import("./Layouts/Layout");
       const { indexLoader } = await import("./util/loaders");
       return { Component: Layout, loader: indexLoader };
     },
@@ -34,25 +33,29 @@ const router = createBrowserRouter([
         },
       },
       {
-        path: 'book',
+        path: "book",
         async lazy() {
           const { default: Books } = await import("./pages/Books/Books");
           return { Component: Books };
         },
       },
       {
-        path: 'book/:slug',
+        path: "book/:slug",
         async lazy() {
-          const { default: BookProfile } = await import("./Components/BookProfile/BookProfile");
+          const { default: BookProfile } = await import(
+            "./Components/BookProfile/BookProfile"
+          );
           return { Component: BookProfile };
         },
       },
       {
-        path:'wishlist',
-        async lazy(){
-          const {default:Whishlist} = await import('./Components/Whishlist/Whishlist');
-          return {Component: Whishlist};
-        }
+        path: "wishlist",
+        async lazy() {
+          const { default: Whishlist } = await import(
+            "./Components/Whishlist/Whishlist"
+          );
+          return { Component: Whishlist };
+        },
       },
       {
         path: "userInfo",
@@ -113,10 +116,17 @@ const router = createBrowserRouter([
       {
         path: "cart",
         async lazy() {
-          const { default: Cart } = await import(
-            "./Components/Cart/Cart"
-          );
+          const { default: Cart } = await import("./Components/Cart/Cart");
           return { Component: Cart };
+        },
+      },
+      {
+        path: "feedback/:token",
+        async lazy() {
+          const { default: Feedback } = await import(
+            "./pages/feedback/Feedback"
+          );
+          return { Component: Feedback };
         },
       },
     ],
@@ -124,9 +134,7 @@ const router = createBrowserRouter([
   {
     path: "auth",
     async lazy() {
-      const { default: AuthLayout } = await import(
-        "./Layouts/AuthLayout"
-      );
+      const { default: AuthLayout } = await import("./Layouts/AuthLayout");
       return { Component: AuthLayout };
     },
     children: [
@@ -178,7 +186,10 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
     <ThemeContextProvider>
-      <RouterProvider router={router} fallbackElement={<Loading sectionName='home'/>}>
+      <RouterProvider
+        router={router}
+        fallbackElement={<Loading sectionName="home" />}
+      >
         <App />
       </RouterProvider>
     </ThemeContextProvider>
