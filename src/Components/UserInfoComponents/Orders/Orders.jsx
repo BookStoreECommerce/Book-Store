@@ -26,6 +26,8 @@ export default function Orders() {
   const ordersArray = orders.orders;
   console.log(ordersArray);
   const pdfBooksArray = orders.pdfBooks;
+  console.log(pdfBooksArray);
+
 
   const getAllOrders = () => {
     dispatch(getOrders(token));
@@ -79,11 +81,12 @@ export default function Orders() {
 
 
                       <div className={`col-xl-10 col-lg-12 col-12 mb-5`} key={index} >
+                       
                         <div className={`${styles.orderCard} mb-3`}>
                           <div className={`${styles.cardHeader}`}>
                             <p className={`${styles.orderNum} `}>Order # {order.serial_number}</p>
 
-                            <p className={`${styles.orderDate} `}>Date goes here</p>
+                            <p className={`${styles.orderDate} `}>{order?.paidAt?.split("").slice(0,10).join("")}</p>
                           </div>
                           <div className={`${styles.cardBody}`}>
                             {order.books?.map((orderBook, index) =>
@@ -150,9 +153,9 @@ export default function Orders() {
                       <div className={`col-lg-12  col-12`} key={index} >
                         <div className={`${styles.orderCard} mb-3`}>
                           <div className={`${styles.cardHeader}`}>
-                            <p className={`${styles.orderNum} `}>Order # {order.serial_number}</p>
+              
 
-                            <p className={`${styles.orderDate} `}>Date goes here</p>
+                            
                           </div>
                           <div className={`${styles.cardBody}`}>
 
@@ -199,7 +202,7 @@ export default function Orders() {
             ) : (
               <div className={styles.notFoundContainer}>
                 <div className={styles.notFoundContainer}>
-                  <p>No Items Found In Cart</p>
+                  <p>No Orders</p>
                 </div>
               </div>
             )}

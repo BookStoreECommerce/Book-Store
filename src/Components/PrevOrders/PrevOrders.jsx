@@ -134,29 +134,6 @@ export default function PrevOrders() {
                       </div>
 
                     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                   </>
                 ) : (
                   <div className={styles.notFoundContainer}>
