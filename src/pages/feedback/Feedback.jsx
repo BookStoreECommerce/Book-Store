@@ -1,23 +1,42 @@
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   removeFooterMargin,
   setFooterMargin,
 } from "../../Redux/Slicies/appSlice";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import styles from "./Feedback.module.css";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import RatingQuestion from "../../Components/Feedback/rating-question/RatingQuestion";
+import axios from "axios";
+import { baseUrl } from "../../util/util.js";
+import Loading from "../../Components/ReusableComponents/Loading/Loading.jsx";
 
 const Feedback = () => {
   const { footerH, navH } = useSelector((state) => state.app);
+  const { token } = useParams();
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(removeFooterMargin());
     return () => dispatch(setFooterMargin());
   }, [dispatch]);
-
+  const checkUser = useMemo(async () => {
+    const result = await axios
+      .get(`${baseUrl}feedback/checkuser`, {
+        headers: {
+          authorization: token,
+        },
+      })
+      .then(({ data }) => data)
+      .catch(({ response }) => {
+        setError(response?.data?.error);
+        return response?.data;
+      });
+    setLoading(false);
+  }, []);
   return (
     <>
       <Box
@@ -45,7 +64,24 @@ const Feedback = () => {
             flexFlow: "row",
           }}
         >
-          <RatingQuestion />
+          {loading ? (
+            <Loading />
+          ) : error ? (
+            <Typography
+              variant="h3"
+              sx={{
+                fontFamily: "inherit",
+                m: 10,
+                color: "red",
+              }}
+            >
+              {error}
+              &nbsp;&nbsp;
+              <Link to="/book">Order Now</Link>
+            </Typography>
+          ) : (
+            <RatingQuestion />
+          )}
         </Box>
       </Box>
     </>

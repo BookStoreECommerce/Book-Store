@@ -1,14 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../../axios/axios-instance.js";
 import axios from "axios";
+import { baseUrl } from "../../../util/util.js";
 
 export const createFeedback = createAsyncThunk(
   "feedback/create",
   async ({ values, token }, { rejectWithValue }) => {
-    
     return await axios
-      // .post("https://bookstore-api.codecraftsportfolio.online/api/v1/feedback", values, {
-      .post("http://localhost:8080/api/v1/feedback", values, {
+      .post(`${baseUrl}feedback`, values, {
         headers: {
           authorization: token,
         },
