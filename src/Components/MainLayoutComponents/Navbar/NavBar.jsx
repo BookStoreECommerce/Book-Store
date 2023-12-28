@@ -26,7 +26,6 @@ function NavBar({ navRef }) {
   let category = { categoriesBooks }.categoriesBooks.result;
   const token = localStorage.getItem("access-token");
   const { localStorageCart } = useSelector((state) => state.cart);
-
   let arr = JSON.parse(localStorage.getItem("whishList"));
 
   const changeBackground = () => {
@@ -238,7 +237,6 @@ function NavBar({ navRef }) {
                     Contact
                   </NavLink>
                 </li>
-              
               </ul>
 
               {user !== null && token !== null ? (
@@ -259,7 +257,7 @@ function NavBar({ navRef }) {
                   <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li className="nav-item">
                       <Button
-                      disableRipple
+                        disableRipple
                         className={`nav-link ${styles.navLink}`}
                         onClick={() => {
                           dispatch(handleClickOpen({ name: "login" }));
@@ -270,8 +268,7 @@ function NavBar({ navRef }) {
                     </li>
                     <li className="nav-item">
                       <Button
-                      disableRipple
-                    
+                        disableRipple
                         className={`nav-link ${styles.navLink}`}
                         onClick={() => {
                           dispatch(handleClickOpen({ name: "register" }));

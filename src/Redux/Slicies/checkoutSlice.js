@@ -1,9 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addCoupon, removeCoupon } from "./checkoutActions";
+import { addCoupon, addOrder, removeCoupon } from "./checkoutActions";
 
 const initialState = {
   isCouponLoading: false,
   couponErrorMsg: null,
+  isLoading: false,
+  msgError: ''
 };
 
 const checkoutSlice = createSlice({
@@ -35,6 +37,19 @@ const checkoutSlice = createSlice({
       .addCase(removeCoupon.rejected, (state, action) => {
         state.isCouponLoading = false;
         state.couponErrorMsg = action.payload.error;
+      });
+
+    builder
+      .addCase(addOrder.pending, (state, action) => {
+        state.isLoading = true;
+        state.msgError = "";
+      })
+      .addCase(addOrder.fulfilled, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(addOrder.rejected, (state, action) => {
+        state.isLoading = false;
+        state.msgError = action.payload.error;
       });
   },
 });

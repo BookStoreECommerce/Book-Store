@@ -18,7 +18,8 @@ import { addOrder } from "../../Redux/Slicies/checkoutActions";
 
 const UserCheckoutDetails = () => {
 
-  const { isLoading, msgError, user } = useSelector(({ auth }) => auth);
+  const { user } = useSelector(({ auth }) => auth);
+  const { isLoading, msgError } = useSelector(({ checkout }) => checkout);
   const dispatch = useDispatch();
 
   const validationSchema = Yup.object({
@@ -54,7 +55,7 @@ const UserCheckoutDetails = () => {
         const checkoutDetails = {
           name, paymentMethod,
           shippingAddress: { address, city, country, phone },
-          // successCallbackURL: window.location.origin
+          successCallbackURL: window.location.origin
         };
         dispatch(addOrder(checkoutDetails));
       }}
@@ -171,6 +172,7 @@ const UserCheckoutDetails = () => {
                 isLoading ? <i className="fas fa-spinner fa-spin"></i> : ""
               }
               disabled={!isValid}
+              
             >
               Order Now
             </Button>

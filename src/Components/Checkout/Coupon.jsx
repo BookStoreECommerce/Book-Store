@@ -30,7 +30,7 @@ export default function RedeemCoupon({ code }) {
           helperText={checkout.couponErrorMsg && checkout.couponErrorMsg}
           variant="outlined"
           className="form-control"
-          disabled={code !== "" || checkout.isCouponLoading}
+          disabled={code || checkout.isCouponLoading}
           value={couponCode}
           onChange={handleInputChange}
         />
@@ -38,8 +38,7 @@ export default function RedeemCoupon({ code }) {
           type="submit"
           variant="contained"
           disabled={!couponCode || checkout.isCouponLoading}
-          sx={{color: code ? "error" : "primary", width: "6rem"}}
-          
+          sx={{ color: code ? "error" : "primary", width: "6rem" }}
         >
           {checkout.isCouponLoading ? (
             <CircularProgress color="inherit" size={20} />
