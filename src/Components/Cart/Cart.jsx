@@ -9,9 +9,7 @@ import DeleteCartItem from "./DeleteCartItem";
 import { getCart } from "../../Redux/Slicies/cartAction";
 import { Button } from "@mui/material";
 import styles from "./Cart.module.css";
-import {
-  getCartWithoutToken,
-} from "../../Redux/Slicies/cartSlice";
+import { getCartWithoutToken } from "../../Redux/Slicies/cartSlice";
 import UpdataCart from "./UpdataCart.jsx";
 
 export default function Cart() {
@@ -26,12 +24,11 @@ export default function Cart() {
     totalAmount,
     discount,
   } = useSelector((state) => state.cart);
-  // const { token } = useSelector((state) => state.auth);
+  const { user } = useSelector(({ auth }) => auth);
   const getCartDetails = () => {
     token ? dispatch(getCart()) : dispatch(getCartWithoutToken());
   };
-
-
+  console.log(user);
   useEffect(() => {
     getCartDetails();
   }, [dispatch]);
@@ -66,105 +63,129 @@ export default function Cart() {
               <div className="row justify-content-center pb-2">
                 {localStorageCart?.books?.length >= 0 ? (
                   <>
-            {localStorageCart?.books?.length > 0 ?         <div className="col-lg-4 col-md-12 col-12">
-         {discount ? (
-                      <div className={styles.checkoutStyles}>
-                        <h1 className={styles.totalAmount}>Total cart Amount: <span className={styles.totalAmountSpan}>{totalAmount}</span></h1>
-                        <h1 className={styles.totalAmount}>Discount: <span className={styles.totalAmountSpan}>{discount}</span></h1>
-                        <h1 className={styles.totalAmount}>
-                          Total Amount After Discount: <span className={styles.totalAmountSpan}>{totalAmountAfterDisc}</span>
-                        </h1>
-                      </div>
-                    ) : (
-                      <div className={styles.checkoutStyles}>
-                      <h1 className={styles.totalAmount}>Total cart Amount: <span className={styles.totalAmountSpan}>{totalAmount}</span></h1>
-                      </div>
-                    )}
-                            {localStorageCart?.books?.length > 0 ? (
-                      <div className={styles.checkoutBtn}>
-                        <Button
-                          variant="outlined"
-                          component={Link}
-                   
-                          to="/checkout"
-                          endIcon={
-                            isLoading ? (
-                              <i className="fas fa-spinner fa-spin"></i>
+                    {localStorageCart?.books?.length > 0 ? (
+                      <div className="col-lg-4 col-md-12 col-12">
+                        {discount ? (
+                          <div className={styles.checkoutStyles}>
+                            <h1 className={styles.totalAmount}>
+                              Total cart Amount:{" "}
+                              <span className={styles.totalAmountSpan}>
+                                {totalAmount}
+                              </span>
+                            </h1>
+                            <h1 className={styles.totalAmount}>
+                              Discount:{" "}
+                              <span className={styles.totalAmountSpan}>
+                                {discount}
+                              </span>
+                            </h1>
+                            <h1 className={styles.totalAmount}>
+                              Total Amount After Discount:{" "}
+                              <span className={styles.totalAmountSpan}>
+                                {totalAmountAfterDisc}
+                              </span>
+                            </h1>
+                          </div>
+                        ) : (
+                          <div className={styles.checkoutStyles}>
+                            <h1 className={styles.totalAmount}>
+                              Total cart Amount:{" "}
+                              <span className={styles.totalAmountSpan}>
+                                {totalAmount}
+                              </span>
+                            </h1>
+                          </div>
+                        )}
+                        {localStorageCart?.books?.length > 0 ? (
+                          <div className={styles.checkoutBtn}>
+                            {user ? (
+                              <Button
+                                variant="outlined"
+                                component={Link}
+                                to="/checkout"
+                                endIcon={
+                                  isLoading ? (
+                                    <i className="fas fa-spinner fa-spin"></i>
+                                  ) : (
+                                    <i className="fa-solid"></i>
+                                  )
+                                }
+                                className={`mainBtn ${styles.fitContent}`}
+                              >
+                                Checkout {totalAmountAfterDisc}
+                              </Button>
                             ) : (
-                              <i className="fa-solid"></i>
-                            )
-                          }
-                          className={`mainBtn ${styles.fitContent}`}
-                        >
-                          Checkout {totalAmountAfterDisc}
-                        </Button>
+                              ""
+                            )}
+                          </div>
+                        ) : (
+                          ""
+                        )}
                       </div>
                     ) : (
                       ""
                     )}
-         </div>:""}
 
-
-                <div className="col-lg-8 col-md-12 col-12">
-                {localStorageCart?.books.map((book, index) => (
-                      <div
-                        className={`${styles.orderCard} col-lg-12 col-md-12 col-sm-12 col-12`}
-                        key={index}
-                      >
+                    <div className="col-lg-8 col-md-12 col-12">
+                      {localStorageCart?.books.map((book, index) => (
                         <div
-                          className={`row justify-content-between ${styles.cardParent}`}
+                          className={`${styles.orderCard} col-lg-12 col-md-12 col-sm-12 col-12`}
+                          key={index}
                         >
-                          <div className="col-md-11">
-                            <div className="row">
-                              <div className="col-sm-3 col-4">
-                                <Link to={`/book/${book.book.slug}`}>
-                                  <div className={styles.bookCoverWrapper}>
-                                    <img
-                                      src={
-                                        book.book.image?.secure_url ||
-                                        book.book.image
-                                      }
-                                      alt="Book Cover"
-                                    />
-                                  </div>
-                                </Link>
-                              </div>
-                              <div
-                                className={`${styles.bookDetails} col-sm-9 col-8 ps-0`}
-                              >
-                                <div className={styles.titleAndPrice}>
-                                  <div className={styles.bookTitle}>
-                                    {book.book.name}
-                                  </div>
+                          <div
+                            className={`row justify-content-between ${styles.cardParent}`}
+                          >
+                            <div className="col-md-11">
+                              <div className="row">
+                                <div className="col-sm-3 col-4">
+                                  <Link to={`/book/${book.book.slug}`}>
+                                    <div className={styles.bookCoverWrapper}>
+                                      <img
+                                        src={
+                                          book.book.image?.secure_url ||
+                                          book.book.image
+                                        }
+                                        alt="Book Cover"
+                                      />
+                                    </div>
+                                  </Link>
                                 </div>
-                                <div className={styles.titleAndPrice}>
-                                  <div className={styles.bookTitle}>
-                                    {book.variation_name}
+                                <div
+                                  className={`${styles.bookDetails} col-sm-9 col-8 ps-0`}
+                                >
+                                  <div className={styles.titleAndPrice}>
+                                    <div className={styles.bookTitle}>
+                                      {book.book.name}
+                                    </div>
                                   </div>
-                                </div>
+                                  <div className={styles.titleAndPrice}>
+                                    <div className={styles.bookTitle}>
+                                      {book.variation_name}
+                                    </div>
+                                  </div>
 
-                                <div className={styles.bookPrice}>
-                                  {book.price} EGP
+                                  <div className={styles.bookPrice}>
+                                    {book.price} EGP
+                                  </div>
+                                  {book.variation_name === "hardcover" && (
+                                    <UpdataCart book={book} index={index} />
+                                  )}
                                 </div>
-                                {book.variation_name === "hardcover" && (
-                                  <UpdataCart book={book} index={index} />
-                                )}
                               </div>
                             </div>
-                          </div>
-                          <div className={` ${styles.deleteAndSubTotal}  `}>
-                            <DeleteCartItem
-                              id={book?.book._id}
-                              variation_name={book?.variation_name}
-                            />
-                          </div>
-                          <div className={styles.bookSubTotal}>
-                            {book.price * book.qty} EGP
+                            <div className={` ${styles.deleteAndSubTotal}  `}>
+                              <DeleteCartItem
+                                id={book?.book._id}
+                                variation_name={book?.variation_name}
+                              />
+                            </div>
+                            <div className={styles.bookSubTotal}>
+                              {book.price * book.qty} EGP
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
-                </div>
+                      ))}
+                    </div>
                     {localStorageCart?.books?.length > 0 ? (
                       <ClearCart />
                     ) : (

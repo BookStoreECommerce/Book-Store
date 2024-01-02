@@ -4,7 +4,7 @@ import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 import AudioFileIcon from "@mui/icons-material/AudioFile";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import { ToastContainer, toast } from "react-toastify";
-import styles from './CartDialog.module.css'
+import styles from "./CartDialog.module.css";
 
 import {
   Box,
@@ -101,11 +101,10 @@ export default function CartDialog() {
           variation_name: book.variation_name,
         })
       );
-
       toast.dismiss(buyBook._id);
-      dispatch(handleClose());
       addAlert();
     }
+    dispatch(handleClose());
   };
 
   useEffect(() => {
@@ -118,13 +117,17 @@ export default function CartDialog() {
         sx={{ minHeight: "200px", justifyContent: "center" }}
         className={styles.contentPadding}
       >
-        <Typography component="h2" className={styles.title} sx={{ textAlign: "center" }}>
-          <Typography className={styles.buy} >BUY:</Typography> {book?.name?.split(" ").slice(0, 5).join(" ")} ......
+        <Typography
+          component="h2"
+          className={styles.title}
+          sx={{ textAlign: "center" }}
+        >
+          <Typography className={styles.buy}>BUY:</Typography>{" "}
+          {book?.name?.split(" ").slice(0, 5).join(" ")} ......
         </Typography>
         <RadioGroup
           defaultValue="female"
           name="radio-buttons-group"
-
           sx={{
             display: "flex",
             flexDirection: "row",
@@ -136,9 +139,14 @@ export default function CartDialog() {
           {book?.variations?.map((el) => {
             return (
               <div key={el.variation_name}>
-                   <div className="d-flex flex-column justify-content-center align-items-center">
-                  <FormLabel className={styles.color}>{el.variation_name}</FormLabel>
-                  <FormLabel className={styles.color2}>{el.variation_price} <span className={styles.color3}>EGP</span></FormLabel>
+                <div className="d-flex flex-column justify-content-center align-items-center">
+                  <FormLabel className={styles.color}>
+                    {el.variation_name}
+                  </FormLabel>
+                  <FormLabel className={styles.color2}>
+                    {el.variation_price}{" "}
+                    <span className={styles.color3}>EGP</span>
+                  </FormLabel>
                 </div>
                 <FormControlLabel
                   disabled={!el.variation_is_available}
@@ -150,7 +158,6 @@ export default function CartDialog() {
                   sx={{ display: "flex", flexDirection: "column-reverse" }}
                   title="Hard Cover"
                 />
-             
               </div>
             );
           })}
